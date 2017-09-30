@@ -3,3 +3,4 @@
  */
 public class startup {
 }
+that shit doesnt work
