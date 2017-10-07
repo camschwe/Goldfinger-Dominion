@@ -1,35 +1,93 @@
 package Client_Server.Server;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashSet;
 
-public class Server {
+public class Server extends Thread {
+
+    private static final int PORT = 22022;
+    private static HashSet<String> names = new HashSet<String>();
+    private static HashSet<ObjectOutputStream> writers = new HashSet<ObjectOutputStream>();
+    private String name;
+    private ObjectInputStream objInput;
+    private ObjectOutputStream objOutput;
+    private Socket server;
+    ServerSocket socket;
+
 
     public Server(){
 
-        while (true) {
+        try {
+            socket = new ServerSocket(PORT);
+            System.out.println("Server waiting");
+
+            server = socket.accept();
+
+            while (true) {
+                this.start();
+            }
+
+        } catch (Exception e) {
+
+        } finally {
             try {
-                ServerSocket socket = new ServerSocket(22022);
-                System.out.println("Server waiting");
-
-                Socket server = socket.accept();
-
-                ObjectInputStream objInput = new ObjectInputStream(server.getInputStream());
-
-                ObjectOutputStream objOutput = new ObjectOutputStream(server.getOutputStream());
-
-                Object obj = objInput.readObject();
-
-                objOutput.writeObject(obj);
-
-                objInput.close();
-                objOutput.close();
-            } catch (Exception e) {
+                this.socket.close();
+            } catch (IOException e) {
 
             }
         }
+    }
+
+    public void run(){
+        try {
+            this.objInput = new ObjectInputStream(server.getInputStream());
+
+            this.objOutput = new ObjectOutputStream(server.getOutputStream());
+
+            if (objInput.readObject().getClass().equals(Type.String)){
+                while (true) {
+                    name = (String) objInput.readObject();
+                    if (name == null) {
+                        return;
+                    }
+                    synchronized (names) {
+                        if (!names.contains(name)) {
+                            names.add(name);
+                            System.out.println("Name added: "+name);
+                            break;
+                        }
+                    }
+                }
+                writers.add(objOutput);
+
+                while (true){
+                    if(objInput == null){
+                        return;
+                    }
+                    for (ObjectOutputStream objSend : writers) {
+                        objSend.writeObject(objInput);
+                    }
+                }
+            }
+
+            objOutput.writeObject(objInput.readObject());
+
+            objInput.close();
+            objOutput.close();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void main(String[] args){
+        new Server();
     }
 
 
