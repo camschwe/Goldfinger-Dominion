@@ -5,5 +5,4 @@ package Game;
  */
 public class Player {
 
-    //Comment
 }
