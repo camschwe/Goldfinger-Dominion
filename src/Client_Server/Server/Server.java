@@ -8,21 +8,27 @@ import java.net.Socket;
 public class Server {
 
     public Server(){
-        try {
-            ServerSocket socket = new ServerSocket(22022);
-            System.out.println("Server waiting");
 
-            Socket server = socket.accept();
+        while (true) {
+            try {
+                ServerSocket socket = new ServerSocket(22022);
+                System.out.println("Server waiting");
 
-            ObjectInputStream objInput = new ObjectInputStream(server.getInputStream());
+                Socket server = socket.accept();
 
-            ObjectOutputStream objOutput = new ObjectOutputStream(server.getOutputStream());
-            // useObject(objInput.readObject());
+                ObjectInputStream objInput = new ObjectInputStream(server.getInputStream());
 
-            objInput.close();
-            objOutput.close();
-        } catch (Exception e){
+                ObjectOutputStream objOutput = new ObjectOutputStream(server.getOutputStream());
 
+                Object obj = objInput.readObject();
+
+                objOutput.writeObject(obj);
+
+                objInput.close();
+                objOutput.close();
+            } catch (Exception e) {
+
+            }
         }
     }
 
