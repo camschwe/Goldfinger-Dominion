@@ -17,6 +17,7 @@ public class Client {
             // objOutput.writeObject(TODO);
 
             // TODO = objInput.readObject();
+            //Testen
 
             objInput.close();
             objOutput.close();
