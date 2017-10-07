@@ -1,7 +1,7 @@
-package Game;
+package Game.Cards;
 
 /**
  * Created by camillo.schweizer on 07.10.2017.
  */
-public class ActionCard {
+public class PointCard {
 }
