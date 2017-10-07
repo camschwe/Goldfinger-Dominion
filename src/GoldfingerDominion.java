@@ -1,4 +1,5 @@
 import Lobby.LobbyView;
+import Localisation.Localisator;
 import Login.LoginController;
 import Login.LoginModel;
 import Login.LoginView;
@@ -13,6 +14,7 @@ public class GoldfingerDominion extends Application {
     private static LoginView loginView;
     private static LoginController loginController;
     private static Stage primaryStage;
+    public Localisator localisator;
 
 
 
@@ -27,10 +29,11 @@ public class GoldfingerDominion extends Application {
     public void start(Stage primaryStage) {
         GoldfingerDominion.primaryStage = primaryStage;
 
-
+        localisator = new Localisator();
         loginModel = new LoginModel();
-        loginView = new LoginView(primaryStage);
-        loginController = new LoginController(loginModel, loginView, primaryStage);
+        loginView = new LoginView(primaryStage, localisator);
+        loginController = new LoginController(loginModel, loginView, primaryStage, localisator);
+
 
 
         loginView.start();

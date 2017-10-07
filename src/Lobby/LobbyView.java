@@ -1,6 +1,7 @@
 package Lobby;
 
 
+import Localisation.Localisator;
 import Login.LoginView;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -21,18 +22,20 @@ public class LobbyView {
     public Button startButton;
     public TextField userField;
     public Label ipLabel, userLabel1, userLabel2;
+    protected Localisator localisator;
 
 
 
-    public LobbyView(Stage entryStage) {
+    public LobbyView(Stage entryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
+        this.localisator = localisator;
 
 
 
-        ipLabel = new Label("IP Adresse: 46.127.72.195");
+        ipLabel = new Label(localisator.getResourceBundle().getString("IP")+"46.127.72.195");
         userLabel1 = new Label("Spieler1");
         userLabel2 = new Label("Spieler2");
-        startButton = new Button("Bereit setzen");
+        startButton = new Button(localisator.getResourceBundle().getString("ready"));
 
 
 
