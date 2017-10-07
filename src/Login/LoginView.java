@@ -25,11 +25,9 @@ public class LoginView {
     protected ComboBox<String> switchBox;
     protected Localisator localisator;
 
-
     public LoginView(Stage primaryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
-
 
         userNameLabel = new Label(localisator.getResourceBundle().getString("username"));
         hostButton = new Button(localisator.getResourceBundle().getString("hosting"));
@@ -44,7 +42,6 @@ public class LoginView {
                 "Deutsch",
                 "Schwiizerdütsch"
         );
-
 
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -61,8 +58,6 @@ public class LoginView {
         hBox.setPadding(new Insets(0, 0, 40, 740));
         hBox.getChildren().addAll(switchBox);
 
-
-
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
@@ -72,7 +67,6 @@ public class LoginView {
         primaryStage.setMaxHeight(800);
         primaryStage.setMinWidth(100);
         primaryStage.setMinHeight(800);
-
     }
 
     public void start() {
@@ -82,7 +76,6 @@ public class LoginView {
     public void stop() {
         primaryStage.hide();
     }
-
 
 }
 

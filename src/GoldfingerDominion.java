@@ -16,14 +16,10 @@ public class GoldfingerDominion extends Application {
     private static Stage primaryStage;
     public Localisator localisator;
 
-
-
     public static void main(String[] args) {
 
         launch();
-
     }
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -33,24 +29,13 @@ public class GoldfingerDominion extends Application {
         loginModel = new LoginModel();
         loginView = new LoginView(primaryStage, localisator);
         loginController = new LoginController(loginModel, loginView, primaryStage, localisator);
-
-
-
         loginView.start();
-
-
     }
-
-
 
     @Override
     public void stop() {
         if (loginView != null) loginView.stop();
     }
-
-
-
-
 }
 
 
