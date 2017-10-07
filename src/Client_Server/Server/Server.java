@@ -68,15 +68,11 @@ public class Server extends Thread {
                 writers.add(objOutput);
 
                 while (true){
-                    if(objInput == null){
-                        return;
-                    }
                     for (ObjectOutputStream objSend : writers) {
-                        objSend.writeObject(objInput);
+                        objSend.writeObject(name);
                     }
                 }
             }
-
             objOutput.writeObject(objInput.readObject());
 
             objInput.close();
