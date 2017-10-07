@@ -1,0 +1,35 @@
+
+.button {
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 14px 46px;
+    -fx-border-color: #000000;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 14px 40px;
+    -fx-border-color: #000000;
+}
+
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 14px;
+    -fx-border-color: #000000;
+}
+
+.button:hover{
+    -fx-background-color: #1874CD;
+}
+
+.root {
+    -fx-background-image: url("DominionBox.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1000 800;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+
+}
