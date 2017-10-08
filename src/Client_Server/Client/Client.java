@@ -5,47 +5,28 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Client {
-    ObjectOutputStream objOutput;
-    ObjectInputStream objInput;
+    private static final int PORT = 22022;
 
-    public Client() {
+    public static void main(String[] args){
 
         try {
-            Socket socketConnection = new Socket("localhost", 22022);
+            String tester = "Test Client ";
+            System.out.println(tester);
 
-            System.out.println("versuch");
+            Socket serverSocket = new Socket("127.0.0.1", PORT);
 
-            objOutput = new ObjectOutputStream(socketConnection.getOutputStream());
-            objInput = new ObjectInputStream(socketConnection.getInputStream());
+            ObjectOutputStream objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
+            ObjectInputStream objInput = new ObjectInputStream(serverSocket.getInputStream());
 
-            System.out.println("versuch2");
+            objOutput.writeObject(tester);
 
+            tester = (String)objInput.readObject();
 
-        } catch (Exception e){}
+            System.out.println(tester);
 
-    }
-    public static void main (String[] args){
-        Client client = new Client();
-        String name = "Benjamin";
-        client.sendObject(name);
-        int test = 5;
-        client.sendObject(test);
-        System.out.println("End");
-        client.close();
-    }
-
-    public void sendObject(Object o){
-        try {
-            objOutput.writeObject(o);
-        } catch (Exception e) {
-        }
-    }
-    public void close(){
-        try {
             objInput.close();
             objOutput.close();
-        } catch (Exception e) {
-        }
-    }
 
+        } catch (Exception e) {}
+    }
 }
