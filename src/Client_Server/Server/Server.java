@@ -51,7 +51,7 @@ public class Server extends Thread {
 
             this.objOutput = new ObjectOutputStream(server.getOutputStream());
 
-            if (objInput.readObject().getClass().equals(Type.String)){
+            if (objInput.readObject().getClass().equals(Type.String)) {
                 while (true) {
                     name = (String) objInput.readObject();
                     if (name == null) {
@@ -60,23 +60,23 @@ public class Server extends Thread {
                     synchronized (names) {
                         if (!names.contains(name)) {
                             names.add(name);
-                            System.out.println("Name added: "+name);
+                            System.out.println("Name added: " + name);
                             break;
                         }
                     }
                 }
                 writers.add(objOutput);
+            }
 
-                while (true){
-                    for (ObjectOutputStream objSend : writers) {
-                        objSend.writeObject(name);
-                    }
+            while (true){
+                for (ObjectOutputStream objSend : writers) {
+                    objSend.writeObject(name);
+                    System.out.println("" + objInput.readObject());
                 }
             }
-            objOutput.writeObject(objInput.readObject());
 
-            objInput.close();
-            objOutput.close();
+            //objInput.close();
+            //objOutput.close();
         } catch (Exception e) {
 
         }

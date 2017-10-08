@@ -31,6 +31,7 @@ public class Client {
         int test = 5;
         client.sendObject(test);
         System.out.println("End");
+        client.close();
     }
 
     public void sendObject(Object o){
