@@ -10,7 +10,7 @@ public class Client {
     public static void main(String[] args){
 
         try {
-            String tester = "Test Client ";
+            String tester = "Test Client";
             System.out.println(tester);
 
             Socket serverSocket = new Socket("127.0.0.1", PORT);
@@ -20,12 +20,20 @@ public class Client {
 
             objOutput.writeObject(tester);
 
-            tester = (String)objInput.readObject();
+            int zahl = 0;
+            Integer test2;
+            while (zahl < 5){
+                test2 = zahl;
+                objOutput.writeObject(test2);
 
-            System.out.println(tester);
+                test2 = (Integer) objInput.readObject();
 
-            objInput.close();
-            objOutput.close();
+                System.out.println(test2);
+                zahl++;
+            }
+
+            //objInput.close();
+            //objOutput.close();
 
         } catch (Exception e) {}
     }
