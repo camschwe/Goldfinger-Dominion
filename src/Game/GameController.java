@@ -1,6 +1,8 @@
 package Game;
 
 
+import Game.GameView.GameView;
+
 /**
  * Created by camillo.schweizer on 07.10.2017.
  */

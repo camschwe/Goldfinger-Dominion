@@ -1,0 +1,115 @@
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 14px 40px;
+    -fx-border-color: #000000;
+}
+
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 14px;
+    -fx-border-color: #000000;
+}
+
+.button:hover{
+    -fx-background-color: #1874CD;
+}
+
+#copperButton{
+    -fx-background-image: url('copper_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+#copperButton:hover {
+    -fx-background-image: url('copper.jpg');
+    -fx-min-width: 200;
+    -fx-min-height: 300;
+    -fx-background-size: 200 300;
+}
+
+#silverButton:hover {
+    -fx-background-image: url('silver.jpg');
+    -fx-min-width: 200;
+    -fx-min-height: 300;
+    -fx-background-size: 200 300;
+}
+
+#silverButton{
+    -fx-background-image: url('silver_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+#goldButton:hover {
+     -fx-background-image: url('gold.jpg');
+     -fx-min-width: 200;
+     -fx-min-height: 300;
+     -fx-background-size: 200 300;
+ }
+
+#goldButton{
+    -fx-background-image: url('gold_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+#provinceButton:hover {
+    -fx-background-image: url('province.jpg');
+    -fx-min-width: 200;
+    -fx-min-height: 300;
+    -fx-background-size: 200 300;
+}
+
+#provinceButton{
+    -fx-background-image: url('province_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+#duchyButton:hover {
+    -fx-background-image: url('duchy.jpg');
+    -fx-min-width: 200;
+    -fx-min-height: 300;
+    -fx-background-size: 200 300;
+}
+
+#duchyButton{
+    -fx-background-image: url('duchy_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+#estateButton:hover {
+    -fx-background-image: url('estate.jpg');
+    -fx-min-width: 200;
+    -fx-min-height: 300;
+    -fx-background-size: 200 300;
+}
+
+#estateButton{
+    -fx-background-image: url('estate_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+}
+
+
+
+
+.root {
+    -fx-background-image: url("../HappyDay.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 300 200;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+
+}

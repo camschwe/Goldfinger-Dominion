@@ -1,7 +1,7 @@
 package Lobby;
 
 import Game.GameController;
-import Game.GameView;
+import Game.GameView.GameView;
 import javafx.stage.Stage;
 
 /**
