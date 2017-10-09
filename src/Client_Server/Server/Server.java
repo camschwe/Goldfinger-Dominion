@@ -1,90 +1,134 @@
 package Client_Server.Server;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
-
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashSet;
 
-public class Server extends Thread {
-
+public class Server {
     private static final int PORT = 22022;
-    private static HashSet<String> names = new HashSet<String>();
-    private static HashSet<ObjectOutputStream> writers = new HashSet<ObjectOutputStream>();
-    private String name;
-    private ObjectInputStream objInput;
-    private ObjectOutputStream objOutput;
-    private Socket server;
-    ServerSocket socket;
+    private static final int MAX_PLAYERS = 4;
+    private static final String[] players = new String[MAX_PLAYERS];
+    private static int i = 0;
+    private static ObjectOutputStream[] writers = new ObjectOutputStream[MAX_PLAYERS];
+    private static ServerSocket socket;
+    private static boolean dontStop = true;
 
 
-    public Server(){
+    public static void main(String[] args){
 
         try {
             socket = new ServerSocket(PORT);
             System.out.println("Server waiting");
+        } catch (Exception e) {}
 
-            server = socket.accept();
+        try {
+            while (true){
+                new Handler(socket.accept()).start();
+            }
+        } catch (Exception e){}
 
+        /**
+        try {
             while (true) {
-                this.start();
+                System.out.println("Server waiting");
+
+                Socket pipe = socket.accept();
+
+                ObjectInputStream objInput = new ObjectInputStream(pipe.getInputStream());
+                ObjectOutputStream objOutput = new ObjectOutputStream(pipe.getOutputStream());
+
+                Object o = objInput.readObject();
+
+                System.out.println("Stage 1");
+
+                if (o instanceof String){
+                    players[i] = (String) o;
+                    writers[i] = objOutput;
+                    i++;
+                    System.out.println("Player " + (i-1) + players[i-1]);
+                }
+
+                System.out.println("Stage 2");
+
+                //test += "+1 test";
+                //System.out.println(test);
+
+
+                System.out.println("Stage 3");
+
+                for (ObjectOutputStream receiver : writers) {
+                    receiver.writeObject(o);
+                }
+
+                System.out.println("Stage 4");
+
+                objInput.close();
             }
 
         } catch (Exception e) {
-
-        } finally {
-            try {
-                this.socket.close();
-            } catch (IOException e) {
-
-            }
+            System.out.println(e);
         }
+        **/
+
     }
 
-    public void run(){
-        try {
-            this.objInput = new ObjectInputStream(server.getInputStream());
+    public static class Handler extends Thread {
+        private Socket socket;
+        private ObjectInputStream objIn;
+        private ObjectOutputStream objOut;
+        private Boolean checkName = false;
+        private Object input;
 
-            this.objOutput = new ObjectOutputStream(server.getOutputStream());
+        public Handler (Socket socket){
+            this.socket = socket;
+        }
 
-            if (objInput.readObject().getClass().equals(Type.String)){
-                while (true) {
-                    name = (String) objInput.readObject();
-                    if (name == null) {
-                        return;
-                    }
-                    synchronized (names) {
-                        if (!names.contains(name)) {
-                            names.add(name);
-                            System.out.println("Name added: "+name);
-                            break;
+        public void run(){
+            try {
+                objIn = new ObjectInputStream(socket.getInputStream());
+                objOut = new ObjectOutputStream(socket.getOutputStream());
+
+                int zahl = 0;
+                while (zahl < 10) {
+
+                    input = objIn.readObject();
+
+                    if (input instanceof String) { // War: while (true)
+                        String name = (String) input;
+
+                        if (i > 0) {
+                            for (String player : players) {
+                                checkName = player.equals(name);
+                            }
+                        }
+
+                        synchronized (players) {
+                            if (!checkName) {
+                                players[i] = name;
+                                writers[i] = objOut;
+                                System.out.println("Player added " + players[i] + writers[i]);
+                                i++;
+                                // break;
+                            }
+                        }
+                    } else {
+                        for (ObjectOutputStream objOutput : writers) {
+                            if (objOutput != null){
+                                objOutput.writeObject(input);
+                            }
                         }
                     }
+                    zahl++;
                 }
-                writers.add(objOutput);
 
-                while (true){
-                    for (ObjectOutputStream objSend : writers) {
-                        objSend.writeObject(name);
-                    }
-                }
-            }
-            objOutput.writeObject(objInput.readObject());
-
-            objInput.close();
-            objOutput.close();
-        } catch (Exception e) {
-
+            } catch (Exception e){}
         }
+
     }
 
-    public static void main(String[] args){
-        new Server();
+    public void stopServer(){
+        dontStop = false;
     }
-
 
 }
