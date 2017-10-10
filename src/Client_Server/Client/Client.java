@@ -1,5 +1,7 @@
 package Client_Server.Client;
 
+import Client_Server.Server.Server;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -8,6 +10,7 @@ public class Client {
     private static final int PORT = 22022;
 
     public static void main(String[] args){
+
 
         try {
             String tester = "Test Client";
@@ -30,10 +33,11 @@ public class Client {
 
                 System.out.println(test2);
                 zahl++;
+
             }
 
-            //objInput.close();
-            //objOutput.close();
+            objInput.close();
+            objOutput.close();
 
         } catch (Exception e) {}
     }

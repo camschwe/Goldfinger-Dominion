@@ -1,5 +1,6 @@
 package Login;
 
+import Client_Server.Server.Server;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
@@ -34,9 +35,11 @@ public class LoginController {
 
         loginView.hostButton.setOnAction(event -> {
 
-            lobbyView = new LobbyView(primaryStage, localisator);
-            lobbyModel = new LobbyModel();
-            lobbyController = new LobbyController(lobbyModel, lobbyView);
+            Server server = new Server();
+            server.start();
+            //lobbyView = new LobbyView(primaryStage, localisator);
+            //lobbyModel = new LobbyModel();
+            //lobbyController = new LobbyController(lobbyModel, lobbyView);
         });
 
         loginView.switchBox.setOnAction(event -> {
