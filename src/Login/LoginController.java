@@ -20,6 +20,7 @@ public class LoginController {
     private LobbyModel lobbyModel;
     protected Localisator localisator;
 
+
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
         this.loginModel = loginModel;
         this.loginView = loginView;
@@ -30,7 +31,8 @@ public class LoginController {
 
             lobbyView = new LobbyView(primaryStage, localisator);
             lobbyModel = new LobbyModel();
-            lobbyController = new LobbyController(lobbyModel, lobbyView);
+            lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
+
         });
 
         loginView.hostButton.setOnAction(event -> {

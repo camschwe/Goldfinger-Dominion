@@ -14,9 +14,6 @@
     -fx-border-color: #000000;
 }
 
-.button:hover{
-    -fx-background-color: #1874CD;
-}
 
 #copperButton{
     -fx-background-image: url('copper_small.jpg');
@@ -25,18 +22,18 @@
     -fx-background-size: 100 100;
 }
 
-#copperButton:hover {
+.copper{
     -fx-background-image: url('copper.jpg');
-    -fx-min-width: 200;
+    -fx-min-width: 192;
     -fx-min-height: 300;
-    -fx-background-size: 200 300;
+    -fx-background-size: 192 300;
 }
 
-#silverButton:hover {
+.silver {
     -fx-background-image: url('silver.jpg');
-    -fx-min-width: 200;
+    -fx-min-width: 192;
     -fx-min-height: 300;
-    -fx-background-size: 200 300;
+    -fx-background-size: 192 300;
 }
 
 #silverButton{
@@ -46,11 +43,11 @@
     -fx-background-size: 100 100;
 }
 
-#goldButton:hover {
+.gold {
      -fx-background-image: url('gold.jpg');
-     -fx-min-width: 200;
+     -fx-min-width: 192;
      -fx-min-height: 300;
-     -fx-background-size: 200 300;
+     -fx-background-size: 192 300;
  }
 
 #goldButton{
@@ -60,11 +57,11 @@
     -fx-background-size: 100 100;
 }
 
-#provinceButton:hover {
+.province {
     -fx-background-image: url('province.jpg');
-    -fx-min-width: 200;
+    -fx-min-width: 192;
     -fx-min-height: 300;
-    -fx-background-size: 200 300;
+    -fx-background-size: 192 300;
 }
 
 #provinceButton{
@@ -74,25 +71,25 @@
     -fx-background-size: 100 100;
 }
 
-#duchyButton:hover {
+.duchy {
     -fx-background-image: url('duchy.jpg');
-    -fx-min-width: 200;
+    -fx-min-width: 192;
     -fx-min-height: 300;
-    -fx-background-size: 200 300;
+    -fx-background-size: 192 300;
 }
 
-#duchyButton{
+#duchyButton {
     -fx-background-image: url('duchy_small.jpg');
     -fx-min-width: 100;
     -fx-min-height: 100;
     -fx-background-size: 100 100;
 }
 
-#estateButton:hover {
+.estate {
     -fx-background-image: url('estate.jpg');
-    -fx-min-width: 200;
+    -fx-min-width: 192;
     -fx-min-height: 300;
-    -fx-background-size: 200 300;
+    -fx-background-size: 192 300;
 }
 
 #estateButton{
@@ -102,13 +99,48 @@
     -fx-background-size: 100 100;
 }
 
+.villageButton {
+    -fx-background-image: url('village_small.jpg');
+    -fx-min-width: 100;
+    -fx-min-height: 100;
+    -fx-background-size: 100 100;
+
+}
+
+.village {
+    -fx-background-image: url('village.jpg');
+    -fx-min-width: 192;
+    -fx-min-height: 300;
+    -fx-background-size: 192 300;
+
+}
+
+.back1 {
+    -fx-background-image: url('back1.jpg');
+    -fx-min-width: 192;
+    -fx-min-height: 300;
+    -fx-background-size: 192 300;
+}
+
+.back2 {
+    -fx-background-image: url('back2.jpg');
+    -fx-min-width: 192;
+    -fx-min-height: 300;
+    -fx-background-size: 192 300;
+}
 
 
+
+.invisible {
+    visibility: hidden;
+    -fx-min-width: 192;
+    -fx-min-height: 300;
+}
 
 .root {
-    -fx-background-image: url("../HappyDay.jpg");
+    -fx-background-image: url("blue_red.jpg");
     -fx-background-repeat: stretch;
-    -fx-background-size: 300 200;
+    -fx-background-size: 1920 1080;
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 

@@ -27,7 +27,7 @@ public class LobbyView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
 
-        ipLabel = new Label(localisator.getResourceBundle().getString("IP")+"46.127.72.195");
+        ipLabel = new Label(localisator.getResourceBundle().getString("IP")+": 46.127.72.195");
         userLabel1 = new Label("Spieler1");
         userLabel2 = new Label("Spieler2");
         startButton = new Button(localisator.getResourceBundle().getString("ready"));
