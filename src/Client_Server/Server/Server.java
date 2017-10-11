@@ -7,16 +7,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Server extends Thread{
-    static final int PORT = 22022;
+    private static final int PORT = 22022;
+    private static final int MAXSPIELER = 4;
     private Thread thread;
     private final String threadName = "Server";
     private ServerSocket serverSocket = null;
     private Socket socket = null;
-    private String[] names = new String[4];
-    private ObjectOutputStream[] outputs = new ObjectOutputStream[4];
+    //private String[] names = new String[4];
+    //private ObjectOutputStream[] outputs = new ObjectOutputStream[4];
+    private static HashSet<String> names = new HashSet<String>();
+    private static String clientName;
+    private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
     private boolean running = true;
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOutput = null;
@@ -64,7 +68,18 @@ public class Server extends Thread{
                     Object input = objInput.readObject();
                     System.out.println(input + " Objekttyp: " + input.getClass());
                     if (input instanceof String) {
-                        boolean vorhanden = false;
+
+                        clientName = (String) input;
+
+                        synchronized (names){
+                            if (!names.contains(clientName)){
+                                names.add(clientName);
+                                outputs.add(objOutput);
+                                System.out.println("Benutzer hinzugefügt");
+                            }
+                        }
+
+                        /**boolean vorhanden = false;
                         for (String name : names) {
                             if (name != null) {
                                 if (name.equals(input)) {
@@ -74,11 +89,13 @@ public class Server extends Thread{
                             }
                         }
                         if (!vorhanden) {
-                            names[0] = (String) input;
-                            System.out.println("User");
-                            outputs[0] = objOutput;
-                            System.out.println("Benutzer hinzugefügt");
-                        }
+                            synchronized (names) {
+                                clientName = (String) input;
+                                names.add(clientName);
+                                outputs.add(objOutput);
+                                System.out.println("Benutzer hinzugefügt");
+                            }
+                        }**/
                     } else {
                         for (ObjectOutputStream output : outputs) {
                             if (output != null) {
@@ -95,16 +112,26 @@ public class Server extends Thread{
 
     }
     public void start(){
-        if (thread == null){
-            thread = new Thread(this, threadName);
-            thread.start();
+        for (int i = 0; i < MAXSPIELER; i++){
+
+                thread = new Thread(this, threadName);
+                thread.start();
+
         }
     }
 
     public void stopServer(){
         running = false;
-        names[0] = null;
-        outputs[0] = null;
+        //names[0] = null;
+        names.remove(clientName);
+        //outputs[0] = null;
+        outputs.remove(objOutput);
+        try {
+            objInput.close();
+            objOutput.close();
+        } catch (Exception e) {
+            System.out.println("Error closing Input and Output Streams");
+        }
     }
 
 }
