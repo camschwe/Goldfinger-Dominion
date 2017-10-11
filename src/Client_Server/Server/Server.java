@@ -1,13 +1,16 @@
 package Client_Server.Server;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
+
+/**
+ * Created by Benjamin Probst on 01.10.2017.
+ * last edit: 11.10.2017
+ **/
 
 public class Server extends Thread{
     private static final int PORT = 22022;
