@@ -78,6 +78,7 @@ public class GameView {
         resourePane.add(copperButton, 1,2);
         resourePane.setHgap(30);
         resourePane.setVgap(30);
+        resourePane.setPadding(new Insets(20, 20, 20, 20));
 
         Label moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t2");
         Label pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t2");
@@ -144,6 +145,7 @@ public class GameView {
         actionPane.add(actionButton10, 4, 1);
         actionPane.setHgap(30);
         actionPane.setVgap(30);
+        actionPane.setPadding(new Insets(20, 20, 20, 20));
 
 
 
@@ -155,12 +157,16 @@ public class GameView {
             player1Box.getChildren().add(player1Card);
         }
 
+        player1Box.setPadding((new Insets(20, 20, 20, 20)));
+
         //TODO: mit Array schöner gestalten
         for(int i = 0; i<5; i++){
             Button player2Card = new Button();
             player2Card.getStyleClass().add("back2");
             player2Box.getChildren().add(player2Card);
         }
+
+        player2Box.setPadding((new Insets(20, 20, 20, 20)));
 
         Label noteLabel = new Label ("Hinweis:\n\nnimm endlich diese verdammte Karte\n\n\nendlich bist du so weit!");
         rightPane.setBottom(noteLabel);
