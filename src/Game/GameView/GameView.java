@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -37,7 +36,6 @@ public class GameView {
         BorderPane leftPane = new BorderPane();
         GridPane player1Pane = new GridPane();
         GridPane player2Pane = new GridPane();
-        GridPane notePane = new GridPane();
         GridPane actionPane = new GridPane();
         HBox player1Box = new HBox();
         HBox player2Box = new HBox();
@@ -170,8 +168,6 @@ public class GameView {
 
         Label noteLabel = new Label ("Hinweis:\n\nnimm endlich diese verdammte Karte\n\n\nendlich bist du so weit!");
         rightPane.setBottom(noteLabel);
-
-
 
 
 
