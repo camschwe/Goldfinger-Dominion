@@ -36,8 +36,12 @@ public class Client {
 
             }
 
-            objInput.close();
-            objOutput.close();
+            //objInput.close();
+            //objOutput.close();
+
+            while (true){
+
+            }
 
         } catch (Exception e) {}
     }

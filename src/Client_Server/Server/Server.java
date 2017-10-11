@@ -15,8 +15,8 @@ public class Server extends Thread{
     private final String threadName = "Server";
     private ServerSocket serverSocket = null;
     private Socket socket = null;
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<ObjectOutputStream> outputs = new ArrayList<>();
+    private String[] names = new String[4];
+    private ObjectOutputStream[] outputs = new ObjectOutputStream[4];
     private boolean running = true;
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOutput = null;
@@ -41,45 +41,55 @@ public class Server extends Thread{
     }
 
     public void run() {
-        try {
-            socket = serverSocket.accept();
-            System.out.println("Client verbunden");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            objInput = new ObjectInputStream(socket.getInputStream());
-            objOutput = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("In- und Output erstellt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        while (running){
+        while (true) {
+            running = true;
             try {
-                Object input = objInput.readObject();
-                System.out.println(input + " Objekttyp: " + input.getClass());
-                if (input.getClass().equals(Type.String)){
-                    for (String name : names) {
-                        if (name != null){
-                            if (!name.equals((String)input)){
-                                names.add((String) input);
-                                outputs.add(objOutput);
-                                System.out.println("Benutzer hinzugefügt");
-                            }else {
-                                System.out.println("Name bereits vergeben");
+                socket = serverSocket.accept();
+                System.out.println("Client verbunden");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            try {
+                objInput = new ObjectInputStream(socket.getInputStream());
+                objOutput = new ObjectOutputStream(socket.getOutputStream());
+                System.out.println("In- und Output erstellt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            while (running) {
+                try {
+                    Object input = objInput.readObject();
+                    System.out.println(input + " Objekttyp: " + input.getClass());
+                    if (input instanceof String) {
+                        boolean vorhanden = false;
+                        for (String name : names) {
+                            if (name != null) {
+                                if (name.equals(input)) {
+                                    vorhanden = true;
+                                    System.out.println("Name bereits vergeben");
+                                }
+                            }
+                        }
+                        if (!vorhanden) {
+                            names[0] = (String) input;
+                            System.out.println("User");
+                            outputs[0] = objOutput;
+                            System.out.println("Benutzer hinzugefügt");
+                        }
+                    } else {
+                        for (ObjectOutputStream output : outputs) {
+                            if (output != null) {
+                                output.writeObject(input);
                             }
                         }
                     }
-                } else {
-                    for (ObjectOutputStream output : outputs){
-                        output.writeObject(input);
-                    }
+                } catch (Exception e) {
+                    System.out.println("ERROR");
+                    stopServer();
                 }
-            } catch (Exception e) {
-                System.out.println("ERROR");
             }
         }
 
@@ -93,6 +103,8 @@ public class Server extends Thread{
 
     public void stopServer(){
         running = false;
+        names[0] = null;
+        outputs[0] = null;
     }
 
 }
