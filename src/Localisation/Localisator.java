@@ -13,7 +13,7 @@ public class Localisator {
 
     public Localisator(){
 
-        this.language = "eng";
+        this.language = "CH";
         newLocal();
     }
 

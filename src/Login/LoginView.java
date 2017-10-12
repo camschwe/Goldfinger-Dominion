@@ -35,7 +35,7 @@ public class LoginView {
         userNameField = new TextField();
         userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
 
-        switchBox = new ComboBox<String>();
+        switchBox = new ComboBox<>();
         switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
         switchBox.getItems().addAll(
                 "English",

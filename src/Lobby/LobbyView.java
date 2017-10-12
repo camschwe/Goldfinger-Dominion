@@ -23,11 +23,11 @@ public class LobbyView {
     public Label ipLabel, userLabel1, userLabel2;
     protected Localisator localisator;
 
-    public LobbyView(Stage entryStage, Localisator localisator) {
+    public LobbyView(Stage primaryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
 
-        ipLabel = new Label(localisator.getResourceBundle().getString("IP")+"46.127.72.195");
+        ipLabel = new Label(localisator.getResourceBundle().getString("IP")+": 46.127.72.195");
         userLabel1 = new Label("Spieler1");
         userLabel2 = new Label("Spieler2");
         startButton = new Button(localisator.getResourceBundle().getString("ready"));
@@ -52,7 +52,7 @@ public class LobbyView {
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);
-        entryStage.setScene(scene);
+        primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("LobbyStyles.css").toExternalForm());
         //entryStage.setTitle("Goldfinger Dominion");
     }
