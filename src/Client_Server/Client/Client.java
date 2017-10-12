@@ -53,7 +53,7 @@ public class Client extends Thread {
 
     }
 
-    public void sendOject(Object o){
+    public void sendObject(Object o){
         try {
             objOutput.writeObject(o);
         } catch (IOException e) {
