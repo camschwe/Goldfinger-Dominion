@@ -19,8 +19,6 @@ public class Server extends Thread{
     private final String threadName = "Server";
     private ServerSocket serverSocket = null;
     private Socket socket = null;
-    //private String[] names = new String[4];
-    //private ObjectOutputStream[] outputs = new ObjectOutputStream[4];
     private static HashSet<String> names = new HashSet<String>();
     private static String clientName;
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();

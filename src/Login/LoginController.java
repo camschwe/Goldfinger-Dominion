@@ -1,5 +1,6 @@
 package Login;
 
+import Client_Server.Client.Client;
 import Client_Server.Server.Server;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
@@ -39,6 +40,8 @@ public class LoginController {
 
             Server server = new Server();
             server.start();
+            Client client = new Client("localhost");
+            client.start();
             //lobbyView = new LobbyView(primaryStage, localisator);
             //lobbyModel = new LobbyModel();
             //lobbyController = new LobbyController(lobbyModel, lobbyView);
