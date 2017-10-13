@@ -2,45 +2,41 @@
 .button {
     -fx-background-color: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 10px 0px;
+    -fx-padding: 14px 46px;
     -fx-border-color: #000000;
-    -fx-min-width: 200px;
 }
 
-.label {
+.userLabel {
     -fx-text-fill: #000000;
     -fx-background-color: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 10px 0px;
+    -fx-padding: 14px 36px;
     -fx-border-color: #000000;
-    -fx-min-width: 200px;
-    -fx-alignment: center;
+}
+
+.ipLabel {
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 36Pt;
+    -fx-padding: 14px 36px;
+    -fx-border-color: #000000;
+
+
 }
 
 .text-field {
     -fx-background-color: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 10px 0px;
+    -fx-padding: 14px;
     -fx-border-color: #000000;
-    -fx-min-width: 200px;
-    -fx-alignment: center;
 }
 
 .button:hover{
     -fx-background-color: #1874CD;
 }
 
-.combo-box{
-    fx-background-color: #FFFFFF;
-    -fx-font-size: 12Pt;
-    -fx-padding: 5px 0px;
-    -fx-border-color: #000000;
-    -fx-min-width: 200px;
-
-}
-
 .root {
-    -fx-background-image: url("DominionBox.jpg");
+    -fx-background-image: url("../Backgrounds/metal_texture.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 1000 800;
     -fx-background-position: center center;

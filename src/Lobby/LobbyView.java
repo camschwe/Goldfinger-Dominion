@@ -53,7 +53,7 @@ public class LobbyView {
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("LobbyStyles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("../Stylesheets/LobbyStyles.css").toExternalForm());
         //entryStage.setTitle("Goldfinger Dominion");
     }
 

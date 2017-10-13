@@ -2,7 +2,7 @@ package Lobby;
 
 import Game.CardHandle;
 import Game.GameController;
-import Game.GameView.GameView;
+import Game.GameView;
 import Localisation.Localisator;
 import javafx.stage.Stage;
 

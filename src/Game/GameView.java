@@ -1,4 +1,4 @@
-package Game.GameView;
+package Game;
 
 import Localisation.Localisator;
 import javafx.geometry.Insets;
@@ -52,17 +52,17 @@ public class GameView {
         midPane.setBottom(player1Box);
 
         estateButton = new Button();
-        estateButton.setId("estateButton");
+        estateButton.getStyleClass().add("estateButton");
         duchyButton = new Button();
-        duchyButton.setId("duchyButton");
+        duchyButton.getStyleClass().add("duchyButton");
         provinceButton = new Button();
-        provinceButton.setId("provinceButton");
+        provinceButton.getStyleClass().add("provinceButton");
         copperButton = new Button();
-        copperButton.setId("copperButton");
+        copperButton.getStyleClass().add("copperButton");
         silverButton = new Button();
-        silverButton.setId("silverButton");
+        silverButton.getStyleClass().add("silverButton");
         goldButton = new Button();
-        goldButton.setId("goldButton");
+        goldButton.getStyleClass().add("goldButton");
         resourceButton = new Button();
         resourceButton.getStyleClass().add("invisible");
 
@@ -76,33 +76,45 @@ public class GameView {
         resourePane.add(copperButton, 1,2);
         resourePane.setHgap(30);
         resourePane.setVgap(30);
-        resourePane.setPadding(new Insets(20, 20, 20, 20));
+        resourePane.setPadding(new Insets(20, 20, 0, 20));
 
+        Label playerLabel1 = new Label ( "Spieler 1");
+        playerLabel1.getStyleClass().add("nameLabel");
         Label moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t2");
         Label pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t2");
         Label phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        moneyLabel1.getStyleClass().add("resourceLabel");
+        pointLabel1.getStyleClass().add("resourceLabel");
+        phaseLabel1.getStyleClass().add("resourceLabel");
         Button putStapelPlayer1 = new Button();
         putStapelPlayer1.getStyleClass().add("village");
         Button drawStapelPlayer1 = new Button();
         drawStapelPlayer1.getStyleClass().add("back1");
 
-        player1Pane.add(moneyLabel1, 0,0);
-        player1Pane.add(pointLabel1, 0,1);
-        player1Pane.add(phaseLabel1, 0,2);
-        player1Pane.add(putStapelPlayer1, 0,3);
-        player1Pane.add(drawStapelPlayer1, 1,3);
+        player1Pane.add(playerLabel1, 0,0);
+        player1Pane.add(moneyLabel1, 0,1);
+        player1Pane.add(pointLabel1, 0,2);
+        player1Pane.add(phaseLabel1, 0,3);
+        player1Pane.add(putStapelPlayer1, 0,4);
+        player1Pane.add(drawStapelPlayer1, 1,4);
 
+        Label playerLabel2 = new Label ("Spieler 2");
+        playerLabel2.getStyleClass().add("nameLabel");
         Label moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t2");
         Label pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t2");
         Label phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        moneyLabel2.getStyleClass().add("resourceLabel");
+        pointLabel2.getStyleClass().add("resourceLabel");
+        phaseLabel2.getStyleClass().add("resourceLabel");
         Button putStapelPlayer2 = new Button();
         putStapelPlayer2.getStyleClass().add("back2");
         Button drawStapelPlayer2 = new Button();
         drawStapelPlayer2.getStyleClass().add("village");
 
-        player2Pane.add(moneyLabel2, 0,1);
-        player2Pane.add(pointLabel2, 0,2);
-        player2Pane.add(phaseLabel2, 0,3);
+        player2Pane.add(playerLabel2, 0,1);
+        player2Pane.add(moneyLabel2, 0,2);
+        player2Pane.add(pointLabel2, 0,3);
+        player2Pane.add(phaseLabel2, 0,4);
         player2Pane.add(putStapelPlayer2, 0,0);
         player2Pane.add(drawStapelPlayer2, 1,0);
 
@@ -141,9 +153,9 @@ public class GameView {
         actionButton10 = new Button();
         actionButton10.getStyleClass().add("villageButton");
         actionPane.add(actionButton10, 4, 1);
-        actionPane.setHgap(30);
-        actionPane.setVgap(30);
-        actionPane.setPadding(new Insets(20, 20, 20, 20));
+        actionPane.setHgap(20);
+        actionPane.setVgap(20);
+        actionPane.setPadding(new Insets(20, 20, 0, 0));
 
 
 
@@ -151,11 +163,12 @@ public class GameView {
         //TODO: mit Array schöner gestalten
         for(int i = 0; i<5; i++){
             Button player1Card = new Button();
-            player1Card.getStyleClass().add("back1");
+            player1Card.getStyleClass().add("village");
             player1Box.getChildren().add(player1Card);
         }
 
         player1Box.setPadding((new Insets(20, 20, 20, 20)));
+        player1Box.setSpacing(20);
 
         //TODO: mit Array schöner gestalten
         for(int i = 0; i<5; i++){
@@ -165,16 +178,18 @@ public class GameView {
         }
 
         player2Box.setPadding((new Insets(20, 20, 20, 20)));
+        player2Box.setSpacing(20);
 
-        Label noteLabel = new Label ("Hinweis:\n\nnimm endlich diese verdammte Karte\n\n\nendlich bist du so weit!");
+        Label noteLabel = new Label ("Hinweis:\n\nViel Spass!");
         rightPane.setBottom(noteLabel);
+        noteLabel.getStyleClass().add("noteLabel");
 
 
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1800, 1000);
         gameStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("GameStyles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
         gameStage.setTitle("Goldfinger Dominion");
         gameStage.setFullScreen(true);
 

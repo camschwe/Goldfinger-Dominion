@@ -1,6 +1,5 @@
 package Game;
 
-import Game.GameView.GameView;
 import Localisation.Localisator;
 
 

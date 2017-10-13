@@ -61,7 +61,7 @@ public class LoginView {
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("LoginStyles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("../Stylesheets/LoginStyles.css").toExternalForm());
         primaryStage.setTitle("Goldfinger Dominion");
         primaryStage.setMaxWidth(1000);
         primaryStage.setMaxHeight(800);

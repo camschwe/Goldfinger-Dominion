@@ -34,7 +34,7 @@ public class Localisator {
 
     public void newLocal(){
         Locale locale = new Locale(language);
-        resourceBundle = ResourceBundle.getBundle("Localisation.Bundle", locale);
+        resourceBundle = ResourceBundle.getBundle("Properties/Bundle", locale);
     }
 
     public ResourceBundle getResourceBundle(){
