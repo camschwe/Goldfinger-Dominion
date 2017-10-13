@@ -8,26 +8,20 @@
 
 .userLabel {
     -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 14px 36px;
-    -fx-border-color: #000000;
+
 }
 
 .ipLabel {
     -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
     -fx-font-size: 36Pt;
-    -fx-padding: 14px 36px;
-    -fx-border-color: #000000;
+    -fx-padding: 20px 36px;
 
 
 }
 
 .text-field {
-    -fx-background-color: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 14px;
     -fx-border-color: #000000;
 }
 
@@ -36,10 +30,8 @@
 }
 
 .root {
-    -fx-background-image: url("../Backgrounds/metal_texture.jpg");
-    -fx-background-repeat: stretch;
+    -fx-background-image: url("../Backgrounds/scroll.jpg");
     -fx-background-size: 1000 800;
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+
 
 }

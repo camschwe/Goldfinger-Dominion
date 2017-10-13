@@ -19,7 +19,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("copper");
+                gameView.resourceButton.getStyleClass().add("copperBig");
 
             }
         });
@@ -36,7 +36,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("silver");
+                gameView.resourceButton.getStyleClass().add("silverBig");
 
             }
         });
@@ -53,7 +53,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("gold");
+                gameView.resourceButton.getStyleClass().add("goldBig");
 
             }
         });
@@ -71,7 +71,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("estate");
+                gameView.resourceButton.getStyleClass().add("estateBig");
 
             }
         });
@@ -89,7 +89,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("duchy");
+                gameView.resourceButton.getStyleClass().add("duchyBig");
 
             }
         });
@@ -107,7 +107,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("estate");
+                gameView.resourceButton.getStyleClass().add("estateBig");
 
             }
         });
@@ -124,7 +124,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add("province");
+                gameView.resourceButton.getStyleClass().add("provinceBig");
 
             }
         });
@@ -141,7 +141,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -158,7 +158,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -175,7 +175,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -192,7 +192,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -209,7 +209,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -226,7 +226,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -243,7 +243,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -260,7 +260,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -277,7 +277,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });
@@ -294,7 +294,7 @@ public class CardHandle {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameView.actionButton.getStyleClass().clear();
-                gameView.actionButton.getStyleClass().add("village");
+                gameView.actionButton.getStyleClass().add("villageBig");
 
             }
         });

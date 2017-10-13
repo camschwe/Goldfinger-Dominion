@@ -2,6 +2,7 @@ package Lobby;
 
 import Game.CardHandle;
 import Game.GameController;
+import Game.GameModel;
 import Game.GameView;
 import Localisation.Localisator;
 import javafx.stage.Stage;
@@ -17,6 +18,7 @@ public class LobbyController {
     private GameView gameView;
     private Localisator localisator;
     private CardHandle cardHandle;
+    private GameModel gameModel;
 
     public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView, Localisator localisator) {
         this.lobbyModel = lobbyModel;
@@ -25,9 +27,12 @@ public class LobbyController {
 
         lobbyView.startButton.setOnAction(event -> {
 
+            //TODO: Add player count
+
             Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator);
-            gameController = new GameController(gameView, localisator);
+            gameModel = new GameModel(2);
+            gameController = new GameController(gameView, localisator, gameModel);
             cardHandle = new CardHandle(gameView);
             gameView.start();
         });

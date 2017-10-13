@@ -1,18 +1,16 @@
 package Game.Cards;
 
 /**
- * Created by camillo.schweizer on 07.10.2017.
+ * Created by camillo.schweizer on 13.10.2017.
  */
-public class PointCard extends Card{
+public class Card {
 
     String cardName;
     int cost;
-    int value;
 
-    public PointCard(String cardName, int cost, int value) {
+    public Card() {
         this.cardName = cardName;
         this.cost = cost;
-        this.value = value;
     }
 
     public String getCardName() {
@@ -29,13 +27,5 @@ public class PointCard extends Card{
 
     public void setCost(int cost) {
         this.cost = cost;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 }

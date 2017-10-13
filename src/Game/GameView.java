@@ -5,6 +5,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -20,6 +22,7 @@ public class GameView {
     public Button copperButton, silverButton, goldButton, estateButton, duchyButton, provinceButton,resourceButton;
     public Button actionButton, actionButton1, actionButton2, actionButton3, actionButton4, actionButton5, actionButton6;
     public Button actionButton7, actionButton8, actionButton9,actionButton10;
+    public HBox player1Box, player2Box;
 
 
     public GameView(Stage gameStage, Localisator localisator) {
@@ -29,53 +32,63 @@ public class GameView {
 
 
         BorderPane root = new BorderPane();
+        BorderPane mainPane = new BorderPane();
         BorderPane midPane = new BorderPane();
         BorderPane resourceBorder = new BorderPane();
         BorderPane rightPane = new BorderPane();
         GridPane resourePane = new GridPane();
         BorderPane leftPane = new BorderPane();
+        BorderPane actionBorder = new BorderPane();
         GridPane player1Pane = new GridPane();
         GridPane player2Pane = new GridPane();
         GridPane actionPane = new GridPane();
-        HBox player1Box = new HBox();
-        HBox player2Box = new HBox();
+        GridPane chatPane = new GridPane();
+        player1Box = new HBox();
+        player2Box = new HBox();
+        HBox player2CardBox = new HBox();
+        HBox player1CardBox = new HBox();
 
         root.setCenter(midPane);
-        root.setLeft(resourceBorder);
+        root.setLeft(leftPane);
         root.setRight(rightPane);
-        resourceBorder.setTop(leftPane);
-        leftPane.setLeft(resourePane);
-        resourceBorder.setBottom(player1Pane);
-        midPane.setCenter(actionPane);
-        rightPane.setLeft(player2Pane);
+        leftPane.setTop(resourceBorder);
+        leftPane.setBottom(player1CardBox);
+        leftPane.setCenter(player1Pane);
+        midPane.setCenter(actionBorder);
+        rightPane.setCenter(player2Pane);
+        rightPane.setTop(player2CardBox);
+        rightPane.setRight(chatPane);
         midPane.setTop(player2Box);
         midPane.setBottom(player1Box);
+        resourceBorder.setCenter(resourePane);
+        actionBorder.setCenter(actionPane);
+
 
         estateButton = new Button();
-        estateButton.getStyleClass().add("estateButton");
+        estateButton.getStyleClass().add("estateSmall");
         duchyButton = new Button();
-        duchyButton.getStyleClass().add("duchyButton");
+        duchyButton.getStyleClass().add("duchySmall");
         provinceButton = new Button();
-        provinceButton.getStyleClass().add("provinceButton");
+        provinceButton.getStyleClass().add("provinceSmall");
         copperButton = new Button();
-        copperButton.getStyleClass().add("copperButton");
+        copperButton.getStyleClass().add("copperSmall");
         silverButton = new Button();
-        silverButton.getStyleClass().add("silverButton");
+        silverButton.getStyleClass().add("silverSmall");
         goldButton = new Button();
-        goldButton.getStyleClass().add("goldButton");
+        goldButton.getStyleClass().add("goldSmall");
         resourceButton = new Button();
         resourceButton.getStyleClass().add("invisible");
 
 
-        leftPane.setCenter(resourceButton);
+        resourceBorder.setRight(resourceButton);
         resourePane.add(provinceButton, 0,0);
         resourePane.add(duchyButton, 0,1);
         resourePane.add(estateButton, 0,2);
         resourePane.add(goldButton, 1,0);
         resourePane.add(silverButton, 1,1);
         resourePane.add(copperButton, 1,2);
-        resourePane.setHgap(30);
-        resourePane.setVgap(30);
+        resourePane.setHgap(20);
+        resourePane.setVgap(20);
         resourePane.setPadding(new Insets(20, 20, 0, 20));
 
         Label playerLabel1 = new Label ( "Spieler 1");
@@ -95,8 +108,7 @@ public class GameView {
         player1Pane.add(moneyLabel1, 0,1);
         player1Pane.add(pointLabel1, 0,2);
         player1Pane.add(phaseLabel1, 0,3);
-        player1Pane.add(putStapelPlayer1, 0,4);
-        player1Pane.add(drawStapelPlayer1, 1,4);
+        player1CardBox.getChildren().addAll(putStapelPlayer1, drawStapelPlayer1);
 
         Label playerLabel2 = new Label ("Spieler 2");
         playerLabel2.getStyleClass().add("nameLabel");
@@ -115,57 +127,48 @@ public class GameView {
         player2Pane.add(moneyLabel2, 0,2);
         player2Pane.add(pointLabel2, 0,3);
         player2Pane.add(phaseLabel2, 0,4);
-        player2Pane.add(putStapelPlayer2, 0,0);
-        player2Pane.add(drawStapelPlayer2, 1,0);
+        player2CardBox.getChildren().addAll(drawStapelPlayer2, putStapelPlayer2);
 
 
         //TODO: mit Array schöner gestalten
         actionButton = new Button();
         actionButton.getStyleClass().add("invisible");
-        midPane.setRight(actionButton);
+        actionBorder.setBottom(actionButton);
         actionButton1 = new Button();
-        actionButton1.getStyleClass().add("villageButton");
+        actionButton1.getStyleClass().add("villageSmall");
         actionPane.add(actionButton1, 0, 0);
         actionButton2 = new Button();
-        actionButton2.getStyleClass().add("villageButton");
+        actionButton2.getStyleClass().add("villageSmall");
         actionPane.add(actionButton2, 1, 0);
         actionButton3 = new Button();
-        actionButton3.getStyleClass().add("villageButton");
+        actionButton3.getStyleClass().add("villageSmall");
         actionPane.add(actionButton3, 2, 0);
         actionButton4 = new Button();
-        actionButton4.getStyleClass().add("villageButton");
+        actionButton4.getStyleClass().add("villageSmall");
         actionPane.add(actionButton4, 3, 0);
         actionButton5 = new Button();
-        actionButton5.getStyleClass().add("villageButton");
+        actionButton5.getStyleClass().add("villageSmall");
         actionPane.add(actionButton5, 4, 0);
         actionButton6 = new Button();
-        actionButton6.getStyleClass().add("villageButton");
+        actionButton6.getStyleClass().add("villageSmall");
         actionPane.add(actionButton6, 0, 1);
         actionButton7 = new Button();
-        actionButton7.getStyleClass().add("villageButton");
+        actionButton7.getStyleClass().add("villageSmall");
         actionPane.add(actionButton7, 1, 1);
         actionButton8 = new Button();
-        actionButton8.getStyleClass().add("villageButton");
+        actionButton8.getStyleClass().add("villageSmall");
         actionPane.add(actionButton8, 2, 1);
         actionButton9 = new Button();
-        actionButton9.getStyleClass().add("villageButton");
+        actionButton9.getStyleClass().add("villageSmall");
         actionPane.add(actionButton9, 3, 1);
         actionButton10 = new Button();
-        actionButton10.getStyleClass().add("villageButton");
+        actionButton10.getStyleClass().add("villageSmall");
         actionPane.add(actionButton10, 4, 1);
         actionPane.setHgap(20);
         actionPane.setVgap(20);
         actionPane.setPadding(new Insets(20, 20, 0, 0));
 
 
-
-
-        //TODO: mit Array schöner gestalten
-        for(int i = 0; i<5; i++){
-            Button player1Card = new Button();
-            player1Card.getStyleClass().add("village");
-            player1Box.getChildren().add(player1Card);
-        }
 
         player1Box.setPadding((new Insets(20, 20, 20, 20)));
         player1Box.setSpacing(20);
@@ -180,14 +183,23 @@ public class GameView {
         player2Box.setPadding((new Insets(20, 20, 20, 20)));
         player2Box.setSpacing(20);
 
-        Label noteLabel = new Label ("Hinweis:\n\nViel Spass!");
-        rightPane.setBottom(noteLabel);
-        noteLabel.getStyleClass().add("noteLabel");
+        TextArea noteArea = new TextArea ();
+        noteArea.setPromptText("note");
+        noteArea.setEditable(false);
+        noteArea.getStyleClass().add("noteArea");
+        chatPane.add(noteArea, 0,0);
+
+        TextArea chatArea = new TextArea ();
+        chatArea.setPromptText("Chat");
+        chatArea.setEditable(false);
+        chatArea.getStyleClass().add("chatArea");
+        chatPane.add(chatArea,0,1);
+
 
 
 
         //Scene Initialisieren
-        Scene scene = new Scene(root, 1800, 1000);
+        Scene scene = new Scene(root, 1920, 1080);
         gameStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
         gameStage.setTitle("Goldfinger Dominion");
