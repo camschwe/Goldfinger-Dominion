@@ -1,6 +1,7 @@
 package Login;
 
 import Client_Server.Client.Client;
+import Client_Server.Message;
 import Client_Server.Server.Server;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
@@ -20,6 +21,9 @@ public class LoginController {
     private LobbyController lobbyController;
     private LobbyModel lobbyModel;
     protected Localisator localisator;
+    private String clientName;
+    private Client client;
+    private Server server;
 
 
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
@@ -30,21 +34,41 @@ public class LoginController {
 
         loginView.joinButton.setOnAction(event -> {
 
-            lobbyView = new LobbyView(primaryStage, localisator);
-            lobbyModel = new LobbyModel();
-            lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
-
+            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+                clientName = loginView.userNameField.getText();
+                if (client == null){
+                    client = new Client("localhost", clientName);
+                    client.start();
+                }
+                Message benutzer = new Message(0, clientName, "login");
+                client.sendObject(benutzer);
+                while (!client.isChecked()){
+                    //Waiting until server response
+                }
+                if (client.isValid()) {
+                    lobbyView = new LobbyView(primaryStage, localisator);
+                    lobbyModel = new LobbyModel();
+                    lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
+                } else {
+                    loginView.userNameValid.setVisible(true);
+                    client.resetChecked();
+                }
+            }
         });
 
         loginView.hostButton.setOnAction(event -> {
 
-            Server server = new Server();
-            server.start();
-            Client client = new Client("localhost");
-            client.start();
-            //lobbyView = new LobbyView(primaryStage, localisator);
-            //lobbyModel = new LobbyModel();
-            //lobbyController = new LobbyController(lobbyModel, lobbyView);
+            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+                clientName = loginView.userNameField.getText();
+                server = new Server();
+                server.start();
+                client = new Client("localhost", clientName);
+                client.start();
+                client.sendObject(new Message(0, clientName, "login"));
+                lobbyView = new LobbyView(primaryStage, localisator);
+                lobbyModel = new LobbyModel();
+                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
+            }
         });
 
         loginView.switchBox.setOnAction(event -> {
@@ -78,6 +102,7 @@ public class LoginController {
             loginView.joinButton.setText(localisator.getResourceBundle().getString("join"));
             loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
             loginView.switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
+            loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
         }
 
 

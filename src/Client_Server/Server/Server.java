@@ -1,5 +1,7 @@
 package Client_Server.Server;
 
+import Client_Server.Message;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,6 +27,7 @@ public class Server extends Thread{
     private boolean running = true;
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOutput = null;
+    private Object input;
 
 
     public Server(){
@@ -35,14 +38,6 @@ public class Server extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /**while (true) {
-            try {
-                socket = serverSocket.accept();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }**/
     }
 
     public void run() {
@@ -66,43 +61,41 @@ public class Server extends Thread{
 
             while (running) {
                 try {
-                    Object input = objInput.readObject();
+                    input = objInput.readObject();
                     System.out.println(input + " Objekttyp: " + input.getClass());
-                    if (input instanceof String) {
+                    if (input instanceof Message) {
 
-                        clientName = (String) input;
+                        Message message = (Message) input;
+                        clientName = message.getClientName();
 
-                        synchronized (names){
-                            if (!names.contains(clientName)){
-                                names.add(clientName);
-                                outputs.add(objOutput);
-                                System.out.println("Benutzer hinzugefügt");
-                            }
-                        }
+                        switch (message.getType()){
 
-                        /**boolean vorhanden = false;
-                        for (String name : names) {
-                            if (name != null) {
-                                if (name.equals(input)) {
-                                    vorhanden = true;
-                                    System.out.println("Name bereits vergeben");
+                            case 0:
+                                synchronized (names) {
+                                    if (!names.contains(clientName)) {
+                                      names.add(clientName);
+                                      outputs.add(objOutput);
+                                      input = new Message(3, clientName, "valid");
+                                      objOutput.writeObject(input);
+                                      System.out.println("Benutzer hinzugefügt: " + ((Message) input).getFullMessage());
+                                    }else {
+                                        input = new Message(3, clientName, "invalid");
+                                        objOutput.writeObject(input);
+                                    }
                                 }
-                            }
+                                break;
+
+                            case 1:
+                                sendToAll();
+                                break;
+
+                            case 2:
+                                this.removeClient();
+                                break;
                         }
-                        if (!vorhanden) {
-                            synchronized (names) {
-                                clientName = (String) input;
-                                names.add(clientName);
-                                outputs.add(objOutput);
-                                System.out.println("Benutzer hinzugefügt");
-                            }
-                        }**/
+
                     } else {
-                        for (ObjectOutputStream output : outputs) {
-                            if (output != null) {
-                                output.writeObject(input);
-                            }
-                        }
+                        sendToAll();
                     }
                 } catch (Exception e) {
                     System.out.println("ERROR");
@@ -123,15 +116,26 @@ public class Server extends Thread{
 
     public void stopServer(){
         running = false;
-        //names[0] = null;
-        names.remove(clientName);
-        //outputs[0] = null;
-        outputs.remove(objOutput);
+        this.removeClient();
         try {
             objInput.close();
             objOutput.close();
         } catch (Exception e) {
             System.out.println("Error closing Input and Output Streams");
+        }
+    }
+
+    public void removeClient(){
+        names.remove(clientName);
+        outputs.remove(objOutput);
+    }
+    public void sendToAll() throws IOException {
+        synchronized (outputs){
+            for (ObjectOutputStream output : outputs) {
+                if (output != null) {
+                    output.writeObject(input);
+                }
+            }
         }
     }
 

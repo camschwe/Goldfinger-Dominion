@@ -24,6 +24,7 @@ public class LoginView {
     protected Label userNameLabel;
     protected ComboBox<String> switchBox;
     protected Localisator localisator;
+    protected Label userNameValid;
 
     public LoginView(Stage primaryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
@@ -34,6 +35,10 @@ public class LoginView {
         joinButton = new Button(localisator.getResourceBundle().getString("join"));
         userNameField = new TextField();
         userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
+        userNameValid = new Label(localisator.getResourceBundle().getString("validUsername"));
+        userNameValid.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: red");
+        userNameValid.setVisible(false);
+        //userNameValid.setStyle("-fx-border-color: transparent");
 
         switchBox = new ComboBox<>();
         switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
@@ -48,8 +53,9 @@ public class LoginView {
         root.setCenter(gridPane);
         gridPane.add(userNameLabel, 0, 0);
         gridPane.add(userNameField, 1, 0);
-        gridPane.add(hostButton, 0, 1);
-        gridPane.add(joinButton, 1, 1);
+        gridPane.add(userNameValid, 1, 1);
+        gridPane.add(hostButton, 0, 2);
+        gridPane.add(joinButton, 1, 2);
         gridPane.setPadding(new Insets(400, 0, 0, 280));
         gridPane.setHgap(40);
         gridPane.setVgap(40);
