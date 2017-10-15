@@ -1,7 +1,10 @@
 package Game;
 
 import Localisation.Localisator;
-import javafx.scene.control.Button;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+
+import javax.smartcardio.*;
 
 
 /**
@@ -19,26 +22,97 @@ public class GameController {
         this.localisator = localisator;
         this.gameModel = gameModel;
 
-        updateHandcards();
-
-        gameView.copperButton.setOnAction(event -> {
-            updateHandcards();
-        });
+        updateHandcardsView();
 
     }
 
-    public void updateHandcards(){
+    //Aktualisiert die Handkarten im GUI
+    public void updateHandcardsView() {
         gameView.player1Box.getChildren().clear();
 
-        for(int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++){
-            Button player1Card = new Button();
+        for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
+            GameButton player1Card = new GameButton(gameModel.getPlayer().getHandCards().get(i));
             player1Card.getStyleClass().add(gameModel.getPlayer().getHandCards().get(i).getCardName());
             gameView.player1Box.getChildren().add(player1Card);
-
+            mouseEntered(player1Card);
+            mouseExited(player1Card);
+            mouseKlicked(player1Card);
 
 
         }
 
+    }
+
+    //Action Event Handcards Mouse Entered
+    public void mouseEntered(GameButton gameButton){
+        gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                gameButton.getStyleClass().clear();
+                gameButton.getStyleClass().add(gameButton.getCard().getCardName() + "Big");
+
+            }
+        });
+
+
+    }
+
+    // Action Event Handcards Mouse Left
+    public void mouseExited(GameButton gameButton){
+        gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                gameButton.getStyleClass().clear();
+                gameButton.getStyleClass().add(gameButton.getCard().getCardName());
+
+            }
+        });
+    }
+
+    public void mouseKlicked(GameButton gameButton){
+        gameButton.setOnAction(event -> {
+            cardChecker(gameButton);
+        });
+    }
+
+    public void cardChecker(GameButton gameButton){
+        String cardName = gameButton.getCard().getCardName();
+
+        switch (cardName) {
+            case "copper":
+                moneyUpdate(gameButton);
+                break;
+            case "village":
+                villageUpdate(gameButton);
+                break;
+            default:
+                break;
+        }
+    }
+
+    
+    public void moneyUpdate(GameButton gameButton){
+        if(gameModel.getPlayer().isYourTurn()){
+            gameModel.getPlayer().setMoney(gameModel.getPlayer().getMoney()+ gameButton.getCard().getValue());
+            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameModel.getPlayer().getMoney());
+            gameView.player1Box.getChildren().remove(gameButton);
+
+            int i = 0;
+            boolean checker = false;
+            while(gameModel.getPlayer().getHandCards().size() > i || !checker){
+                if(gameButton.getCard().equals(gameModel.getPlayer().getHandCards().get(i))){
+                    gameModel.getPlayer().getPutDeck().add(gameModel.getPlayer().getHandCards().get(i));
+                    gameModel.getPlayer().getHandCards().remove(i);
+                    checker = true;
+                }
+                i++;
+            }
+
+        }
+    }
+
+    public void villageUpdate(GameButton gameButton){
+        Card.village(gameModel.getPlayer());
     }
 
 

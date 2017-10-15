@@ -80,6 +80,7 @@ public class LoginView {
 
     public void stop() {
         primaryStage.hide();
+
     }
 
 }

@@ -1,9 +1,5 @@
 package Game;
 
-import Game.Cards.ActionCard;
-import Game.Cards.MoneyCard;
-import Game.Cards.PointCard;
-
 import java.util.Collections;
 
 
@@ -11,10 +7,8 @@ import java.util.Collections;
  * Created by camillo.schweizer on 07.10.2017.
  */
 public class GameModel {
-    boolean yourTurn;
+
     int playerCount;
-    int action = 1;
-    int buy = 1;
     Player player;
 
 
@@ -23,18 +17,19 @@ public class GameModel {
 
         this.player = new Player();
 
+
         for(int i = 0; i < 3 ; i++) {
 
-            PointCard village = new PointCard("estate", 3,1);
-            player.getDrawStaple().add(village);
+            Card village = new Card("estate", 1,1);
+            player.getDrawDeck().add(village);
         }
 
         for(int i = 0; i< 7; i++) {
-            MoneyCard copper = new MoneyCard("copper", 2, 1);
-            player.getDrawStaple().add(copper);
+            Card copper = new Card("copper", 0, 1);
+            player.getDrawDeck().add(copper);
         }
 
-        Collections.shuffle(player.getDrawStaple());
+        Collections.shuffle(player.getDrawDeck());
 
         player.draw(5);
 
@@ -48,33 +43,11 @@ public class GameModel {
         return this.playerCount;
     }
 
-    public boolean isYourTurn() {
-        return yourTurn;
-    }
-
-    public int getAction() {
-        return action;
-    }
-
-    public int getBuy() {
-        return buy;
-    }
-
-    public void setYourTurn(boolean yourTurn) {
-        this.yourTurn = yourTurn;
-    }
 
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
     }
 
-    public void setAction(int action) {
-        this.action = action;
-    }
-
-    public void setBuy(int buy) {
-        this.buy = buy;
-    }
 
     public Player getPlayer(){
         return player;

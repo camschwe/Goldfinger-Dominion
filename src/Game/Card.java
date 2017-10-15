@@ -1,18 +1,25 @@
-package Game.Cards;
+package Game;
+
+import Game.Player;
 
 /**
- * Created by camillo.schweizer on 07.10.2017.
+ * Created by camillo.schweizer on 13.10.2017.
  */
-public class PointCard extends Card{
+public class Card {
 
     String cardName;
-    int cost;
-    int value;
+    int cost, value;
 
-    public PointCard(String cardName, int cost, int value) {
-        this.cardName = cardName;
+    public Card(String cardName, int cost, int value) {
         this.cost = cost;
+        this.cardName = cardName;
         this.value = value;
+    }
+
+    public static void village(Player player){
+        player.draw(1);
+        player.setActions((player.getActions() +1));
+
     }
 
     public String getCardName() {

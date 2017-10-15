@@ -105,17 +105,6 @@ public class LoginController {
             loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
         }
 
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
