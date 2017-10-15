@@ -29,6 +29,7 @@ public class LobbyView {
         this.localisator = localisator;
         chatWindow = new ChatWindow(localisator);
         chatWindow.getTxtChatMessages().getStyleClass().add("chatWindow");
+        chatWindow.getVBox().setPadding(new Insets(80, 0, 0, 250));
 
         paricipateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
