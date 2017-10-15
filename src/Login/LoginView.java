@@ -38,7 +38,6 @@ public class LoginView {
         userNameValid = new Label(localisator.getResourceBundle().getString("validUsername"));
         userNameValid.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: red");
         userNameValid.setVisible(false);
-        //userNameValid.setStyle("-fx-border-color: transparent");
 
         switchBox = new ComboBox<>();
         switchBox.setPromptText(localisator.getResourceBundle().getString("language"));

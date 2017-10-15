@@ -1,4 +1,4 @@
-package Client_Server;
+package Client_Server.Chat;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Message implements Serializable {
     /**
      * die Variable type speichert die möglichen Arten von Nachrichten:
-     * 0 = neuer Spieler, 1 = eine Nachricht, 2 = Spieler meldet sich ab, 3 = Spielername validation
+     * 0 = neuer Spieler, 1 = eine Nachricht, 2 = Spieler meldet sich ab, 3 = Spielername validation, 4 = Game started
      * Die Message benötigt immer einen Typ, einen Client Namen und die Nachricht.
      */
     private int type;

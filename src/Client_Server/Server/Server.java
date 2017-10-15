@@ -1,6 +1,6 @@
 package Client_Server.Server;
 
-import Client_Server.Message;
+import Client_Server.Chat.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
