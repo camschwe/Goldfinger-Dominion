@@ -1,7 +1,7 @@
 package Client_Server.Client;
 
 
-import Client_Server.Message;
+import Client_Server.Chat.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -74,6 +74,9 @@ public class Client extends Thread {
                         this.valid = true;
                     }
                     checked = true;
+                    break;
+                case 4:
+                    //startGame();
                     break;
             }
         }

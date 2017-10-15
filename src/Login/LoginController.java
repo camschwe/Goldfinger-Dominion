@@ -1,7 +1,7 @@
 package Login;
 
 import Client_Server.Client.Client;
-import Client_Server.Message;
+import Client_Server.Chat.Message;
 import Client_Server.Server.Server;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
@@ -58,17 +58,17 @@ public class LoginController {
 
         loginView.hostButton.setOnAction(event -> {
 
-            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+            /**if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
                 clientName = loginView.userNameField.getText();
                 server = new Server();
                 server.start();
                 client = new Client("localhost", clientName);
                 client.start();
-                client.sendObject(new Message(0, clientName, "login"));
+                client.sendObject(new Message(0, clientName, "login"));**/
                 lobbyView = new LobbyView(primaryStage, localisator);
                 lobbyModel = new LobbyModel();
                 lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
-            }
+            //}
         });
 
         loginView.switchBox.setOnAction(event -> {

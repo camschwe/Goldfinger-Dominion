@@ -1,5 +1,6 @@
 package Lobby;
 
+import Client_Server.Chat.ChatWindow;
 import Localisation.Localisator;
 import Login.LoginView;
 import javafx.geometry.Insets;
@@ -21,10 +22,12 @@ public class LobbyView {
     public Button startButton;
     public Label paricipateLabel, gameLabel, userLabel1, userLabel2;
     protected Localisator localisator;
+    protected ChatWindow chatWindow;
 
     public LobbyView(Stage primaryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
+        chatWindow = new ChatWindow(localisator);
 
         paricipateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
@@ -36,7 +39,7 @@ public class LobbyView {
         userLabel1.getStyleClass().add("userLabel");
         userLabel2.getStyleClass().add("userLabel");
         paricipateLabel.getStyleClass().add("userLabel");
-
+        
         HBox topBox = new HBox();
         topBox.setPadding(new Insets(100, 0, 0, 80));
         topBox.getChildren().addAll(gameLabel);
@@ -48,6 +51,7 @@ public class LobbyView {
         root.setLeft(gridPane);
         root.setTop(topBox);
         root.setBottom(botBox);
+        root.setRight(chatWindow.getRoot());
         gridPane.add(paricipateLabel,0,0);
         gridPane.add(userLabel1,0,1);
         gridPane.add(userLabel2,0,2);
