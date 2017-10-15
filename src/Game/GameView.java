@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Chat.ChatWindow;
 import Localisation.Localisator;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -49,6 +50,7 @@ public class GameView {
         player2Box = new HBox();
         HBox player2CardBox = new HBox();
         HBox player1CardBox = new HBox();
+
 
         root.setCenter(midPane);
         root.setLeft(leftPane);

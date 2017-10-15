@@ -2,7 +2,7 @@ package Client_Server.Client;
 
 
 import Client_Server.Chat.Message;
-import Game.GameController;
+import Game.HandCardController;
 import Lobby.LobbyController;
 
 import java.io.IOException;
@@ -27,14 +27,14 @@ public class Client extends Thread {
     private boolean valid = false;
     private boolean checked = false;
     private LobbyController lobbyController;
-    private GameController gameController;
+    private HandCardController handCardController;
     private int actualController;
 
     public Client(String serverAdresse, String clientName){
         try {
-            this.serverAdresse = serverAdresse;
+            Client.serverAdresse = serverAdresse;
             this.clientName = clientName;
-            serverSocket = new Socket(this.serverAdresse, PORT);
+            serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
             objInput = new ObjectInputStream(serverSocket.getInputStream());
         } catch (Exception e) {
@@ -73,11 +73,7 @@ public class Client extends Thread {
                     actualizeChat(message);
                     break;
                 case 3:
-                    if (message.getMessage().equals("invalid")){
-                        this.valid = false;
-                    } else {
-                        this.valid = true;
-                    }
+                    this.valid = !message.getMessage().equals("invalid");
                     checked = true;
                     break;
                 case 4:
@@ -120,12 +116,12 @@ public class Client extends Thread {
         actualController = 1;
     }
 
-    public void setGameController (GameController gameController){
-        this.gameController = gameController;
+    public void setGameController (HandCardController handCardController){
+        this.handCardController = handCardController;
         actualController = 2;
     }
 
     public void stopClient(){
-        this.running = false;
+        running = false;
     }
 }

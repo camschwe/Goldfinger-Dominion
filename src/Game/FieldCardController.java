@@ -1,5 +1,6 @@
 package Game;
 
+import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -11,11 +12,13 @@ public class FieldCardController {
 
     private GameView gameView;
     private GameModel gameModel;
+    private Localisator localisator;
 
 
-    public FieldCardController(GameView gameView, GameModel gameModel) {
+    public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel) {
         this.gameView = gameView;
         this.gameModel = gameModel;
+        this.localisator = localisator;
 
 
        // estateButton = new Button();
@@ -42,7 +45,7 @@ public class FieldCardController {
         //resourcePane.add(silverButton, 1,1);
         //resourcePane.add(copperButton, 1,2);
 
-
+        //Initialisierung der Geldkarten
         for(int i = 0; i < gameModel.getMoneyCards().size() ; i++) {
             GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i));
             moneyButton.getStyleClass().add(moneyButton.getCard().getCardName()+"Small");
@@ -50,7 +53,6 @@ public class FieldCardController {
             addMouseExited(moneyButton);
             addMouseEntered(moneyButton);
             addMouseKlickedMoney(moneyButton);
-
 
         }
 
@@ -66,6 +68,7 @@ public class FieldCardController {
         }
 
     }
+    //fügt Effekt für Mouseover hizu
     public void addMouseEntered(GameButton gameButton){
 
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -80,6 +83,7 @@ public class FieldCardController {
 
     }
 
+    //Fügt Effekt für Mouse Exited hinzu
     public void addMouseExited(GameButton gameButton){
 
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -92,18 +96,22 @@ public class FieldCardController {
 
     }
 
+    //Eventhändler für Klick auf Geldkarte
     //Todo: Anzahl Karten auf dem Stapel abfragen und vermindern
-    //TODO: Label mit Properties
     public void addMouseKlickedMoney(GameButton gameButton){
         gameButton.setOnAction(event -> {
-            if(gameModel.getPlayer().isYourTurn()&& gameButton.getCard().getCost() <= gameModel.getPlayer().getMoney()){
-                gameModel.getPlayer().getHandCards().add(gameButton.getCard());
-                gameModel.getPlayer().setMoney(gameModel.getPlayer().getMoney() - gameButton.getCard().getCost());
-                gameView.moneyLabel1.setText("money"+ ":\t"+gameModel.getPlayer().getMoney());
+            Player player = gameModel.getPlayer();
+            Card card = gameButton.getCard();
+
+            if(player.isYourTurn()&& card.getCost() <= player.getMoney()){
+                player.getHandCards().add(card);
+                player.setMoney(player.getMoney() - card.getCost());
+                gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
             }
         });
     }
 
+    //Eventhändler für Klick auf Punktekarte
     //TODO: IMPLEMENTIEREN
     public void addMouseKlickedPoint(GameButton gameButton){
         gameButton.setOnAction(event -> {
