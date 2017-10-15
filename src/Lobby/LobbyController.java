@@ -1,10 +1,14 @@
 package Lobby;
 
+import Client_Server.Chat.Message;
+import Client_Server.Client.Client;
 import Game.CardHandle;
 import Game.GameController;
 import Game.GameModel;
 import Game.GameView;
 import Localisation.Localisator;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -19,11 +23,15 @@ public class LobbyController {
     private Localisator localisator;
     private CardHandle cardHandle;
     private GameModel gameModel;
+    private Client client;
 
-    public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView, Localisator localisator) {
+    public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView, Localisator localisator, Client client) {
         this.lobbyModel = lobbyModel;
         this.lobbyView = lobbyView;
         this.localisator = localisator;
+        this.client = client;
+
+        //client.setLobbyController(this);
 
         lobbyView.startButton.setOnAction(event -> {
 
@@ -36,5 +44,28 @@ public class LobbyController {
             cardHandle = new CardHandle(gameView);
             gameView.start();
         });
+
+        lobbyView.chatWindow.getSendButton().setOnAction(event -> {
+            String text = lobbyView.chatWindow.getMessage();
+            Message message = new Message(1, client.getClientName(), text);
+            client.sendObject(message);
+            lobbyView.chatWindow.clearMessageField();
+        });
+
+        lobbyView.chatWindow.getTxtMessage().setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode().equals(KeyCode.ENTER)){
+                lobbyView.chatWindow.getSendButton().fire();
+            }
+        });
+
+
+    }
+
+    public LobbyView getLobbyView() {
+        return lobbyView;
+    }
+
+    public LobbyModel getLobbyModel() {
+        return lobbyModel;
     }
 }

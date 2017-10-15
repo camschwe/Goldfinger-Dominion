@@ -1,8 +1,6 @@
 package Client_Server.Chat;
 
 import Localisation.Localisator;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,6 +16,7 @@ public class ChatWindow {
     protected TextField txtMessage;
     protected TextArea txtChatMessages;
     protected Pane root;
+    private String newLine;
 
 
     public ChatWindow(Localisator localisator) {
@@ -27,6 +26,7 @@ public class ChatWindow {
         txtMessage = new TextField();
         sendButton = new Button(localisator.getResourceBundle().getString("sendButton"));
         txtChatMessages.setEditable(false);
+        newLine = System.getProperty("line.separator");
 
         HBox hBox = new HBox();
         VBox vBox = new VBox();
@@ -39,6 +39,7 @@ public class ChatWindow {
         hBox.setSpacing(5);
 
         root.getChildren().add(vBox);
+
     }
 
     public void start(){
@@ -51,5 +52,30 @@ public class ChatWindow {
 
     public Pane getRoot(){
         return root;
+    }
+
+    public Button getSendButton() {
+        return sendButton;
+    }
+
+    public String getMessage(){
+        String message = txtMessage.getText();
+        return message;
+    }
+
+    public TextArea getTxtChatMessages() {
+        return txtChatMessages;
+    }
+
+    public void clearMessageField(){
+        this.txtMessage.clear();
+    }
+
+    public TextField getTxtMessage() {
+        return txtMessage;
+    }
+
+    public void actualizeTextArea(String message){
+        txtChatMessages.appendText(message + newLine);
     }
 }

@@ -47,8 +47,8 @@ public class LoginController {
                 }
                 if (client.isValid()) {
                     lobbyView = new LobbyView(primaryStage, localisator);
+                    lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                     lobbyModel = new LobbyModel();
-                    lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
                 } else {
                     loginView.userNameValid.setVisible(true);
                     client.resetChecked();
@@ -58,17 +58,18 @@ public class LoginController {
 
         loginView.hostButton.setOnAction(event -> {
 
-            /**if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
                 clientName = loginView.userNameField.getText();
                 server = new Server();
                 server.start();
                 client = new Client("localhost", clientName);
                 client.start();
-                client.sendObject(new Message(0, clientName, "login"));**/
+                client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
+                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 lobbyModel = new LobbyModel();
-                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator);
-            //}
+                client.setLobbyController(lobbyController);
+            }
         });
 
         loginView.switchBox.setOnAction(event -> {

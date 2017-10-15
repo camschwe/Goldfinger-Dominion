@@ -2,6 +2,8 @@ package Client_Server.Client;
 
 
 import Client_Server.Chat.Message;
+import Game.GameController;
+import Lobby.LobbyController;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,6 +26,9 @@ public class Client extends Thread {
     private String clientName;
     private boolean valid = false;
     private boolean checked = false;
+    private LobbyController lobbyController;
+    private GameController gameController;
+    private int actualController;
 
     public Client(String serverAdresse, String clientName){
         try {
@@ -83,6 +88,11 @@ public class Client extends Thread {
     }
 
     private void actualizeChat(Message message) {
+        if (actualController == 1){
+            lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
+        }else if (actualController == 2){
+            // gameController.getGameModel().actualizeChatWindow(message);
+        }
     }
 
     public boolean isValid() {
@@ -103,6 +113,16 @@ public class Client extends Thread {
         } catch (IOException e) {
             System.out.println("Error");
         }
+    }
+
+    public void setLobbyController (LobbyController lobbyController){
+        this.lobbyController = lobbyController;
+        actualController = 1;
+    }
+
+    public void setGameController (GameController gameController){
+        this.gameController = gameController;
+        actualController = 2;
     }
 
     public void stopClient(){

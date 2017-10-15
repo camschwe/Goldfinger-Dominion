@@ -39,7 +39,7 @@ public class LobbyView {
         userLabel1.getStyleClass().add("userLabel");
         userLabel2.getStyleClass().add("userLabel");
         paricipateLabel.getStyleClass().add("userLabel");
-        
+
         HBox topBox = new HBox();
         topBox.setPadding(new Insets(100, 0, 0, 80));
         topBox.getChildren().addAll(gameLabel);
@@ -64,6 +64,10 @@ public class LobbyView {
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/LobbyStyles.css").toExternalForm());
 
+    }
+
+    public ChatWindow getChatWindow() {
+        return chatWindow;
     }
 
     public void start() {
