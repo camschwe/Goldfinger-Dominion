@@ -2,8 +2,8 @@ package Lobby;
 
 import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
-import Game.CardHandle;
-import Game.GameController;
+import Game.FieldCardController;
+import Game.HandCardController;
 import Game.GameModel;
 import Game.GameView;
 import Localisation.Localisator;
@@ -18,10 +18,10 @@ public class LobbyController {
 
     private LobbyModel lobbyModel;
     private LobbyView lobbyView;
-    private GameController gameController;
+    private HandCardController gameController;
     private GameView gameView;
     private Localisator localisator;
-    private CardHandle cardHandle;
+    private FieldCardController cardHandle;
     private GameModel gameModel;
     private Client client;
 
@@ -40,8 +40,8 @@ public class LobbyController {
             Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator);
             gameModel = new GameModel(2);
-            gameController = new GameController(gameView, localisator, gameModel);
-            cardHandle = new CardHandle(gameView);
+            gameController = new HandCardController(gameView, localisator, gameModel);
+            cardHandle = new FieldCardController(gameView, gameModel);
             gameView.start();
         });
 

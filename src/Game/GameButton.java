@@ -7,10 +7,17 @@ import javafx.scene.control.Button;
  */
 public class GameButton extends Button {
     Card card;
+    int amount;
 
 
     public GameButton(Card card) {
         this.card = card;
+
+    }
+
+    public GameButton(Card card, int amount) {
+        this.card = card;
+        this.amount = amount;
 
     }
 

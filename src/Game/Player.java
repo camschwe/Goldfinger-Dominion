@@ -20,7 +20,7 @@ public class Player {
         this.putDeck = new ArrayList<>();
         this.drawDeck = new ArrayList<>();
         this.actionPhase = true;
-        this.buyPase = false;
+        this.buyPase = true;
         this.actions = 1;
         this.buys = 1;
         this.money = 0;
