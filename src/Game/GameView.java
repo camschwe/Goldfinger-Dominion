@@ -23,6 +23,7 @@ public class GameView {
     public Button actionButton, actionButton1, actionButton2, actionButton3, actionButton4, actionButton5, actionButton6;
     public Button actionButton7, actionButton8, actionButton9,actionButton10;
     public HBox player1Box, player2Box;
+    public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
 
 
     public GameView(Stage gameStage, Localisator localisator) {
@@ -93,9 +94,9 @@ public class GameView {
 
         Label playerLabel1 = new Label ( "Spieler 1");
         playerLabel1.getStyleClass().add("nameLabel");
-        Label moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t2");
-        Label pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t2");
-        Label phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
+        pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
+        phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
         moneyLabel1.getStyleClass().add("resourceLabel");
         pointLabel1.getStyleClass().add("resourceLabel");
         phaseLabel1.getStyleClass().add("resourceLabel");
@@ -112,9 +113,9 @@ public class GameView {
 
         Label playerLabel2 = new Label ("Spieler 2");
         playerLabel2.getStyleClass().add("nameLabel");
-        Label moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t2");
-        Label pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t2");
-        Label phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
+        pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
+        phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
         moneyLabel2.getStyleClass().add("resourceLabel");
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");

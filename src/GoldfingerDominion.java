@@ -1,3 +1,4 @@
+import Client_Server.Server.Server;
 import Lobby.LobbyView;
 import Localisation.Localisator;
 import Login.LoginController;
@@ -35,6 +36,7 @@ public class GoldfingerDominion extends Application {
     @Override
     public void stop() {
         if (loginView != null) loginView.stop();
+
     }
 }
 
