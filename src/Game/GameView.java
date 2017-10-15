@@ -19,11 +19,12 @@ public class GameView {
 
     protected Stage gameStage;
     private Localisator localisator;
-    public Button copperButton, silverButton, goldButton, estateButton, duchyButton, provinceButton,resourceButton;
+    public Button resourceButton;
     public Button actionButton, actionButton1, actionButton2, actionButton3, actionButton4, actionButton5, actionButton6;
     public Button actionButton7, actionButton8, actionButton9,actionButton10;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
+    public GridPane resourcePane;
 
 
     public GameView(Stage gameStage, Localisator localisator) {
@@ -37,7 +38,7 @@ public class GameView {
         BorderPane midPane = new BorderPane();
         BorderPane resourceBorder = new BorderPane();
         BorderPane rightPane = new BorderPane();
-        GridPane resourePane = new GridPane();
+        resourcePane = new GridPane();
         BorderPane leftPane = new BorderPane();
         BorderPane actionBorder = new BorderPane();
         GridPane player1Pane = new GridPane();
@@ -61,36 +62,20 @@ public class GameView {
         rightPane.setRight(chatPane);
         midPane.setTop(player2Box);
         midPane.setBottom(player1Box);
-        resourceBorder.setCenter(resourePane);
+        resourceBorder.setCenter(resourcePane);
         actionBorder.setCenter(actionPane);
 
-
-        estateButton = new Button();
-        estateButton.getStyleClass().add("estateSmall");
-        duchyButton = new Button();
-        duchyButton.getStyleClass().add("duchySmall");
-        provinceButton = new Button();
-        provinceButton.getStyleClass().add("provinceSmall");
-        copperButton = new Button();
-        copperButton.getStyleClass().add("copperSmall");
-        silverButton = new Button();
-        silverButton.getStyleClass().add("silverSmall");
-        goldButton = new Button();
-        goldButton.getStyleClass().add("goldSmall");
         resourceButton = new Button();
+        resourceButton.getStyleClass().add("copperBig");
         resourceButton.getStyleClass().add("invisible");
 
 
         resourceBorder.setRight(resourceButton);
-        resourePane.add(provinceButton, 0,0);
-        resourePane.add(duchyButton, 0,1);
-        resourePane.add(estateButton, 0,2);
-        resourePane.add(goldButton, 1,0);
-        resourePane.add(silverButton, 1,1);
-        resourePane.add(copperButton, 1,2);
-        resourePane.setHgap(20);
-        resourePane.setVgap(20);
-        resourePane.setPadding(new Insets(20, 20, 0, 20));
+
+
+        resourcePane.setHgap(20);
+        resourcePane.setVgap(20);
+        resourcePane.setPadding(new Insets(20, 20, 0, 20));
 
         Label playerLabel1 = new Label ( "Spieler 1");
         playerLabel1.getStyleClass().add("nameLabel");

@@ -4,20 +4,18 @@ import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-import javax.smartcardio.*;
-
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
  */
-public class GameController {
+public class HandCardController {
 
 
     private GameView gameView;
     private Localisator localisator;
     private GameModel gameModel;
 
-    public GameController(GameView gameView, Localisator localisator, GameModel gameModel) {
+    public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel) {
         this.gameView = gameView;
         this.localisator = localisator;
         this.gameModel = gameModel;
@@ -34,9 +32,9 @@ public class GameController {
             GameButton player1Card = new GameButton(gameModel.getPlayer().getHandCards().get(i));
             player1Card.getStyleClass().add(gameModel.getPlayer().getHandCards().get(i).getCardName());
             gameView.player1Box.getChildren().add(player1Card);
-            mouseEntered(player1Card);
-            mouseExited(player1Card);
-            mouseKlicked(player1Card);
+            addMouseEntered(player1Card);
+            addMouseExited(player1Card);
+            addMouseKlicked(player1Card);
 
 
         }
@@ -44,7 +42,7 @@ public class GameController {
     }
 
     //Action Event Handcards Mouse Entered
-    public void mouseEntered(GameButton gameButton){
+    public void addMouseEntered(GameButton gameButton){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -58,7 +56,7 @@ public class GameController {
     }
 
     // Action Event Handcards Mouse Left
-    public void mouseExited(GameButton gameButton){
+    public void addMouseExited(GameButton gameButton){
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -69,7 +67,7 @@ public class GameController {
         });
     }
 
-    public void mouseKlicked(GameButton gameButton){
+    public void addMouseKlicked(GameButton gameButton){
         gameButton.setOnAction(event -> {
             cardChecker(gameButton);
         });
@@ -90,7 +88,7 @@ public class GameController {
         }
     }
 
-    
+
     public void moneyUpdate(GameButton gameButton){
         if(gameModel.getPlayer().isYourTurn()){
             gameModel.getPlayer().setMoney(gameModel.getPlayer().getMoney()+ gameButton.getCard().getValue());
