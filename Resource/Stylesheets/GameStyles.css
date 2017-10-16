@@ -37,12 +37,13 @@
     -fx-border-color: #000000;
     -fx-border-width: 2px;
     -fx-background-size: stretch;
+    
 }
 
 .villageSmall {
     -fx-background-image: url('../Cards/village_small.JPG');
-    -fx-pref-width: 80;
-    -fx-pref-height: 80;
+    -fx-min-width: 80;
+    -fx-min-height: 80;
     -fx-border-color: #000000;
     -fx-border-width: 2px;
     -fx-background-size: stretch;
