@@ -18,10 +18,10 @@ public class LobbyController {
 
     private LobbyModel lobbyModel;
     private LobbyView lobbyView;
-    private HandCardController gameController;
+    private HandCardController handCardController;
     private GameView gameView;
     private Localisator localisator;
-    private FieldCardController cardHandle;
+    private FieldCardController fieldCardController;
     private GameModel gameModel;
     private Client client;
 
@@ -40,8 +40,8 @@ public class LobbyController {
             Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator);
             gameModel = new GameModel(2);
-            gameController = new HandCardController(gameView, localisator, gameModel);
-            cardHandle = new FieldCardController(gameView, gameModel);
+            handCardController = new HandCardController(gameView, localisator, gameModel);
+            fieldCardController = new FieldCardController(gameView,localisator, gameModel);
             gameView.start();
         });
 
@@ -68,4 +68,6 @@ public class LobbyController {
     public LobbyModel getLobbyModel() {
         return lobbyModel;
     }
+
+
 }

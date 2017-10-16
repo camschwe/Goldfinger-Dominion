@@ -11,6 +11,15 @@
     -fx-font-size: 12Pt;
 
 }
+.chatWindow{
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-border-color: #000000;
+    -fx-max-width: 400px;
+    -fx-max-height: 400px;
+
+}
 
 .ipLabel {
     -fx-text-fill: #000000;

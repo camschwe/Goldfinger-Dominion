@@ -28,6 +28,8 @@ public class LobbyView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
         chatWindow = new ChatWindow(localisator);
+        chatWindow.getTxtChatMessages().getStyleClass().add("chatWindow");
+        chatWindow.getVBox().setPadding(new Insets(80, 0, 0, 250));
 
         paricipateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
@@ -51,7 +53,7 @@ public class LobbyView {
         root.setLeft(gridPane);
         root.setTop(topBox);
         root.setBottom(botBox);
-        root.setRight(chatWindow.getRoot());
+        root.setCenter(chatWindow.getRoot());
         gridPane.add(paricipateLabel,0,0);
         gridPane.add(userLabel1,0,1);
         gridPane.add(userLabel2,0,2);

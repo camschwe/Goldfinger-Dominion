@@ -25,60 +25,63 @@ public class HandCardController {
     }
 
     //Aktualisiert die Handkarten im GUI
+    //TODO: Aktualisierung am Zugende implementieren
     public void updateHandcardsView() {
         gameView.player1Box.getChildren().clear();
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
-            GameButton player1Card = new GameButton(gameModel.getPlayer().getHandCards().get(i));
-            player1Card.getStyleClass().add(gameModel.getPlayer().getHandCards().get(i).getCardName());
+            Player player = gameModel.getPlayer();
+            Card card = player.getHandCards().get(i);
+
+            GameButton player1Card = new GameButton(card);
+            player1Card.getStyleClass().add(card.getCardName());
             gameView.player1Box.getChildren().add(player1Card);
-            addMouseEntered(player1Card);
-            addMouseExited(player1Card);
-            addMouseKlicked(player1Card);
-
-
+            addMouseEntered(player1Card, card);
+            addMouseExited(player1Card, card);
+            addMouseKlicked(player1Card, card, player);
         }
 
     }
 
     //Action Event Handcards Mouse Entered
-    public void addMouseEntered(GameButton gameButton){
+    public void addMouseEntered(GameButton gameButton, Card card){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameButton.getStyleClass().clear();
-                gameButton.getStyleClass().add(gameButton.getCard().getCardName() + "Big");
+                gameButton.getStyleClass().add(card.getCardName() + "Big");
 
             }
         });
-
 
     }
 
     // Action Event Handcards Mouse Left
-    public void addMouseExited(GameButton gameButton){
+    public void addMouseExited(GameButton gameButton, Card card){
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 gameButton.getStyleClass().clear();
-                gameButton.getStyleClass().add(gameButton.getCard().getCardName());
+                gameButton.getStyleClass().add(card.getCardName());
 
             }
         });
     }
 
-    public void addMouseKlicked(GameButton gameButton){
+    //Eventhändler für Klick auf Handkarte
+    public void addMouseKlicked(GameButton gameButton, Card card, Player player){
         gameButton.setOnAction(event -> {
-            cardChecker(gameButton);
+            cardChecker(gameButton, card, player);
         });
     }
 
-    public void cardChecker(GameButton gameButton){
+    //Switch zur überprüfung der gedrückten Handkarte
+    public void cardChecker(GameButton gameButton, Card card, Player player){
         String cardName = gameButton.getCard().getCardName();
 
         switch (cardName) {
             case "copper":
-                moneyUpdate(gameButton);
+                moneyUpdate(gameButton, card, player);
                 break;
             case "village":
                 villageUpdate(gameButton);
@@ -89,18 +92,19 @@ public class HandCardController {
     }
 
 
-    public void moneyUpdate(GameButton gameButton){
-        if(gameModel.getPlayer().isYourTurn()){
-            gameModel.getPlayer().setMoney(gameModel.getPlayer().getMoney()+ gameButton.getCard().getValue());
-            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameModel.getPlayer().getMoney());
+    //Führ das Update nach Klick auf eine Geldkarte durch
+    public void moneyUpdate(GameButton gameButton, Card card, Player player){
+        if(player.isYourTurn()){
+            player.setMoney(player.getMoney()+ card.getValue());
+            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
             gameView.player1Box.getChildren().remove(gameButton);
 
             int i = 0;
             boolean checker = false;
-            while(gameModel.getPlayer().getHandCards().size() > i || !checker){
-                if(gameButton.getCard().equals(gameModel.getPlayer().getHandCards().get(i))){
-                    gameModel.getPlayer().getPutDeck().add(gameModel.getPlayer().getHandCards().get(i));
-                    gameModel.getPlayer().getHandCards().remove(i);
+            while(player.getHandCards().size() > i || !checker){
+                if(card.equals(player.getHandCards().get(i))){
+                    player.getPutDeck().add(player.getHandCards().get(i));
+                    player.getHandCards().remove(i);
                     checker = true;
                 }
                 i++;

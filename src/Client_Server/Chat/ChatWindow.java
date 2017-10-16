@@ -17,6 +17,7 @@ public class ChatWindow {
     protected TextArea txtChatMessages;
     protected Pane root;
     private String newLine;
+    protected VBox vBox;
 
 
     public ChatWindow(Localisator localisator) {
@@ -29,7 +30,7 @@ public class ChatWindow {
         newLine = System.getProperty("line.separator");
 
         HBox hBox = new HBox();
-        VBox vBox = new VBox();
+        vBox = new VBox();
         txtMessage.setPromptText(localisator.getResourceBundle().getString("message"));
 
         root = new Pane();
@@ -73,6 +74,10 @@ public class ChatWindow {
 
     public TextField getTxtMessage() {
         return txtMessage;
+    }
+
+    public VBox getVBox(){
+        return this.vBox;
     }
 
     public void actualizeTextArea(String message){
