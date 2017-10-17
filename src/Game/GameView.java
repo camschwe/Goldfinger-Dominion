@@ -18,12 +18,10 @@ public class GameView {
 
     protected Stage gameStage;
     private Localisator localisator;
-    public Button resourceButton;
-    public Button actionButton, actionButton1, actionButton2, actionButton3, actionButton4, actionButton5, actionButton6;
-    public Button actionButton7, actionButton8, actionButton9,actionButton10;
+    public Button resourceButton, actionButton, phaseButton;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
-    public GridPane resourcePane;
+    public GridPane resourcePane, actionPane;
 
 
     public GameView(Stage gameStage, Localisator localisator) {
@@ -44,7 +42,7 @@ public class GameView {
         BorderPane actionBorder = new BorderPane();
         GridPane player1Pane = new GridPane();
         GridPane player2Pane = new GridPane();
-        GridPane actionPane = new GridPane();
+        actionPane = new GridPane();
         GridPane chatPane = new GridPane();
         player1Box = new HBox();
         player2Box = new HBox();
@@ -70,6 +68,9 @@ public class GameView {
         resourceBorder.setCenter(resourcePane);
         actionBorder.setCenter(actionPane);
 
+
+        phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
+        rightMainPane.setBottom(phaseButton);
 
         resourceButton = new Button();
         resourceButton.getStyleClass().add("copperBig");
@@ -111,51 +112,22 @@ public class GameView {
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");
         Button putStapelPlayer2 = new Button();
-        putStapelPlayer2.getStyleClass().add("back2");
+        putStapelPlayer2.getStyleClass().add("village");
         Button drawStapelPlayer2 = new Button();
-        drawStapelPlayer2.getStyleClass().add("village");
+        drawStapelPlayer2.getStyleClass().add("back2");
 
         player2Pane.add(playerLabel2, 0,1);
         player2Pane.add(moneyLabel2, 0,2);
         player2Pane.add(pointLabel2, 0,3);
         player2Pane.add(phaseLabel2, 0,4);
-        player2CardBox.getChildren().addAll(drawStapelPlayer2, putStapelPlayer2);
+        player2CardBox.getChildren().addAll(putStapelPlayer2, drawStapelPlayer2);
 
 
         //TODO: mit Array schöner gestalten
         actionButton = new Button();
         actionButton.getStyleClass().add("invisible");
         actionBorder.setLeft(actionButton);
-        actionButton1 = new Button();
-        actionButton1.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton1, 0, 0);
-        actionButton2 = new Button();
-        actionButton2.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton2, 1, 0);
-        actionButton3 = new Button();
-        actionButton3.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton3, 2, 0);
-        actionButton4 = new Button();
-        actionButton4.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton4, 3, 0);
-        actionButton5 = new Button();
-        actionButton5.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton5, 4, 0);
-        actionButton6 = new Button();
-        actionButton6.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton6, 0, 1);
-        actionButton7 = new Button();
-        actionButton7.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton7, 1, 1);
-        actionButton8 = new Button();
-        actionButton8.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton8, 2, 1);
-        actionButton9 = new Button();
-        actionButton9.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton9, 3, 1);
-        actionButton10 = new Button();
-        actionButton10.getStyleClass().add("villageSmall");
-        actionPane.add(actionButton10, 4, 1);
+
         actionPane.setHgap(20);
         actionPane.setVgap(20);
         actionPane.setPadding(new Insets(20, 20, 0, 0));
