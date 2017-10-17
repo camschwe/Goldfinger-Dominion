@@ -29,34 +29,39 @@ public class Server extends Thread{
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOutput = null;
     private Object input;
-    private ArrayList colors = new ArrayList();
+    private static ArrayList colors = new ArrayList();
 
 
     public Server(){
-
+        colors.add("-fx-fill: red");
+        colors.add("-fx-fill: green");
+        colors.add("-fx-fill: blue");
+        colors.add("-fx-fill: yellow");
         try {
-            colors.add("-fx-fill: red");
-            colors.add("-fx-fill: green");
-            colors.add("-fx-fill: blue");
-            colors.add("-fx-fill: yellow");
             serverSocket = new ServerSocket(PORT);
-            System.out.println("Server started");
-
+            System.out.println("Server started");   // While-Schleife: while (true){new Handler(serverSocket.accept(),start();}
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //finally {serverSocket.close();}
     }
 
+    // Eventuell von hier --------------------------------------------------------------------------
+    // private static class Handler extends Thread {}
     public void run() {
+        //private ObjectInputStream objInput = null;
+        //private ObjectOutputStream objOutput = null;
+        //private Object input;
         while (true) {
             running = true;
+            // Dies käme weg -----------------------------------------------------------------------
             try {
                 socket = serverSocket.accept();
                 System.out.println("Client verbunden");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            // Bis hier weg ------------------------------------------------------------------------
 
             try {
                 objInput = new ObjectInputStream(socket.getInputStream());
@@ -114,6 +119,7 @@ public class Server extends Thread{
         }
 
     }
+    //Bis hier -----------------------------------------------------------------------------------
 
     private void sendPlayerList() {
         for (String player: players){
@@ -123,26 +129,6 @@ public class Server extends Thread{
             } catch (IOException e) {
 
             }
-        }
-    }
-
-    public void start(){
-        for (int i = 0; i < MAXSPIELER; i++){
-
-                thread = new Thread(this, threadName);
-                thread.start();
-
-        }
-    }
-
-    public void stopServer(){
-        running = false;
-        this.removeClient();
-        try {
-            objInput.close();
-            objOutput.close();
-        } catch (Exception e) {
-            System.out.println("Error closing Input and Output Streams");
         }
     }
 
@@ -169,6 +155,26 @@ public class Server extends Thread{
         }
         return list;
     }
+    //Eventuell bis hier -----------------------------------------------------------------------------------
 
+    public void start(){
+        for (int i = 0; i < MAXSPIELER; i++){
+
+            thread = new Thread(this, threadName);
+            thread.start();
+
+        }
+    }
+
+    public void stopServer(){
+        running = false;
+        this.removeClient();
+        try {
+            objInput.close();
+            objOutput.close();
+        } catch (Exception e) {
+            System.out.println("Error closing Input and Output Streams");
+        }
+    }
 
 }
