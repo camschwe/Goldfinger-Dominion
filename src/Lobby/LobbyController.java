@@ -2,11 +2,13 @@ package Lobby;
 
 import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
+import Client_Server.Server.Server;
 import Game.FieldCardController;
 import Game.HandCardController;
 import Game.GameModel;
 import Game.GameView;
 import Localisation.Localisator;
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -56,6 +58,11 @@ public class LobbyController {
             if (event.getCode().equals(KeyCode.ENTER)){
                 lobbyView.chatWindow.getSendButton().fire();
             }
+        });
+
+        lobbyView.primaryStage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
         });
 
 
