@@ -134,6 +134,7 @@ public class Server extends Thread{
             for (ObjectOutputStream output : outputs) {
                 if (output != null) {
                     output.writeObject(input);
+                    System.out.println(output);
                 }
             }
         }

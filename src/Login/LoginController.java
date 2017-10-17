@@ -34,7 +34,10 @@ public class LoginController {
 
         loginView.joinButton.setOnAction(event -> {
 
-            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+            if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
+                loginView.userNameValid.setText(localisator.getResourceBundle().getString("UsernameNeeded"));
+                loginView.userNameValid.setVisible(true);
+            } else {
                 clientName = loginView.userNameField.getText();
                 if (client == null){
                     client = new Client("localhost", clientName);
@@ -50,6 +53,7 @@ public class LoginController {
                     lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                     lobbyModel = new LobbyModel();
                 } else {
+                    loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
                     loginView.userNameValid.setVisible(true);
                     client.resetChecked();
                 }
@@ -58,7 +62,10 @@ public class LoginController {
 
         loginView.hostButton.setOnAction(event -> {
 
-            if (loginView.userNameField.getText() != null || !loginView.userNameField.getText().trim().isEmpty()) {
+            if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()) {
+                loginView.userNameValid.setText(localisator.getResourceBundle().getString("UsernameNeeded"));
+                loginView.userNameValid.setVisible(true);
+            } else {
                 clientName = loginView.userNameField.getText();
                 server = new Server();
                 server.start();
