@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Goldfinger-Dominion:jar">
+    <output-path>$USER_HOME$/Desktop/artifacts/Goldfinger_Dominion_jar</output-path>
+    <root id="archive" name="Goldfinger-Dominion.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/Resources/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Goldfinger-Dominion" />
+    </root>
+  </artifact>
+</component>
