@@ -29,13 +29,19 @@ public class Server extends Thread{
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOutput = null;
     private Object input;
+    private ArrayList colors = new ArrayList();
 
 
     public Server(){
 
         try {
+            colors.add("-fx-fill: red");
+            colors.add("-fx-fill: green");
+            colors.add("-fx-fill: blue");
+            colors.add("-fx-fill: yellow");
             serverSocket = new ServerSocket(PORT);
             System.out.println("Server started");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,9 +82,11 @@ public class Server extends Thread{
                                     if (!players.contains(clientName)) {
                                       players.add(clientName);
                                       outputs.add(objOutput);
-                                      input = new Message(3, clientName, "valid");
-                                      System.out.println("Benutzer hinzugefügt: " + ((Message) input).getFullMessage());
+                                      input = new Message(3, clientName, "valid", (String)colors.get(0));
+                                      System.out.println("Benutzer hinzugefügt: " + ((Message) input).getFullMessage() + " Color: " + ((Message) input).getColor());
+                                      objOutput.writeObject(input);
                                       sendPlayerList();
+                                      colors.remove(0);
                                     }else {
                                         input = new Message(3, clientName, "invalid");
                                         objOutput.writeObject(input);

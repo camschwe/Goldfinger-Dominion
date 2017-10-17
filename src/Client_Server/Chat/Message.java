@@ -11,16 +11,27 @@ public class Message implements Serializable {
     /**
      * die Variable type speichert die möglichen Arten von Nachrichten:
      * 0 = neuer Spieler, 1 = eine Nachricht, 2 = Spieler meldet sich ab, 3 = Spielername validation, 4 = Game started
-     * Die Message benötigt immer einen Typ, einen Client Namen und die Nachricht.
+     *
+     * Die Variable color speichert als String die zu verwendende Farbe als css Ausdruck
+     *
+     * Die Message benötigt immer einen Typ, einen Client Namen, die Nachricht und optional die Farbe.
      */
     private int type;
     private String message;
     private String clientName;
+    private String color;
 
     public Message (int type,String clientName, String message){
         this.type = type;
         this.clientName = clientName;
         this.message = message;
+    }
+
+    public Message (int type,String clientName, String message, String color){
+        this.type = type;
+        this.clientName = clientName;
+        this.message = message;
+        this.color = color;
     }
 
     public int getType(){
@@ -34,6 +45,10 @@ public class Message implements Serializable {
     public String getFullMessage(){
         String fullMessage = (this.clientName + ": " + toString());
         return fullMessage;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public String getClientName() {

@@ -29,6 +29,7 @@ public class Client extends Thread {
     private LobbyController lobbyController;
     private HandCardController handCardController;
     private int actualController;
+    private static String color;
 
     public Client(String serverAdresse, String clientName){
         try {
@@ -73,13 +74,20 @@ public class Client extends Thread {
                     actualizeChat(message);
                     break;
                 case 3:
-                    if (!message.getMessage().equals("invalid")){
-                        valid = true;
-                        checked = true;
-                        break;
-                    } else {
-                        actualizePlayers(Message message);
-                        break;
+                    switch (message.getMessage()){
+                        case "valid":
+                            valid = true;
+                            checked = true;
+                            this.color = message.getColor();
+                            System.out.println(message.getColor());
+                            break;
+                        case "invalid":
+                            valid = false;
+                            checked = true;
+                            break;
+                        case "add":
+                            actualizePlayers(message);
+                            break;
                     }
                 case 4:
                     //startGame();
@@ -96,7 +104,10 @@ public class Client extends Thread {
 
     private void actualizeChat(Message message) {
         if (actualController == 1){
-            lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
+            message = new Message(message.getType(), message.getClientName(), message.getMessage(), this.color);
+            System.out.println(color);
+            //lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
+            lobbyController.getLobbyView().getChatWindow().actualizeChatFlow(message);
         }else if (actualController == 2){
             // gameController.getGameModel().actualizeChatWindow(message);
         }
