@@ -73,13 +73,24 @@ public class Client extends Thread {
                     actualizeChat(message);
                     break;
                 case 3:
-                    this.valid = !message.getMessage().equals("invalid");
-                    checked = true;
-                    break;
+                    if (!message.getMessage().equals("invalid")){
+                        valid = true;
+                        checked = true;
+                        break;
+                    } else {
+                        actualizePlayers(Message message);
+                        break;
+                    }
                 case 4:
                     //startGame();
                     break;
             }
+        }
+    }
+
+    private void actualizePlayers(Message message) {
+        if (actualController == 1){
+            // lobbyController.getLobbyView().playersTxtArea.appendText(message.getClientName() + System.getProperty("line.separator"));
         }
     }
 

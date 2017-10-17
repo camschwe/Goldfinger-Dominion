@@ -14,7 +14,7 @@ public class ChatWindow {
     protected Stage stage;
     protected Localisator localisator;
     protected TextField txtMessage;
-    protected TextArea txtChatMessages;
+    protected TextArea txtChatMessages;     // try TextFlow
     protected Pane root;
     private String newLine;
     protected VBox vBox;
