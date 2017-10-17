@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -21,7 +22,7 @@ public class Server extends Thread{
     private final String threadName = "Server";
     private ServerSocket serverSocket = null;
     private Socket socket = null;
-    private static HashSet<String> names = new HashSet<String>();
+    private static HashSet<String> players = new HashSet<String>();
     private static String clientName;
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
     private boolean running = true;
@@ -71,13 +72,13 @@ public class Server extends Thread{
                         switch (message.getType()){
 
                             case 0:
-                                synchronized (names) {
-                                    if (!names.contains(clientName)) {
-                                      names.add(clientName);
+                                synchronized (players) {
+                                    if (!players.contains(clientName)) {
+                                      players.add(clientName);
                                       outputs.add(objOutput);
                                       input = new Message(3, clientName, "valid");
-                                      objOutput.writeObject(input);
                                       System.out.println("Benutzer hinzugefügt: " + ((Message) input).getFullMessage());
+                                      sendPlayerList();
                                     }else {
                                         input = new Message(3, clientName, "invalid");
                                         objOutput.writeObject(input);
@@ -105,6 +106,18 @@ public class Server extends Thread{
         }
 
     }
+
+    private void sendPlayerList() {
+        for (String player: players){
+            input = new Message(3, player, "add");
+            try {
+                sendToAll();
+            } catch (IOException e) {
+
+            }
+        }
+    }
+
     public void start(){
         for (int i = 0; i < MAXSPIELER; i++){
 
@@ -126,9 +139,10 @@ public class Server extends Thread{
     }
 
     public void removeClient(){
-        names.remove(clientName);
+        players.remove(clientName);
         outputs.remove(objOutput);
     }
+
     public void sendToAll() throws IOException {
         synchronized (outputs){
             for (ObjectOutputStream output : outputs) {
@@ -138,6 +152,14 @@ public class Server extends Thread{
                 }
             }
         }
+    }
+
+    public ArrayList<String> getPlayersAsArrayList(){
+        ArrayList<String> list = new ArrayList<>();
+        for (String player : players){
+            list.add(player);
+        }
+        return list;
     }
 
 
