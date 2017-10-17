@@ -41,7 +41,7 @@ public class LobbyController {
             gameView = new GameView(gameStage, localisator);
             gameModel = new GameModel(2);
             handCardController = new HandCardController(gameView, localisator, gameModel);
-            fieldCardController = new FieldCardController(gameView,localisator, gameModel);
+            fieldCardController = new FieldCardController(gameView,localisator, gameModel, handCardController);
             gameView.start();
         });
 

@@ -13,6 +13,7 @@ public class GameModel {
     Player player;
     private ArrayList<Card> pointCards;
     private ArrayList<Card> moneyCards;
+    private ArrayList<Card> actionCards;
 
 
 
@@ -48,6 +49,15 @@ public class GameModel {
         Collections.addAll(pointCards, province, duchy, estate);
         moneyCards = new ArrayList<>();
         Collections.addAll(moneyCards,gold, silver, copper);
+
+        actionCards = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++){
+            Card village = new Card("village", 3, 0 );
+            actionCards.add(village);
+
+
+        }
 
 
 
@@ -87,5 +97,13 @@ public class GameModel {
 
     public Player getPlayer(){
         return player;
+    }
+
+    public ArrayList<Card> getActionCards() {
+        return actionCards;
+    }
+
+    public void setActionCards(ArrayList<Card> actionCards) {
+        this.actionCards = actionCards;
     }
 }

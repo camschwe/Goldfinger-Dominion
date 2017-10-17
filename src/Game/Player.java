@@ -20,14 +20,118 @@ public class Player {
         this.putDeck = new ArrayList<>();
         this.drawDeck = new ArrayList<>();
         this.actionPhase = true;
-        this.buyPase = true;
+        this.buyPase = false;
         this.actions = 1;
         this.buys = 1;
         this.money = 0;
         this.points = 0;
         this.yourTurn = true;
 
+    }
 
+    public void village(Card card){
+        this.draw(1);
+        this.setActions((this.getActions() +1));
+        dropCard(card);
+
+    }
+
+    public void draw(int cards){
+
+        if(this.drawDeck.size() < cards){
+            for(int i = this.drawDeck.size()-1 ; i>=0 ;i--){
+                this.handCards.add(this.drawDeck.get(0));
+                this.drawDeck.remove(0);
+                cards--;
+            }
+
+            this.changeDecks();
+        }
+
+        for(int i = cards-1; i>= 0;i--){
+            this.handCards.add(this.drawDeck.get(0));
+            this.drawDeck.remove(0);
+        }
+
+        if(this.drawDeck.size() == 0){
+            this.changeDecks();
+        }
+
+    }
+
+    public void changeDecks (){
+        for(int i = this.putDeck.size()-1; i>=0 ; i--){
+            this.drawDeck.add(this.putDeck.get(0));
+            this.putDeck.remove(0);
+            Collections.shuffle(drawDeck);
+        }
+
+    }
+
+    public void playMoneyCard(Card card){
+
+        this.setMoney(this.getMoney()+ card.getValue());
+        dropCard(card);
+
+
+    }
+
+    public void dropCard(Card card) {
+        int i = 0;
+        boolean checker = false;
+        while (this.getHandCards().size() - 1 >= i || !checker) {
+            if (card.equals(this.getHandCards().get(i))) {
+                this.getPutDeck().add(this.getHandCards().get(i));
+                this.getHandCards().remove(i);
+                checker = true;
+            }
+            i++;
+
+        }
+
+
+    }
+
+
+    public void buyCard(Card card){
+
+        System.out.println(card.getCardName());
+        System.out.println(card.getCost());
+        System.out.println(card.getValue());
+        this.getPutDeck().add(card);
+        this.setMoney(this.getMoney() - card.getCost());
+        this.setBuys(this.getBuys() -1);
+        if(this.getBuys() < 1){
+            this.setBuyPase(false);
+            this.endTurn();
+        }
+    }
+
+    //TODO: Change TO OTHER PLAYER
+    public void endPhase(){
+        if(this.isActionPhase()) {
+            this.setBuyPase(true);
+            this.setActionPhase(false);
+        }else{
+            this.endTurn();
+
+            }
+
+
+    }
+
+    public void endTurn(){
+        this.money = 0;
+        for(int i = this.getHandCards().size()-1; i >= 0;i--){
+            this.putDeck.add(this.handCards.get(0));
+            this.handCards.remove(0);
+        }
+
+        this.setBuys(1);
+        this.setActions(1);
+        this.setBuyPase(false);
+        this.setActionPhase(true);
+        this.draw(5);
 
 
     }
@@ -112,35 +216,5 @@ public class Player {
         this.points = points;
     }
 
-    public void draw(int cards){
 
-        if(handCards.size() < cards){
-            for(int i = 0; i< handCards.size();i++){
-                this.handCards.add(i,this.drawDeck.get(i));
-                this.drawDeck.remove(i);
-            }
-            cards -= this.handCards.size();
-            changeDecks();
-        }
-
-        for(int i = 0; i< cards;i++){
-            this.handCards.add(i,this.drawDeck.get(i));
-            this.drawDeck.remove(i);
-        }
-
-        if(this.drawDeck.size() == 0){
-            changeDecks();
-        }
-
-    }
-
-    public void changeDecks (){
-        for(int i = 0; i< this.putDeck.size(); i++){
-            this.drawDeck.add(i, this.putDeck.get(i));
-            this.putDeck.remove(i);
-            Collections.shuffle(drawDeck);
-        }
-
-
-    }
 }

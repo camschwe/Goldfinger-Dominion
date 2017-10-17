@@ -1,7 +1,9 @@
 package Game;
 
 import Localisation.Localisator;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 
@@ -13,110 +15,156 @@ public class FieldCardController {
     private GameView gameView;
     private GameModel gameModel;
     private Localisator localisator;
+    private HandCardController handCardController;
 
 
-    public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel) {
+    public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel, HandCardController handCardController) {
         this.gameView = gameView;
         this.gameModel = gameModel;
         this.localisator = localisator;
-
-
-       // estateButton = new Button();
-        //estateButton.getStyleClass().add("estateSmall");
-        //duchyButton = new Button();
-        //duchyButton.getStyleClass().add("duchySmall");
-        //provinceButton = new Button();
-        //provinceButton.getStyleClass().add("provinceSmall");
-        //copperButton = new Button();
-        //copperButton.getStyleClass().add("copperSmall");
-        //silverButton = new Button();
-        //silverButton.getStyleClass().add("silverSmall");
-        //goldButton = new Button();
-        //goldButton.getStyleClass().add("goldSmall");
-        //resourceButton = new Button();
-        //resourceButton.getStyleClass().add("invisible");
+        this.handCardController = handCardController;
 
 
 
-        //resourcePane.add(provinceButton, 0,0);
-        //resourcePane.add(duchyButton, 0,1);
-        //resourcePane.add(estateButton, 0,2);
-        //resourcePane.add(goldButton, 1,0);
-        //resourcePane.add(silverButton, 1,1);
-        //resourcePane.add(copperButton, 1,2);
 
+
+
+        //TODO: ADD AMOUNT REFERRING PLAYER
         //Initialisierung der Geldkarten
         for(int i = 0; i < gameModel.getMoneyCards().size() ; i++) {
-            GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i));
-            moneyButton.getStyleClass().add(moneyButton.getCard().getCardName()+"Small");
+            GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), 30);
             gameView.resourcePane.add(moneyButton, 1,i);
-            addMouseExited(moneyButton);
-            addMouseEntered(moneyButton);
-            addMouseKlickedMoney(moneyButton);
+            addMouseExited(moneyButton, gameView.resourceButton);
+            addMouseEntered(moneyButton, gameView.resourceButton);
+            addMouseKlickedMoney(moneyButton, gameModel.getPlayer(), moneyButton.getCard());
 
         }
 
+        //TODO: ADD AMOUNT REFERRING PLAYER
+        //Initialisierung Punktekarten
         for(int i = 0; i < gameModel.getPointCards().size() ; i++) {
-            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i));
-            pointButton.getStyleClass().add(pointButton.getCard().getCardName()+"Small");
+            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), 8);
             gameView.resourcePane.add(pointButton, 0,i);
-            addMouseExited(pointButton);
-            addMouseEntered(pointButton);
-            addMouseKlickedPoint(pointButton);
+            addMouseExited(pointButton, gameView.resourceButton);
+            addMouseEntered(pointButton, gameView.resourceButton);
+            addMouseKlickedPoint(pointButton, gameModel.getPlayer(), pointButton.getCard());
+
+        }
+
+        //TODO: ADD AMOUNT REFERRING PLAYER
+        //Initialisierung Aktionskarten
+        int column = 0;
+        int row = 0;
+        for(int i = 0; i < gameModel.getActionCards().size(); i++){
 
 
+            if (i == 5) {
+                row = 1;
+                column = 0;
+            }
+
+
+            GameButton actionButton = new GameButton(gameModel.getActionCards().get(i), 10);
+
+            gameView.actionPane.add(actionButton, column,row);
+            addMouseExited(actionButton, gameView.actionButton);
+            addMouseEntered(actionButton, gameView.actionButton);
+            addMouseKlickedAction(actionButton, gameModel.getPlayer(), actionButton.getCard());
+            column ++;
         }
 
     }
     //fügt Effekt für Mouseover hizu
-    public void addMouseEntered(GameButton gameButton){
+    public void addMouseEntered(GameButton gameButton, Button showButton){
 
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameView.resourceButton.getStyleClass().clear();
-                gameView.resourceButton.getStyleClass().add(gameButton.getCard().getCardName()+"Big");
-                System.out.println(gameButton.getCard().getCardName()+"Big");
-
+                showButton.getStyleClass().clear();
+                showButton.getStyleClass().add(gameButton.getCard().getCardName()+"Big");
             }
         });
-
     }
-
     //Fügt Effekt für Mouse Exited hinzu
-    public void addMouseExited(GameButton gameButton){
+    public void addMouseExited(GameButton gameButton, Button showButton){
 
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameView.resourceButton.getStyleClass().add("invisible");
-
+                showButton.getStyleClass().add("invisible");
             }
         });
 
     }
 
-    //Eventhändler für Klick auf Geldkarte
-    //Todo: Anzahl Karten auf dem Stapel abfragen und vermindern
-    public void addMouseKlickedMoney(GameButton gameButton){
+    //TODO: ALLE 3 EVENTHÄNDLER ZUSAMMENLEGEN?
+    public void addMouseKlickedAction(GameButton gameButton, Player player, Card card){
         gameButton.setOnAction(event -> {
-            Player player = gameModel.getPlayer();
-            Card card = gameButton.getCard();
-
-            if(player.isYourTurn()&& card.getCost() <= player.getMoney()){
-                player.getHandCards().add(card);
-                player.setMoney(player.getMoney() - card.getCost());
-                gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
+            clickChecker(gameButton, player, card);
+            if (clickChecker(gameButton, player, card)){
+                Card actionCard = new Card(card.getCardName(), card.getCost(), card.getValue());
+                player.buyCard(actionCard);
+                buyUpdateView(gameButton, player);
             }
+
+
+
+
+        });
+    }
+
+    public void addMouseKlickedMoney(GameButton gameButton, Player player, Card card){
+        gameButton.setOnAction(event -> {
+            if (clickChecker(gameButton, player, card)){
+                Card moneyCard = new Card(card.getCardName(), card.getCost(), card.getValue());
+                player.buyCard(moneyCard);
+                buyUpdateView(gameButton, player);
+            }
+
+
+
+
         });
     }
 
     //Eventhändler für Klick auf Punktekarte
     //TODO: IMPLEMENTIEREN
-    public void addMouseKlickedPoint(GameButton gameButton){
+    public void addMouseKlickedPoint(GameButton gameButton, Player player, Card card){
         gameButton.setOnAction(event -> {
+            if(clickChecker(gameButton, player, card));{
+                Card pointCard = new Card(card.getCardName(), card.getCost(), card.getValue());
+                player.buyCard(pointCard);
+                buyUpdateView(gameButton, player);
+                if(gameButton.getAmount() < 1)
+                    gameView.stop();
+            }
+
+
 
         });
+    }
+
+    public boolean clickChecker(GameButton gameButton, Player player, Card card) {
+        if (player.isYourTurn() &&
+                player.isBuyPase() &&
+                player.getBuys() > 0 &&
+                card.getCost() <= player.getMoney() &&
+                gameButton.getAmount() > 0) {
+
+
+
+
+        }
+
+        return true;
+    }
+
+    public void buyUpdateView(GameButton gameButton, Player player){
+        gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money") + ":\t" + player.getMoney());
+        gameButton.setAmount(gameButton.getAmount() - 1);
+        handCardController.updateLabel();
+        handCardController.updateHandcardsView();
+
     }
 
 

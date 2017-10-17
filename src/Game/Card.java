@@ -16,11 +16,7 @@ public class Card {
         this.value = value;
     }
 
-    public static void village(Player player){
-        player.draw(1);
-        player.setActions((player.getActions() +1));
 
-    }
 
     public String getCardName() {
         return cardName;

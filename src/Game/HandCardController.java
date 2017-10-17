@@ -22,6 +22,15 @@ public class HandCardController {
 
         updateHandcardsView();
 
+        gameView.phaseButton.setOnAction(event -> {
+            if(gameModel.getPlayer().isYourTurn()) {
+                gameModel.getPlayer().endPhase();
+                updateHandcardsView();
+                updateLabel();
+            }
+
+        });
+
     }
 
     //Aktualisiert die Handkarten im GUI
@@ -34,7 +43,6 @@ public class HandCardController {
             Card card = player.getHandCards().get(i);
 
             GameButton player1Card = new GameButton(card);
-            player1Card.getStyleClass().add(card.getCardName());
             gameView.player1Box.getChildren().add(player1Card);
             addMouseEntered(player1Card, card);
             addMouseExited(player1Card, card);
@@ -71,7 +79,9 @@ public class HandCardController {
     //Eventhändler für Klick auf Handkarte
     public void addMouseKlicked(GameButton gameButton, Card card, Player player){
         gameButton.setOnAction(event -> {
-            cardChecker(gameButton, card, player);
+            if(player.isYourTurn()){
+                cardChecker(gameButton, card, player);
+            }
         });
     }
 
@@ -81,40 +91,51 @@ public class HandCardController {
 
         switch (cardName) {
             case "copper":
-                moneyUpdate(gameButton, card, player);
+                moneyUpdate(card, player);
+                break;
+            case "silver":
+                moneyUpdate(card, player);
+                break;
+            case "gold":
+                moneyUpdate(card, player);
                 break;
             case "village":
-                villageUpdate(gameButton);
+                villageUpdate(player, card);
                 break;
             default:
                 break;
+
         }
     }
 
 
     //Führ das Update nach Klick auf eine Geldkarte durch
-    public void moneyUpdate(GameButton gameButton, Card card, Player player){
-        if(player.isYourTurn()){
-            player.setMoney(player.getMoney()+ card.getValue());
-            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
-            gameView.player1Box.getChildren().remove(gameButton);
+    public void moneyUpdate(Card card, Player player){
+        if(player.isBuyPase()) {
+            player.playMoneyCard(card);
+            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money") + ":\t" + player.getMoney());
+            updateHandcardsView();
+        }
 
-            int i = 0;
-            boolean checker = false;
-            while(player.getHandCards().size() > i || !checker){
-                if(card.equals(player.getHandCards().get(i))){
-                    player.getPutDeck().add(player.getHandCards().get(i));
-                    player.getHandCards().remove(i);
-                    checker = true;
-                }
-                i++;
-            }
 
+    }
+
+    public void villageUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.village(card);
+            updateHandcardsView();
         }
     }
 
-    public void villageUpdate(GameButton gameButton){
-        Card.village(gameModel.getPlayer());
+    public void updateLabel(){
+        Player player = gameModel.getPlayer();
+        gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
+        if(player.isActionPhase()){
+            gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+ ":\t Action");
+        }else{gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+ ":\t Buy");
+
+        }
+
     }
 
 
