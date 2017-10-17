@@ -3,14 +3,12 @@ package Game;
 import Client_Server.Chat.ChatWindow;
 import Localisation.Localisator;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 /**
@@ -34,10 +32,12 @@ public class GameView {
 
 
 
+
+
         BorderPane root = new BorderPane();
-        BorderPane mainPane = new BorderPane();
         BorderPane midPane = new BorderPane();
         BorderPane resourceBorder = new BorderPane();
+        BorderPane rightMainPane = new BorderPane();
         BorderPane rightPane = new BorderPane();
         resourcePane = new GridPane();
         BorderPane leftPane = new BorderPane();
@@ -52,20 +52,24 @@ public class GameView {
         HBox player1CardBox = new HBox();
 
 
+
+
         root.setCenter(midPane);
         root.setLeft(leftPane);
-        root.setRight(rightPane);
+        root.setRight(rightMainPane);
+        rightMainPane.setCenter(rightPane);
         leftPane.setTop(resourceBorder);
         leftPane.setBottom(player1CardBox);
         leftPane.setCenter(player1Pane);
         midPane.setCenter(actionBorder);
-        rightPane.setCenter(player2Pane);
-        rightPane.setTop(player2CardBox);
-        rightPane.setRight(chatPane);
         midPane.setTop(player2Box);
         midPane.setBottom(player1Box);
+        rightPane.setCenter(player2Pane);
+        rightPane.setTop(player2CardBox);
+        rightMainPane.setRight(chatPane);
         resourceBorder.setCenter(resourcePane);
         actionBorder.setCenter(actionPane);
+
 
         resourceButton = new Button();
         resourceButton.getStyleClass().add("copperBig");
@@ -121,7 +125,7 @@ public class GameView {
         //TODO: mit Array schöner gestalten
         actionButton = new Button();
         actionButton.getStyleClass().add("invisible");
-        actionBorder.setBottom(actionButton);
+        actionBorder.setLeft(actionButton);
         actionButton1 = new Button();
         actionButton1.getStyleClass().add("villageSmall");
         actionPane.add(actionButton1, 0, 0);
@@ -155,11 +159,15 @@ public class GameView {
         actionPane.setHgap(20);
         actionPane.setVgap(20);
         actionPane.setPadding(new Insets(20, 20, 0, 0));
+        actionPane.setAlignment(Pos.TOP_CENTER);
+
 
 
 
         player1Box.setPadding((new Insets(20, 20, 20, 20)));
         player1Box.setSpacing(20);
+        player1Box.setAlignment(Pos.BOTTOM_CENTER);
+
 
         //TODO: mit Array schöner gestalten
         for(int i = 0; i<5; i++){
