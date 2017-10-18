@@ -33,11 +33,13 @@ public class Client extends Thread {
 
     public Client(String serverAdresse, String clientName){
         try {
-            Client.serverAdresse = serverAdresse;
+            this.serverAdresse = serverAdresse;
             this.clientName = clientName;
-            serverSocket = new Socket(Client.serverAdresse, PORT);
+            serverSocket = new Socket(this.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
+            System.out.println("Output: " + objOutput);
             objInput = new ObjectInputStream(serverSocket.getInputStream());
+            System.out.println("Input: " + objInput);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,13 +47,16 @@ public class Client extends Thread {
     }
 
     public void run(){
-        while (running){
-            Object o = null;
+        int i = 1;
+        while (i<2){
+            Object o;
             try {
                 o = objInput.readObject();
+                i++;
                 doSomething(o);
             } catch (Exception e) {
                 e.printStackTrace();
+                i++;
             }
             //doSomething(o);
         }

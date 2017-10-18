@@ -3,6 +3,8 @@ package Login;
 import Client_Server.Client.Client;
 import Client_Server.Chat.Message;
 import Client_Server.Server.Server;
+import Client_Server.Server.ServerTest;
+import Client_Server.Server.StartServer;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
@@ -69,6 +71,8 @@ public class LoginController {
                 clientName = loginView.userNameField.getText();
                 server = new Server();
                 server.start();
+                // StartServer startServer = new StartServer();
+                // startServer.start();
                 client = new Client("localhost", clientName);
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
