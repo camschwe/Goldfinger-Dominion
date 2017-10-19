@@ -44,6 +44,10 @@ public class Client extends Thread {
 
     }
 
+    public static String getColor() {
+        return color;
+    }
+
     public void run(){
         while (running){
             Object o;

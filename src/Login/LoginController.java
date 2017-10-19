@@ -49,6 +49,7 @@ public class LoginController {
                 client.sendObject(benutzer);
                 while (!client.isChecked()){
                     //Waiting until server response
+                    
                 }
                 if (client.isValid()) {
                     lobbyView = new LobbyView(primaryStage, localisator);
