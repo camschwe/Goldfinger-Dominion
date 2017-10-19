@@ -54,6 +54,7 @@ public class LoginController {
                     lobbyView = new LobbyView(primaryStage, localisator);
                     lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                     lobbyModel = new LobbyModel();
+                    client.setLobbyController(lobbyController);
                 } else {
                     loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
                     loginView.userNameValid.setVisible(true);

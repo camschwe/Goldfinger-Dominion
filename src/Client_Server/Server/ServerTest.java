@@ -69,9 +69,6 @@ public class ServerTest extends Thread{
                                         if (!players.contains(message.getClientName())) {
                                             players.add(name);
                                             outputs.add(objOutput);
-                                            for (ObjectOutputStream output : outputs){
-                                                System.out.println(output);
-                                            }
                                             Message send = new Message(3, name, "valid", colors.get(0));
                                             objOutput.writeObject(send);
                                             sendPlayerList();
@@ -84,7 +81,7 @@ public class ServerTest extends Thread{
                                     break;
 
                                 case 1:
-                                    sendToAll(message);
+                                    sendMessageToAll(message);
                                     break;
 
                                 case 2:
@@ -93,6 +90,7 @@ public class ServerTest extends Thread{
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
+                        players.remove(name);
                         break;
                     }
                 }
@@ -113,7 +111,7 @@ public class ServerTest extends Thread{
 
         private void sendPlayerList() throws IOException {
             for (String name : players){
-                sendToAll(new Message(3, name, "add"));
+                sendMessageToAll(new Message(3, name, "add"));
             }
         }
 
@@ -126,6 +124,15 @@ public class ServerTest extends Thread{
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(o);
+                }
+
+            }
+        }
+
+        private void sendMessageToAll(Message message) throws IOException {
+            for (ObjectOutputStream output : outputs){
+                if (output != null){
+                    output.writeObject(message);
                 }
 
             }

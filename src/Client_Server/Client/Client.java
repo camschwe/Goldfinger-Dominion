@@ -103,7 +103,7 @@ public class Client extends Thread {
 
     public void actualizeChat(Message message) {
         if (actualController == 1){
-            message = new Message(message.getType(), message.getClientName(), message.getMessage(), this.color);
+            //message = new Message(message.getType(), message.getClientName(), message.getMessage(), this.color);
             //lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
             lobbyController.getLobbyView().getChatWindow().actualizeChatFlow(message);
         }else if (actualController == 2){
