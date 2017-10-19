@@ -69,10 +69,10 @@ public class LoginController {
                 loginView.userNameValid.setVisible(true);
             } else {
                 clientName = loginView.userNameField.getText();
-                server = new Server();
-                server.start();
-                // StartServer startServer = new StartServer();
-                // startServer.start();
+                //server = new Server();
+                //server.start();
+                StartServer startServer = new StartServer();
+                startServer.start();
                 client = new Client("localhost", clientName);
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
@@ -80,6 +80,7 @@ public class LoginController {
                 lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 lobbyModel = new LobbyModel();
                 client.setLobbyController(lobbyController);
+                client.actualizeChat(new Message(1, "client", "Test", "-fx-fill: red"));
             }
         });
 

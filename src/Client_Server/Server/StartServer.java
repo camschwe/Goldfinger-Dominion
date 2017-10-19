@@ -10,6 +10,7 @@ public class StartServer extends Thread {
         try {
             testServer = new ServerTest();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -17,4 +18,5 @@ public class StartServer extends Thread {
         Thread thread = new Thread(this);
         thread.start();
     }
+
 }

@@ -37,9 +37,7 @@ public class Client extends Thread {
             this.clientName = clientName;
             serverSocket = new Socket(this.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
-            System.out.println("Output: " + objOutput);
             objInput = new ObjectInputStream(serverSocket.getInputStream());
-            System.out.println("Input: " + objInput);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,16 +45,13 @@ public class Client extends Thread {
     }
 
     public void run(){
-        int i = 1;
-        while (i<2){
+        while (running){
             Object o;
             try {
                 o = objInput.readObject();
-                i++;
                 doSomething(o);
             } catch (Exception e) {
                 e.printStackTrace();
-                i++;
             }
             //doSomething(o);
         }
@@ -84,7 +79,6 @@ public class Client extends Thread {
                             valid = true;
                             checked = true;
                             this.color = message.getColor();
-                            System.out.println(message.getColor());
                             break;
                         case "invalid":
                             valid = false;
@@ -107,10 +101,9 @@ public class Client extends Thread {
         }
     }
 
-    private void actualizeChat(Message message) {
+    public void actualizeChat(Message message) {
         if (actualController == 1){
             message = new Message(message.getType(), message.getClientName(), message.getMessage(), this.color);
-            System.out.println(color);
             //lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
             lobbyController.getLobbyView().getChatWindow().actualizeChatFlow(message);
         }else if (actualController == 2){

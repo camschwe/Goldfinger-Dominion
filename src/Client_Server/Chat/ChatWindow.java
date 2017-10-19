@@ -37,6 +37,7 @@ public class ChatWindow {
         txtChatFlow.setStyle("-fx-background-color: #FFFFFF");
         newLine = System.getProperty("line.separator");
 
+
         HBox hBox = new HBox();
         vBox = new VBox();
         txtMessage.setPromptText(localisator.getResourceBundle().getString("message"));
@@ -94,17 +95,15 @@ public class ChatWindow {
     }
 
     public void actualizeChatFlow(Message message){
+        System.out.println(message);
         Text user = new Text(message.getClientName());
         user.setStyle(message.getColor());
         Text content = new Text(": " + message.getMessage() + newLine);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                txtChatFlow.getChildren().addAll(user, content);
-                if (txtChatFlow.getChildren().size() > 30) {
-                    txtChatFlow.getChildren().remove(1);
-                    txtChatFlow.getChildren().remove(0);
-                }
+        Platform.runLater(() -> {
+            txtChatFlow.getChildren().addAll(user, content);
+            if (txtChatFlow.getChildren().size() > 30) {
+                txtChatFlow.getChildren().remove(1);
+                txtChatFlow.getChildren().remove(0);
             }
         });
 

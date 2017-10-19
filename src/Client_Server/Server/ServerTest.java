@@ -1,7 +1,6 @@
 package Client_Server.Server;
 
 import Client_Server.Chat.Message;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,20 +16,24 @@ import java.util.HashSet;
 
 public class ServerTest extends Thread{
     private static final int PORT = 22022;
-    private static ServerSocket serverSocket = null;
-    //private Socket socket = null;
+    private static ServerSocket serverSocket;
     private static HashSet<String> players = new HashSet<String>();
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
+    private static ArrayList<String> colors = new ArrayList<>();
 
     public ServerTest() throws Exception{
-        System.out.println("Server started.");
+        colors.add("-fx-fill: red");
+        colors.add("-fx-fill: green");
+        colors.add("-fx-fill: blue");
+        colors.add("-fx-fill: yellow");
         serverSocket = new ServerSocket(PORT);
         try {
             while (true){
-                new Handler(serverSocket.accept()).start();
+                Handler handler = new Handler(serverSocket.accept());
+                handler.start();
             }
         } catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
@@ -48,7 +51,6 @@ public class ServerTest extends Thread{
             try {
                 obInput = new ObjectInputStream(socket.getInputStream());
                 objOutput = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println("Client connected");
 
                 outputs.add(objOutput);
 
@@ -58,8 +60,36 @@ public class ServerTest extends Thread{
                         if (o == null) {
                             return;
                         }
-                        for (ObjectOutputStream output : outputs){
-                            output.writeObject(o);
+                        if (o instanceof Message){
+                            Message message = (Message) o;
+                            name = message.getClientName();
+                            switch (message.getType()){
+                                case 0:
+                                    synchronized (players) {
+                                        if (!players.contains(message.getClientName())) {
+                                            players.add(name);
+                                            outputs.add(objOutput);
+                                            for (ObjectOutputStream output : outputs){
+                                                System.out.println(output);
+                                            }
+                                            Message send = new Message(3, name, "valid", colors.get(0));
+                                            objOutput.writeObject(send);
+                                            sendPlayerList();
+                                            colors.remove(0);
+                                        }else {
+                                            Message send = new Message(3, name, "invalid");
+                                            objOutput.writeObject(send);
+                                        }
+                                    }
+                                    break;
+
+                                case 1:
+                                    sendToAll(message);
+                                    break;
+
+                                case 2:
+                                    removeClient();
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
@@ -79,6 +109,26 @@ public class ServerTest extends Thread{
                 }
             }
 
+        }
+
+        private void sendPlayerList() throws IOException {
+            for (String name : players){
+                sendToAll(new Message(3, name, "add"));
+            }
+        }
+
+        private void removeClient() {
+            players.remove(name);
+            outputs.remove(objOutput);
+        }
+
+        private void sendToAll(Object o) throws IOException {
+            for (ObjectOutputStream output : outputs){
+                if (output != null){
+                    output.writeObject(o);
+                }
+
+            }
         }
     }
 }
