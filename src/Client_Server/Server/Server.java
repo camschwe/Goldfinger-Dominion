@@ -13,14 +13,14 @@ import java.util.HashSet;
  * Created by Benjamin Probst on 01.10.2017.
  **/
 
-public class ServerTest extends Thread{
+public class Server extends Thread{
     private static final int PORT = 22022;
     private static ServerSocket serverSocket;
     private static HashSet<String> players = new HashSet<String>();
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
     private static ArrayList<String> colors = new ArrayList<>();
 
-    public ServerTest() throws Exception{
+    public Server() throws Exception{
         colors.add("-fx-fill: red");
         colors.add("-fx-fill: green");
         colors.add("-fx-fill: blue");

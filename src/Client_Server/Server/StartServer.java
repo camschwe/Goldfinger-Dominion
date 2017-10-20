@@ -5,14 +5,14 @@ package Client_Server.Server;
  **/
 
 public class StartServer extends Thread {
-    private ServerTest testServer;
+    private Server server;
 
     public StartServer(){
     }
 
     public void run(){
         try {
-            testServer = new ServerTest();
+            server = new Server();
         } catch (Exception e) {
             e.printStackTrace();
         }
