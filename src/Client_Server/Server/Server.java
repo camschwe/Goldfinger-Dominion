@@ -71,6 +71,7 @@ public class Server extends Thread{
                                             Message send = new Message(3, name, "valid", colors.get(0));
                                             objOutput.writeObject(send);
                                             sendPlayerList();
+                                            sendMessageToAll(new Message(3, name, "end"));
                                             colors.remove(0);
                                         }else {
                                             Message send = new Message(3, name, "invalid");
