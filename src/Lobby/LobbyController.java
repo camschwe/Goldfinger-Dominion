@@ -2,7 +2,6 @@ package Lobby;
 
 import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
-import Client_Server.Server.Server;
 import Game.FieldCardController;
 import Game.HandCardController;
 import Game.GameModel;
