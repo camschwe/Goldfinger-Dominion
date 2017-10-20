@@ -48,10 +48,13 @@ public class LobbyController {
         });
 
         lobbyView.chatWindow.getSendButton().setOnAction(event -> {
-            String text = lobbyView.chatWindow.getMessage();
-            Message message = new Message(1, client.getClientName(), text, client.getColor());
-            client.sendObject(message);
-            lobbyView.chatWindow.clearMessageField();
+            if (lobbyView.chatWindow.getTxtMessage().getText() == null || lobbyView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
+            }else {
+                String text = lobbyView.chatWindow.getMessage();
+                Message message = new Message(1, client.getClientName(), text, client.getColor());
+                client.sendObject(message);
+                lobbyView.chatWindow.clearMessageField();
+            }
         });
 
         lobbyView.chatWindow.getTxtMessage().setOnKeyPressed((KeyEvent event) -> {
