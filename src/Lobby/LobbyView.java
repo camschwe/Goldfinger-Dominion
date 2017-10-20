@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -28,7 +29,7 @@ public class LobbyView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
         chatWindow = new ChatWindow(localisator);
-        chatWindow.getTxtChatMessages().getStyleClass().add("chatWindow");
+        //chatWindow.getTxtChatMessages().getStyleClass().add("chatWindow");
         chatWindow.getVBox().setPadding(new Insets(80, 0, 0, 250));
 
         paricipateLabel = new Label(localisator.getResourceBundle().getString("participate"));

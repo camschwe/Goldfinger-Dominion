@@ -3,6 +3,7 @@ package Client_Server.Chat;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -12,30 +13,44 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+/**
+ * Created by Benjamin Probst on 11.10.2017.
+ **/
+
 public class ChatWindow {
     protected Button sendButton;
     protected Stage stage;
     protected Localisator localisator;
     protected TextField txtMessage;
-    protected TextArea txtChatMessages;     // try TextFlow
+    // protected TextArea txtChatMessages;     // try TextFlow
     protected TextFlow txtChatFlow;
     protected Pane root;
     private String newLine;
     protected VBox vBox;
+    protected ScrollPane scrollPane;
 
 
     public ChatWindow(Localisator localisator) {
         this.stage = new Stage();
         this.localisator = localisator;
-        txtChatMessages = new TextArea();
+        // txtChatMessages = new TextArea();
         txtMessage = new TextField();
         sendButton = new Button(localisator.getResourceBundle().getString("sendButton"));
-        txtChatMessages.setEditable(false);
+        // txtChatMessages.setEditable(false);
         txtChatFlow = new TextFlow();
-        txtChatFlow.setPrefSize(100, 300);
-        txtChatFlow.setMaxHeight(150);
-        txtChatFlow.setStyle("-fx-background-color: #FFFFFF");
+
+        // txtChatFlow.setPrefSize(150, 250);
+        // txtChatFlow.setMaxHeight(150);
+        txtChatFlow.setStyle("-fx-background-color: white");
         newLine = System.getProperty("line.separator");
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(100, 300);
+        scrollPane.setStyle("-fx-background-color: white");
+        scrollPane.setContent(txtChatFlow);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.vvalueProperty().bind(txtChatFlow.heightProperty());
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
 
 
         HBox hBox = new HBox();
@@ -44,7 +59,7 @@ public class ChatWindow {
 
         root = new Pane();
         //vBox.getChildren().addAll(txtChatMessages, hBox);
-        vBox.getChildren().addAll(txtChatFlow, hBox);
+        vBox.getChildren().addAll(scrollPane, hBox);
         hBox.getChildren().addAll(txtMessage, sendButton);
         vBox.setSpacing(5);
         hBox.setSpacing(5);
@@ -74,9 +89,9 @@ public class ChatWindow {
         return message;
     }
 
-    public TextArea getTxtChatMessages() {
+    /**public TextArea getTxtChatMessages() {
         return txtChatMessages;
-    }
+    }**/
 
     public void clearMessageField(){
         this.txtMessage.clear();
@@ -90,9 +105,9 @@ public class ChatWindow {
         return this.vBox;
     }
 
-    public void actualizeTextArea(String message){
+    /**public void actualizeTextArea(String message){
         txtChatMessages.appendText(message + newLine);
-    }
+    }**/
 
     public void actualizeChatFlow(Message message){
         System.out.println(message);
@@ -101,10 +116,10 @@ public class ChatWindow {
         Text content = new Text(": " + message.getMessage() + newLine);
         Platform.runLater(() -> {
             txtChatFlow.getChildren().addAll(user, content);
-            if (txtChatFlow.getChildren().size() > 30) {
+            /**if (txtChatFlow.getChildren().size() > 30) {
                 txtChatFlow.getChildren().remove(1);
                 txtChatFlow.getChildren().remove(0);
-            }
+            }**/
         });
 
     }

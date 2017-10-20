@@ -25,7 +25,6 @@ public class LoginController {
     protected Localisator localisator;
     private String clientName;
     private Client client;
-    private Server server;
 
 
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
@@ -71,8 +70,6 @@ public class LoginController {
                 loginView.userNameValid.setVisible(true);
             } else {
                 clientName = loginView.userNameField.getText();
-                //server = new Server();
-                //server.start();
                 StartServer startServer = new StartServer();
                 startServer.start();
                 client = new Client("localhost", clientName);
@@ -82,7 +79,6 @@ public class LoginController {
                 lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 lobbyModel = new LobbyModel();
                 client.setLobbyController(lobbyController);
-                client.actualizeChat(new Message(1, "client", "Test", "-fx-fill: red"));
             }
         });
 

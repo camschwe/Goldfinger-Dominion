@@ -1,5 +1,9 @@
 package Client_Server.Server;
 
+/**
+ * Created by Benjamin Probst on 01.10.2017.
+ **/
+
 public class StartServer extends Thread {
     private ServerTest testServer;
 

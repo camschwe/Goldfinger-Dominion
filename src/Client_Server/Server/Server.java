@@ -12,7 +12,6 @@ import java.util.HashSet;
 
 /**
  * Created by Benjamin Probst on 01.10.2017.
- * last edit: 11.10.2017
  **/
 
 public class Server extends Thread{
