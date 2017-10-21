@@ -61,8 +61,8 @@ public class HandCardController {
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().remove(card.getCardName());
-                gameButton.getStyleClass().add(card.getCardName() + "Big");
+                gameButton.getStyleClass().remove("mediumButton");
+                gameButton.getStyleClass().add("bigButton");
             }
         });
     }
@@ -72,8 +72,8 @@ public class HandCardController {
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().remove(card.getCardName() + "Big");
-                gameButton.getStyleClass().add(card.getCardName());
+                gameButton.getStyleClass().remove("bigButton");
+                gameButton.getStyleClass().add("mediumButton");
             }
         });
     }

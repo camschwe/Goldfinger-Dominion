@@ -81,8 +81,8 @@ public class FieldCardController {
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                showButton.getStyleClass().clear();
-                showButton.getStyleClass().add(gameButton.getCard().getCardName()+"Big");
+                showButton.getStyleClass().remove("invisible");
+                showButton.getStyleClass().add(gameButton.getCard().getCardName());
             }
         });
     }
@@ -102,8 +102,10 @@ public class FieldCardController {
         gameButton.setOnAction(event -> {
             if(buyChecker(gameButton, player, card)){
                 buyUpdate(gameButton, player, card);
+                fieldCardsGlowingUpdate();
+                buttonAmountUpdate(gameButton);
                 }
-            fieldCardsGlowingUpdate();
+
         });
     }
 
@@ -148,10 +150,13 @@ public class FieldCardController {
             if(gameModel.getPlayer().isBuyPhase() &&
                     resourceButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
                 resourceButtons.get(i).getStyleClass().add("buttonOnAction");
-                System.out.println(resourceButtons.get(i).getStyleClass().toString());
-                                
+
             }
         }
+    }
+
+    public void buttonAmountUpdate(GameButton gameButton){
+        gameButton.setText(""+gameButton.getAmount());
     }
 
 
