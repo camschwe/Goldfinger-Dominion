@@ -40,9 +40,8 @@ public class GameController {
     public void putStapelUpdate(Player player, Button putStapelButton){
         if(player.getPutDeck().size() > 0) {
             putStapelButton.getStyleClass().clear();
+            putStapelButton.getStyleClass().add("mediumButton");
             putStapelButton.getStyleClass().add(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
-            System.out.println(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
-            System.out.println(putStapelButton.getStyleClass().toString());
         }else{putStapelButton.getStyleClass().add("trash");
         }
 
