@@ -15,16 +15,11 @@ public class GameModel {
     private ArrayList<Card> moneyCards;
     private ArrayList<Card> actionCards;
 
-
-
-
     public GameModel(int playerCount) {
 
         this.player = new Player();
 
-
         for(int i = 0; i < 3 ; i++) {
-
             Card estateHand = new Card("estate", 2,1);
             player.getDrawDeck().add(estateHand);
         }
@@ -55,15 +50,7 @@ public class GameModel {
         for(int i = 0; i < 10; i++){
             Card village = new Card("village", 3, 0 );
             actionCards.add(village);
-
-
         }
-
-
-
-
-
-
     }
 
     public int  getPlayerCount(){

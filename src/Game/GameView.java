@@ -163,11 +163,6 @@ public class GameView {
         chatPane.setBottom(chatWindow.getRoot());
 
 
-
-
-
-
-
         //Scene Initialisieren
         Scene scene = new Scene(root, 1920, 1080);
         gameStage.setScene(scene);

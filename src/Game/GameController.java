@@ -2,6 +2,7 @@ package Game;
 
 import Client_Server.Client.Client;
 import Localisation.Localisator;
+import javafx.application.Platform;
 
 /**
  * Created by camillo.schweizer on 21.10.2017.
@@ -25,5 +26,12 @@ public class GameController {
 
         handCardController = new HandCardController(gameView, localisator, gameModel);
         fieldCardController = new FieldCardController(gameView,localisator, gameModel, handCardController);
+
+        gameView.gameStage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
+
+
 }
