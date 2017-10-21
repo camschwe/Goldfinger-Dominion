@@ -151,6 +151,15 @@
     -fx-background-size: stretch;
 }
 
+.trash{
+    -fx-background-image: url('../Cards/trash.JPG');
+    -fx-pref-width: 150;
+    -fx-pref-height: 240;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-background-size: stretch;
+}
+
 
 .copper{
     -fx-background-image: url('../Cards/copper.JPG');

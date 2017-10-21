@@ -20,12 +20,12 @@ public class GameModel {
         this.player = new Player();
 
         for(int i = 0; i < 3 ; i++) {
-            Card estateHand = new Card("estate", 2,1);
+            Card estateHand = new Card("estate","money", 2,1);
             player.getDrawDeck().add(estateHand);
         }
 
         for(int i = 0; i< 7; i++) {
-            Card copperHand = new Card("copper", 0, 1);
+            Card copperHand = new Card("copper","money", 0, 1);
             player.getDrawDeck().add(copperHand);
         }
 
@@ -33,12 +33,12 @@ public class GameModel {
 
         player.draw(5);
 
-        Card copper = new Card("copper", 0, 1);
-        Card silver = new Card("silver", 3, 2);
-        Card gold = new Card("gold", 6, 3);
-        Card estate = new Card("estate", 2, 1 );
-        Card duchy = new Card("duchy", 5, 3);
-        Card province = new Card("province", 8, 6);
+        Card copper = new Card("copper","money", 0, 1);
+        Card silver = new Card("silver","money", 3, 2);
+        Card gold = new Card("gold","money", 6, 3);
+        Card estate = new Card("estate","point", 2, 1 );
+        Card duchy = new Card("duchy","point", 5, 3);
+        Card province = new Card("province","point", 8, 6);
 
         pointCards = new ArrayList<>();
         Collections.addAll(pointCards, province, duchy, estate);
@@ -48,10 +48,12 @@ public class GameModel {
         actionCards = new ArrayList<>();
 
         for(int i = 0; i < 10; i++){
-            Card village = new Card("village", 3, 0 );
+            Card village = new Card("village","action", 3, 0 );
             actionCards.add(village);
         }
     }
+
+
 
     public int  getPlayerCount(){
         return this.playerCount;

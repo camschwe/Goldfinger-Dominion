@@ -14,11 +14,13 @@ public class HandCardController {
     private GameView gameView;
     private Localisator localisator;
     private GameModel gameModel;
+    private GameController gameController;
 
-    public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel) {
+    public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel, GameController gameController) {
         this.gameView = gameView;
         this.localisator = localisator;
         this.gameModel = gameModel;
+        this.gameController = gameController;
 
         updateHandcardsView();
 
@@ -76,7 +78,12 @@ public class HandCardController {
         gameButton.setOnAction(event -> {
             if(player.isYourTurn()){
                 cardChecker(gameButton, card, player);
-            }
+                updateHandcardsView();
+                player.phaseChanger();
+                updateLabel();
+                gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
+                }
+
         });
     }
 
@@ -108,7 +115,6 @@ public class HandCardController {
         if(player.isBuyPhase()) {
             player.playMoneyCard(card);
             gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money") + ":\t" + player.getMoney());
-            updateHandcardsView();
         }
     }
 
@@ -116,7 +122,6 @@ public class HandCardController {
     public void villageUpdate(Player player, Card card){
         if(player.isActionPhase()) {
             player.village(card);
-            updateHandcardsView();
         }
     }
 

@@ -7,16 +7,21 @@ import Game.Player;
  */
 public class Card {
 
-    String cardName;
+    String cardName, type;
     int cost, value;
 
-    public Card(String cardName, int cost, int value) {
+    public Card(String cardName, String type, int cost, int value) {
         this.cost = cost;
+        this.type = type;
         this.cardName = cardName;
         this.value = value;
     }
 
+    public static Card cardCopy(Card card){
+        Card coppyCard = new Card(card.getCardName(),card.getType(), card.getCost(), card.getValue());
+        return coppyCard;
 
+    }
 
     public String getCardName() {
         return cardName;
@@ -40,5 +45,13 @@ public class Card {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

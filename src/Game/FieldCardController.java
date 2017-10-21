@@ -15,13 +15,15 @@ public class FieldCardController {
     private GameModel gameModel;
     private Localisator localisator;
     private HandCardController handCardController;
+    private GameController gameController;
 
 
-    public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel, HandCardController handCardController) {
+    public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel, HandCardController handCardController, GameController gameController) {
         this.gameView = gameView;
         this.gameModel = gameModel;
         this.localisator = localisator;
         this.handCardController = handCardController;
+        this.gameController = gameController;
 
         //TODO: ADD AMOUNT REFERRING PLAYER
         //Initialisierung der Geldkarten
@@ -30,7 +32,7 @@ public class FieldCardController {
             gameView.resourcePane.add(moneyButton, 1,i);
             addMouseExited(moneyButton, gameView.resourceButton);
             addMouseEntered(moneyButton, gameView.resourceButton);
-            addMouseKlickedMoney(moneyButton, gameModel.getPlayer(), moneyButton.getCard());
+            addMouseKlicked(moneyButton, gameModel.getPlayer(), moneyButton.getCard());
         }
 
         //TODO: ADD AMOUNT REFERRING PLAYER
@@ -40,7 +42,7 @@ public class FieldCardController {
             gameView.resourcePane.add(pointButton, 0,i);
             addMouseExited(pointButton, gameView.resourceButton);
             addMouseEntered(pointButton, gameView.resourceButton);
-            addMouseKlickedPoint(pointButton, gameModel.getPlayer(), pointButton.getCard());
+            addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
 
         //TODO: ADD AMOUNT REFERRING PLAYER
@@ -56,7 +58,7 @@ public class FieldCardController {
             gameView.actionPane.add(actionButton, column,row);
             addMouseExited(actionButton, gameView.actionButton);
             addMouseEntered(actionButton, gameView.actionButton);
-            addMouseKlickedAction(actionButton, gameModel.getPlayer(), actionButton.getCard());
+            addMouseKlicked(actionButton, gameModel.getPlayer(), actionButton.getCard());
             column ++;
         }
     }
@@ -84,41 +86,23 @@ public class FieldCardController {
 
     //TODO: ALLE 3 EVENTHÄNDLER ZUSAMMENLEGEN?
     //Eventhändler für Klick auf einen Aktionskarte auf dem Spielfeld
-    public void addMouseKlickedAction(GameButton gameButton, Player player, Card card){
-        gameButton.setOnAction(event -> {
-            buyChecker(gameButton, player, card);
-            if (buyChecker(gameButton, player, card)){
-                Card actionCard = new Card(card.getCardName(), card.getCost(), card.getValue());
-                player.buyCard(actionCard);
-                buyUpdateView(gameButton, player);
-            }
-        });
-    }
-
-    //Eventhändler für den Klick auf eine Geldkarte auf dem Spielfeld
-    public void addMouseKlickedMoney(GameButton gameButton, Player player, Card card){
+    public void addMouseKlicked(GameButton gameButton, Player player, Card card){
         gameButton.setOnAction(event -> {
             if (buyChecker(gameButton, player, card)){
-                Card moneyCard = new Card(card.getCardName(), card.getCost(), card.getValue());
-                player.buyCard(moneyCard);
+                Card cardCoppy = Card.cardCopy(card);
+                player.buyCard(cardCoppy);
                 buyUpdateView(gameButton, player);
-            }
-        });
-    }
-
-    //Eventhändler für Klick auf Punktekarte
-    //TODO: IMPLEMENTIEREN
-    public void addMouseKlickedPoint(GameButton gameButton, Player player, Card card){
-        gameButton.setOnAction(event -> {
-            if(buyChecker(gameButton, player, card));{
-                Card pointCard = new Card(card.getCardName(), card.getCost(), card.getValue());
-                player.buyCard(pointCard);
-                buyUpdateView(gameButton, player);
-                if(gameButton.getAmount() < 1)
+                gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
+                if(card.getCardName().equals("province") && gameButton.getAmount() < 1) {
                     gameView.stop();
+                }
             }
+
+
+
         });
     }
+
 
     //überprüft ob eine Karte gekauft werden kann
     public boolean buyChecker(GameButton gameButton, Player player, Card card) {
@@ -136,4 +120,7 @@ public class FieldCardController {
         handCardController.updateLabel();
         handCardController.updateHandcardsView();
     }
+
+
+
 }

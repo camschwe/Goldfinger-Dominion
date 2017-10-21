@@ -19,8 +19,8 @@ public class Player {
         this.putDeck = new ArrayList<>();
         this.drawDeck = new ArrayList<>();
         this.playDeck = new ArrayList<>();
-        this.actionPhase = true;
-        this.buyPhase = false;
+        this.actionPhase = false;
+        this.buyPhase = true;
         this.actions = 1;
         this.buys = 1;
         this.money = 0;
@@ -43,25 +43,26 @@ public class Player {
         }
         if(this.drawDeck.size() < cards){
             for(int i = this.drawDeck.size()-1 ; i>=0 ;i--){
-                this.handCards.add(this.drawDeck.get(0));
-                this.drawDeck.remove(0);
+                this.handCards.add(this.drawDeck.get(i));
+                this.drawDeck.remove(i);
                 cards--;
             }
             this.changeDecks(this.putDeck, this.drawDeck);
             Collections.shuffle(this.drawDeck);
         }
         for(int i = cards-1; i>= 0;i--){
-            this.handCards.add(this.drawDeck.get(0));
-            this.drawDeck.remove(0);
+            this.handCards.add(this.drawDeck.get(i));
+            this.drawDeck.remove(i);
         }
     }
 
     //Karten werden von einem Deck in ein anderes übernommen
     public void changeDecks (ArrayList<Card> removeArray,ArrayList<Card> addArray){
         for(int i = removeArray.size()-1; i>=0 ; i--){
-            addArray.add(removeArray.get(0));
-            removeArray.remove(0);
+            addArray.add(removeArray.get(i));
+            removeArray.remove(i);
         }
+
     }
 
     //Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die Karte aus der Hand
@@ -106,18 +107,17 @@ public class Player {
     }
 
     //Spielerlarten auf dem Feld sowie aus der Hand werden auf den Ablagestapel gelegt
-    public void dropAllCards(){
+    public void dropCards(){
         for(int i = this.handCards.size()-1; i >= 0;i--){
-            this.playDeck.add(this.handCards.get(0));
-            this.handCards.remove(0);
+            this.playDeck.add(this.handCards.get(i));
+            this.handCards.remove(i);
         }
         for(int i = this.playDeck.size()-1; i >= 0;i--){
-            this.putDeck.add(this.playDeck.get(0));
-            this.playDeck.remove(0);
+            this.putDeck.add(this.playDeck.get(i));
+            this.playDeck.remove(i);
         }
     }
 
-    //TODO: Change TO OTHER PLAYER
     //Schliesst die aktuelle Phase ab
     public void endPhase(){
         if(this.actionPhase) {
@@ -128,16 +128,40 @@ public class Player {
             }
     }
 
+    //TODO: Change TO OTHER PLAYER
     //Schliesst den aktuellen Zug Ab und zieht 5 neue Karten
     public void endTurn(){
         this.money = 0;
         this.buys = 1;
         this.actions = 1;
-        this.buyPhase = false;
-        this.actionPhase = true;
-        this.dropAllCards();
+
+        this.dropCards();
         this.draw(5);
+        this.phaseChanger();
+
     }
+
+    //überprüft ob sich eine Aktionskarte in der Hand befindet
+    public boolean handCardActionChecker(){
+        boolean checker = false;
+        for(int i = this.handCards.size()-1; i >= 0;i--){
+            if(this.handCards.get(i).getType().equals("action")){
+                checker = true;            }
+        }
+        return checker;
+    }
+
+    //überspringt die Aktionsphase, insofern keine Aktionskarte in der Hand
+    public void phaseChanger(){
+        if(this.handCardActionChecker()) {
+            this.buyPhase = false;
+            this.actionPhase = true;
+        }else{
+            this.actionPhase = false;
+            this.buyPhase = true;
+        }
+    }
+
 
     public ArrayList<Card> getPlayDeck() {
         return playDeck;

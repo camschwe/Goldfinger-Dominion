@@ -19,7 +19,7 @@ public class GameView {
     protected Stage gameStage;
     private Localisator localisator;
     private ChatWindow chatWindow;
-    public Button resourceButton, actionButton, phaseButton;
+    public Button resourceButton, actionButton, phaseButton,putStapelPlayer1;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
     public GridPane resourcePane, actionPane;
@@ -91,12 +91,12 @@ public class GameView {
         moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
         phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+
-                ":\t" +localisator.getResourceBundle().getString( "action"));
+                ":\t" +localisator.getResourceBundle().getString( "buy"));
         moneyLabel1.getStyleClass().add("resourceLabel");
         pointLabel1.getStyleClass().add("resourceLabel");
         phaseLabel1.getStyleClass().add("resourceLabel");
-        Button putStapelPlayer1 = new Button();
-        putStapelPlayer1.getStyleClass().add("village");
+        putStapelPlayer1 = new Button();
+        putStapelPlayer1.getStyleClass().add("trash");
         Button drawStapelPlayer1 = new Button();
         drawStapelPlayer1.getStyleClass().add("back1");
 
@@ -111,7 +111,7 @@ public class GameView {
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
         phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+
-                ":\t" +localisator.getResourceBundle().getString( "action"));
+                ":\t" +localisator.getResourceBundle().getString( "buy"));
         moneyLabel2.getStyleClass().add("resourceLabel");
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");
