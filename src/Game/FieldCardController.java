@@ -133,22 +133,23 @@ public class FieldCardController {
 
     //Aktualisiert den Glow Effekt
     public void fieldCardsGlowingUpdate(){
-        for(int i = 0; i<actionButtons.size(); i++){
-            if(gameModel.getPlayer().isBuyPhase() &&
-                    actionButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
+
+
+        for(int i = 0; i<actionButtons.size(); i++) {
+            actionButtons.get(i).getStyleClass().remove("buttonOnAction");
+            if (gameModel.getPlayer().isBuyPhase() &&
+                    actionButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()) {
                 actionButtons.get(i).getStyleClass().add("buttonOnAction");
-            }else{
-                actionButtons.get(i).getStyleClass().remove("buttonOnAction");
             }
         }
 
         for(int i = 0; i<resourceButtons.size(); i++){
+            resourceButtons.get(i).getStyleClass().remove("buttonOnAction");
             if(gameModel.getPlayer().isBuyPhase() &&
                     resourceButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
                 resourceButtons.get(i).getStyleClass().add("buttonOnAction");
-
-            }else{
-                resourceButtons.get(i).getStyleClass().remove("buttonOnAction");
+                System.out.println(resourceButtons.get(i).getStyleClass().toString());
+                                
             }
         }
     }
