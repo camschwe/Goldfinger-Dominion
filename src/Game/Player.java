@@ -7,6 +7,10 @@ import java.util.Collections;
  * Created by camillo.schweizer on 07.10.2017.
  */
 public class Player {
+
+    /**
+     * Spielerklassen mit Arrays für das GUI sowie Methoden für den Kauf und das ausspielen von Karten
+     */
     private ArrayList<Card> handCards;
     private ArrayList<Card> putDeck;
     private ArrayList<Card> drawDeck;
@@ -28,6 +32,10 @@ public class Player {
         this.yourTurn = true;
     }
 
+    /**
+     * Methoden für das ausspielen von Aktionskarten
+     */
+
     //Führt Aktionskarte Village aus
     public void village(Card card){
         this.draw(1);
@@ -37,6 +45,11 @@ public class Player {
             this.endPhase();
         }
     }
+
+    /**
+     * Methoden um die verschiedenen Arrays des Spielers zu managen. Beispielsweise für den Zug von einer beliebigen Anzahl
+     * von Spielkarten und wechselt den Ablagestapel mit dem Ziehstapel, wenn keine Karten mehr vorhanden sind
+     */
 
     //Zieht Anzahl angegebener Karten vom Nachziehstapel
     public void draw(int cards){
@@ -68,15 +81,6 @@ public class Player {
 
     }
 
-    //Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die Karte aus der Hand
-    public void playMoneyCard(Card card){
-        this.money += card.getValue();
-        this.addPlayCard(card);
-        if(this.buys < 1) {
-            this.endPhase();
-        }
-    }
-
     //Legt eine Handkarte auf den Ablagestapel
     public void dropCard(Card card) {
         this.changeCardPlace(card, this.handCards, this.putDeck);
@@ -101,16 +105,6 @@ public class Player {
         }
     }
 
-    //karte wird gekauft und auf den Spielstapel gelegt. Zudem wird der Geldbetrag vom Spieler abgebucht
-    public void buyCard(Card card){
-        this.putDeck.add(card);
-        this.money -= card.getCost();
-        this.buys -= 1;
-        if(this.buys < 1){
-            this.endPhase();
-        }
-    }
-
     //Spielerlarten auf dem Feld sowie aus der Hand werden auf den Ablagestapel gelegt
     public void dropCards(){
         for(int i = this.handCards.size()-1; i >= 0;i--){
@@ -122,6 +116,37 @@ public class Player {
             this.playDeck.remove(i);
         }
     }
+
+    /**
+     * Methode für das ausspielen einer Geldkarte
+     */
+
+    //Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die Karte aus der Hand
+    public void playMoneyCard(Card card){
+        this.money += card.getValue();
+        this.addPlayCard(card);
+        if(this.buys < 1) {
+            this.endPhase();
+        }
+    }
+
+    /**
+     * Methode für das kaufen einer Karte
+     */
+
+    //karte wird gekauft und auf den Spielstapel gelegt. Zudem wird der Geldbetrag vom Spieler abgebucht
+    public void buyCard(Card card){
+        this.putDeck.add(card);
+        this.money -= card.getCost();
+        this.buys -= 1;
+        if(this.buys < 1){
+            this.endPhase();
+        }
+    }
+
+    /**
+     * Methoden für das Zug- bzw Phasenmanagement
+     */
 
     //Schliesst die aktuelle Phase ab
     public void endPhase(){
@@ -143,17 +168,6 @@ public class Player {
         this.dropCards();
         this.draw(5);
         this.phaseChanger();
-
-    }
-
-    //überprüft ob sich eine Aktionskarte in der Hand befindet
-    public boolean handCardActionChecker(){
-        boolean checker = false;
-        for(int i = this.handCards.size()-1; i >= 0;i--){
-            if(this.handCards.get(i).getType().equals("action")){
-                checker = true;            }
-        }
-        return checker;
     }
 
     //überspringt die Aktionsphase, insofern keine Aktionskarte in der Hand
@@ -166,6 +180,22 @@ public class Player {
             this.buyPhase = true;
         }
     }
+
+    /**
+     * Supportmethode um die Handkarten zu überprüfen
+     */
+
+    //überprüft ob sich eine Aktionskarte in der Hand befindet
+    public boolean handCardActionChecker(){
+        boolean checker = false;
+        for(int i = this.handCards.size()-1; i >= 0;i--){
+            if(this.handCards.get(i).getType().equals("action")){
+                checker = true;            }
+        }
+        return checker;
+    }
+
+
 
 
     public ArrayList<Card> getPlayDeck() {

@@ -9,6 +9,11 @@ public class GameButton extends Button {
     Card card;
     int amount;
 
+    /**
+     * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style ahand
+     * vom Namen festgelegt
+     */
+
 
     public GameButton(Card card) {
         this.card = card;

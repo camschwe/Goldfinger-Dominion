@@ -10,6 +10,9 @@ import javafx.scene.input.MouseEvent;
  */
 public class HandCardController {
 
+    /**
+     * Controller für die Handkarten mit Initalisierung und Eventhändlern
+     */
 
     private GameView gameView;
     private Localisator localisator;
@@ -37,6 +40,10 @@ public class HandCardController {
         });
     }
 
+    /**
+     * Initialisierung der Handkarten sowie hinzufügen der Eventhändler
+     */
+
     //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
     //TODO: Aktualisierung am Zugende implementieren
     public void updateHandcardsView() {
@@ -55,6 +62,10 @@ public class HandCardController {
             glowingUpdateHandCards(player1Card, gameModel.getPlayer());
         }
     }
+
+    /**
+     * Eventhändler für Entered, Exited und Klicked
+     */
 
     //Action Event Handcards Mouse Entered
     public void addMouseEntered(GameButton gameButton, Card card){
@@ -92,6 +103,10 @@ public class HandCardController {
         });
     }
 
+    /**
+     * Supportmethoden für den Klickevent
+     */
+
     //Switch zur überprüfung der gedrückten Handkarte
     public void cardChecker(GameButton gameButton, Card card, Player player){
         String cardName = gameButton.getCard().getCardName();
@@ -114,7 +129,6 @@ public class HandCardController {
         }
     }
 
-
     //Führt das Update nach Klick auf eine Geldkarte durch
     public void moneyUpdate(Card card, Player player){
         if(player.isBuyPhase()) {
@@ -129,7 +143,10 @@ public class HandCardController {
         }
     }
 
-    //Spielerlabel werden aktualisiert
+
+    /**
+     * Methode um den Glow Effekt hinzuzufügen und wieder zu entfernen
+     */
 
 
     public void glowingUpdateHandCards(GameButton gameButton, Player player){

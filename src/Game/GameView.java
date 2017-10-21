@@ -17,6 +17,10 @@ import javafx.stage.Stage;
 public class GameView {
 
     protected Stage gameStage;
+
+    /**
+     * View für das Game mit der GameStage in 1080p - skalierbarkeit geplant auf andere Seitenverhältnisse
+     */
     private Localisator localisator;
     private ChatWindow chatWindow;
     public Button resourceButton, actionButton, phaseButton,putStapelPlayer1;
@@ -31,8 +35,9 @@ public class GameView {
         this.chatWindow = chatWindow;
 
 
-
-
+        /**
+         * Initialisierung der Container
+         */
 
         BorderPane root = new BorderPane();
         BorderPane midPane = new BorderPane();
@@ -53,6 +58,10 @@ public class GameView {
 
 
 
+        /**
+         * Verteilung der Container
+         */
+
 
         root.setCenter(midPane);
         root.setLeft(leftPane);
@@ -71,22 +80,39 @@ public class GameView {
         actionBorder.setCenter(actionPane);
 
 
-        phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
-        phaseButton.getStyleClass().add("klickButton");
-        rightMainPane.setBottom(phaseButton);
+
+
+        /**
+         * Pane mit Ressourcenkarten
+         */
 
         resourceButton = new Button();
         resourceButton.getStyleClass().add("bigButton");
         resourceButton.getStyleClass().add("invisible");
 
-
-
         resourceBorder.setRight(resourceButton);
-
-
         resourcePane.setHgap(20);
         resourcePane.setVgap(20);
         resourcePane.setPadding(new Insets(20, 20, 0, 20));
+
+        /**
+         * Chat, TextArea und PhaseButton
+         */
+
+        TextArea noteArea = new TextArea ();
+        noteArea.setPromptText("note");
+        noteArea.setEditable(false);
+        noteArea.getStyleClass().add("noteArea");
+        chatPane.setTop(noteArea);
+        chatPane.setBottom(chatWindow.getRoot());
+
+        phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
+        phaseButton.getStyleClass().add("klickButton");
+        rightMainPane.setBottom(phaseButton);
+
+        /**
+         * Label und Buttons Spieler 1
+         */
 
         Label playerLabel1 = new Label ( "Spieler 1");
         playerLabel1.getStyleClass().add("nameLabel");
@@ -114,6 +140,15 @@ public class GameView {
         player1CardBox.setSpacing(10);
         player1CardBox.setPadding(new Insets(0,0,10,20));
 
+        player1Box.setPadding((new Insets(20, 20, 20, 20)));
+        player1Box.setSpacing(20);
+        player1Box.setAlignment(Pos.BOTTOM_CENTER);
+
+
+        /**
+         * Label und Buttons Spieler 2
+         */
+
         Label playerLabel2 = new Label ("Spieler 2");
         playerLabel2.getStyleClass().add("nameLabel");
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
@@ -140,6 +175,21 @@ public class GameView {
         player2CardBox.setSpacing(10);
         player2CardBox.setPadding(new Insets(10,0,0,0));
 
+        //TODO: mit Array schöner gestalten
+        for(int i = 0; i<5; i++){
+            Button player2Card = new Button();
+            player2Card.getStyleClass().add("mediumButton");
+            player2Card.getStyleClass().add("back2");
+            player2Box.getChildren().add(player2Card);
+        }
+
+        player2Box.setPadding((new Insets(20, 20, 20, 20)));
+        player2Box.setSpacing(20);
+
+
+        /**
+         * Pane mit Aktionskarten
+         */
 
         //TODO: mit Array schöner gestalten
         actionButton = new Button();
@@ -152,32 +202,9 @@ public class GameView {
         actionPane.setPadding(new Insets(20, 20, 0, 0));
         actionPane.setAlignment(Pos.TOP_CENTER);
 
-
-
-
-        player1Box.setPadding((new Insets(20, 20, 20, 20)));
-        player1Box.setSpacing(20);
-        player1Box.setAlignment(Pos.BOTTOM_CENTER);
-
-
-        //TODO: mit Array schöner gestalten
-        for(int i = 0; i<5; i++){
-            Button player2Card = new Button();
-            player2Card.getStyleClass().add("mediumButton");
-            player2Card.getStyleClass().add("back2");
-            player2Box.getChildren().add(player2Card);
-        }
-
-        player2Box.setPadding((new Insets(20, 20, 20, 20)));
-        player2Box.setSpacing(20);
-
-        TextArea noteArea = new TextArea ();
-        noteArea.setPromptText("note");
-        noteArea.setEditable(false);
-        noteArea.getStyleClass().add("noteArea");
-        chatPane.setTop(noteArea);
-        chatPane.setBottom(chatWindow.getRoot());
-
+        /**
+         * Scene
+         */
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1920, 1080);

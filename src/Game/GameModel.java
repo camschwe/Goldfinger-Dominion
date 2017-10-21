@@ -9,6 +9,11 @@ import java.util.Collections;
  */
 public class GameModel {
 
+    /**
+     * Klasse zum Spiel mit allen globalen Parametern sowie Initialisierung der Kartenobjekte sowie der Arrays für
+     * die Feldkarten
+     */
+
     int playerCount;
     Player player;
     private ArrayList<Card> pointCards;
@@ -18,6 +23,12 @@ public class GameModel {
     public GameModel(int playerCount) {
 
         this.player = new Player();
+
+
+        /**
+         * Initialisierung der Kartenobjekte
+         */
+
 
         for(int i = 0; i < 3 ; i++) {
             Card estateHand = new Card("estate","point", 2,1);
