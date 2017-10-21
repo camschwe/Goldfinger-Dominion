@@ -18,15 +18,17 @@ public class GameView {
 
     protected Stage gameStage;
     private Localisator localisator;
+    private ChatWindow chatWindow;
     public Button resourceButton, actionButton, phaseButton;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
     public GridPane resourcePane, actionPane;
 
 
-    public GameView(Stage gameStage, Localisator localisator) {
+    public GameView(Stage gameStage, Localisator localisator, ChatWindow chatWindow) {
         this.gameStage = gameStage;
         this.localisator = localisator;
+        this.chatWindow = chatWindow;
 
 
 
@@ -43,7 +45,7 @@ public class GameView {
         GridPane player1Pane = new GridPane();
         GridPane player2Pane = new GridPane();
         actionPane = new GridPane();
-        GridPane chatPane = new GridPane();
+        BorderPane chatPane = new BorderPane();
         player1Box = new HBox();
         player2Box = new HBox();
         HBox player2CardBox = new HBox();
@@ -155,13 +157,11 @@ public class GameView {
         noteArea.setPromptText("note");
         noteArea.setEditable(false);
         noteArea.getStyleClass().add("noteArea");
-        chatPane.add(noteArea, 0,0);
+        chatPane.setTop(noteArea);
+        chatPane.setBottom(chatWindow.getRoot());
 
-        TextArea chatArea = new TextArea ();
-        chatArea.setPromptText("Chat");
-        chatArea.setEditable(false);
-        chatArea.getStyleClass().add("chatArea");
-        chatPane.add(chatArea,0,1);
+
+
 
 
 

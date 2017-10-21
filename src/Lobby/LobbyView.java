@@ -52,10 +52,6 @@ public class LobbyView {
         }
 
         gameLabel.getStyleClass().add("ipLabel");
-        //userLabel1.getStyleClass().add("userLabel");
-        //userLabel2.getStyleClass().add("userLabel");
-        //userLabel3.getStyleClass().add("userLabel");
-        //userLabel4.getStyleClass().add("userLabel");
         paricipateLabel.getStyleClass().add("userLabel");
 
         HBox topBox = new HBox();

@@ -32,14 +32,13 @@ public class LobbyController {
         this.localisator = localisator;
         this.client = client;
 
-        //client.setLobbyController(this);
 
         lobbyView.startButton.setOnAction(event -> {
 
             //TODO: Add player count
 
             Stage gameStage = new Stage();
-            gameView = new GameView(gameStage, localisator);
+            gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
             gameModel = new GameModel(2);
             handCardController = new HandCardController(gameView, localisator, gameModel);
             fieldCardController = new FieldCardController(gameView,localisator, gameModel, handCardController);
@@ -50,7 +49,7 @@ public class LobbyController {
             if (lobbyView.chatWindow.getTxtMessage().getText() == null || lobbyView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
             }else {
                 String text = lobbyView.chatWindow.getMessage();
-                Message message = new Message(1, client.getClientName(), text, client.getColor());
+                Message message = new Message(1, client.getClientName(), text, Client.getColor());
                 client.sendObject(message);
                 lobbyView.chatWindow.clearMessageField();
             }

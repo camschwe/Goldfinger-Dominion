@@ -15,10 +15,12 @@ public class HandCardController {
     private Localisator localisator;
     private GameModel gameModel;
 
+
     public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel) {
         this.gameView = gameView;
         this.localisator = localisator;
         this.gameModel = gameModel;
+
 
         updateHandcardsView();
 
@@ -27,6 +29,7 @@ public class HandCardController {
                 gameModel.getPlayer().endPhase();
                 updateHandcardsView();
                 updateLabel();
+
             }
 
         });
@@ -80,7 +83,9 @@ public class HandCardController {
     public void addMouseKlicked(GameButton gameButton, Card card, Player player){
         gameButton.setOnAction(event -> {
             if(player.isYourTurn()){
+
                 cardChecker(gameButton, card, player);
+
             }
         });
     }

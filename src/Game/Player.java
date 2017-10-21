@@ -38,6 +38,10 @@ public class Player {
 
     public void draw(int cards){
 
+        if(this.drawDeck.size() == 0){
+            this.changeDecks();
+        }
+
         if(this.drawDeck.size() < cards){
             for(int i = this.drawDeck.size()-1 ; i>=0 ;i--){
                 this.handCards.add(this.drawDeck.get(0));
@@ -53,9 +57,7 @@ public class Player {
             this.drawDeck.remove(0);
         }
 
-        if(this.drawDeck.size() == 0){
-            this.changeDecks();
-        }
+
 
     }
 
@@ -95,9 +97,6 @@ public class Player {
 
     public void buyCard(Card card){
 
-        System.out.println(card.getCardName());
-        System.out.println(card.getCost());
-        System.out.println(card.getValue());
         this.getPutDeck().add(card);
         this.setMoney(this.getMoney() - card.getCost());
         this.setBuys(this.getBuys() -1);
