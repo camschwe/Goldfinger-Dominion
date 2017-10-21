@@ -1,4 +1,8 @@
 
+.buttonOnAction {
+    -fx-effect: dropshadow(three-pass-box, #1874CD, 20, 0, 0, 0);
+}
+
 .nameLabel {
     -fx-text-fill: #FFFFFF;;
     -fx-font-size: 24Pt;
@@ -20,6 +24,8 @@
     -fx-max-height: 400px;
 
 }
+
+
 
 
 
@@ -57,16 +63,12 @@
     -fx-background-image: url('../Cards/silver_small.jpg');
     -fx-pref-width: 80;
     -fx-pref-height: 80;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 .goldSmall{
     -fx-background-image: url('../Cards/gold_small.jpg');
     -fx-pref-width: 80;
     -fx-pref-height: 80;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -74,8 +76,6 @@
     -fx-background-image: url('../Cards/province_small.jpg');
     -fx-pref-width: 80;
     -fx-pref-height: 80;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -83,8 +83,6 @@
     -fx-background-image: url('../Cards/duchy_small.jpg');
     -fx-pref-width: 80;
     -fx-pref-height: 80;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -92,8 +90,6 @@
     -fx-background-image: url('../Cards/estate.jpg');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -101,8 +97,6 @@
     -fx-background-image: url('../Cards/village.JPG');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -111,8 +105,6 @@
     -fx-background-image: url('../Cards/copper.JPG');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -120,16 +112,12 @@
     -fx-background-image: url('../Cards/silver.jpg');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 .goldBig{
     -fx-background-image: url('../Cards/gold.jpg');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -137,8 +125,6 @@
     -fx-background-image: url('../Cards/province.jpg');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -146,8 +132,6 @@
     -fx-background-image: url('../Cards/duchy.jpg');
     -fx-pref-width: 200;
     -fx-pref-height: 300;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -155,8 +139,6 @@
     -fx-background-image: url('../Cards/trash.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -165,8 +147,6 @@
     -fx-background-image: url('../Cards/copper.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -174,8 +154,6 @@
     -fx-background-image: url('../Cards/silver.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -185,8 +163,6 @@
      -fx-background-image: url('../Cards/gold.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
      -fx-background-size: stretch;
  }
 
@@ -196,8 +172,6 @@
     -fx-background-image: url('../Cards/province.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -207,8 +181,6 @@
     -fx-background-image: url('../Cards/duchy.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -217,8 +189,6 @@
     -fx-background-image: url('../Cards/estate.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -227,8 +197,6 @@
     -fx-background-image: url('../Cards/village.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -236,8 +204,6 @@
     -fx-background-image: url('../Cards/back1.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 
@@ -245,8 +211,6 @@
     -fx-background-image: url('../Cards/back2.JPG');
     -fx-pref-width: 150;
     -fx-pref-height: 240;
-    -fx-border-color: #000000;
-    -fx-border-width: 2px;
     -fx-background-size: stretch;
 }
 

@@ -33,6 +33,9 @@ public class Player {
         this.draw(1);
         this.actions += 1;
         this.addPlayCard(card);
+        if(this.actions < 1 || !this.handCardActionChecker()) {
+            this.endPhase();
+        }
     }
 
     //Zieht Anzahl angegebener Karten vom Nachziehstapel
@@ -69,6 +72,9 @@ public class Player {
     public void playMoneyCard(Card card){
         this.money += card.getValue();
         this.addPlayCard(card);
+        if(this.buys < 1) {
+            this.endPhase();
+        }
     }
 
     //Legt eine Handkarte auf den Ablagestapel
@@ -101,8 +107,7 @@ public class Player {
         this.money -= card.getCost();
         this.buys -= 1;
         if(this.buys < 1){
-            this.buyPhase = false;
-            this.endTurn();
+            this.endPhase();
         }
     }
 

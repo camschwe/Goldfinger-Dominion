@@ -20,7 +20,7 @@ public class GameModel {
         this.player = new Player();
 
         for(int i = 0; i < 3 ; i++) {
-            Card estateHand = new Card("estate","money", 2,1);
+            Card estateHand = new Card("estate","point", 2,1);
             player.getDrawDeck().add(estateHand);
         }
 

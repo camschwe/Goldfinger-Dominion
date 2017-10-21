@@ -15,12 +15,14 @@ public class HandCardController {
     private Localisator localisator;
     private GameModel gameModel;
     private GameController gameController;
+    private FieldCardController fieldCardController;
 
-    public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel, GameController gameController) {
+    public HandCardController(GameView gameView, Localisator localisator, GameModel gameModel, GameController gameController, FieldCardController fieldCardController) {
         this.gameView = gameView;
         this.localisator = localisator;
         this.gameModel = gameModel;
         this.gameController = gameController;
+        this.fieldCardController = fieldCardController;
 
         updateHandcardsView();
 
@@ -29,7 +31,8 @@ public class HandCardController {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
                 updateHandcardsView();
-                updateLabel();
+                gameController.updateLabel();
+                fieldCardController.fieldCardsGlowingUpdate();
             }
         });
     }
@@ -38,6 +41,7 @@ public class HandCardController {
     //TODO: Aktualisierung am Zugende implementieren
     public void updateHandcardsView() {
         gameView.player1Box.getChildren().clear();
+
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
             Player player = gameModel.getPlayer();
@@ -48,6 +52,7 @@ public class HandCardController {
             addMouseEntered(player1Card, card);
             addMouseExited(player1Card, card);
             addMouseKlicked(player1Card, card, player);
+            glowingUpdateHandCards(player1Card, gameModel.getPlayer());
         }
     }
 
@@ -56,7 +61,7 @@ public class HandCardController {
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().clear();
+                gameButton.getStyleClass().remove(card.getCardName());
                 gameButton.getStyleClass().add(card.getCardName() + "Big");
             }
         });
@@ -67,7 +72,7 @@ public class HandCardController {
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().clear();
+                gameButton.getStyleClass().remove(card.getCardName() + "Big");
                 gameButton.getStyleClass().add(card.getCardName());
             }
         });
@@ -78,11 +83,11 @@ public class HandCardController {
         gameButton.setOnAction(event -> {
             if(player.isYourTurn()){
                 cardChecker(gameButton, card, player);
-                updateHandcardsView();
-                player.phaseChanger();
-                updateLabel();
+                gameController.updateLabel();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
-                }
+                updateHandcardsView();
+                fieldCardController.fieldCardsGlowingUpdate();
+            }
 
         });
     }
@@ -114,7 +119,6 @@ public class HandCardController {
     public void moneyUpdate(Card card, Player player){
         if(player.isBuyPhase()) {
             player.playMoneyCard(card);
-            gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money") + ":\t" + player.getMoney());
         }
     }
 
@@ -126,14 +130,15 @@ public class HandCardController {
     }
 
     //Spielerlabel werden aktualisiert
-    public void updateLabel(){
-        Player player = gameModel.getPlayer();
-        gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
-        if(player.isActionPhase()){
-            gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
-                    ":\t" +localisator.getResourceBundle().getString( "action"));
-        }else{gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
-                ":\t" +localisator.getResourceBundle().getString( "buy"));
+
+
+    public void glowingUpdateHandCards(GameButton gameButton, Player player){
+        if(player.isActionPhase() && gameButton.getCard().getType().equals("action")){
+            gameButton.getStyleClass().add("buttonOnAction");
+        }
+
+        if(player.isBuyPhase() && gameButton.getCard().getType().equals("money")){
+            gameButton.getStyleClass().add("buttonOnAction");
         }
     }
 }

@@ -25,8 +25,9 @@ public class GameController {
         this.gameModel = gameModel;
         this.client = client;
 
-        handCardController = new HandCardController(gameView, localisator, gameModel, this);
-        fieldCardController = new FieldCardController(gameView,localisator, gameModel, handCardController, this);
+        fieldCardController = new FieldCardController(gameView,localisator, gameModel, this);
+
+
 
         gameView.gameStage.setOnCloseRequest(event -> {
             Platform.exit();
@@ -35,15 +36,28 @@ public class GameController {
     }
 
 
+
     public void putStapelUpdate(Player player, Button putStapelButton){
         if(player.getPutDeck().size() > 0) {
-            putStapelButton.getStyleClass().removeAll();
+            putStapelButton.getStyleClass().clear();
             putStapelButton.getStyleClass().add(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
-            System.out.println("changed to:"+ player.getPutDeck().get(player.getPutDeck().size()-1).getCardName() );
+            System.out.println(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
+            System.out.println(putStapelButton.getStyleClass().toString());
         }else{putStapelButton.getStyleClass().add("trash");
         }
 
 
+    }
+
+    public void updateLabel(){
+        Player player = gameModel.getPlayer();
+        gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
+        if(player.isActionPhase()){
+            gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
+                    ":\t" +localisator.getResourceBundle().getString( "action"));
+        }else{gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
+                ":\t" +localisator.getResourceBundle().getString( "buy"));
+        }
     }
 
 
