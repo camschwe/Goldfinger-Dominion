@@ -2,10 +2,7 @@ package Lobby;
 
 import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
-import Game.FieldCardController;
-import Game.HandCardController;
-import Game.GameModel;
-import Game.GameView;
+import Game.*;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
@@ -25,6 +22,7 @@ public class LobbyController {
     private FieldCardController fieldCardController;
     private GameModel gameModel;
     private Client client;
+    private GameController gameController;
 
     public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView, Localisator localisator, Client client) {
         this.lobbyModel = lobbyModel;
@@ -40,9 +38,10 @@ public class LobbyController {
             Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
             gameModel = new GameModel(2);
-            handCardController = new HandCardController(gameView, localisator, gameModel);
-            fieldCardController = new FieldCardController(gameView,localisator, gameModel, handCardController);
+            gameController = new GameController(gameView, localisator, gameModel, client);
+
             gameView.start();
+            lobbyView.stop();
         });
 
         lobbyView.chatWindow.getSendButton().setOnAction(event -> {

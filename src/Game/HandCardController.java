@@ -136,8 +136,10 @@ public class HandCardController {
         Player player = gameModel.getPlayer();
         gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
         if(player.isActionPhase()){
-            gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+ ":\t Action");
-        }else{gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+ ":\t Buy");
+            gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
+                    ":\t" +localisator.getResourceBundle().getString( "action"));
+        }else{gameView.phaseLabel1.setText(localisator.getResourceBundle().getString("phase")+
+                ":\t" +localisator.getResourceBundle().getString( "buy"));
 
         }
 

@@ -90,7 +90,8 @@ public class GameView {
         playerLabel1.getStyleClass().add("nameLabel");
         moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
-        phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        phaseLabel1 = new Label(localisator.getResourceBundle().getString("phase")+
+                ":\t" +localisator.getResourceBundle().getString( "action"));
         moneyLabel1.getStyleClass().add("resourceLabel");
         pointLabel1.getStyleClass().add("resourceLabel");
         phaseLabel1.getStyleClass().add("resourceLabel");
@@ -109,7 +110,8 @@ public class GameView {
         playerLabel2.getStyleClass().add("nameLabel");
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
-        phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+ ":\tAction");
+        phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+
+                ":\t" +localisator.getResourceBundle().getString( "action"));
         moneyLabel2.getStyleClass().add("resourceLabel");
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");

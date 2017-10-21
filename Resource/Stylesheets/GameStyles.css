@@ -20,15 +20,8 @@
     -fx-max-height: 400px;
 
 }
-.chatArea {
-    -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
-    -fx-font-size: 12Pt;
-    -fx-border-color: #000000;
-    -fx-max-width: 300px;
-    -fx-max-height: 600px;
 
-}
+
 
 .estateSmall{
     -fx-background-image: url('../Cards/estate_small.jpg');
