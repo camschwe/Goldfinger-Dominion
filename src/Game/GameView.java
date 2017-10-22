@@ -180,6 +180,8 @@ public class GameView {
         gameStage.hide();
     }
 
-
+    public ChatWindow getChatWindow() {
+        return chatWindow;
+    }
 }
 

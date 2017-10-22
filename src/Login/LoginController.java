@@ -45,14 +45,14 @@ public class LoginController {
                 Message benutzer = new Message(0, clientName, "login");
                 client.sendObject(benutzer);
                 while (!client.isChecked()){
-                    //Waiting until server response
-                    
+                    //Waiting until server response for username validation
                 }
                 if (client.isValid()) {
                     lobbyView = new LobbyView(primaryStage, localisator);
                     lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                     lobbyModel = new LobbyModel();
                     client.setLobbyController(lobbyController);
+                    client.actualizePlayers();
                 } else {
                     loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
                     loginView.userNameValid.setVisible(true);
@@ -77,6 +77,7 @@ public class LoginController {
                 lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 lobbyModel = new LobbyModel();
                 client.setLobbyController(lobbyController);
+                client.actualizePlayers();
             }
         });
 

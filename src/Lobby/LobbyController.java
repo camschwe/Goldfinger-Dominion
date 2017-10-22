@@ -30,7 +30,6 @@ public class LobbyController {
         this.localisator = localisator;
         this.client = client;
 
-
         lobbyView.startButton.setOnAction(event -> {
 
             //TODO: Add player count

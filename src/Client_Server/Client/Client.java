@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 /**
  * Created by Benjamin Probst on 01.10.2017.
- * last edit: 12.10.2017
  **/
 
 public class Client extends Thread {
@@ -59,11 +58,10 @@ public class Client extends Thread {
             Object o;
             try {
                 o = objInput.readObject();
-                doSomething(o);
+                handleObject(o);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //doSomething(o);
         }
     }
 
@@ -76,7 +74,7 @@ public class Client extends Thread {
         return this.clientName;
     }
 
-    public void doSomething(Object o){
+    public void handleObject(Object o){
         if (o instanceof Message){
             Message message = (Message) o;
             switch (message.getType()){
@@ -97,7 +95,7 @@ public class Client extends Thread {
                         case "add":
                             addPlayers(message);
                             break;
-                        case "end":
+                        case "actualize":
                             actualizePlayers();
                             reset = true;
                     }
@@ -108,6 +106,7 @@ public class Client extends Thread {
         }
     }
 
+    // die Clientseitige Spielerliste wird erstellt und aktualisiert
     private void addPlayers(Message message){
         if (reset) {
             players.clear();
@@ -117,55 +116,31 @@ public class Client extends Thread {
         System.out.println("Player added: " + message.getClientName());
     }
 
-    private void actualizePlayers() {
+    // Aktualisierung der Spielerliste in der LobbyView
+    public void actualizePlayers() {
         System.out.println("Start setting labels");
         int i = 0;
+
         if (actualController == 1){
             System.out.println("go");
-            //ArrayList<Label>  labels = lobbyController.getLobbyView().getPlayers();
-            for (javafx.scene.control.Label label : lobbyController.getLobbyView().getPlayers()){
-                if (i != -1) {
-                    if (players.get(i) != null && label.getText().equals("unknown")) {
-                        System.out.println("setting Labels");
-                        String name = players.get(i);
-                        System.out.println(name);
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                label.setText(name);
-                                label.setVisible(true);
-                            }
-                        });
-                    }
-                    if (i < players.size()-1){
-                        i++;
-                    }else {
-                        i = -1;
-                    }
-                }
+            for (String player: players){
+                final int iCopy = i;
+                Platform.runLater(() -> {
+                    lobbyController.getLobbyView().getPlayers().get(iCopy).setText(player);
+                    lobbyController.getLobbyView().getPlayers().get(iCopy).setVisible(true);
+                });
+                i++;
             }
         }
-        /**if (actualController == 2){
-            //ArrayList<Label>  labels = lobbyController.getLobbyView().getPlayers();
-            for (javafx.scene.control.Label label : handCardController.getLobbyView().getPlayers()){
-                if (players.get(i) != null) {
-                    label.setText(players.get(i));
-                    label.setVisible(true);
-                    i++;
-                }
-            }
-        }**/
-
         reset = true;
     }
 
+    // Aktualisieren der Chat Nachrichten
     public void actualizeChat(Message message) {
         if (actualController == 1){
-            //message = new Message(message.getType(), message.getClientName(), message.getMessage(), this.color);
-            //lobbyController.getLobbyView().getChatWindow().actualizeTextArea(message.getFullMessage());
             lobbyController.getLobbyView().getChatWindow().actualizeChatFlow(message);
         }else if (actualController == 2){
-            // gameController.getGameModel().actualizeChatWindow(message);
+            gameController.getGameView().getChatWindow().actualizeChatFlow(message);
         }
     }
 
@@ -181,6 +156,7 @@ public class Client extends Thread {
         checked = false;
     }
 
+    // Sendet ein Objekt an den Server
     public void sendObject(Object o){
         try {
             objOutput.writeObject(o);

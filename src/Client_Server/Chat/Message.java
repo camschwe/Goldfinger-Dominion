@@ -20,12 +20,14 @@ public class Message implements Serializable {
     private String clientName;
     private String color;
 
+    // Konstruktor
     public Message (int type,String clientName, String message){
         this.type = type;
         this.clientName = clientName;
         this.message = message;
     }
 
+    // Konstruktor mit Farbe
     public Message (int type,String clientName, String message, String color){
         this.type = type;
         this.clientName = clientName;
@@ -56,6 +58,6 @@ public class Message implements Serializable {
 
     @Override
     public String toString() {
-        return this.getMessage();
+        return ("Typ: " + this.type + ", Benutzer: " + this.clientName + ", Nachricht: " + this.getMessage() + ((color != null) ? " Farbe: " + this.color : "" ));
     }
 }

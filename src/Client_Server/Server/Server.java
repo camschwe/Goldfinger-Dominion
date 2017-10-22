@@ -64,20 +64,7 @@ public class Server extends Thread{
                             name = message.getClientName();
                             switch (message.getType()){
                                 case 0:
-                                    synchronized (players) {
-                                        if (!players.contains(message.getClientName())) {
-                                            players.add(name);
-                                            outputs.add(objOutput);
-                                            Message send = new Message(3, name, "valid", colors.get(0));
-                                            objOutput.writeObject(send);
-                                            sendPlayerList();
-                                            sendMessageToAll(new Message(3, name, "end"));
-                                            colors.remove(0);
-                                        }else {
-                                            Message send = new Message(3, name, "invalid");
-                                            objOutput.writeObject(send);
-                                        }
-                                    }
+                                    addPlayer(message);
                                     break;
 
                                 case 1:
@@ -85,6 +72,7 @@ public class Server extends Thread{
                                     break;
 
                                 case 2:
+                                    colors.add(message.getColor());
                                     removeClient();
                             }
                         }
@@ -109,17 +97,39 @@ public class Server extends Thread{
 
         }
 
+        // Hinzufügen des neuen Spielers
+        private void addPlayer(Message message) throws IOException {
+            synchronized (players) {
+                if (!players.contains(message.getClientName())) {
+                    players.add(name);
+                    outputs.add(objOutput);
+                    Message send = new Message(3, name, "valid", colors.get(0));
+                    objOutput.writeObject(send);
+                    sendPlayerList();
+                    sendMessageToAll(new Message(3, name, "actualize"));
+                    colors.remove(0);
+                }else {
+                    Message send = new Message(3, name, "invalid");
+                    objOutput.writeObject(send);
+                }
+            }
+        }
+
+        // Senden der Spielerliste an alle Spieler
         private void sendPlayerList() throws IOException {
             for (String name : players){
                 sendMessageToAll(new Message(3, name, "add"));
             }
         }
 
-        private void removeClient() {
+        // Wenn ein Client die Verbindung trennt, soll er auch aus der Liste entfernt werden
+        private void removeClient() throws IOException {
             players.remove(name);
             outputs.remove(objOutput);
+            sendPlayerList();
         }
 
+        // Übermitteln eines Objekts an alle Spieler
         private void sendToAll(Object o) throws IOException {
             for (ObjectOutputStream output : outputs){
                 if (output != null){
@@ -129,6 +139,7 @@ public class Server extends Thread{
             }
         }
 
+        // Übermitteln einer Message an alle Spieler
         private void sendMessageToAll(Message message) throws IOException {
             for (ObjectOutputStream output : outputs){
                 if (output != null){
