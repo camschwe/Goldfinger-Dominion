@@ -12,6 +12,10 @@ import javafx.scene.control.Button;
 
 public class GameController {
 
+    /**
+     * Hauptkontroller zur Steuerung der GameView mit Methoden zum GUI Update
+     */
+
     private GameView gameView;
     private Localisator localisator;
     private GameModel gameModel;
@@ -36,13 +40,15 @@ public class GameController {
     }
 
 
+    /**
+     * Methoden zum GUI Update
+     */
 
     public void putStapelUpdate(Player player, Button putStapelButton){
         if(player.getPutDeck().size() > 0) {
             putStapelButton.getStyleClass().clear();
+            putStapelButton.getStyleClass().add("mediumButton");
             putStapelButton.getStyleClass().add(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
-            System.out.println(player.getPutDeck().get(player.getPutDeck().size()-1).getCardName());
-            System.out.println(putStapelButton.getStyleClass().toString());
         }else{putStapelButton.getStyleClass().add("trash");
         }
 

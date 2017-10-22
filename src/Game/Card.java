@@ -7,6 +7,10 @@ import Game.Player;
  */
 public class Card {
 
+    /**
+     * Generiert einfache Kartenobjekte mit einem String für den Namen sowie dem Typen
+     */
+
     String cardName, type;
     int cost, value;
 

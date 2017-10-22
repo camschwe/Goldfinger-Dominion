@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class FieldCardController {
 
+    /**
+     * Controller für die Feldkarten mit Initalisierung und Eventhändlern
+     */
+
     private GameView gameView;
     private GameModel gameModel;
     private Localisator localisator;
@@ -32,6 +36,11 @@ public class FieldCardController {
         this.resourceButtons = new ArrayList<>();
 
         handCardController = new HandCardController(gameView, localisator, gameModel, gameController, this);
+
+        /**
+         * Jeweils eine Methode zur Initialisierung der Geld, Punkte und Aktionskarten auf dem Spielfeld anhand
+         * dem Array aus dem GameModel.Zudem Eventhändler für die Feldkarten sowie Methode für den Glow Effekt.
+         * */
 
         //TODO: ADD AMOUNT REFERRING PLAYER
         //Initialisierung der Geldkarten
@@ -75,14 +84,18 @@ public class FieldCardController {
         }
     }
 
+    /**
+     * Eventhändler für das GUI und Klick
+     */
+
     //fügt Effekt für Mouseover hizu
     //TODO: MIT TOOLTIP LöSEN
     public void addMouseEntered(GameButton gameButton, Button showButton){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                showButton.getStyleClass().clear();
-                showButton.getStyleClass().add(gameButton.getCard().getCardName()+"Big");
+                showButton.getStyleClass().remove("invisible");
+                showButton.getStyleClass().add(gameButton.getCard().getCardName());
             }
         });
     }
@@ -102,11 +115,17 @@ public class FieldCardController {
         gameButton.setOnAction(event -> {
             if(buyChecker(gameButton, player, card)){
                 buyUpdate(gameButton, player, card);
+                fieldCardsGlowingUpdate();
+                buttonAmountUpdate(gameButton);
                 }
-            fieldCardsGlowingUpdate();
+
         });
     }
 
+
+    /**
+     * Methoden für den Klickevent beziehungsweise Kauf einer Karte
+     */
 
     //überprüft ob eine Karte gekauft werden kann
     public boolean buyChecker(GameButton gameButton, Player player, Card card) {
@@ -128,12 +147,14 @@ public class FieldCardController {
         if(card.getCardName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();
         }
-
     }
+
+    /**
+     * Methode um den Glow Effekt hinzuzufügen und zu entfernen
+     */
 
     //Aktualisiert den Glow Effekt
     public void fieldCardsGlowingUpdate(){
-
 
         for(int i = 0; i<actionButtons.size(); i++) {
             actionButtons.get(i).getStyleClass().remove("buttonOnAction");
@@ -148,10 +169,13 @@ public class FieldCardController {
             if(gameModel.getPlayer().isBuyPhase() &&
                     resourceButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
                 resourceButtons.get(i).getStyleClass().add("buttonOnAction");
-                System.out.println(resourceButtons.get(i).getStyleClass().toString());
-                                
+
             }
         }
+    }
+
+    public void buttonAmountUpdate(GameButton gameButton){
+        gameButton.setText(""+gameButton.getAmount());
     }
 
 

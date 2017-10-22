@@ -10,6 +10,9 @@ import javafx.scene.input.MouseEvent;
  */
 public class HandCardController {
 
+    /**
+     * Controller für die Handkarten mit Initalisierung und Eventhändlern
+     */
 
     private GameView gameView;
     private Localisator localisator;
@@ -37,6 +40,10 @@ public class HandCardController {
         });
     }
 
+    /**
+     * Initialisierung der Handkarten sowie hinzufügen der Eventhändler
+     */
+
     //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
     //TODO: Aktualisierung am Zugende implementieren
     public void updateHandcardsView() {
@@ -56,13 +63,17 @@ public class HandCardController {
         }
     }
 
+    /**
+     * Eventhändler für Entered, Exited und Klicked
+     */
+
     //Action Event Handcards Mouse Entered
     public void addMouseEntered(GameButton gameButton, Card card){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().remove(card.getCardName());
-                gameButton.getStyleClass().add(card.getCardName() + "Big");
+                gameButton.getStyleClass().remove("mediumButton");
+                gameButton.getStyleClass().add("bigButton");
             }
         });
     }
@@ -72,8 +83,8 @@ public class HandCardController {
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                gameButton.getStyleClass().remove(card.getCardName() + "Big");
-                gameButton.getStyleClass().add(card.getCardName());
+                gameButton.getStyleClass().remove("bigButton");
+                gameButton.getStyleClass().add("mediumButton");
             }
         });
     }
@@ -91,6 +102,10 @@ public class HandCardController {
 
         });
     }
+
+    /**
+     * Supportmethoden für den Klickevent
+     */
 
     //Switch zur überprüfung der gedrückten Handkarte
     public void cardChecker(GameButton gameButton, Card card, Player player){
@@ -114,7 +129,6 @@ public class HandCardController {
         }
     }
 
-
     //Führt das Update nach Klick auf eine Geldkarte durch
     public void moneyUpdate(Card card, Player player){
         if(player.isBuyPhase()) {
@@ -129,7 +143,10 @@ public class HandCardController {
         }
     }
 
-    //Spielerlabel werden aktualisiert
+
+    /**
+     * Methode um den Glow Effekt hinzuzufügen und wieder zu entfernen
+     */
 
 
     public void glowingUpdateHandCards(GameButton gameButton, Player player){
