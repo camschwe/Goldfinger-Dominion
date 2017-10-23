@@ -153,37 +153,37 @@ public class HandCardController {
 
     //überprüft ob die Village Karte ausgespielt werden kann und startet die Methode
     public void villageUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.village(card);
         }
     }
 
     public void fairUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.fair(card);
         }
     }
 
     public void smithyUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.smithy(card);
         }
     }
 
     public void marketUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.market(card);
         }
     }
 
     public void laboratoryUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.laboratory(card);
         }
     }
 
     public void lumberjackUpdate(Player player, Card card){
-        if(player.isActionPhase()) {
+        if(player.isActionPhase() && player.getActions() > 0) {
             player.lumberjack(card);
         }
     }
@@ -195,7 +195,9 @@ public class HandCardController {
 
 
     public void glowingUpdateHandCards(GameButton gameButton, Player player){
-        if(player.isActionPhase() && gameButton.getCard().getType().equals("action")){
+        if(player.isActionPhase() &&
+                gameButton.getCard().getType().equals("action") &&
+                player.getActions() > 0){
             gameButton.getStyleClass().add("buttonOnAction");
         }
 

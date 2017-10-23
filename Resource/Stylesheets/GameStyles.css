@@ -56,8 +56,8 @@
 
 
 .bigButton{
-    -fx-pref-width: 200;
-    -fx-pref-height: 300;
+    -fx-min-width: 200;
+    -fx-min-height: 300;
     -fx-background-size: stretch;
     -fx-border-color: #FFFFFF;
     -fx-border-width: 2px;
