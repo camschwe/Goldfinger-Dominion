@@ -94,7 +94,8 @@ public class FieldCardController {
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                showButton.getStyleClass().remove("invisible");
+                showButton.getStyleClass().clear();
+                showButton.getStyleClass().add("bigButton");
                 showButton.getStyleClass().add(gameButton.getCard().getCardName());
             }
         });

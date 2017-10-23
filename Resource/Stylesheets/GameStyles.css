@@ -76,7 +76,6 @@
     -fx-background-image: url('../Cards/trash.JPG');
 }
 
-
 .copper{
     -fx-background-image: url('../Cards/copper.JPG');
 }
@@ -88,7 +87,6 @@
 .gold {
      -fx-background-image: url('../Cards/gold.JPG');
  }
-
 
 .province {
     -fx-background-image: url('../Cards/province.JPG');
@@ -106,6 +104,25 @@
     -fx-background-image: url('../Cards/village.JPG');
 }
 
+.fair{
+    -fx-background-image: url('../Cards/fair.JPG');
+}
+
+.smithy{
+    -fx-background-image: url('../Cards/smithy.JPG');
+}
+
+.market{
+    -fx-background-image: url('../Cards/market.JPG');
+}
+
+.laboratory{
+    -fx-background-image: url('../Cards/laboratory.JPG');
+}
+
+.lumberjack{
+    -fx-background-image: url('../Cards/lumberjack.JPG');
+}
 
 .copperSmall{
     -fx-background-image: url('../Cards/copper_small.JPG');
@@ -134,6 +151,26 @@
 
 .villageSmall {
     -fx-background-image: url('../Cards/village_small.JPG');
+}
+
+.fairSmall{
+    -fx-background-image: url('../Cards/fair_small.JPG');
+}
+
+.smithySmall{
+    -fx-background-image: url('../Cards/smithy_small.JPG');
+}
+
+.marketSmall{
+    -fx-background-image: url('../Cards/market_small.JPG');
+}
+
+.laboratorySmall{
+    -fx-background-image: url('../Cards/laboratory_small.JPG');
+}
+
+.lumberjackSmall{
+    -fx-background-image: url('../Cards/lumberjack_small.JPG');
 }
 
 .back1{

@@ -41,8 +41,46 @@ public class Player {
     public void village(Card card){
         this.draw(1);
         this.actions += 1;
+        this.actionSupport(card);
+
+    }
+
+    public void fair(Card card){
+        this.money += 2;
+        this.buys += 1;
+        this.actions += 1;
+        this.actionSupport(card);
+    }
+
+    public void smithy(Card card){
+        this.draw(3);
+        this.actionSupport(card);
+        this.actions -= 1;
+    }
+
+    public void market(Card card){
+        this.draw(1);
+        this.actions +=1;
+        this.money +=1;
+        this.actionSupport(card);
+    }
+
+    public void laboratory(Card card){
+        this.draw(2);
+        this.actionSupport(card);
+    }
+
+    public void lumberjack(Card card){
+        this.money += 2;
+        this.buys += 1;
+        this.actions -= 1;
+        this.actionSupport(card);
+    }
+
+
+    public void actionSupport(Card card) {
         this.addPlayCard(card);
-        if(this.actions < 1 || !this.handCardActionChecker()) {
+        if (this.actions < 1 || !this.handCardActionChecker()) {
             this.endPhase();
         }
     }

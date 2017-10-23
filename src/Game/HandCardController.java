@@ -124,6 +124,21 @@ public class HandCardController {
             case "village":
                 villageUpdate(player, card);
                 break;
+            case "fair":
+                fairUpdate(player, card);
+                break;
+            case "smithy":
+                smithyUpdate(player, card);
+                break;
+            case "market":
+                marketUpdate(player, card);
+                break;
+            case "laboratory":
+                laboratoryUpdate(player, card);
+                break;
+            case "lumberjack":
+                lumberjackUpdate(player, card);
+                break;
             default:
                 break;
         }
@@ -140,6 +155,36 @@ public class HandCardController {
     public void villageUpdate(Player player, Card card){
         if(player.isActionPhase()) {
             player.village(card);
+        }
+    }
+
+    public void fairUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.fair(card);
+        }
+    }
+
+    public void smithyUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.smithy(card);
+        }
+    }
+
+    public void marketUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.market(card);
+        }
+    }
+
+    public void laboratoryUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.laboratory(card);
+        }
+    }
+
+    public void lumberjackUpdate(Player player, Card card){
+        if(player.isActionPhase()) {
+            player.lumberjack(card);
         }
     }
 

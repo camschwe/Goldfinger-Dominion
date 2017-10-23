@@ -15,7 +15,8 @@ public class GameModel {
      */
 
     int playerCount;
-    Player player;
+    private Player player;
+    private int turn;
     private ArrayList<Card> pointCards;
     private ArrayList<Card> moneyCards;
     private ArrayList<Card> actionCards;
@@ -24,6 +25,7 @@ public class GameModel {
 
         //TODO: Correct with hash set
         this.player = new Player(1);
+        this.turn = 1;
 
 
         /**
@@ -61,10 +63,26 @@ public class GameModel {
 
         actionCards = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 5; i++){
             Card village = new Card("village","action", 3, 0 );
             actionCards.add(village);
         }
+
+        Card fair = new Card("fair","action", 5, 0 );
+        actionCards.add(fair);
+
+        Card smithy = new Card("smithy","action", 4, 0);
+        actionCards.add(smithy);
+
+        Card market = new Card("market","action", 5, 0);
+        actionCards.add(market);
+
+        Card laboratory = new Card("laboratory","action", 5, 0);
+        actionCards.add(laboratory);
+
+        Card lumberjack = new Card("lumberjack","action", 3, 0);
+        actionCards.add(lumberjack);
+
     }
 
 
@@ -108,5 +126,13 @@ public class GameModel {
 
     public void setActionCards(ArrayList<Card> actionCards) {
         this.actionCards = actionCards;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }
