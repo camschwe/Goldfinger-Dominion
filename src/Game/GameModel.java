@@ -22,13 +22,13 @@ public class GameModel {
 
     public GameModel(int playerCount) {
 
-        this.player = new Player();
+        //TODO: Correct with hash set
+        this.player = new Player(1);
 
 
         /**
-         * Initialisierung der Kartenobjekte
+         * Initialisierung der Kartenobjekte für das Spielerdeck
          */
-
 
         for(int i = 0; i < 3 ; i++) {
             Card estateHand = new Card("estate","point", 2,1);
@@ -41,8 +41,11 @@ public class GameModel {
         }
 
         Collections.shuffle(player.getDrawDeck());
-
         player.draw(5);
+
+        /**
+         * Initialisierung der Kartenobjekte für das Spielfeld
+         */
 
         Card copper = new Card("copper","money", 0, 1);
         Card silver = new Card("silver","money", 3, 2);

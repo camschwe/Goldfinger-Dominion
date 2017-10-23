@@ -16,9 +16,10 @@ public class Player {
     private ArrayList<Card> drawDeck;
     private ArrayList<Card> playDeck;
     private boolean yourTurn, actionPhase, buyPhase;
-    private int actions, buys, money, points;
+    private int playerNumber, actions, buys, money, points;
 
-    public Player() {
+    public Player(int playerNumber) {
+        this.playerNumber = playerNumber;
         this.handCards = new ArrayList<>();
         this.putDeck = new ArrayList<>();
         this.drawDeck = new ArrayList<>();
