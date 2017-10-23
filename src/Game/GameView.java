@@ -7,8 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +29,10 @@ public class GameView {
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
     public GridPane resourcePane, actionPane;
+    protected TextFlow noteFlow;
+    public String newLine;
+    protected ScrollPane scrollPane;
+
 
 
     public GameView(Stage gameStage, Localisator localisator, ChatWindow chatWindow) {
@@ -50,11 +56,11 @@ public class GameView {
         GridPane player1Pane = new GridPane();
         GridPane player2Pane = new GridPane();
         actionPane = new GridPane();
-        BorderPane chatPane = new BorderPane();
         player1Box = new HBox();
         player2Box = new HBox();
         HBox player2CardBox = new HBox();
         HBox player1CardBox = new HBox();
+        VBox chatBox = new VBox();
 
 
 
@@ -75,7 +81,7 @@ public class GameView {
         midPane.setBottom(player1Box);
         rightPane.setCenter(player2Pane);
         rightPane.setTop(player2CardBox);
-        rightMainPane.setRight(chatPane);
+        rightMainPane.setRight(chatBox);
         resourceBorder.setCenter(resourcePane);
         actionBorder.setCenter(actionPane);
 
@@ -99,12 +105,20 @@ public class GameView {
          * Chat, TextArea und PhaseButton
          */
 
-        TextArea noteArea = new TextArea ();
-        noteArea.setPromptText("note");
-        noteArea.setEditable(false);
-        noteArea.getStyleClass().add("noteArea");
-        chatPane.setTop(noteArea);
-        chatPane.setBottom(chatWindow.getRoot());
+        noteFlow = new TextFlow();
+
+        newLine = System.getProperty("line.separator");
+        scrollPane = new ScrollPane();
+        scrollPane.setContent(noteFlow);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.vvalueProperty().bind(noteFlow.heightProperty());
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setPrefHeight(600);
+        chatBox.getChildren().addAll(scrollPane, chatWindow.getRoot());
+        chatWindow.getVBox().setPadding(new Insets(0, 0, 0, 0));
+        chatBox.setPadding(new Insets(20, 0, 0, 20));
+        chatBox.setSpacing(20);
 
         phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
         phaseButton.getStyleClass().add("klickButton");
@@ -199,7 +213,7 @@ public class GameView {
 
         actionPane.setHgap(20);
         actionPane.setVgap(20);
-        actionPane.setPadding(new Insets(20, 20, 0, 0));
+        actionPane.setPadding(new Insets(150, 20, 0, 0));
         actionPane.setAlignment(Pos.TOP_CENTER);
 
         /**

@@ -96,7 +96,7 @@ public class FieldCardController {
             public void handle(MouseEvent mouseEvent) {
                 showButton.getStyleClass().clear();
                 showButton.getStyleClass().add("bigButton");
-                showButton.getStyleClass().add(gameButton.getCard().getCardName());
+                showButton.getStyleClass().add(gameButton.getCard().getName());
             }
         });
     }
@@ -118,6 +118,7 @@ public class FieldCardController {
                 buyUpdate(gameButton, player, card);
                 fieldCardsGlowingUpdate();
                 buttonAmountUpdate(gameButton);
+                gameController.noteFlowUpdate( card, player, 1);
                 }
 
         });
@@ -145,7 +146,7 @@ public class FieldCardController {
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
         gameController.updateLabel();
         handCardController.updateHandcardsView();
-        if(card.getCardName().equals("province") && gameButton.getAmount() < 1) {
+        if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();
         }
     }

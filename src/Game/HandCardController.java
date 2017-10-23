@@ -49,17 +49,16 @@ public class HandCardController {
     public void updateHandcardsView() {
         gameView.player1Box.getChildren().clear();
 
-
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
             Player player = gameModel.getPlayer();
             Card card = player.getHandCards().get(i);
 
-            GameButton player1Card = new GameButton(card);
-            gameView.player1Box.getChildren().add(player1Card);
-            addMouseEntered(player1Card, card);
-            addMouseExited(player1Card, card);
-            addMouseKlicked(player1Card, card, player);
-            glowingUpdateHandCards(player1Card, gameModel.getPlayer());
+            GameButton gameButton = new GameButton(card);
+            gameView.player1Box.getChildren().add(gameButton);
+            addMouseEntered(gameButton, card);
+            addMouseExited(gameButton, card);
+            addMouseKlicked(gameButton, card, player);
+            glowingUpdateHandCards(gameButton, card, player);
         }
     }
 
@@ -93,116 +92,81 @@ public class HandCardController {
     public void addMouseKlicked(GameButton gameButton, Card card, Player player){
         gameButton.setOnAction(event -> {
             if(player.isYourTurn()){
-                cardChecker(gameButton, card, player);
+                cardSwitch(card, player);
+                gameController.noteFlowUpdate(card, player, 0);
                 gameController.updateLabel();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
                 fieldCardController.fieldCardsGlowingUpdate();
             }
-
         });
     }
 
     /**
-     * Supportmethoden für den Klickevent
+     * Klickevent für Geld- und Aktionskarten
      */
 
     //Switch zur überprüfung der gedrückten Handkarte
-    public void cardChecker(GameButton gameButton, Card card, Player player){
-        String cardName = gameButton.getCard().getCardName();
+    public void cardSwitch(Card card, Player player){
+        String cardName = "!Valid";
+
+        if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
+            cardName = card.getName();
+        }
 
         switch (cardName) {
             case "copper":
-                moneyUpdate(card, player);
+                player.playMoneyCard(card);
                 break;
             case "silver":
-                moneyUpdate(card, player);
+                player.playMoneyCard(card);
                 break;
             case "gold":
-                moneyUpdate(card, player);
+                player.playMoneyCard(card);
                 break;
             case "village":
-                villageUpdate(player, card);
+                player.village(card);
                 break;
             case "fair":
-                fairUpdate(player, card);
+                player.fair(card);
                 break;
             case "smithy":
-                smithyUpdate(player, card);
+                player.smithy(card);
                 break;
             case "market":
-                marketUpdate(player, card);
+                player.market(card);
                 break;
             case "laboratory":
-                laboratoryUpdate(player, card);
+                player.laboratory(card);
                 break;
             case "lumberjack":
-                lumberjackUpdate(player, card);
+                player.lumberjack(card);
                 break;
             default:
                 break;
         }
     }
 
-    //Führt das Update nach Klick auf eine Geldkarte durch
-    public void moneyUpdate(Card card, Player player){
-        if(player.isBuyPhase()) {
-            player.playMoneyCard(card);
-        }
-    }
-
-    //überprüft ob die Village Karte ausgespielt werden kann und startet die Methode
-    public void villageUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.village(card);
-        }
-    }
-
-    public void fairUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.fair(card);
-        }
-    }
-
-    public void smithyUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.smithy(card);
-        }
-    }
-
-    public void marketUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.market(card);
-        }
-    }
-
-    public void laboratoryUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.laboratory(card);
-        }
-    }
-
-    public void lumberjackUpdate(Player player, Card card){
-        if(player.isActionPhase() && player.getActions() > 0) {
-            player.lumberjack(card);
-        }
-    }
-
 
     /**
-     * Methode um den Glow Effekt hinzuzufügen und wieder zu entfernen
+     * Glow Effekt hinzuzufügen und wieder zu entfernen
      */
 
-
-    public void glowingUpdateHandCards(GameButton gameButton, Player player){
-        if(player.isActionPhase() &&
-                gameButton.getCard().getType().equals("action") &&
-                player.getActions() > 0){
+    public void glowingUpdateHandCards(GameButton gameButton, Card card, Player player){
+        if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
             gameButton.getStyleClass().add("buttonOnAction");
         }
+    }
 
-        if(player.isBuyPhase() && gameButton.getCard().getType().equals("money")){
-            gameButton.getStyleClass().add("buttonOnAction");
-        }
+    public boolean actionChecker(Card card, Player player){
+        return card.getType().equals("action") &&
+                player.isActionPhase() &&
+                player.getActions() > 0;
+
+    }
+
+    public boolean moneyChecker(Card card, Player player){
+        return card.getType().equals("money")
+                && player.isBuyPhase();
     }
 }

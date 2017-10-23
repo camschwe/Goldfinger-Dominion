@@ -42,8 +42,8 @@ public class LoginController {
                     client = new Client("localhost", clientName);
                     client.start();
                 }
-                Message benutzer = new Message(0, clientName, "login");
-                client.sendObject(benutzer);
+                Message user = new Message(0, clientName, "login");
+                client.sendObject(user);
                 while (!client.isChecked()){
                     //Waiting until server response for username validation
                 }

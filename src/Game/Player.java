@@ -54,8 +54,8 @@ public class Player {
 
     public void smithy(Card card){
         this.draw(3);
-        this.actionSupport(card);
         this.actions -= 1;
+        this.actionSupport(card);
     }
 
     public void market(Card card){
@@ -117,7 +117,6 @@ public class Player {
             addArray.add(removeArray.get(i));
             removeArray.remove(i);
         }
-
     }
 
     //Legt eine Handkarte auf den Ablagestapel
@@ -233,8 +232,6 @@ public class Player {
         }
         return checker;
     }
-
-
 
 
     public ArrayList<Card> getPlayDeck() {

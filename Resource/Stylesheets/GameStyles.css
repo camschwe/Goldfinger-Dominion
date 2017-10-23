@@ -1,6 +1,6 @@
 
 .buttonOnAction {
-    -fx-effect: dropshadow(three-pass-box, #1874CD, 20, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, #FFFF00, 30, 0, 0, 0);
 }
 
 .klickButton {
@@ -34,15 +34,16 @@
 
 }
 
-.noteArea {
-    -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
+.noteText {
+    -fx-max-width: 250px;
+    -fx-max-height: 600px;
+    -fx-border-color: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-border-color: #000000;
-    -fx-max-width: 300px;
-    -fx-max-height: 400px;
+    -fx-border-width: 2px;
 
 }
+
 
 .smallButton{
     -fx-pref-width: 80;

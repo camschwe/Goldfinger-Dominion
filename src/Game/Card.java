@@ -1,7 +1,5 @@
 package Game;
 
-import Game.Player;
-
 /**
  * Created by camillo.schweizer on 13.10.2017.
  */
@@ -22,12 +20,12 @@ public class Card {
     }
 
     public static Card cardCopy(Card card){
-        Card coppyCard = new Card(card.getCardName(),card.getType(), card.getCost(), card.getValue());
+        Card coppyCard = new Card(card.getName(),card.getType(), card.getCost(), card.getValue());
         return coppyCard;
 
     }
 
-    public String getCardName() {
+    public String getName() {
         return cardName;
     }
 

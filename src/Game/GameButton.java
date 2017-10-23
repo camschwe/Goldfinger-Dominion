@@ -18,7 +18,7 @@ public class GameButton extends Button {
     public GameButton(Card card) {
         this.card = card;
         this.getStyleClass().add("mediumButton");
-        this.getStyleClass().add(card.getCardName());
+        this.getStyleClass().add(card.getName());
 
     }
 
@@ -26,7 +26,7 @@ public class GameButton extends Button {
         this.card = card;
         this.amount = amount;
         this.getStyleClass().add("smallButton");
-        this.getStyleClass().add(card.getCardName()+"Small");
+        this.getStyleClass().add(card.getName()+"Small");
         this.setText(""+amount);
     }
 
