@@ -47,8 +47,8 @@
 
 
 .smallButton{
-    -fx-pref-width: 80;
-    -fx-pref-height: 80;
+    -fx-pref-width: 120;
+    -fx-pref-height: 120;
     -fx-border-width: 2px;
     -fx-background-size: stretch;
     -fx-padding: 0px 0px 55px 55px;

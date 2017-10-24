@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Container;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -97,6 +98,7 @@ public class HandCardController {
                 gameController.updateLabel();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
+                gameController.getClient().sendObject(new Container(player, gameButton, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
             }
         });

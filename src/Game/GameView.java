@@ -25,7 +25,7 @@ public class GameView {
      */
     private Localisator localisator;
     private ChatWindow chatWindow;
-    public Button resourceButton, actionButton, phaseButton,putStapelPlayer1;
+    public Button actionButton, phaseButton,putStapelPlayer1;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1;
     public GridPane resourcePane, actionPane;
@@ -92,11 +92,8 @@ public class GameView {
          * Pane mit Ressourcenkarten
          */
 
-        resourceButton = new Button();
-        resourceButton.getStyleClass().add("bigButton");
-        resourceButton.getStyleClass().add("invisible");
 
-        resourceBorder.setRight(resourceButton);
+
         resourcePane.setHgap(20);
         resourcePane.setVgap(20);
         resourcePane.setPadding(new Insets(20, 20, 0, 20));
@@ -148,7 +145,7 @@ public class GameView {
         player1Pane.add(moneyLabel1, 0,1);
         player1Pane.add(pointLabel1, 0,2);
         player1Pane.add(phaseLabel1, 0,3);
-        player1Pane.setPadding(new Insets(150,0,0,20));
+        player1Pane.setPadding(new Insets(50,0,0,20));
         player1Pane.setVgap(5);
         player1CardBox.getChildren().addAll(putStapelPlayer1, drawStapelPlayer1);
         player1CardBox.setSpacing(10);
@@ -197,7 +194,7 @@ public class GameView {
             player2Box.getChildren().add(player2Card);
         }
 
-        player2Box.setPadding((new Insets(20, 20, 20, 20)));
+        player2Box.setPadding((new Insets(20, 20, 20, 80)));
         player2Box.setSpacing(20);
 
 
@@ -210,10 +207,11 @@ public class GameView {
         actionButton.getStyleClass().add("bigButton");
         actionButton.getStyleClass().add("invisible");
         actionBorder.setLeft(actionButton);
+        actionBorder.setPadding(new Insets(100,0,0,0));
 
         actionPane.setHgap(20);
         actionPane.setVgap(20);
-        actionPane.setPadding(new Insets(150, 20, 0, 0));
+        actionPane.setPadding(new Insets(25, 0, 0, 0));
         actionPane.setAlignment(Pos.TOP_CENTER);
 
         /**

@@ -49,8 +49,8 @@ public class FieldCardController {
             GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), 30);
             gameView.resourcePane.add(moneyButton, 1,i);
             resourceButtons.add(moneyButton);
-            addMouseExited(moneyButton, gameView.resourceButton);
-            addMouseEntered(moneyButton, gameView.resourceButton);
+            addMouseExited(moneyButton, gameView.actionButton);
+            addMouseEntered(moneyButton, gameView.actionButton);
             addMouseKlicked(moneyButton, gameModel.getPlayer(), moneyButton.getCard());
 
         }
@@ -61,8 +61,8 @@ public class FieldCardController {
             GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), 8);
             gameView.resourcePane.add(pointButton, 0,i);
             resourceButtons.add(pointButton);
-            addMouseExited(pointButton, gameView.resourceButton);
-            addMouseEntered(pointButton, gameView.resourceButton);
+            addMouseExited(pointButton, gameView.actionButton);
+            addMouseEntered(pointButton, gameView.actionButton);
             addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
 
