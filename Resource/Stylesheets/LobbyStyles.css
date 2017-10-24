@@ -1,30 +1,53 @@
 
 .button {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-padding: 14px 46px;
-    -fx-border-color: #000000;
+    -fx-padding: 10px 0px;
+    -fx-border-color: #FFFFFF;
+    -fx-min-width: 200px;
 }
+
+.button:hover{
+    -fx-background-color: black;
+}
+
+.chatButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12Pt;
+    -fx-padding: 10px 0px;
+    -fx-border-color: #FFFFFF;
+    -fx-min-width: 100px;
+}
+
+.chatButton:hover{
+    -fx-background-color: black;
+}
+
 
 .userLabel {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 12Pt;
-
+    -fx-border-color: #FFFFFF;
+    -fx-pref-width: 150;
+    -fx-padding: 0px 0px 0px 10px
 }
-.chatWindow{
-    -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
+
+.participateLabel {
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 12Pt;
-    -fx-border-color: #000000;
-    -fx-max-width: 400px;
-    -fx-max-height: 400px;
-
+    -fx-padding: 14px 20px;
+    -fx-border-color: #FFFFFF;
+    -fx-pref-width: 150;
 }
+
 
 .ipLabel {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 36Pt;
     -fx-padding: 20px 36px;
+    -fx-border-color: #FFFFFF;
 
 
 }
@@ -32,11 +55,9 @@
 .text-field {
     -fx-font-size: 12Pt;
     -fx-border-color: #000000;
+    -fx-padding: 10px 60px;
 }
 
-.button:hover{
-    -fx-background-color: #1874CD;
-}
 
 .root {
     -fx-background-image: url("../Backgrounds/scroll.jpg");

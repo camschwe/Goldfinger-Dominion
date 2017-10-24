@@ -34,8 +34,9 @@ public class LoginController {
         loginView.joinButton.setOnAction(event -> {
 
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
-                loginView.userNameValid.setText(localisator.getResourceBundle().getString("UsernameNeeded"));
-                loginView.userNameValid.setVisible(true);
+                loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
+                loginView.userNameField.getStyleClass().clear();
+                loginView.userNameField.getStyleClass().add("userNameNeeded");
             } else {
                 clientName = loginView.userNameField.getText();
                 if (client == null){
@@ -54,8 +55,9 @@ public class LoginController {
                     client.setLobbyController(lobbyController);
                     client.actualizePlayers();
                 } else {
-                    loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
-                    loginView.userNameValid.setVisible(true);
+                    loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("validUsername"));
+                    loginView.userNameField.getStyleClass().clear();
+                    loginView.userNameField.getStyleClass().add("text-field");
                     client.resetChecked();
                 }
             }
@@ -64,8 +66,9 @@ public class LoginController {
         loginView.hostButton.setOnAction(event -> {
 
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()) {
-                loginView.userNameValid.setText(localisator.getResourceBundle().getString("UsernameNeeded"));
-                loginView.userNameValid.setVisible(true);
+                loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
+                loginView.userNameField.getStyleClass().clear();
+                loginView.userNameField.getStyleClass().add("userNameNeeded");
             } else {
                 clientName = loginView.userNameField.getText();
                 StartServer startServer = new StartServer();
@@ -111,8 +114,9 @@ public class LoginController {
             loginView.hostButton.setText(localisator.getResourceBundle().getString("hosting"));
             loginView.joinButton.setText(localisator.getResourceBundle().getString("join"));
             loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
+            loginView.userNameField.getStyleClass().clear();
+            loginView.userNameField.getStyleClass().add("text-field");
             loginView.switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
-            loginView.userNameValid.setText(localisator.getResourceBundle().getString("validUsername"));
         }
 
 }

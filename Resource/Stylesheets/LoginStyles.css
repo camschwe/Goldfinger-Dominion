@@ -1,37 +1,47 @@
-
 .button {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: #000000;
+    -fx-border-color: white;
     -fx-min-width: 200px;
 }
 
+.button:hover{
+    -fx-background-color: black;
+}
+
 .label {
-    -fx-text-fill: #000000;
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: #000000;
+    -fx-border-color: white;
     -fx-min-width: 200px;
     -fx-alignment: center;
 }
 
 .text-field {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: #000000;
+    -fx-border-color: black;
     -fx-min-width: 200px;
     -fx-alignment: center;
 }
 
-.button:hover{
-    -fx-background-color: #1874CD;
+.userNameNeeded{
+    -fx-background-color: red;
+    -fx-font-size: 12Pt;
+    -fx-padding: 10px 0px;
+    -fx-border-color: black;
+    -fx-min-width: 200px;
+    -fx-alignment: center;
 }
 
+
 .combo-box{
-    fx-background-color: #FFFFFF;
+    fx-background-color: transparent;
     -fx-font-size: 12Pt;
     -fx-padding: 5px 0px;
     -fx-border-color: #000000;

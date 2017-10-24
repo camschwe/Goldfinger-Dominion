@@ -4,15 +4,16 @@
 }
 
 .klickButton {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: #000000;
+    -fx-border-color: #FFFFFF;
     -fx-min-width: 200px;
 }
 
 .klickButton:hover{
-    -fx-background-color: #1874CD;
+    -fx-background-color: black;
 }
 
 .nameLabel {
