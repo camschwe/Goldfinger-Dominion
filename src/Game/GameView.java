@@ -42,7 +42,7 @@ public class GameView {
 
 
         /**
-         * Initialisierung der Container
+         * Initialisierung der Con Tainer
          */
 
         BorderPane root = new BorderPane();
@@ -65,7 +65,7 @@ public class GameView {
 
 
         /**
-         * Verteilung der Container
+         * Verteilung der Con Tainer
          */
 
 

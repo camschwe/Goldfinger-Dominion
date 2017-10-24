@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Container;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -146,6 +147,7 @@ public class FieldCardController {
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
         gameController.updateLabel();
         handCardController.updateHandcardsView();
+        gameController.getClient().sendObject(new Container(player, gameButton, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();
         }

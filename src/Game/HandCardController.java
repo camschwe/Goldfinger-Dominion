@@ -116,31 +116,31 @@ public class HandCardController {
 
         switch (cardName) {
             case "copper":
-                player.playMoneyCard(card);
+                card.playMoneyCard(player);
                 break;
             case "silver":
-                player.playMoneyCard(card);
+                card.playMoneyCard(player);
                 break;
             case "gold":
-                player.playMoneyCard(card);
+                card.playMoneyCard(player);
                 break;
             case "village":
-                player.village(card);
+                card.village(player);
                 break;
             case "fair":
-                player.fair(card);
+                card.fair(player);
                 break;
             case "smithy":
-                player.smithy(card);
+                card.smithy(player);
                 break;
             case "market":
-                player.market(card);
+                card.market(player);
                 break;
             case "laboratory":
-                player.laboratory(card);
+                card.laboratory(player);
                 break;
             case "lumberjack":
-                player.lumberjack(card);
+                card.lumberjack(player);
                 break;
             default:
                 break;

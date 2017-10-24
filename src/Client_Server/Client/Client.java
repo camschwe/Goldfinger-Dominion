@@ -52,7 +52,6 @@ public class Client extends Thread {
     public static String getColor() {
         return color;
     }
-
     public void run(){
         while (running){
             Object o;
@@ -103,6 +102,10 @@ public class Client extends Thread {
                     //startGame();
                     break;
             }
+        }
+        if(o instanceof Container){
+            Container container = (Container) o;
+            gameController.otherPlayerChecker(container);
         }
     }
 

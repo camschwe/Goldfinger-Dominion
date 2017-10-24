@@ -16,10 +16,11 @@ public class Player {
     private ArrayList<Card> drawDeck;
     private ArrayList<Card> playDeck;
     private boolean yourTurn, actionPhase, buyPhase;
-    private int playerNumber, actions, buys, money, points;
+    private int actions, buys, money, points;
+    private String playerName;
 
-    public Player(int playerNumber) {
-        this.playerNumber = playerNumber;
+    public Player(String playerName) {
+        this.playerName = playerName;
         this.handCards = new ArrayList<>();
         this.putDeck = new ArrayList<>();
         this.drawDeck = new ArrayList<>();
@@ -33,57 +34,7 @@ public class Player {
         this.yourTurn = true;
     }
 
-    /**
-     * Methoden für das ausspielen von Aktionskarten
-     */
 
-    //Führt Aktionskarte Village aus
-    public void village(Card card){
-        this.draw(1);
-        this.actions += 1;
-        this.actionSupport(card);
-
-    }
-
-    public void fair(Card card){
-        this.money += 2;
-        this.buys += 1;
-        this.actions += 1;
-        this.actionSupport(card);
-    }
-
-    public void smithy(Card card){
-        this.draw(3);
-        this.actions -= 1;
-        this.actionSupport(card);
-    }
-
-    public void market(Card card){
-        this.draw(1);
-        this.actions +=1;
-        this.money +=1;
-        this.actionSupport(card);
-    }
-
-    public void laboratory(Card card){
-        this.draw(2);
-        this.actionSupport(card);
-    }
-
-    public void lumberjack(Card card){
-        this.money += 2;
-        this.buys += 1;
-        this.actions -= 1;
-        this.actionSupport(card);
-    }
-
-
-    public void actionSupport(Card card) {
-        this.addPlayCard(card);
-        if (this.actions < 1 || !this.handCardActionChecker()) {
-            this.endPhase();
-        }
-    }
 
     /**
      * Methoden um die verschiedenen Arrays des Spielers zu managen. Beispielsweise für den Zug von einer beliebigen Anzahl
@@ -155,18 +106,7 @@ public class Player {
         }
     }
 
-    /**
-     * Methode für das ausspielen einer Geldkarte
-     */
 
-    //Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die Karte aus der Hand
-    public void playMoneyCard(Card card){
-        this.money += card.getValue();
-        this.addPlayCard(card);
-        if(this.buys < 1) {
-            this.endPhase();
-        }
-    }
 
     /**
      * Methode für das kaufen einer Karte
@@ -322,5 +262,11 @@ public class Player {
         this.points = points;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }

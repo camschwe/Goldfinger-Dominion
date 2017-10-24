@@ -9,14 +9,14 @@ import Game.Player;
 public class Container {
     private Player player;
     private GameButton gameButton;
-    boolean played;
-    boolean bought;
+    private int action;
 
-    public Container(Player player, GameButton gameButton, boolean played, boolean bought){
+
+    //Action 0 = gespielt, Action 1 = gekauft
+    public Container(Player player, GameButton gameButton, int action){
         this.player = player;
         this.gameButton = gameButton;
-        this.played = played;
-        this.bought = bought;
+        this.action = action;
 
     }
 
@@ -36,19 +36,11 @@ public class Container {
         this.gameButton = gameButton;
     }
 
-    public boolean isPlayed() {
-        return played;
+    public int getAction() {
+        return action;
     }
 
-    public void setPlayed(boolean played) {
-        this.played = played;
-    }
-
-    public boolean isBought() {
-        return bought;
-    }
-
-    public void setBought(boolean bought) {
-        this.bought = bought;
+    public void setAction(int action) {
+        this.action = action;
     }
 }

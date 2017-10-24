@@ -6,6 +6,8 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+
 /**
  * Created by camillo.schweizer on 21.10.2017.
  */
@@ -83,8 +85,18 @@ public class GameController {
         gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
     }
 
+    //TODO: IMPLEMENTIEREN
+    public void otherPlayerChecker(Container container) {
+        gameModel.updateChecker();
+    }
 
     public GameView getGameView() {
         return gameView;
     }
+
+    public Client getClient(){
+        return this.client;
+    }
+
+
 }

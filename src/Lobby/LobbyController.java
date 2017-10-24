@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
- * Created by camillo.schweizer on 06.10.2017.
+ * Created by Benjamin Probst on 06.10.2017.
  */
 public class LobbyController {
 

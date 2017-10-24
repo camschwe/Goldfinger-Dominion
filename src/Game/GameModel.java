@@ -85,7 +85,10 @@ public class GameModel {
 
     }
 
+    //TODO: IMPLEMENTIEREN
+    public void updateChecker(){
 
+    }
 
     public int  getPlayerCount(){
         return this.playerCount;
