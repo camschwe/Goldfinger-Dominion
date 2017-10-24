@@ -27,7 +27,7 @@ public class GameView {
     private ChatWindow chatWindow;
     public Button resourceButton, actionButton, phaseButton,putStapelPlayer1;
     public HBox player1Box, player2Box;
-    public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2;
+    public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1;
     public GridPane resourcePane, actionPane;
     protected TextFlow noteFlow;
     public String newLine;
@@ -128,7 +128,7 @@ public class GameView {
          * Label und Buttons Spieler 1
          */
 
-        Label playerLabel1 = new Label ( "Spieler 1");
+        playerLabel1 = new Label ( "Spieler 1");
         playerLabel1.getStyleClass().add("nameLabel");
         moneyLabel1 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel1 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");

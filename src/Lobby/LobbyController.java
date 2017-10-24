@@ -36,7 +36,7 @@ public class LobbyController {
 
             Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
-            gameModel = new GameModel(2);
+            gameModel = new GameModel(client);
             gameController = new GameController(gameView, localisator, gameModel, client);
             client.setGameController(gameController);
 

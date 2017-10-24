@@ -1,5 +1,7 @@
 package Game;
 
+import Client_Server.Client.Client;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -21,10 +23,10 @@ public class GameModel {
     private ArrayList<Card> moneyCards;
     private ArrayList<Card> actionCards;
 
-    public GameModel(int playerCount) {
+    public GameModel(Client client) {
 
         //TODO: Correct with hash set
-        this.player = new Player(1);
+        this.player = new Player(client.getClientName());
         this.turn = 1;
 
 

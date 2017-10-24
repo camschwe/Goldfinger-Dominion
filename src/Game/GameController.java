@@ -33,6 +33,7 @@ public class GameController {
         this.client = client;
 
         fieldCardController = new FieldCardController(gameView,localisator, gameModel, this);
+        gameView.playerLabel1.setText(client.getClientName());
 
 
 
