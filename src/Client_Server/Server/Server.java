@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 /**
@@ -21,6 +22,8 @@ public class Server extends Thread{
     private static HashSet<String> players = new HashSet<String>();
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
     private static ArrayList<String> colors = new ArrayList<>();
+    private static ArrayList<String> gamePlayers = new ArrayList<>();
+    private static int actualPlayer = 0;
 
     public Server() throws Exception{
         colors.add("-fx-fill: red");
@@ -78,14 +81,17 @@ public class Server extends Thread{
                                     removeClient();
                                     break;
                                 case 4:
+                                    setGamePlayers();
                                     sendMessageToAll(message);
+                                    Collections.shuffle(gamePlayers);
+                                    nextPlayer();
                             }
                         }else if (o instanceof GameObject){
                             sendToAll(o);
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
-                        players.remove(name);
+                        removeClient();
                         break;
                     }
                 }
@@ -153,6 +159,22 @@ public class Server extends Thread{
                     output.writeObject(message);
                 }
 
+            }
+        }
+
+        private void setGamePlayers(){
+            for (String player : players) {
+                gamePlayers.add(player);
+            }
+        }
+
+        // Der nächste Spieler wird gesendet
+        private void nextPlayer() throws IOException {
+            sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
+            if (actualPlayer < gamePlayers.size()-1) {
+                actualPlayer += 1;
+            } else {
+                actualPlayer = 0;
             }
         }
     }
