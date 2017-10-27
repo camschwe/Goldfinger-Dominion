@@ -1,6 +1,6 @@
 package Game;
 
-import Client_Server.Container;
+import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -35,7 +35,7 @@ public class HandCardController {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
                 updateHandcardsView();
-                gameController.updateLabel();
+                gameController.player1LabelUpdate();
                 fieldCardController.fieldCardsGlowingUpdate();
             }
         });
@@ -95,10 +95,10 @@ public class HandCardController {
             if(player.isYourTurn()){
                 cardSwitch(card, player);
                 gameController.noteFlowUpdate(card, player, 0);
-                gameController.updateLabel();
+                gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
-                gameController.getClient().sendObject(new Container(player, card, 0 ));
+                gameController.getClient().sendObject(new GameObject(player, card, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
             }
         });

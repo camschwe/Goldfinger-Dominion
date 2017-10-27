@@ -2,6 +2,7 @@ package Client_Server.Client;
 
 
 import Client_Server.Chat.Message;
+import Client_Server.GameObject;
 import Game.GameController;
 import Game.HandCardController;
 import Lobby.LobbyController;
@@ -113,10 +114,10 @@ public class Client extends Thread {
                     break;
             }
         }
-        if(o instanceof Container){
+        if(o instanceof GameObject){
             System.out.println(o);
-            Container container = (Container) o;
-            gameController.otherPlayerChecker(container);
+            GameObject gameObject = (GameObject) o;
+            gameController.otherPlayerChecker(gameObject);
         }
     }
 

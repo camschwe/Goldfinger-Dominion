@@ -1,12 +1,11 @@
 package Game;
 
 import Client_Server.Client.Client;
+import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-
-import java.awt.*;
 
 /**
  * Created by camillo.schweizer on 21.10.2017.
@@ -59,7 +58,7 @@ public class GameController {
 
     }
 
-    public void updateLabel(){
+    public void player1LabelUpdate(){
         Player player = gameModel.getPlayer();
         gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
         if(player.isActionPhase()){
@@ -87,9 +86,80 @@ public class GameController {
     }
 
     //TODO: IMPLEMENTIEREN
-    public void otherPlayerChecker(Container container) {
-        gameModel.updateChecker();
+    public void otherPlayerChecker(GameObject gameObject) {
+        if(gameObject.getAction() == 0){
+            player2HandCardsUpdate(gameObject);
+        }else{
+            fieldCardUpdate(gameObject);
+
+        }
+        player2LabelUpdate(gameObject);
+        noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
     }
+
+    public void player2HandCardsUpdate(GameObject gameObject) {
+        gameView.player2Box.getChildren().clear();
+
+        for (int i = 0; i < gameObject.getPlayer().getHandCards().size(); i++) {
+            Player player = gameObject.getPlayer();
+            Card card = player.getHandCards().get(i);
+
+            GameButton gameButton = new GameButton(card);
+            gameView.player2Box.getChildren().add(gameButton);
+
+        }
+    }
+
+    public void fieldCardUpdate(GameObject gameObject){
+        String type = gameObject.getCard().getType();
+
+        switch (type) {
+            case "action":
+                actionFieldCardUpdate(gameObject.getCard().getName());
+                break;
+            case "money":
+                resourceFieldUpdate(gameObject.getCard().getName());
+                break;
+            case "point":
+                resourceFieldUpdate(gameObject.getCard().getName());
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public void actionFieldCardUpdate(String cardName){
+        for(int i = 0; i< fieldCardController.getActionButtons().size();i++){
+            if(fieldCardController.getActionButtons().get(i).getCard().getName().equals(cardName)){
+                fieldCardController.getActionButtons().get(i).setAmount( fieldCardController.getActionButtons().get(i).getAmount()-1);
+            }
+        }
+
+    }
+
+    public void resourceFieldUpdate(String cardName){
+        for(int i = 0; i< fieldCardController.getResourceButtons().size();i++){
+            if(fieldCardController.getResourceButtons().get(i).getCard().getName().equals(cardName)){
+                fieldCardController.getResourceButtons().get(i).setAmount( fieldCardController.getResourceButtons().get(i).getAmount()-1);
+            }
+        }
+    }
+
+    public void player2LabelUpdate(GameObject gameObject){
+        gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
+
+
+        gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
+        if(gameModel.getPlayer().isActionPhase()){
+            gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
+                    ":\t" +localisator.getResourceBundle().getString( "action"));
+        }else{gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
+                ":\t" +localisator.getResourceBundle().getString( "buy"));
+        }
+    }
+
+
 
     public GameView getGameView() {
         return gameView;

@@ -8,14 +8,14 @@ import java.io.Serializable;
 /**
  * Created by camillo.schweizer on 23.10.2017.
  */
-public class Container implements Serializable {
+public class GameObject implements Serializable {
     private Player player;
     private Card card;
     private int action;
 
 
     //Action 0 = gespielt, Action 1 = gekauft
-    public Container(Player player, Card card, int action){
+    public GameObject(Player player, Card card, int action){
         this.player = player;
         this.card = card;
         this.action = action;
@@ -30,6 +30,13 @@ public class Container implements Serializable {
         this.player = player;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     public int getAction() {
         return action;

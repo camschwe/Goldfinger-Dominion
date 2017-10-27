@@ -1,6 +1,6 @@
 package Game;
 
-import Client_Server.Container;
+import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -145,9 +145,9 @@ public class FieldCardController {
         Card cardCopy = Card.cardCopy(card);
         player.buyCard(cardCopy);
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
-        gameController.updateLabel();
+        gameController.player1LabelUpdate();
         handCardController.updateHandcardsView();
-        gameController.getClient().sendObject(new Container(player, card, 1 ));
+        gameController.getClient().sendObject(new GameObject(player, card, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();
         }
@@ -182,6 +182,59 @@ public class FieldCardController {
         gameButton.setText(""+gameButton.getAmount());
     }
 
+    public GameView getGameView() {
+        return gameView;
+    }
 
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
+    }
 
+    public GameModel getGameModel() {
+        return gameModel;
+    }
+
+    public void setGameModel(GameModel gameModel) {
+        this.gameModel = gameModel;
+    }
+
+    public Localisator getLocalisator() {
+        return localisator;
+    }
+
+    public void setLocalisator(Localisator localisator) {
+        this.localisator = localisator;
+    }
+
+    public HandCardController getHandCardController() {
+        return handCardController;
+    }
+
+    public void setHandCardController(HandCardController handCardController) {
+        this.handCardController = handCardController;
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public ArrayList<GameButton> getActionButtons() {
+        return actionButtons;
+    }
+
+    public void setActionButtons(ArrayList<GameButton> actionButtons) {
+        this.actionButtons = actionButtons;
+    }
+
+    public ArrayList<GameButton> getResourceButtons() {
+        return resourceButtons;
+    }
+
+    public void setResourceButtons(ArrayList<GameButton> resourceButtons) {
+        this.resourceButtons = resourceButtons;
+    }
 }
