@@ -85,6 +85,10 @@ public class Server extends Thread{
                                     sendMessageToAll(message);
                                     Collections.shuffle(gamePlayers);
                                     nextPlayer();
+                                    break;
+                                case 6:
+                                    nextPlayer();
+                                    break;
                             }
                         }else if (o instanceof GameObject){
                             sendToAll(o);

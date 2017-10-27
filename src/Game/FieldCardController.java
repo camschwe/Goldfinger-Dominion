@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Chat.Message;
 import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
@@ -150,6 +151,10 @@ public class FieldCardController {
         gameController.getClient().sendObject(new GameObject(player, card, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();
+        }
+        if (player.isTurnEnded()){
+            gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
+            player.setTurnEnded(false);
         }
     }
 

@@ -123,6 +123,9 @@ public class Client extends Thread {
                     } else {
                         turn = false;
                     }
+                    if (gameController != null){
+                        gameController.getGameModel().getPlayer().setYourTurn(turn);
+                    }
                     break;
             }
         }

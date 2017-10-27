@@ -16,7 +16,7 @@ public class Player implements Serializable {
     private ArrayList<Card> putDeck;
     private ArrayList<Card> drawDeck;
     private ArrayList<Card> playDeck;
-    private boolean yourTurn, actionPhase, buyPhase;
+    private boolean yourTurn, actionPhase, buyPhase, turnEnded;
     private int actions, buys, money, points;
     private String playerName;
 
@@ -33,6 +33,7 @@ public class Player implements Serializable {
         this.money = 0;
         this.points = 0;
         this.yourTurn = true;
+        this.turnEnded = false;
     }
 
     /**
@@ -144,6 +145,7 @@ public class Player implements Serializable {
         this.dropCards();
         this.draw(5);
         this.phaseChanger();
+        this.turnEnded = true;
     }
 
     //überspringt die Aktionsphase, insofern keine Aktionskarte in der Hand
@@ -264,5 +266,13 @@ public class Player implements Serializable {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public boolean isTurnEnded() {
+        return turnEnded;
+    }
+
+    public void setTurnEnded(boolean turnEnded) {
+        this.turnEnded = turnEnded;
     }
 }
