@@ -33,8 +33,9 @@ public class LobbyController {
         lobbyView.startButton.setOnAction(event -> {
 
             //TODO: Add player count
+            client.sendObject(new Message(4, client.getClientName(), "started"));
 
-            Stage gameStage = new Stage();
+            /**Stage gameStage = new Stage();
             gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
             gameModel = new GameModel(client);
             gameController = new GameController(gameView, localisator, gameModel, client);
@@ -42,6 +43,7 @@ public class LobbyController {
 
             gameView.start();
             lobbyView.stop();
+             **/
         });
 
         lobbyView.chatWindow.getSendButton().setOnAction(event -> {
@@ -74,6 +76,17 @@ public class LobbyController {
 
     public LobbyModel getLobbyModel() {
         return lobbyModel;
+    }
+
+    public void startGame(){
+        Stage gameStage = new Stage();
+        gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
+        gameModel = new GameModel(client);
+        gameController = new GameController(gameView, localisator, gameModel, client);
+        client.setGameController(gameController);
+
+        gameView.start();
+        lobbyView.stop();
     }
 
 

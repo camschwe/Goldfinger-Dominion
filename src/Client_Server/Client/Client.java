@@ -108,8 +108,9 @@ public class Client extends Thread {
                             actualizePlayers();
                             reset = true;
                     }
+                    break;
                 case 4:
-                    //startGame();
+                    Platform.runLater(() -> lobbyController.startGame());
                     break;
             }
         }
