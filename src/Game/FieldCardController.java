@@ -147,6 +147,7 @@ public class FieldCardController {
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
         gameController.updateLabel();
         handCardController.updateHandcardsView();
+        System.out.println("Send Card");
         gameController.getClient().sendObject(new Container(player, gameButton, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameView.stop();

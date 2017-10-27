@@ -1,6 +1,8 @@
 package Client_Server.Server;
 
 import Client_Server.Chat.Message;
+import Client_Server.Container;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -75,6 +77,8 @@ public class Server extends Thread{
                                     colors.add(message.getColor());
                                     removeClient();
                             }
+                        }else if (o instanceof Container){
+                            sendToAll(o);
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");

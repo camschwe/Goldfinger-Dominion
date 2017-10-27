@@ -55,19 +55,22 @@ public class Client extends Thread {
     }
     public void run(){
         while (running){
-
-            Object o;
+            Object o = null;
             try {
-                o = objInput.readObject();
+                try {
+                    o = objInput.readObject();
+                }catch (EOFException e) {
+                    System.out.println("EOFException");
+                }catch(Exception e){
+                    System.out.println("Other Error");
+                }
                 System.out.println("Object: " + o);
                 handleObject(o);
-            } catch (EOFException e) {
-                System.out.println("Error while reading");
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
+
         }
     }
 
@@ -111,6 +114,7 @@ public class Client extends Thread {
             }
         }
         if(o instanceof Container){
+            System.out.println(o);
             Container container = (Container) o;
             gameController.otherPlayerChecker(container);
         }
