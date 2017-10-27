@@ -105,16 +105,21 @@ public class GameController {
     public void player2HandCardsUpdate(GameObject gameObject) {
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
-            for(int i = 0; i< gameObject.getPlayer().getPlayDeck().size();i++){
-                System.out.println(gameObject.getPlayer().getPlayDeck().get(i).getName());
-            }
+
+            System.out.println("empfang ");
+            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                System.out.print(gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+            System.out.println("\n");
 
             for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
 
-                if(gameObject.getPlayer().getPlayDeck().get(i)== null){
+
+                if(i >= gameObject.getPlayer().getPlayDeck().size()){
                     Button button = new Button();
                     button.getStyleClass().add("mediumButton");
                     button.getStyleClass().add("back2");
+                    gameView.player2Box.getChildren().add(button);
                 }else {
                     GameButton gameButton = new GameButton(gameObject.getPlayer().getPlayDeck().get(i));
                     gameView.player2Box.getChildren().add(gameButton);
