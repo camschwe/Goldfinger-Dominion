@@ -66,11 +66,10 @@ public class Client extends Thread {
                 try {
                     o = objInput.readObject();
                 }catch (EOFException e) {
-                    System.out.println("EOFException");
+                    e.printStackTrace();
                 }catch(Exception e){
-                    System.out.println("Other Error");
+                    e.printStackTrace();
                 }
-                System.out.println("Object: " + o);
                 handleObject(o);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,7 +119,6 @@ public class Client extends Thread {
                     break;
                 case 5:
                     if (message.getClientName().equals(this.clientName)){
-                        System.out.println("Your Turn: " + this.clientName);
                         turn = true;
                     } else {
                         turn = false;
@@ -128,7 +126,6 @@ public class Client extends Thread {
             }
         }
         if(o instanceof GameObject){
-            System.out.println(o);
             GameObject gameObject = (GameObject) o;
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
         }
@@ -141,16 +138,13 @@ public class Client extends Thread {
             reset = false;
         }
         players.add(message.getClientName());
-        System.out.println("Player added: " + message.getClientName());
     }
 
     // Aktualisierung der Spielerliste in der LobbyView
     public void actualizePlayers() {
-        System.out.println("Start setting labels");
         int i = 0;
 
         if (actualController == 1){
-            System.out.println("go");
             for (String player: players){
                 final int iCopy = i;
                 Platform.runLater(() -> {
@@ -189,7 +183,6 @@ public class Client extends Thread {
         try {
             objOutput.writeObject(o);
         } catch (IOException e) {
-            System.out.println("Error");
             e.printStackTrace();
         }
     }
@@ -202,6 +195,7 @@ public class Client extends Thread {
     public void setGameController (GameController gameController){
         this.gameController = gameController;
         actualController = 2;
+        gameController.getGameModel().getPlayer().setYourTurn(turn);
     }
 
     public void setServer() {

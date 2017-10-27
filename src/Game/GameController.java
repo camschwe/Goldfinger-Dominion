@@ -182,7 +182,9 @@ public class GameController {
 
     }
 
-
+    public GameModel getGameModel() {
+        return gameModel;
+    }
 
     public GameView getGameView() {
         return gameView;
