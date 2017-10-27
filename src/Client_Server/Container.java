@@ -1,6 +1,6 @@
 package Client_Server;
 
-import Game.GameButton;
+import Game.Card;
 import Game.Player;
 
 import java.io.Serializable;
@@ -10,14 +10,14 @@ import java.io.Serializable;
  */
 public class Container implements Serializable {
     private Player player;
-    private GameButton gameButton;
+    private Card card;
     private int action;
 
 
     //Action 0 = gespielt, Action 1 = gekauft
-    public Container(Player player, GameButton gameButton, int action){
+    public Container(Player player, Card card, int action){
         this.player = player;
-        this.gameButton = gameButton;
+        this.card = card;
         this.action = action;
 
     }
@@ -30,13 +30,6 @@ public class Container implements Serializable {
         this.player = player;
     }
 
-    public GameButton getGameButton() {
-        return gameButton;
-    }
-
-    public void setGameButton(GameButton gameButton) {
-        this.gameButton = gameButton;
-    }
 
     public int getAction() {
         return action;
