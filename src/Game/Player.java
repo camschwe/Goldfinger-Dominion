@@ -35,8 +35,6 @@ public class Player implements Serializable {
         this.yourTurn = true;
     }
 
-
-
     /**
      * Methoden um die verschiedenen Arrays des Spielers zu managen. Beispielsweise für den Zug von einer beliebigen Anzahl
      * von Spielkarten und wechselt den Ablagestapel mit dem Ziehstapel, wenn keine Karten mehr vorhanden sind
@@ -143,7 +141,6 @@ public class Player implements Serializable {
         this.money = 0;
         this.buys = 1;
         this.actions = 1;
-
         this.dropCards();
         this.draw(5);
         this.phaseChanger();
@@ -166,12 +163,10 @@ public class Player implements Serializable {
 
     //überprüft ob sich eine Aktionskarte in der Hand befindet
     public boolean handCardActionChecker(){
-        boolean checker = false;
-        for(int i = this.handCards.size()-1; i >= 0;i--){
-            if(this.handCards.get(i).getType().equals("action")){
-                checker = true;            }
+        for (Card card : handCards) {
+            if (card.getType().equals("action")) return true;
         }
-        return checker;
+        return false;
     }
 
 

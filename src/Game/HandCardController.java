@@ -98,7 +98,7 @@ public class HandCardController {
                 gameController.updateLabel();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
-                gameController.getClient().sendObject(new Container(player, gameButton, 0 ));
+                gameController.getClient().sendObject(new Container(player, card, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
             }
         });
