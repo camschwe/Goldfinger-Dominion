@@ -65,6 +65,16 @@ public class Client extends Thread {
             try {
                 try {
                     o = objInput.readObject();
+
+                    if(o instanceof GameObject) {
+                        GameObject gameObject = (GameObject) o;
+                        System.out.println("client empfang 1 ");
+                        for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                            System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+                        System.out.println("\n");
+                    }
+
                 }catch (EOFException e) {
                     e.printStackTrace();
                 }catch(Exception e){
@@ -118,17 +128,19 @@ public class Client extends Thread {
                     Platform.runLater(() -> lobbyController.startGame());
                     break;
                 case 5:
-                    if (message.getClientName().equals(this.clientName)){
-                        turn = true;
-                    } else {
-                        turn = false;
-                    }
+                    turn = message.getClientName().equals(this.clientName);
                     break;
             }
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
+
+            System.out.println("client empfang2 ");
+            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+            System.out.println("\n");
         }
     }
 
@@ -181,6 +193,15 @@ public class Client extends Thread {
 
     // Sendet ein Objekt an den Server
     public void sendObject(Object o){
+        if(o instanceof GameObject) {
+            GameObject gameObject = (GameObject) o;
+            System.out.println("client senden ");
+            for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+            System.out.println("\n");
+        }
+
         try {
             objOutput.writeObject(o);
         } catch (IOException e) {

@@ -98,12 +98,12 @@ public class HandCardController {
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
-                gameController.getClient().sendObject(new GameObject(gameModel.getPlayer(), card, 0 ));
-                System.out.println("übermittlung ");
+                System.out.println("controller übermittlung ");
                 for(int i = 0 ; i < gameModel.getPlayer().getPlayDeck().size(); i++)
-                    System.out.print(gameModel.getPlayer().getPlayDeck().get(i).getName());
+                    System.out.print(" "+gameModel.getPlayer().getPlayDeck().get(i).getName());
 
                 System.out.println("\n");
+                gameController.getClient().sendObject(new GameObject(gameModel.getPlayer(), card, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
             }
         });

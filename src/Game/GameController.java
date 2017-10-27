@@ -106,7 +106,7 @@ public class GameController {
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
 
-            System.out.println("empfang ");
+            System.out.println("controller empfang ");
             for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
                 System.out.print(gameObject.getPlayer().getPlayDeck().get(i).getName());
 

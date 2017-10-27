@@ -88,6 +88,12 @@ public class Server extends Thread{
                             }
                         }else if (o instanceof GameObject){
                             sendToAll(o);
+                            GameObject gameObject = (GameObject) o;
+                            System.out.println("Server ");
+                            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                                System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+                            System.out.println("\n");
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
