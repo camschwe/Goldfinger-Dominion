@@ -1,12 +1,13 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * Created by camillo.schweizer on 07.10.2017.
  */
-public class Player {
+public class Player implements Serializable {
 
     /**
      * Spielerklassen mit Arrays für das GUI sowie Methoden für den Kauf und das ausspielen von Karten

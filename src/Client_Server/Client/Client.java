@@ -8,6 +8,7 @@ import Lobby.LobbyController;
 import javafx.application.Platform;
 
 import java.awt.*;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -42,7 +43,6 @@ public class Client extends Thread {
             this.clientName = clientName;
             serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
-            objInput = new ObjectInputStream(serverSocket.getInputStream());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,12 +54,27 @@ public class Client extends Thread {
     }
     public void run(){
         while (running){
+            try {
+                objInput = new ObjectInputStream(serverSocket.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Object o;
             try {
                 o = objInput.readObject();
+                System.out.println("Object: " + o);
                 handleObject(o);
+            } catch (EOFException e) {
+                System.out.println("Error while reading");
+
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    objInput.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -165,6 +180,7 @@ public class Client extends Thread {
             objOutput.writeObject(o);
         } catch (IOException e) {
             System.out.println("Error");
+            e.printStackTrace();
         }
     }
 

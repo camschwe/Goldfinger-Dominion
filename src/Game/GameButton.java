@@ -2,10 +2,12 @@ package Game;
 
 import javafx.scene.control.Button;
 
+import java.io.Serializable;
+
 /**
  * Created by camillo.schweizer on 13.10.2017.
  */
-public class GameButton extends Button {
+public class GameButton extends Button implements Serializable {
     Card card;
     int amount;
 

@@ -3,10 +3,12 @@ package Client_Server;
 import Game.GameButton;
 import Game.Player;
 
+import java.io.Serializable;
+
 /**
  * Created by camillo.schweizer on 23.10.2017.
  */
-public class Container {
+public class Container implements Serializable {
     private Player player;
     private GameButton gameButton;
     private int action;

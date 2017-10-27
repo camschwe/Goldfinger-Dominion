@@ -1,9 +1,11 @@
 package Game;
 
+import java.io.Serializable;
+
 /**
  * Created by camillo.schweizer on 13.10.2017.
  */
-public class Card {
+public class Card implements Serializable {
 
     /**
      * Generiert einfache Kartenobjekte mit einem String für den Namen sowie dem Typen
