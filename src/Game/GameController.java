@@ -71,19 +71,18 @@ public class GameController {
 
 
     public void noteFlowUpdate(Card card, Player player, int type) {
+        Text action;
+
+        if (type == 0) {
+            action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
+        } else {action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
+        }
+
+        Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
+        Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
+        Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
 
         Platform.runLater(() -> {
-            Text action;
-
-            if (type == 0) {
-                action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
-            } else {action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
-            }
-
-            Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
-            Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
-            Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
-
             gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
         });
 
@@ -106,11 +105,20 @@ public class GameController {
     public void player2HandCardsUpdate(GameObject gameObject) {
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
+            for(int i = 0; i< gameObject.getPlayer().getPlayDeck().size();i++){
+                System.out.println(gameObject.getPlayer().getPlayDeck().get(i).getName());
+            }
 
             for (int i = 0; i < gameObject.getPlayer().getHandCards().size(); i++) {
 
-                GameButton gameButton = new GameButton(gameObject.getPlayer().getHandCards().get(i));
-                gameView.player2Box.getChildren().add(gameButton);
+                if(gameObject.getPlayer().getPlayDeck().get(i)== null){
+                    Button button = new Button();
+                    button.getStyleClass().add("mediumButton");
+                    button.getStyleClass().add("back2");
+                }else {
+                    GameButton gameButton = new GameButton(gameObject.getPlayer().getPlayDeck().get(i));
+                    gameView.player2Box.getChildren().add(gameButton);
+                }
             }
         });
 
