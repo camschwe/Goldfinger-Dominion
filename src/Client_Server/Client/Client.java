@@ -37,6 +37,7 @@ public class Client extends Thread {
     private static String color;
     private static ArrayList<String> players = new ArrayList<>();
     private static boolean reset = true;
+    private boolean turn = false;
 
 
 
@@ -117,12 +118,19 @@ public class Client extends Thread {
                 case 4:
                     Platform.runLater(() -> lobbyController.startGame());
                     break;
+                case 5:
+                    if (message.getClientName().equals(this.clientName)){
+                        System.out.println("Your Turn: " + this.clientName);
+                        turn = true;
+                    } else {
+                        turn = false;
+                    }
             }
         }
         if(o instanceof GameObject){
             System.out.println(o);
             GameObject gameObject = (GameObject) o;
-            gameController.otherPlayerChecker(gameObject);
+            Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
         }
     }
 
