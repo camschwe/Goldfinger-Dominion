@@ -57,15 +57,12 @@ public class HandCardController {
         gameView.player1Box.getChildren().clear();
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
-            Player player = gameModel.getPlayer();
-            Card card = player.getHandCards().get(i);
-
-            GameButton gameButton = new GameButton(card);
+            GameButton gameButton = new GameButton(gameModel.getPlayer().getHandCards().get(i));
             gameView.player1Box.getChildren().add(gameButton);
-            addMouseEntered(gameButton, card);
-            addMouseExited(gameButton, card);
-            addMouseKlicked(gameButton, card, player);
-            glowingUpdateHandCards(gameButton, card, player);
+            addMouseEntered(gameButton);
+            addMouseExited(gameButton);
+            addMouseKlicked(gameButton);
+            glowingUpdateHandCards(gameButton);
         }
     }
 
@@ -74,7 +71,7 @@ public class HandCardController {
      */
 
     //Action Event Handcards Mouse Entered
-    public void addMouseEntered(GameButton gameButton, Card card){
+    public void addMouseEntered(GameButton gameButton){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -85,7 +82,7 @@ public class HandCardController {
     }
 
     // Action Event Handcards Mouse Left
-    public void addMouseExited(GameButton gameButton, Card card){
+    public void addMouseExited(GameButton gameButton){
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -96,15 +93,23 @@ public class HandCardController {
     }
 
     //Eventhändler für Klick auf Handkarte
-    public void addMouseKlicked(GameButton gameButton, Card card, Player player){
+    public void addMouseKlicked(GameButton gameButton){
         gameButton.setOnAction(event -> {
+            Player player = gameModel.getPlayer();
+            Card card = gameButton.getCard();
+
             if(player.isYourTurn()){
                 cardSwitch(card, player);
                 gameController.noteFlowUpdate(card, player, 0);
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
-                gameController.getClient().sendObject(new GameObject(player, card, 0 ));
+                System.out.println("controller übermittlung");
+                for(int i = 0 ; i < gameModel.getPlayer().getPlayDeck().size(); i++)
+                    System.out.print(" "+gameModel.getPlayer().getPlayDeck().get(i).getName());
+
+                System.out.println("\n");
+                gameController.getClient().sendObject(new GameObject(gameModel.getPlayer(), card, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
             }
             if (player.isTurnEnded()){
@@ -119,7 +124,7 @@ public class HandCardController {
      */
 
     //Switch zur überprüfung der gedrückten Handkarte
-    public void cardSwitch(Card card, Player player){
+    public void cardSwitch(Card card, Player player ){
         String cardName = "!Valid";
 
         if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
@@ -164,7 +169,9 @@ public class HandCardController {
      * Glow Effekt hinzuzufügen und wieder zu entfernen
      */
 
-    public void glowingUpdateHandCards(GameButton gameButton, Card card, Player player){
+    public void glowingUpdateHandCards(GameButton gameButton){
+        Card card = gameButton.getCard();
+        Player player = gameModel.getPlayer();
         if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
             gameButton.getStyleClass().add("buttonOnAction");
         }

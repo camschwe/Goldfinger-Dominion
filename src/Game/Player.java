@@ -82,15 +82,12 @@ public class Player implements Serializable {
 
     //Wechselt die Karten von einem Deck in ein anderes
     public void changeCardPlace(Card card, ArrayList<Card> removeArray,ArrayList<Card> addArray ){
-        int i = 0;
-        boolean checker = false;
-        while (removeArray.size() - 1 >= i || !checker) {
-            if (card.equals(removeArray.get(i))) {
-                addArray.add(removeArray.get(i));
-                removeArray.remove(i);
-                checker = true;
+
+        for(int i =0; i< removeArray.size();i++){
+            if(removeArray.get(i).equals(card)){
+                addArray.add(card);
+                removeArray.remove(card);
             }
-            i++;
         }
     }
 
