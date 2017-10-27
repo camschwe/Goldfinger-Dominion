@@ -76,6 +76,9 @@ public class Server extends Thread{
                                 case 2:
                                     colors.add(message.getColor());
                                     removeClient();
+                                    break;
+                                case 4:
+                                    sendMessageToAll(message);
                             }
                         }else if (o instanceof GameObject){
                             sendToAll(o);

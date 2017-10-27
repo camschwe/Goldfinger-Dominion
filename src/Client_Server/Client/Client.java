@@ -38,6 +38,10 @@ public class Client extends Thread {
     private static ArrayList<String> players = new ArrayList<>();
     private static boolean reset = true;
 
+
+
+    private boolean isServer = false;
+
     public Client(String serverAdresse, String clientName){
         try {
             Client.serverAdresse = serverAdresse;
@@ -109,8 +113,9 @@ public class Client extends Thread {
                             actualizePlayers();
                             reset = true;
                     }
+                    break;
                 case 4:
-                    //startGame();
+                    Platform.runLater(() -> lobbyController.startGame());
                     break;
             }
         }
@@ -189,6 +194,14 @@ public class Client extends Thread {
     public void setGameController (GameController gameController){
         this.gameController = gameController;
         actualController = 2;
+    }
+
+    public void setServer() {
+        isServer = true;
+    }
+
+    public boolean isServer(){
+        return isServer;
     }
 
     public void stopClient(){

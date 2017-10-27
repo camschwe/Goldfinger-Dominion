@@ -81,6 +81,7 @@ public class LoginController {
                 lobbyModel = new LobbyModel();
                 client.setLobbyController(lobbyController);
                 client.actualizePlayers();
+                client.setServer();
             }
         });
 
