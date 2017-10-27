@@ -43,6 +43,7 @@ public class Client extends Thread {
             this.clientName = clientName;
             serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
+            objInput = new ObjectInputStream(serverSocket.getInputStream());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,11 +55,7 @@ public class Client extends Thread {
     }
     public void run(){
         while (running){
-            try {
-                objInput = new ObjectInputStream(serverSocket.getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
             Object o;
             try {
                 o = objInput.readObject();
@@ -69,13 +66,8 @@ public class Client extends Thread {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    objInput.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
+            
         }
     }
 
