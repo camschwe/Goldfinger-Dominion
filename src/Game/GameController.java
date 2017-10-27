@@ -71,43 +71,50 @@ public class GameController {
 
 
     public void noteFlowUpdate(Card card, Player player, int type) {
-        Text action;
 
-        if (type == 0) {
-            action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
-        } else {action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
-        }
+        Platform.runLater(() -> {
+            Text action;
 
-        Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
-        Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
-        Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
+            if (type == 0) {
+                action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
+            } else {action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
+            }
 
-        gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
+            Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
+            Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
+            Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
+
+            gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
+        });
+
     }
 
-    //TODO: IMPLEMENTIEREN
+
     public void otherPlayerChecker(GameObject gameObject) {
-        if(gameObject.getAction() == 0){
-            player2HandCardsUpdate(gameObject);
-        }else{
-            fieldCardUpdate(gameObject);
-
-        }
-        player2LabelUpdate(gameObject);
-        noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
+        if(!gameObject.getPlayer().getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
+            if(gameObject.getAction() == 0){
+                player2HandCardsUpdate(gameObject);
+            }else{
+                fieldCardUpdate(gameObject);
+            }
+            player2LabelUpdate(gameObject);
+            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
     }
+    }
+
 
     public void player2HandCardsUpdate(GameObject gameObject) {
-        gameView.player2Box.getChildren().clear();
+        Platform.runLater(() -> {
+            gameView.player2Box.getChildren().clear();
 
-        for (int i = 0; i < gameObject.getPlayer().getHandCards().size(); i++) {
-            Player player = gameObject.getPlayer();
-            Card card = player.getHandCards().get(i);
+            for (int i = 0; i < gameObject.getPlayer().getHandCards().size(); i++) {
 
-            GameButton gameButton = new GameButton(card);
-            gameView.player2Box.getChildren().add(gameButton);
+                GameButton gameButton = new GameButton(gameObject.getPlayer().getHandCards().get(i));
+                gameView.player2Box.getChildren().add(gameButton);
+            }
+        });
 
-        }
+
     }
 
     public void fieldCardUpdate(GameObject gameObject){
@@ -130,33 +137,49 @@ public class GameController {
     }
 
     public void actionFieldCardUpdate(String cardName){
-        for(int i = 0; i< fieldCardController.getActionButtons().size();i++){
-            if(fieldCardController.getActionButtons().get(i).getCard().getName().equals(cardName)){
-                fieldCardController.getActionButtons().get(i).setAmount( fieldCardController.getActionButtons().get(i).getAmount()-1);
+
+        Platform.runLater(() -> {
+            for(int i = 0; i< fieldCardController.getActionButtons().size();i++){
+                if(fieldCardController.getActionButtons().get(i).getCard().getName().equals(cardName)){
+                    fieldCardController.getActionButtons().get(i).setAmount( fieldCardController.getActionButtons().get(i).getAmount()-1);
+                }
             }
-        }
+
+        });
 
     }
 
     public void resourceFieldUpdate(String cardName){
-        for(int i = 0; i< fieldCardController.getResourceButtons().size();i++){
-            if(fieldCardController.getResourceButtons().get(i).getCard().getName().equals(cardName)){
-                fieldCardController.getResourceButtons().get(i).setAmount( fieldCardController.getResourceButtons().get(i).getAmount()-1);
+
+        Platform.runLater(() -> {
+            for(int i = 0; i< fieldCardController.getResourceButtons().size();i++){
+                if(fieldCardController.getResourceButtons().get(i).getCard().getName().equals(cardName)){
+                    fieldCardController.getResourceButtons().get(i).setAmount( fieldCardController.getResourceButtons().get(i).getAmount()-1);
+                }
             }
-        }
+
+        });
+
+
     }
 
     public void player2LabelUpdate(GameObject gameObject){
-        gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
+
+        Platform.runLater(() -> {
+            gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
 
 
-        gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
-        if(gameModel.getPlayer().isActionPhase()){
-            gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
-                    ":\t" +localisator.getResourceBundle().getString( "action"));
-        }else{gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
-                ":\t" +localisator.getResourceBundle().getString( "buy"));
-        }
+            gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
+            if(gameModel.getPlayer().isActionPhase()){
+                gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
+                        ":\t" +localisator.getResourceBundle().getString( "action"));
+            }else{gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
+                    ":\t" +localisator.getResourceBundle().getString( "buy"));
+            }
+
+        });
+
+
     }
 
 
