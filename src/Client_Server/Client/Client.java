@@ -123,6 +123,7 @@ public class Client extends Thread {
                     } else {
                         turn = false;
                     }
+                    break;
             }
         }
         if(o instanceof GameObject){
