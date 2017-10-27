@@ -109,7 +109,7 @@ public class GameController {
                 System.out.println(gameObject.getPlayer().getPlayDeck().get(i).getName());
             }
 
-            for (int i = 0; i < gameObject.getPlayer().getHandCards().size(); i++) {
+            for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
 
                 if(gameObject.getPlayer().getPlayDeck().get(i)== null){
                     Button button = new Button();
