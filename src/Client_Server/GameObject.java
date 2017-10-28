@@ -26,6 +26,12 @@ public class GameObject implements Serializable {
         return player;
     }
 
+    public GameObject gameObjectCopy(){
+        GameObject copy = new GameObject(this.getPlayer(), this.getCard(), this.getAction());
+        return copy;
+
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }

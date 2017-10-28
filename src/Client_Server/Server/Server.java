@@ -87,8 +87,9 @@ public class Server extends Thread{
                                     nextPlayer();
                             }
                         }else if (o instanceof GameObject){
-                            sendToAll(o);
                             GameObject gameObject = (GameObject) o;
+                            sendToAll(gameObject);
+
                             System.out.println("Server ");
                             for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
                                 System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());

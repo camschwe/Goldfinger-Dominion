@@ -69,8 +69,9 @@ public class Client extends Thread {
                     if(o instanceof GameObject) {
                         GameObject gameObject = (GameObject) o;
                         System.out.println("client empfang 1 ");
-                        for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                        for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++) {
                             System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+                        }
 
                         System.out.println("\n");
                     }
@@ -193,17 +194,20 @@ public class Client extends Thread {
 
     // Sendet ein Objekt an den Server
     public void sendObject(Object o){
-        if(o instanceof GameObject) {
-            GameObject gameObject = (GameObject) o;
-            System.out.println("client senden ");
-            for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
 
-            System.out.println("\n");
-        }
 
         try {
+            if(o instanceof GameObject) {
+                GameObject gameObject = (GameObject) o;
+                System.out.println("client senden ");
+                for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+
+                System.out.println("\n");
+                objOutput.writeObject(gameObject);
+            }
             objOutput.writeObject(o);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
