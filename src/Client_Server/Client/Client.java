@@ -129,7 +129,14 @@ public class Client extends Thread {
                     Platform.runLater(() -> lobbyController.startGame());
                     break;
                 case 5:
-                    turn = message.getClientName().equals(this.clientName);
+                    if (message.getClientName().equals(this.clientName)){
+                        turn = true;
+                    } else {
+                        turn = false;
+                    }
+                    if (gameController != null){
+                        gameController.getGameModel().getPlayer().setYourTurn(turn);
+                    }
                     break;
             }
         }

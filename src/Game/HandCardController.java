@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Chat.Message;
 import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
@@ -38,6 +39,11 @@ public class HandCardController {
                 gameController.player1LabelUpdate();
                 fieldCardController.fieldCardsGlowingUpdate();
             }
+            if (gameModel.getPlayer().isTurnEnded()){
+                gameController.getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
+                gameModel.getPlayer().setTurnEnded(false);
+            }
+
         });
     }
 
@@ -105,6 +111,10 @@ public class HandCardController {
                 System.out.println("\n");
                 gameController.getClient().sendObject(new GameObject(gameModel.getPlayer(), card, 0 ));
                 fieldCardController.fieldCardsGlowingUpdate();
+            }
+            if (player.isTurnEnded()){
+                gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
+                player.setTurnEnded(false);
             }
         });
     }
