@@ -66,21 +66,22 @@ public class Client extends Thread {
                 try {
                     o = objInput.readObject();
 
-                    if(o instanceof GameObject) {
+                    /**if(o instanceof GameObject) {
                         GameObject gameObject = (GameObject) o;
-                        System.out.println("client empfang 1 ");
-                        for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++) {
-                            System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
-                        }
+                        System.out.println("client empfang 1 " + gameObject);
+                        //for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++) {
+                        //    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+                        //}
 
-                        System.out.println("\n");
-                    }
+                        //System.out.println("\n");
+                    }**/
 
                 }catch (EOFException e) {
                     e.printStackTrace();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+                System.out.println("Objekt empfangen: " + o);
                 handleObject(o);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -142,13 +143,12 @@ public class Client extends Thread {
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
+            System.out.println("client handleMethode: " + gameObject);
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
+            //for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+            //    System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
 
-            System.out.println("client empfang2 ");
-            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
-
-            System.out.println("\n");
+            //System.out.println("\n");
         }
     }
 
@@ -206,14 +206,16 @@ public class Client extends Thread {
         try {
             if(o instanceof GameObject) {
                 GameObject gameObject = (GameObject) o;
-                System.out.println("client senden ");
-                for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
-
-                System.out.println("\n");
+                System.out.println("client senden " + gameObject);
+                //for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++){
+                //    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
+                //}
+                //System.out.println("\n");
                 objOutput.writeObject(gameObject);
+            } else {
+                objOutput.writeObject(o);
             }
-            objOutput.writeObject(o);
+            objOutput.flush();
 
         } catch (IOException e) {
             e.printStackTrace();

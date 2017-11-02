@@ -90,7 +90,10 @@ public class GameController {
 
 
     public void otherPlayerChecker(GameObject gameObject) {
+        System.out.println("Player from Server Object: " + gameObject.getPlayer().getPlayerName());
+        System.out.println("Player from gameModel: " + gameModel.getPlayer().getPlayerName());
         if(!gameObject.getPlayer().getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
+            System.out.println("Kartenaktion: " + gameObject.getAction());
             if(gameObject.getAction() == 0){
                 player2HandCardsUpdate(gameObject);
             }else{
@@ -103,6 +106,7 @@ public class GameController {
 
 
     public void player2HandCardsUpdate(GameObject gameObject) {
+        System.out.println("Player2HandCardsUpdate: " + gameObject);
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
 

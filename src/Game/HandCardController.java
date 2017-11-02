@@ -109,7 +109,9 @@ public class HandCardController {
                     System.out.print(" "+gameModel.getPlayer().getPlayDeck().get(i).getName());
 
                 System.out.println("\n");
-                gameController.getClient().sendObject(new GameObject(gameModel.getPlayer(), card, 0 ));
+                GameObject gObject = new GameObject(gameModel.getPlayer(), card, 0 );
+                System.out.println("Drücken der Karte: " + gObject);
+                gameController.getClient().sendObject(gObject);
                 fieldCardController.fieldCardsGlowingUpdate();
             }
             if (player.isTurnEnded()){

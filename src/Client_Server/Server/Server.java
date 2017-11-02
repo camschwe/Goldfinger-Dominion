@@ -44,7 +44,7 @@ public class Server extends Thread{
     private static class Handler extends Thread{
         private Socket socket;
         private String name;
-        private ObjectInputStream obInput;
+        private ObjectInputStream objInput;
         private ObjectOutputStream objOutput;
 
         public Handler(Socket socket){
@@ -53,14 +53,19 @@ public class Server extends Thread{
 
         public void run(){
             try {
-                obInput = new ObjectInputStream(socket.getInputStream());
+                objInput = new ObjectInputStream(socket.getInputStream());
                 objOutput = new ObjectOutputStream(socket.getOutputStream());
+                Object o = new Object();
 
                 outputs.add(objOutput);
 
                 while (true) {
                     try {
-                        Object o = obInput.readObject();
+                        try {
+                            o = objInput.readObject();
+                        } catch (Exception e){
+                            System.out.println("Error reading Object");
+                        }
                         if (o == null) {
                             return;
                         }
@@ -92,13 +97,14 @@ public class Server extends Thread{
                             }
                         }else if (o instanceof GameObject){
                             GameObject gameObject = (GameObject) o;
+                            System.out.println("Server Objekt: " + gameObject);
                             sendToAll(gameObject);
 
-                            System.out.println("Server ");
-                            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                                System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
+                            //System.out.println("Server ");
+                            //for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
+                            //    System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
 
-                            System.out.println("\n");
+                            //System.out.println("\n");
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
@@ -155,9 +161,11 @@ public class Server extends Thread{
 
         // Übermitteln eines Objekts an alle Spieler
         private void sendToAll(Object o) throws IOException {
+            System.out.println("Server sending Object: " + o);
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(o);
+                    output.flush();
                 }
 
             }
@@ -168,6 +176,7 @@ public class Server extends Thread{
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(message);
+                    output.flush();
                 }
 
             }
