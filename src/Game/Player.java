@@ -242,7 +242,7 @@ public class Player implements Serializable {
     }
 
     public int getMoney() {
-        return money;
+        return this.money;
     }
 
     public void setMoney(int money) {
@@ -271,5 +271,24 @@ public class Player implements Serializable {
 
     public void setTurnEnded(boolean turnEnded) {
         this.turnEnded = turnEnded;
+    }
+
+    @Override public String toString(){
+        System.out.println("Name: "+this.getPlayerName());
+        System.out.println("Money: "+this.getMoney());
+        System.out.println("Points: "+this.getPoints());
+        System.out.print("Handcards :");
+        for(Card card : handCards){
+            System.out.print(card.getName()+":");
+
+        }
+
+        System.out.print("\nPlayed Cards :");
+        for(Card card : playDeck){
+            System.out.print(card.getName()+":");
+        }
+
+        return("\n\n\n");
+
     }
 }

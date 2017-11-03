@@ -223,7 +223,7 @@ public class GameView {
         gameStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
         gameStage.setTitle("Goldfinger Dominion");
-        gameStage.setFullScreen(true);
+        //gameStage.setFullScreen(true);
 
     }
 

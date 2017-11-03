@@ -97,14 +97,12 @@ public class Server extends Thread{
                             }
                         }else if (o instanceof GameObject){
                             GameObject gameObject = (GameObject) o;
-                            System.out.println("Server Objekt: " + gameObject);
+                            System.out.println("Server receive:");
+                            System.out.print(gameObject.getPlayer());
+                            objOutput.reset();
                             sendToAll(gameObject);
 
-                            //System.out.println("Server ");
-                            //for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                            //    System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
 
-                            //System.out.println("\n");
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
@@ -165,7 +163,7 @@ public class Server extends Thread{
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(o);
-                    output.flush();
+                    output.reset();
                 }
 
             }
@@ -176,7 +174,7 @@ public class Server extends Thread{
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(message);
-                    output.flush();
+                    output.reset();
                 }
 
             }

@@ -130,11 +130,7 @@ public class Client extends Thread {
                     Platform.runLater(() -> lobbyController.startGame());
                     break;
                 case 5:
-                    if (message.getClientName().equals(this.clientName)){
-                        turn = true;
-                    } else {
-                        turn = false;
-                    }
+                    turn = message.getClientName().equals(this.clientName);
                     if (gameController != null){
                         gameController.getGameModel().getPlayer().setYourTurn(turn);
                     }
@@ -143,12 +139,10 @@ public class Client extends Thread {
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
-            System.out.println("client handleMethode: " + gameObject);
+            System.out.println("client receive: ");
+            System.out.println(gameObject.getPlayer());
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
-            //for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-            //    System.out.print(" "+gameObject.getPlayer().getPlayDeck().get(i).getName());
 
-            //System.out.println("\n");
         }
     }
 
@@ -201,21 +195,18 @@ public class Client extends Thread {
 
     // Sendet ein Objekt an den Server
     public void sendObject(Object o){
-
-
         try {
             if(o instanceof GameObject) {
                 GameObject gameObject = (GameObject) o;
-                System.out.println("client senden " + gameObject);
-                //for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++){
-                //    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
-                //}
-                //System.out.println("\n");
+                System.out.println("Client send ");
+                System.out.print(gameObject.getPlayer());
+                objOutput.reset();
                 objOutput.writeObject(gameObject);
+
             } else {
                 objOutput.writeObject(o);
             }
-            objOutput.flush();
+            objOutput.reset();
 
         } catch (IOException e) {
             e.printStackTrace();

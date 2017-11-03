@@ -110,14 +110,10 @@ public class GameController {
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
 
-            System.out.println("controller empfang ");
-            for(int i = 0 ; i < gameObject.getPlayer().getPlayDeck().size(); i++)
-                System.out.print(gameObject.getPlayer().getPlayDeck().get(i).getName());
-
-            System.out.println("\n");
+            System.out.print(gameObject.getPlayer());
 
             for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
-
+                System.out.println(gameObject.getPlayer().getPlayDeck().size());
 
                 if(i >= gameObject.getPlayer().getPlayDeck().size()){
                     Button button = new Button();
