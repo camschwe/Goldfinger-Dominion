@@ -3,12 +3,14 @@ package Lobby;
 import Client_Server.Chat.ChatWindow;
 import Localisation.Localisator;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class LobbyView {
 
     public Stage primaryStage;
     public Button startButton;
+    protected Button spectatorButton;
     public Label participateLabel, gameLabel, userLabel1, userLabel2, userLabel3, userLabel4;
     protected Localisator localisator;
     protected ChatWindow chatWindow;
@@ -29,8 +32,7 @@ public class LobbyView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
         chatWindow = new ChatWindow(localisator);
-        //chatWindow.getTxtChatMessages().getStyleClass().add("chatWindow");
-        chatWindow.getVBox().setPadding(new Insets(165, 0, 0, 300));
+        chatWindow.getVBox().setPadding(new Insets(80, 50, 80, 0));
 
         participateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
@@ -38,7 +40,8 @@ public class LobbyView {
         userLabel2 = new Label("unknown");
         userLabel3 = new Label("unknown");
         userLabel4 = new Label("unknown");
-        startButton = new Button(localisator.getResourceBundle().getString("ready"));
+        startButton = new Button(localisator.getResourceBundle().getString("start"));
+        spectatorButton = new Button(localisator.getResourceBundle().getString("spectator"));
         players.add(userLabel1);
         players.add(userLabel2);
         players.add(userLabel3);
@@ -56,13 +59,15 @@ public class LobbyView {
         topBox.getChildren().addAll(gameLabel);
         HBox botBox = new HBox();
         botBox.setPadding(new Insets(0, 0, 120, 80));
-        botBox.getChildren().addAll(startButton);
+        botBox.setSpacing(20);
+        botBox.getChildren().addAll(startButton, spectatorButton);
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();
         root.setLeft(gridPane);
         root.setTop(topBox);
         root.setBottom(botBox);
-        root.setCenter(chatWindow.getRoot());
+        root.setRight(chatWindow.getRoot());
+
         chatWindow.getSendButton().getStyleClass().add("chatButton");
         gridPane.add(participateLabel,0,0);
         gridPane.add(userLabel1,0,1);
