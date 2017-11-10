@@ -31,10 +31,8 @@ public class GameController {
         this.gameModel = gameModel;
         this.client = client;
 
-        fieldCardController = new FieldCardController(gameView,localisator, gameModel, this);
+        fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
-
-
 
         gameView.gameStage.setOnCloseRequest(event -> {
             Platform.exit();

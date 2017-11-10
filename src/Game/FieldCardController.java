@@ -26,6 +26,7 @@ public class FieldCardController {
     private GameController gameController;
     private ArrayList<GameButton> actionButtons;
     private ArrayList<GameButton> resourceButtons;
+    private SpectatorController spectatorController;
 
 
     public FieldCardController(GameView gameView, Localisator localisator, GameModel gameModel, GameController gameController) {
@@ -37,7 +38,11 @@ public class FieldCardController {
         this.actionButtons = new ArrayList<>();
         this.resourceButtons = new ArrayList<>();
 
-        handCardController = new HandCardController(gameView, localisator, gameModel, gameController, this);
+        if (!gameController.getClient().isGameStarted()) {
+            handCardController = new HandCardController(gameView, localisator, gameModel, gameController, this);
+        } else{
+            spectatorController = new SpectatorController(gameView, localisator, gameModel, this);
+        }
 
         /**
          * Jeweils eine Methode zur Initialisierung der Geld, Punkte und Aktionskarten auf dem Spielfeld anhand

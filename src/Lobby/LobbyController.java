@@ -33,21 +33,25 @@ public class LobbyController {
         lobbyView.startButton.setOnAction(event -> {
 
             //TODO: Add player count
-            if (client.isServer()) {
-                client.sendObject(new Message(4, client.getClientName(), "started"));
-            } else {
-                if (lobbyView.startButton.getText().equals(localisator.getResourceBundle().getString("start"))){
-                    client.sendObject(new Message(1, client.getClientName(), "ready", client.getColor()));
-                    lobbyView.startButton.setText(localisator.getResourceBundle().getString("ready"));
+            if (!client.isGameStarted()) {
+                if (client.isServer()) {
+                    client.sendObject(new Message(4, client.getClientName(), "started"));
                 } else {
-                    client.sendObject(new Message(1, client.getClientName(), "unready", client.getColor()));
-                    lobbyView.startButton.setText(localisator.getResourceBundle().getString("start"));
+                    if (lobbyView.startButton.getText().equals(localisator.getResourceBundle().getString("start"))) {
+                        client.sendObject(new Message(1, client.getClientName(), "ready", client.getColor()));
+                        lobbyView.startButton.setText(localisator.getResourceBundle().getString("ready"));
+                    } else {
+                        client.sendObject(new Message(1, client.getClientName(), "unready", client.getColor()));
+                        lobbyView.startButton.setText(localisator.getResourceBundle().getString("start"));
+                    }
                 }
             }
         });
 
         lobbyView.spectatorButton.setOnAction(event -> {
-            System.out.println("Test");
+            if (client.isGameStarted()){
+                startGame();
+            }
         });
 
         lobbyView.chatWindow.getSendButton().setOnAction(event -> {
@@ -93,5 +97,15 @@ public class LobbyController {
         lobbyView.stop();
     }
 
+    /**public void startSpectator(){
+        Stage gameStage = new Stage();
+        gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
+        gameModel = new GameModel(client);
+        gameController = new GameController(gameView, localisator, gameModel, client);
+        client.setGameController(gameController);
+
+        gameView.start();
+        lobbyView.stop();
+    }**/
 
 }

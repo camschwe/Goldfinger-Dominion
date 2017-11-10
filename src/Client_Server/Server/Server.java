@@ -24,6 +24,7 @@ public class Server extends Thread{
     private static ArrayList<String> colors = new ArrayList<>();
     private static ArrayList<String> gamePlayers = new ArrayList<>();
     private static int actualPlayer = 0;
+    private static boolean gameStarted = false;
 
     public Server() throws Exception{
         colors.add("-fx-fill: red");
@@ -90,6 +91,7 @@ public class Server extends Thread{
                                     sendMessageToAll(message);
                                     Collections.shuffle(gamePlayers);
                                     nextPlayer();
+                                    gameStarted = true;
                                     break;
                                 case 6:
                                     nextPlayer();
@@ -131,11 +133,15 @@ public class Server extends Thread{
                 if (!players.contains(message.getClientName())) {
                     players.add(name);
                     outputs.add(objOutput);
+                    Collections.shuffle(colors);
                     Message send = new Message(3, name, "valid", colors.get(0));
                     objOutput.writeObject(send);
                     sendPlayerList();
                     sendMessageToAll(new Message(3, name, "actualize"));
                     colors.remove(0);
+                    if (gameStarted){
+                        objOutput.writeObject(new Message(4, name, "running"));
+                    }
                 }else {
                     Message send = new Message(3, name, "invalid");
                     objOutput.writeObject(send);

@@ -38,6 +38,7 @@ public class Client extends Thread {
     private static ArrayList<String> players = new ArrayList<>();
     private static boolean reset = true;
     private boolean turn = false;
+    private boolean gameStarted = false;
 
 
 
@@ -65,17 +66,6 @@ public class Client extends Thread {
             try {
                 try {
                     o = objInput.readObject();
-
-                    /**if(o instanceof GameObject) {
-                        GameObject gameObject = (GameObject) o;
-                        System.out.println("client empfang 1 " + gameObject);
-                        //for (int i = 0; i < gameObject.getPlayer().getPlayDeck().size(); i++) {
-                        //    System.out.print(" " + gameObject.getPlayer().getPlayDeck().get(i).getName());
-                        //}
-
-                        //System.out.println("\n");
-                    }**/
-
                 }catch (EOFException e) {
                     e.printStackTrace();
                 }catch(Exception e){
@@ -99,6 +89,7 @@ public class Client extends Thread {
     public String getClientName(){
         return this.clientName;
     }
+
 
     public void handleObject(Object o){
         if (o instanceof Message){
@@ -127,7 +118,11 @@ public class Client extends Thread {
                     }
                     break;
                 case 4:
-                    Platform.runLater(() -> lobbyController.startGame());
+                    if (message.getMessage().equals("started")){
+                        Platform.runLater(() -> lobbyController.startGame());
+                    } else if (message.getMessage().equals("running")){
+                        gameStarted = true;
+                    }
                     break;
                 case 5:
                     turn = message.getClientName().equals(this.clientName);
@@ -230,6 +225,10 @@ public class Client extends Thread {
 
     public boolean isServer(){
         return isServer;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 
     public void stopClient(){
