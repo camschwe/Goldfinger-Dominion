@@ -60,6 +60,7 @@ public class Client extends Thread {
     public static String getColor() {
         return color;
     }
+
     public void run(){
         while (running){
             Object o = null;
@@ -129,6 +130,10 @@ public class Client extends Thread {
                     if (gameController != null){
                         gameController.getGameModel().getPlayer().setYourTurn(turn);
                     }
+                    if (gameStarted){
+                        gameController.getFieldCardController().getSpectatorController().changePlayerCards();
+                    }
+                    Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
                     break;
             }
         }

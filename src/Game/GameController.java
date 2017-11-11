@@ -205,5 +205,7 @@ public class GameController {
         return this.client;
     }
 
-
+    public FieldCardController getFieldCardController() {
+        return fieldCardController;
+    }
 }

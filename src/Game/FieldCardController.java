@@ -247,4 +247,8 @@ public class FieldCardController {
     public void setResourceButtons(ArrayList<GameButton> resourceButtons) {
         this.resourceButtons = resourceButtons;
     }
+
+    public SpectatorController getSpectatorController() {
+        return spectatorController;
+    }
 }
