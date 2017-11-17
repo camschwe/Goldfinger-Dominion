@@ -57,9 +57,6 @@ public class Client extends Thread {
 
     }
 
-    public static String getColor() {
-        return color;
-    }
 
     //Der Client hört auf Objekte vom Server
     public void run(){
@@ -140,8 +137,7 @@ public class Client extends Thread {
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
-            System.out.println("client receive: ");
-            System.out.println(gameObject.getPlayer());
+
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
 
         }
@@ -199,8 +195,7 @@ public class Client extends Thread {
         try {
             if(o instanceof GameObject) {
                 GameObject gameObject = (GameObject) o;
-                System.out.println("Client send ");
-                System.out.print(gameObject.getPlayer());
+                gameObject.setColor(color);
                 objOutput.reset();
                 objOutput.writeObject(gameObject);
 
@@ -246,5 +241,9 @@ public class Client extends Thread {
             e.printStackTrace();
         }
         running = false;
+    }
+
+    public static String getColor(){
+        return Client.color;
     }
 }

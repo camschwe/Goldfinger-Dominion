@@ -100,17 +100,14 @@ public class HandCardController {
 
             if(player.isYourTurn()){
                 cardSwitch(card, player);
-                gameController.noteFlowUpdate(card, player, 0);
+                if(!card.getType().equals("point")){
+                    gameController.noteFlowUpdate(card, player, 0);
+                }
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
                 updateHandcardsView();
-                System.out.println("controller übermittlung");
-                for(int i = 0 ; i < gameModel.getPlayer().getPlayDeck().size(); i++)
-                    System.out.print(" "+gameModel.getPlayer().getPlayDeck().get(i).getName());
 
-                System.out.println("\n");
                 GameObject gObject = new GameObject(player, card, 0 );
-                System.out.println("Drücken der Karte: " + gObject);
                 gameController.getClient().sendObject(gObject);
                 fieldCardController.fieldCardsGlowingUpdate();
             }

@@ -126,6 +126,7 @@ public class FieldCardController {
                 fieldCardsGlowingUpdate();
                 buttonAmountUpdate(gameButton);
                 gameController.noteFlowUpdate( card, player, 1);
+
                 }
 
         });
@@ -174,8 +175,11 @@ public class FieldCardController {
         for(int i = 0; i<actionButtons.size(); i++) {
             actionButtons.get(i).getStyleClass().remove("buttonOnAction");
             if (gameModel.getPlayer().isBuyPhase() &&
+                    actionButtons.get(i).getAmount() > 0 &&
                     actionButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()) {
                 actionButtons.get(i).getStyleClass().add("buttonOnAction");
+            }else if (actionButtons.get(i).getAmount() < 1){
+                actionButtons.get(i).getStyleClass().add("buttonOpacity");
             }
         }
 
@@ -184,7 +188,8 @@ public class FieldCardController {
             if(gameModel.getPlayer().isBuyPhase() &&
                     resourceButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
                 resourceButtons.get(i).getStyleClass().add("buttonOnAction");
-
+            }else if (actionButtons.get(i).getAmount() < 1){
+                actionButtons.get(i).getStyleClass().add("buttonOpacity");
             }
         }
     }
