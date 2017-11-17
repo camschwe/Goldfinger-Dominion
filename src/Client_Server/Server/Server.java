@@ -102,9 +102,6 @@ public class Server extends Thread{
                             }
                         }else if (o instanceof GameObject){
                             GameObject gameObject = (GameObject) o;
-                            //System.out.println("Server receive:");
-                            //System.out.print(gameObject.getPlayer());
-                            //objOutput.reset();
                             actualizeEndPlayers(gameObject.getPlayer());
                             sendToAll(gameObject);
 

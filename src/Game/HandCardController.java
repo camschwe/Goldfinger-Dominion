@@ -1,6 +1,5 @@
 package Game;
 
-import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
 import Client_Server.GameObject;
 import Localisation.Localisator;
@@ -30,7 +29,7 @@ public class HandCardController {
         this.gameController = gameController;
         this.fieldCardController = fieldCardController;
 
-        updateHandcardsView();
+        updateHandCardsView();
 
     }
 
@@ -40,8 +39,10 @@ public class HandCardController {
 
     //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
     //TODO: Aktualisierung am Zugende implementieren
-    public void updateHandcardsView() {
+    public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
+
+        System.out.println("Clear");
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
             GameButton gameButton = new GameButton(gameModel.getPlayer().getHandCards().get(i));
@@ -51,6 +52,8 @@ public class HandCardController {
             addMouseKlicked(gameButton);
             glowingUpdateHandCards(gameButton);
         }
+
+        System.out.println("Added");
     }
 
     /**
@@ -92,7 +95,7 @@ public class HandCardController {
                 }
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
-                updateHandcardsView();
+                updateHandCardsView();
 
                 GameObject gObject = new GameObject(player, card, 0 );
                 gameController.getClient().sendObject(gObject);

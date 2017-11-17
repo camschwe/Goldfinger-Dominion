@@ -6,7 +6,6 @@ import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class GameController {
     private GameView gameView;
     private Localisator localisator;
     private GameModel gameModel;
-    private  HandCardController handCardController;
+    private HandCardController handCardController;
     private FieldCardController fieldCardController;
     private Client client;
 
@@ -34,6 +33,7 @@ public class GameController {
         this.localisator = localisator;
         this.gameModel = gameModel;
         this.client = client;
+
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
@@ -48,7 +48,7 @@ public class GameController {
         gameView.phaseButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
-                handCardController.updateHandcardsView();
+                handCardController.updateHandCardsView();
                 player1LabelUpdate();
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
@@ -72,9 +72,9 @@ public class GameController {
                     this.client.sendObject(gObject);
 
                 }
-
                 player1LabelUpdate();
-                handCardController.updateHandcardsView();
+                this.handCardController = fieldCardController.getHandCardController();
+                handCardController.updateHandCardsView();
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
 

@@ -185,8 +185,7 @@ public class Player implements Serializable, Comparable{
 
         while(i >= 0) {
             if(handCards.get(i).getType().equals("money")){
-                tempList.add(Card.cardCopy(handCards.get(i)));
-                playDeck.add(handCards.get(i));
+                tempList.add(handCards.get(i));
                 this.changeCardPlace(handCards.get(i), this.handCards, this.playDeck);
             }
             i--;
