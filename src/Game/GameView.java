@@ -25,7 +25,7 @@ public class GameView {
      */
     private Localisator localisator;
     private ChatWindow chatWindow;
-    public Button actionButton, phaseButton,putStapelPlayer1;
+    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2;
     public GridPane resourcePane, actionPane;
@@ -99,7 +99,7 @@ public class GameView {
         resourcePane.setPadding(new Insets(20, 20, 0, 20));
 
         /**
-         * Chat, TextArea und PhaseButton
+         * Chat, TextArea und PhaseButton sowie MoneyButton
          */
 
         noteFlow = new TextFlow();
@@ -109,17 +109,24 @@ public class GameView {
         scrollPane.setContent(noteFlow);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vvalueProperty().bind(noteFlow.heightProperty());
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        scrollPane.setPrefHeight(600);
         chatBox.getChildren().addAll(scrollPane, chatWindow.getRoot());
         chatWindow.getVBox().setPadding(new Insets(0, 0, 0, 0));
         chatBox.setPadding(new Insets(20, 0, 0, 20));
         chatBox.setSpacing(20);
 
+
+
         phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
         phaseButton.getStyleClass().add("klickButton");
-        rightMainPane.setBottom(phaseButton);
+
+
+        moneyButton = new Button(localisator.getResourceBundle().getString("playMoneyCards"));
+        moneyButton.getStyleClass().add("klickButton");
+
+        VBox buttonBox = new VBox();
+        buttonBox.getChildren().addAll(phaseButton, moneyButton);
+        buttonBox.setSpacing(10);
+        rightMainPane.setBottom(buttonBox);
 
         /**
          * Label und Buttons Spieler 1
@@ -163,7 +170,7 @@ public class GameView {
         playerLabel2 = new Label ("Spieler 2");
         playerLabel2.getStyleClass().add("nameLabel");
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
-        pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t0");
+        pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t3");
         phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+
                 ":\t" +localisator.getResourceBundle().getString( "buy"));
         moneyLabel2.getStyleClass().add("resourceLabel");

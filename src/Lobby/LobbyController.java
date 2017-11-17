@@ -5,6 +5,7 @@ import Client_Server.Client.Client;
 import Game.*;
 import Localisation.Localisator;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -38,10 +39,10 @@ public class LobbyController {
                     client.sendObject(new Message(4, client.getClientName(), "started"));
                 } else {
                     if (lobbyView.startButton.getText().equals(localisator.getResourceBundle().getString("start"))) {
-                        client.sendObject(new Message(1, client.getClientName(), "ready", client.getColor()));
+                        client.sendObject(new Message(1, client.getClientName(), "ready", Client.getColor()));
                         lobbyView.startButton.setText(localisator.getResourceBundle().getString("ready"));
                     } else {
-                        client.sendObject(new Message(1, client.getClientName(), "unready", client.getColor()));
+                        client.sendObject(new Message(1, client.getClientName(), "unready", Client.getColor()));
                         lobbyView.startButton.setText(localisator.getResourceBundle().getString("start"));
                     }
                 }
@@ -51,6 +52,12 @@ public class LobbyController {
         lobbyView.spectatorButton.setOnAction(event -> {
             if (client.isGameStarted()){
                 startGame();
+            }else{
+                Alert quoteText = new Alert(Alert.AlertType.INFORMATION);
+                quoteText.setTitle(localisator.getResourceBundle().getString("note"));
+                quoteText.setHeaderText((localisator.getResourceBundle().getString("visitor")));
+                quoteText.setContentText(localisator.getResourceBundle().getString("visitorInfo"));
+                quoteText.showAndWait();
             }
         });
 

@@ -32,20 +32,6 @@ public class HandCardController {
 
         updateHandcardsView();
 
-        //Eventhändler für den Phase Button
-        gameView.phaseButton.setOnAction(event -> {
-            if(gameModel.getPlayer().isYourTurn()) {
-                gameModel.getPlayer().endPhase();
-                updateHandcardsView();
-                gameController.player1LabelUpdate();
-                fieldCardController.fieldCardsGlowingUpdate();
-            }
-            if (gameModel.getPlayer().isTurnEnded()){
-                gameController.getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
-                gameModel.getPlayer().setTurnEnded(false);
-            }
-
-        });
     }
 
     /**
@@ -110,12 +96,10 @@ public class HandCardController {
 
                 GameObject gObject = new GameObject(player, card, 0 );
                 gameController.getClient().sendObject(gObject);
-                fieldCardController.fieldCardsGlowingUpdate();
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
             }
-            if (player.isTurnEnded()){
-                gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
-                player.setTurnEnded(false);
-            }
+
         });
     }
 

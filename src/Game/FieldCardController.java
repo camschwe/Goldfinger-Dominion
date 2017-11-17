@@ -124,7 +124,8 @@ public class FieldCardController {
         gameButton.setOnAction(event -> {
             if(buyChecker(gameButton, player, card)){
                 buyUpdate(gameButton, player, card);
-                fieldCardsGlowingUpdate();
+                fieldCardsGlowingUpdate(resourceButtons);
+                fieldCardsGlowingUpdate(actionButtons);
                 buttonAmountUpdate(gameButton);
                 gameController.noteFlowUpdate( card, player, 1, Client.getColor());
 
@@ -171,28 +172,20 @@ public class FieldCardController {
      */
 
     //Aktualisiert den Glow Effekt
-    public void fieldCardsGlowingUpdate(){
+    public void fieldCardsGlowingUpdate(ArrayList<GameButton> gameButtons){
 
-        for(int i = 0; i<actionButtons.size(); i++) {
-            actionButtons.get(i).getStyleClass().remove("buttonOnAction");
+        for(int i = 0; i<gameButtons.size(); i++) {
+            gameButtons.get(i).getStyleClass().remove("buttonOnAction");
             if (gameModel.getPlayer().isBuyPhase() &&
-                    actionButtons.get(i).getAmount() > 0 &&
-                    actionButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()) {
-                actionButtons.get(i).getStyleClass().add("buttonOnAction");
-            }else if (actionButtons.get(i).getAmount() < 1){
-                actionButtons.get(i).getStyleClass().add("buttonOpacity");
+                    gameButtons.get(i).getAmount() > 0 &&
+                    gameButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()) {
+                gameButtons.get(i).getStyleClass().add("buttonOnAction");
+            }else if (gameButtons.get(i).getAmount() < 1){
+                gameButtons.get(i).getStyleClass().add("buttonOpacity");
             }
         }
 
-        for(int i = 0; i<resourceButtons.size(); i++){
-            resourceButtons.get(i).getStyleClass().remove("buttonOnAction");
-            if(gameModel.getPlayer().isBuyPhase() &&
-                    resourceButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()){
-                resourceButtons.get(i).getStyleClass().add("buttonOnAction");
-            }else if (actionButtons.get(i).getAmount() < 1){
-                actionButtons.get(i).getStyleClass().add("buttonOpacity");
-            }
-        }
+
     }
 
     public void buttonAmountUpdate(GameButton gameButton){

@@ -33,13 +33,15 @@ public class ChatWindow {
         this.localisator = localisator;
         txtMessage = new TextField();
         sendButton = new Button(localisator.getResourceBundle().getString("sendButton"));
+        sendButton.getStyleClass().add("chatButton");
         txtChatFlow = new TextFlow();
 
-        txtChatFlow.setStyle("-fx-background-color: white");
+
         newLine = System.getProperty("line.separator");
         scrollPane = new ScrollPane();
         scrollPane.setPrefSize(100, 300);
-        scrollPane.setStyle("-fx-background-color: white");
+        scrollPane.getStyleClass().add("scroll-pane");
+        txtChatFlow.getStyleClass().add("chatFlow");
         scrollPane.setContent(txtChatFlow);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vvalueProperty().bind(txtChatFlow.heightProperty());
@@ -58,6 +60,7 @@ public class ChatWindow {
         hBox.setSpacing(5);
 
         root.getChildren().add(vBox);
+
 
     }
 
@@ -93,6 +96,12 @@ public class ChatWindow {
         return this.vBox;
     }
 
+    public ScrollPane getScrollPane(){
+        return this.scrollPane;
+    }
+
+    public TextFlow getTxtChatFlow() { return this.txtChatFlow;}
+
     // Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
     public void actualizeChatFlow(Message message){
         System.out.println(message);
@@ -104,4 +113,6 @@ public class ChatWindow {
         });
 
     }
+
+
 }

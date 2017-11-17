@@ -1,3 +1,35 @@
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-background-insets: 1px;
+    -fx-pref-width: 200;
+    -fx-pref-height: 500;
+
+}
+
+.chatButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 12Pt;
+    -fx-padding: 10px 0px;
+    -fx-border-color: black;
+    -fx-pref-width: 50px;
+}
+
+.chatButton:hover{
+    -fx-background-color: black;
+}
+
+.text-field {
+    -fx-font-size: 12Pt;
+    -fx-border-color: black;
+    -fx-padding: 10px 20px;
+}
 
 .buttonOnAction {
     -fx-effect: dropshadow(three-pass-box, #FFFF00, 30, 0, 0, 0);
@@ -5,31 +37,31 @@
 
 .klickButton {
     -fx-background-color: transparent;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: black;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
     -fx-min-width: 200px;
 }
 
 .klickButton:hover{
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
 
 .nameLabel {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: black;
     -fx-font-size: 24Pt;
     -fx-padding: 14px 40px;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
     -fx-pref-width: 150;
     -fx-padding: 0px 0px 0px 10px
 
 }
 
 .resourceLabel {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: black;
     -fx-font-size: 12Pt;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
     -fx-pref-width: 150;
     -fx-padding: 0px 0px 0px 10px
 
@@ -38,8 +70,8 @@
 .noteText {
     -fx-max-width: 250px;
     -fx-max-height: 600px;
-    -fx-border-color: #FFFFFF;
-    -fx-text-fill: #FFFFFF;
+    -fx-border-color: black;
+    -fx-text-fill: black;
     -fx-font-size: 12Pt;
     -fx-border-width: 2px;
 
@@ -53,7 +85,7 @@
     -fx-background-size: stretch;
     -fx-padding: 0px 0px 55px 55px;
     -fx-text-fill: red;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
 }
 
 .buttonOpacity{
@@ -65,7 +97,7 @@
     -fx-min-width: 200;
     -fx-min-height: 300;
     -fx-background-size: stretch;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
     -fx-border-width: 2px;
 }
 
@@ -73,7 +105,7 @@
     -fx-pref-width: 150;
     -fx-pref-height: 240;
     -fx-background-size: stretch;
-    -fx-border-color: #FFFFFF;
+    -fx-border-color: black;
     -fx-border-width: 2px;
 }
 
@@ -191,7 +223,7 @@
 }
 
 .root {
-    -fx-background-image: url("../Backgrounds/metal_texture_2.jpg");
+    -fx-background-image: url("../Backgrounds/marmor_texture.jpg");
     -fx-background-size: stretch;
 
 }

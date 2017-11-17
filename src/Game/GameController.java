@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
 import Client_Server.GameObject;
 import Localisation.Localisator;
@@ -7,6 +8,8 @@ import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+
+import java.util.ArrayList;
 
 /**
  * Created by camillo.schweizer on 21.10.2017.
@@ -39,6 +42,45 @@ public class GameController {
             client.stopClient();
             Platform.exit();
             System.exit(0);
+        });
+
+        //Eventhändler für den Phase Button
+        gameView.phaseButton.setOnAction(event -> {
+            if(gameModel.getPlayer().isYourTurn()) {
+                gameModel.getPlayer().endPhase();
+                handCardController.updateHandcardsView();
+                player1LabelUpdate();
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+            }
+            if (gameModel.getPlayer().isTurnEnded()){
+                getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
+                gameModel.getPlayer().setTurnEnded(false);
+            }
+
+        });
+
+        //Eventhändler für den Money Button
+        //TODO: fix HANDCARDUPDATE
+        gameView.moneyButton.setOnAction(event -> {
+            if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
+                ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
+
+                for(Card card : tempList){
+                    noteFlowUpdate(card, gameModel.getPlayer(), 0, Client.getColor());
+                    GameObject gObject = new GameObject(gameModel.getPlayer(), card, 0 );
+                    this.client.sendObject(gObject);
+
+                }
+
+                player1LabelUpdate();
+                handCardController.updateHandcardsView();
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+
+            }
+
+
         });
     }
 

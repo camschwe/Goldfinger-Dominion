@@ -31,7 +31,7 @@ public class Player implements Serializable, Comparable{
         this.actions = 1;
         this.buys = 1;
         this.money = 0;
-        this.points = 0;
+        this.points = 3;
         this.yourTurn = true;
         this.turnEnded = false;
     }
@@ -166,9 +166,32 @@ public class Player implements Serializable, Comparable{
     //überprüft ob sich eine Aktionskarte in der Hand befindet
     public boolean handCardActionChecker(){
         for (Card card : handCards) {
-            if (card.getType().equals("action")) return true;
+            if (card.getType().equals("action")) {
+                return true;
+            }
         }
         return false;
+    }
+
+    public ArrayList<Card> playAllMoneyCards(){
+        for (Card card : this.handCards){
+            if(card.getType().equals("money")){
+                this.money += card.getValue();
+            }
+        }
+
+        int i = this.handCards.size() -1;
+        ArrayList<Card> tempList = new ArrayList<>();
+
+        while(i >= 0) {
+            if(handCards.get(i).getType().equals("money")){
+                tempList.add(Card.cardCopy(handCards.get(i)));
+                playDeck.add(handCards.get(i));
+                this.changeCardPlace(handCards.get(i), this.handCards, this.playDeck);
+            }
+            i--;
+        }
+        return tempList;
     }
 
 

@@ -68,7 +68,6 @@ public class LobbyView {
         root.setBottom(botBox);
         root.setRight(chatWindow.getRoot());
 
-        chatWindow.getSendButton().getStyleClass().add("chatButton");
         gridPane.add(participateLabel,0,0);
         gridPane.add(userLabel1,0,1);
         gridPane.add(userLabel2,0,2);
