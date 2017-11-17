@@ -71,6 +71,7 @@ public class LobbyController {
         });
 
         lobbyView.primaryStage.setOnCloseRequest(event -> {
+            client.stopClient();
             Platform.exit();
             System.exit(0);
         });
@@ -96,16 +97,5 @@ public class LobbyController {
         gameView.start();
         lobbyView.stop();
     }
-
-    /**public void startSpectator(){
-        Stage gameStage = new Stage();
-        gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
-        gameModel = new GameModel(client);
-        gameController = new GameController(gameView, localisator, gameModel, client);
-        client.setGameController(gameController);
-
-        gameView.start();
-        lobbyView.stop();
-    }**/
 
 }

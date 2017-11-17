@@ -7,7 +7,7 @@ import java.util.Collections;
 /**
  * Created by camillo.schweizer on 07.10.2017.
  */
-public class Player implements Serializable {
+public class Player implements Serializable, Comparable{
 
     /**
      * Spielerklassen mit Arrays für das GUI sowie Methoden für den Kauf und das ausspielen von Karten
@@ -291,4 +291,11 @@ public class Player implements Serializable {
         return("\n\n\n");
 
     }
+
+    @Override
+    public int compareTo(Object o) {
+        Player p = (Player) o;
+        return this.points - p.getPoints();
+    }
+
 }
