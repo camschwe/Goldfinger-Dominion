@@ -33,7 +33,7 @@ public class GameController {
         this.localisator = localisator;
         this.gameModel = gameModel;
         this.client = client;
-
+        gameView.pointLabel1.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameModel.getPlayer().getPoints());
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
@@ -144,6 +144,10 @@ public class GameController {
             }
             player2LabelUpdate(gameObject);
             noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
+            if (gameObject.getCard().getType().equals("point")){
+                gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints());
+            }
+            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
     }
     }
 
