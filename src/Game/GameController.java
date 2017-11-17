@@ -5,6 +5,7 @@ import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 /**
@@ -68,7 +69,7 @@ public class GameController {
     }
 
 
-    public void noteFlowUpdate(Card card, Player player, int type) {
+    public void noteFlowUpdate(Card card, Player player, int type, String color) {
         Text action;
 
         if (type == 0) {
@@ -80,6 +81,10 @@ public class GameController {
         Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
         Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
 
+        action.setStyle(color);
+        cardName.setStyle(color);
+        actions.setStyle(color);
+        buys.setStyle(color);
         Platform.runLater(() -> {
             gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
         });
@@ -95,7 +100,7 @@ public class GameController {
                 fieldCardUpdate(gameObject);
             }
             player2LabelUpdate(gameObject);
-            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
+            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
     }
     }
 

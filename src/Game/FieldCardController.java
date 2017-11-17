@@ -1,6 +1,7 @@
 package Game;
 
 import Client_Server.Chat.Message;
+import Client_Server.Client.Client;
 import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
@@ -125,9 +126,9 @@ public class FieldCardController {
                 buyUpdate(gameButton, player, card);
                 fieldCardsGlowingUpdate();
                 buttonAmountUpdate(gameButton);
-                gameController.noteFlowUpdate( card, player, 1);
+                gameController.noteFlowUpdate( card, player, 1, Client.getColor());
 
-                }
+             }
 
         });
     }

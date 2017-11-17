@@ -1,6 +1,7 @@
 package Game;
 
 import Client_Server.Chat.Message;
+import Client_Server.Client.Client;
 import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.event.EventHandler;
@@ -101,7 +102,7 @@ public class HandCardController {
             if(player.isYourTurn()){
                 cardSwitch(card, player);
                 if(!card.getType().equals("point")){
-                    gameController.noteFlowUpdate(card, player, 0);
+                    gameController.noteFlowUpdate(card, player, 0, Client.getColor());
                 }
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
