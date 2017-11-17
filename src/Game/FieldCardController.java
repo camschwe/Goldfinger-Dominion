@@ -157,6 +157,7 @@ public class FieldCardController {
         handCardController.updateHandcardsView();
         gameController.getClient().sendObject(new GameObject(player, card, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
+            gameController.getClient().sendObject(new Message(4, player.getPlayerName(), "EndGame"));
             gameView.stop();
         }
         if (player.isTurnEnded()){

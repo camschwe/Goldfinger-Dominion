@@ -2,6 +2,7 @@ package Client_Server.Server;
 
 import Client_Server.Chat.Message;
 import Client_Server.GameObject;
+import Game.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -23,6 +24,7 @@ public class Server extends Thread{
     private static HashSet<ObjectOutputStream> outputs = new HashSet<ObjectOutputStream>();
     private static ArrayList<String> colors = new ArrayList<>();
     private static ArrayList<String> gamePlayers = new ArrayList<>();
+    private static ArrayList<Player> endPlayers = new ArrayList<>();
     private static int actualPlayer = 0;
     private static boolean gameStarted = false;
 
@@ -95,13 +97,15 @@ public class Server extends Thread{
                                     break;
                                 case 6:
                                     nextPlayer();
+                                    sortEndPlayers();
                                     break;
                             }
                         }else if (o instanceof GameObject){
                             GameObject gameObject = (GameObject) o;
-                            System.out.println("Server receive:");
-                            System.out.print(gameObject.getPlayer());
-                            objOutput.reset();
+                            //System.out.println("Server receive:");
+                            //System.out.print(gameObject.getPlayer());
+                            //objOutput.reset();
+                            actualizeEndPlayers(gameObject.getPlayer());
                             sendToAll(gameObject);
 
 
@@ -145,6 +149,24 @@ public class Server extends Thread{
                 }else {
                     Message send = new Message(3, name, "invalid");
                     objOutput.writeObject(send);
+                }
+            }
+        }
+
+        // Actualize Player Object list
+        private void actualizeEndPlayers(Player receivedPlayer){
+            if (endPlayers.size() == 0){
+                endPlayers.add(receivedPlayer);
+            } else {
+                boolean playerActualized = false;
+                for (int i = 0; i < endPlayers.size(); i++) {
+                    if (endPlayers.get(i).getPlayerName().equals(receivedPlayer.getPlayerName())) {
+                        endPlayers.set(i, receivedPlayer);
+                        playerActualized = true;
+                    }
+                }
+                if (!playerActualized) {
+                    endPlayers.add(receivedPlayer);
                 }
             }
         }
@@ -199,6 +221,15 @@ public class Server extends Thread{
                 actualPlayer += 1;
             } else {
                 actualPlayer = 0;
+            }
+        }
+
+        // EndPlayers List sortieren
+        private void sortEndPlayers(){
+            Collections.sort(endPlayers);
+            System.out.println("Liste sortiert");
+            for (Player player : endPlayers){
+                System.out.println(player.getPlayerName() + " Punkte: " + player.getPoints());
             }
         }
     }

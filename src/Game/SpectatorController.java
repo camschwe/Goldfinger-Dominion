@@ -2,12 +2,14 @@ package Game;
 
 import Localisation.Localisator;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-
 import java.util.ArrayList;
+
+/**
+ * Created by Benjamin Probst on 10.11.2017.
+ **/
+
 
 public class SpectatorController {
     private GameView gameView;
@@ -21,10 +23,10 @@ public class SpectatorController {
         this.localisator = localisator;
         this.gameModel = gameModel;
         this.fieldCardController = fieldCardController;
-
         fillPlayer(1);
     }
 
+    // Methode zum hinzufügen der Spielerkarten, Aktiver Spieler und Letzter Spieler
     private void fillPlayer(int i) {
         for (int amount = 0; amount < initial; amount++) {
             Button button = new Button();
@@ -38,6 +40,7 @@ public class SpectatorController {
         }
     }
 
+    // Methode welche beim Abschluss des Zuges die Karten von oben nach unten verschiebt
     public void changePlayerCards(){
         ArrayList<Button> buttons = new ArrayList<>();
         for (Node child : gameView.player2Box.getChildren()) {
@@ -49,9 +52,9 @@ public class SpectatorController {
                 gameView.player1Box.getChildren().add(button);
                 addMouseEntered(button);
                 addMouseExited(button);
-
             }
             gameView.playerLabel1.setText(gameView.playerLabel2.getText());
+            gameView.pointLabel1.setText(gameView.pointLabel2.getText());
             fillPlayer(2);
         });
     }

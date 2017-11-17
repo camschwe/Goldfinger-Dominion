@@ -58,6 +58,7 @@ public class Client extends Thread {
     }
 
 
+    //Der Client hört auf Objekte vom Server
     public void run(){
         while (running){
             Object o = null;
@@ -88,7 +89,7 @@ public class Client extends Thread {
         return this.clientName;
     }
 
-
+    // Methode um das erhaltene Objekt zu verarbeiten
     public void handleObject(Object o){
         if (o instanceof Message){
             Message message = (Message) o;
@@ -232,6 +233,13 @@ public class Client extends Thread {
     }
 
     public void stopClient(){
+        sendObject(new Message(2, this.clientName, "left", this.color));
+        try {
+            objOutput.close();
+            objInput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         running = false;
     }
 

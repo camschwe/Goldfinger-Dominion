@@ -36,6 +36,7 @@ public class GameController {
         gameView.playerLabel1.setText(client.getClientName());
 
         gameView.gameStage.setOnCloseRequest(event -> {
+            client.stopClient();
             Platform.exit();
             System.exit(0);
         });
@@ -177,7 +178,6 @@ public class GameController {
 
         Platform.runLater(() -> {
             gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
-
 
             gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
             if(gameModel.getPlayer().isActionPhase()){
