@@ -12,6 +12,7 @@ public class GameObject implements Serializable {
     private Player player;
     private Card card;
     private int action;
+    private String color;
 
 
     //Action 0 = gespielt, Action 1 = gekauft
@@ -19,6 +20,7 @@ public class GameObject implements Serializable {
         this.player = player;
         this.card = card;
         this.action = action;
+        this.color = "!valid";
 
     }
 
@@ -50,5 +52,13 @@ public class GameObject implements Serializable {
 
     public void setAction(int action) {
         this.action = action;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

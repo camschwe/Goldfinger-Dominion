@@ -114,6 +114,9 @@ public class Player implements Serializable {
         this.putDeck.add(card);
         this.money -= card.getCost();
         this.buys -= 1;
+        if(card.getType().equals("point")){
+            this.points += card.getValue();
+        }
         if(this.buys < 1){
             this.endPhase();
         }
