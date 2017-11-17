@@ -2,8 +2,10 @@ package Game;
 
 import Localisation.Localisator;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
@@ -45,9 +47,32 @@ public class SpectatorController {
             gameView.player1Box.getChildren().clear();
             for (Button button : buttons){
                 gameView.player1Box.getChildren().add(button);
+                addMouseEntered(button);
+                addMouseExited(button);
+
             }
             gameView.playerLabel1.setText(gameView.playerLabel2.getText());
             fillPlayer(2);
+        });
+    }
+
+    /**
+     * Eventhändler für Entered, Exited und Klicked
+     */
+
+    //Action Event Handcards Mouse Entered
+    public void addMouseEntered(Button gameButton){
+        gameButton.setOnMouseEntered(mouseEvent -> {
+            gameButton.getStyleClass().remove("mediumButton");
+            gameButton.getStyleClass().add("bigButton");
+        });
+    }
+
+    // Action Event Handcards Mouse Left
+    public void addMouseExited(Button gameButton){
+        gameButton.setOnMouseExited(mouseEvent -> {
+            gameButton.getStyleClass().remove("bigButton");
+            gameButton.getStyleClass().add("mediumButton");
         });
     }
 }
