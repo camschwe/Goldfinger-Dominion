@@ -41,6 +41,7 @@ public class FieldCardController {
 
         if (!gameController.getClient().isGameStarted()) {
             handCardController = new HandCardController(gameView, localisator, gameModel, gameController, this);
+            gameController.getClient().sendObject(gameModel.getPlayer());
         } else{
             spectatorController = new SpectatorController(gameView, localisator, gameModel, this);
         }
@@ -162,7 +163,7 @@ public class FieldCardController {
         gameController.getClient().sendObject(new GameObject(player, card, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameController.getClient().sendObject(new Message(4, player.getPlayerName(), "EndGame"));
-            gameView.stop();
+            //gameView.stop();
         }
         if (player.isTurnEnded()){
             gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));

@@ -36,7 +36,7 @@ public class LobbyController {
             //TODO: Add player count
             if (!client.isGameStarted()) {
                 if (client.isServer()) {
-                    client.sendObject(new Message(4, client.getClientName(), "started"));
+                    client.sendObject(new Message(4, client.getClientName(), "start"));
                 } else {
                     if (lobbyView.startButton.getText().equals(localisator.getResourceBundle().getString("start"))) {
                         client.sendObject(new Message(1, client.getClientName(), "ready", Client.getColor()));

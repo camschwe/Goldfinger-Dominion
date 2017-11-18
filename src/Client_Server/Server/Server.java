@@ -89,11 +89,16 @@ public class Server extends Thread{
                                     removeClient();
                                     break;
                                 case 4:
-                                    setGamePlayers();
-                                    sendMessageToAll(message);
-                                    Collections.shuffle(gamePlayers);
-                                    nextPlayer();
-                                    gameStarted = true;
+                                    if (message.getMessage().equals("start")) {
+                                        setGamePlayers();
+                                        sendMessageToAll(message);
+                                        Collections.shuffle(gamePlayers);
+                                        nextPlayer();
+                                        gameStarted = true;
+                                    } else if (message.getMessage().equals("ended")){
+                                        sendMessageToAll(message);
+                                        sendToAll(endPlayers);
+                                    }
                                     break;
                                 case 6:
                                     nextPlayer();
@@ -104,8 +109,10 @@ public class Server extends Thread{
                             GameObject gameObject = (GameObject) o;
                             actualizeEndPlayers(gameObject.getPlayer());
                             sendToAll(gameObject);
-
-
+                        } else if (o instanceof Player){
+                            synchronized (endPlayers){
+                                endPlayers.add((Player) o);
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR");
