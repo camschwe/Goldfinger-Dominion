@@ -105,12 +105,10 @@ public class ChatWindow {
     // Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
     public void actualizeChatFlow(Message message){
         System.out.println(message);
-        Text user = new Text(message.getClientName());
+        Text user = new Text(message.getClientName() + ": ");
         user.setStyle(message.getColor());
-        Text content = new Text(": " + message.getMessage() + newLine);
-        Platform.runLater(() -> {
-            txtChatFlow.getChildren().addAll(user, content);
-        });
+        Text content = new Text(message.getMessage() + newLine);
+        Platform.runLater(() -> txtChatFlow.getChildren().addAll(user, content));
 
     }
 

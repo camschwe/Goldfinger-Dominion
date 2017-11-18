@@ -24,7 +24,7 @@ public class GameView {
      * View für das Game mit der GameStage in 1080p - skalierbarkeit geplant auf andere Seitenverhältnisse
      */
     private Localisator localisator;
-    private ChatWindow chatWindow;
+    protected ChatWindow chatWindow;
     public Button actionButton, phaseButton, moneyButton, putStapelPlayer1;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2, turnLabel, playerLabel;

@@ -6,6 +6,8 @@ import Client_Server.GameObject;
 import Localisation.Localisator;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -58,6 +60,22 @@ public class GameController {
                 gameModel.getPlayer().setTurnEnded(false);
             }
 
+        });
+
+        gameView.chatWindow.getSendButton().setOnAction(event -> {
+            if (gameView.chatWindow.getTxtMessage().getText() == null || gameView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
+            }else {
+                String text = gameView.chatWindow.getMessage();
+                Message message = new Message(1, client.getClientName(), text, Client.getColor());
+                client.sendObject(message);
+                gameView.chatWindow.clearMessageField();
+            }
+        });
+
+        gameView.chatWindow.getTxtMessage().setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode().equals(KeyCode.ENTER)){
+                gameView.chatWindow.getSendButton().fire();
+            }
         });
 
         //Eventhändler für den Money Button
@@ -147,7 +165,6 @@ public class GameController {
             if (gameObject.getCard().getType().equals("point")){
                 gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints());
             }
-            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction());
     }
     }
 
