@@ -130,9 +130,15 @@ public class Client extends Thread {
                     break;
                 case 5:
                     turn = message.getClientName().equals(this.clientName);
-                    if (gameController != null){
-                        gameController.newTurn(turn);
+                    while (actualController != 2){
+                        /**Waiting for gameController setting up**/
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    gameController.newTurn(turn);
                     if (gameStarted){
                         gameController.getFieldCardController().getSpectatorController().changePlayerCards();
                     }

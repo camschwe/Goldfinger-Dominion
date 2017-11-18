@@ -256,8 +256,9 @@ public class GameController {
     }
 
     public void newTurn(boolean turn){
+        System.out.println("/nYour turn/n");
         gameModel.getPlayer().setYourTurn(turn);
-        handCardController.updateHandCardsView();
+        Platform.runLater(() -> fieldCardController.getHandCardController().updateHandCardsView());
     }
 
     public GameModel getGameModel() {
