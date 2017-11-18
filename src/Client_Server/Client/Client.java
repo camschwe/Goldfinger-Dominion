@@ -5,6 +5,7 @@ import Client_Server.Chat.Message;
 import Client_Server.GameObject;
 import Game.GameController;
 import Game.HandCardController;
+import Game.Player;
 import Lobby.LobbyController;
 import javafx.application.Platform;
 
@@ -123,6 +124,8 @@ public class Client extends Thread {
                         Platform.runLater(() -> lobbyController.startGame());
                     } else if (message.getMessage().equals("running")){
                         gameStarted = true;
+                    } else if (message.getMessage().equals("ended")){
+                        gameController.endGame();
                     }
                     break;
                 case 5:
@@ -139,9 +142,10 @@ public class Client extends Thread {
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
-
             Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
-
+        }
+        if (o instanceof ArrayList){
+            gameController.endView((ArrayList<Player>) o);
         }
     }
 

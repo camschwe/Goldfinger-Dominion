@@ -270,4 +270,15 @@ public class GameController {
     public FieldCardController getFieldCardController() {
         return fieldCardController;
     }
+
+    public void endView(ArrayList<Player> o) {
+        /**
+         * TODO Camillo
+         * End View mit ArrayList abfüllen und starten.
+         */
+    }
+
+    public void endGame() {
+        gameModel.getPlayer().setYourTurn(false);
+    }
 }
