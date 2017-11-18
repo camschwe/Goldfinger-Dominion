@@ -168,6 +168,11 @@ public class FieldCardController {
             gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
             player.setTurnEnded(false);
         }
+
+        fieldCardsGlowingUpdate(resourceButtons);
+        fieldCardsGlowingUpdate(actionButtons);
+        handCardController.updateHandCardsView();
+
     }
 
     /**
@@ -179,7 +184,8 @@ public class FieldCardController {
 
         for(int i = 0; i<gameButtons.size(); i++) {
             gameButtons.get(i).getStyleClass().remove("buttonOnAction");
-            if (gameModel.getPlayer().isBuyPhase() &&
+            if (gameModel.getPlayer().isYourTurn() &&
+                    gameModel.getPlayer().isBuyPhase() &&
                     gameButtons.get(i).getAmount() > 0 &&
                     gameButtons.get(i).getCard().getCost() <= gameModel.getPlayer().getMoney()) {
                 gameButtons.get(i).getStyleClass().add("buttonOnAction");

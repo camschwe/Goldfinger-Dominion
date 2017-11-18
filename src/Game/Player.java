@@ -32,7 +32,7 @@ public class Player implements Serializable, Comparable{
         this.buys = 1;
         this.money = 0;
         this.points = 3;
-        this.yourTurn = true;
+        this.yourTurn = false;
         this.turnEnded = false;
     }
 
@@ -146,6 +146,7 @@ public class Player implements Serializable, Comparable{
         this.draw(5);
         this.phaseChanger();
         this.turnEnded = true;
+        this.yourTurn = false;
     }
 
     //überspringt die Aktionsphase, insofern keine Aktionskarte in der Hand

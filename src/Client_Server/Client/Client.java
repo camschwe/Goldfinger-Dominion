@@ -128,7 +128,7 @@ public class Client extends Thread {
                 case 5:
                     turn = message.getClientName().equals(this.clientName);
                     if (gameController != null){
-                        gameController.getGameModel().getPlayer().setYourTurn(turn);
+                        gameController.newTurn(turn);
                     }
                     if (gameStarted){
                         gameController.getFieldCardController().getSpectatorController().changePlayerCards();
@@ -235,7 +235,7 @@ public class Client extends Thread {
     }
 
     public void stopClient(){
-        sendObject(new Message(2, this.clientName, "left", this.color));
+        sendObject(new Message(2, this.clientName, "left", color));
         try {
             objOutput.close();
             objInput.close();

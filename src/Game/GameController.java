@@ -255,6 +255,11 @@ public class GameController {
 
     }
 
+    public void newTurn(boolean turn){
+        gameModel.getPlayer().setYourTurn(turn);
+        handCardController.updateHandCardsView();
+    }
+
     public GameModel getGameModel() {
         return gameModel;
     }
@@ -270,4 +275,6 @@ public class GameController {
     public FieldCardController getFieldCardController() {
         return fieldCardController;
     }
+
+
 }

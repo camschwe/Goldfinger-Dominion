@@ -41,8 +41,9 @@ public class HandCardController {
     //TODO: Aktualisierung am Zugende implementieren
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
+        System.out.println(gameModel.getPlayer().isYourTurn());
+        System.out.println(gameModel.getPlayer().getPlayerName());
 
-        System.out.println("Clear");
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
             GameButton gameButton = new GameButton(gameModel.getPlayer().getHandCards().get(i));
@@ -53,7 +54,6 @@ public class HandCardController {
             glowingUpdateHandCards(gameButton);
         }
 
-        System.out.println("Added");
     }
 
     /**
@@ -166,13 +166,15 @@ public class HandCardController {
 
     public boolean actionChecker(Card card, Player player){
         return card.getType().equals("action") &&
+                player.isYourTurn() &&
                 player.isActionPhase() &&
                 player.getActions() > 0;
 
     }
 
     public boolean moneyChecker(Card card, Player player){
-        return card.getType().equals("money")
-                && player.isBuyPhase();
+        return card.getType().equals("money") &&
+                 player.isYourTurn() &&
+                 player.isBuyPhase();
     }
 }
