@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 /**
@@ -57,17 +58,18 @@ public class Client extends Thread {
 
     }
 
-
     //Der Client hört auf Objekte vom Server
     public void run(){
-        while (running){
+        while (running) {
             Object o = null;
             try {
                 try {
                     o = objInput.readObject();
-                }catch (EOFException e) {
+                } catch (EOFException e) {
                     e.printStackTrace();
-                }catch(Exception e){
+                } catch (SocketException e){
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 System.out.println("Objekt empfangen: " + o);

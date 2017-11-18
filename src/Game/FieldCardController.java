@@ -153,6 +153,9 @@ public class FieldCardController {
         gameButton.setAmount(gameButton.getAmount() - 1);
         Card cardCopy = Card.cardCopy(card);
         player.buyCard(cardCopy);
+        if (cardCopy.getType().equals("point")){
+            gameView.pointLabel1.setText(localisator.getResourceBundle().getString("point")+ ":\t" + player.getPoints());
+        }
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
         gameController.player1LabelUpdate();
         handCardController.updateHandCardsView();
