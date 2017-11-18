@@ -6,7 +6,7 @@
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-background-insets: 1px;
-    -fx-pref-width: 300;
+    -fx-pref-width: 500;
 }
 
 .button {
@@ -65,7 +65,8 @@
 .text-field {
     -fx-font-size: 12Pt;
     -fx-border-color: white;
-    -fx-padding: 10px 60px;
+    -fx-padding: 10px 20px;
+    -fx-pref-width: 400;
 }
 
 

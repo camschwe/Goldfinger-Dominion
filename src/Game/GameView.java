@@ -27,7 +27,7 @@ public class GameView {
     private ChatWindow chatWindow;
     public Button actionButton, phaseButton, moneyButton, putStapelPlayer1;
     public HBox player1Box, player2Box;
-    public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2;
+    public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2, turnLabel, playerLabel;
     public GridPane resourcePane, actionPane;
     protected TextFlow noteFlow;
     public String newLine;
@@ -102,6 +102,11 @@ public class GameView {
          * Chat, TextArea und PhaseButton sowie MoneyButton
          */
 
+        turnLabel = new Label(localisator.getResourceBundle().getString("round")+ ":\t1");
+        turnLabel.getStyleClass().add("infoLabel");
+        playerLabel = new Label(localisator.getResourceBundle().getString("player")+ ":\tSpieler");
+        playerLabel.getStyleClass().add("infoLabel");
+
         noteFlow = new TextFlow();
 
         newLine = System.getProperty("line.separator");
@@ -109,10 +114,12 @@ public class GameView {
         scrollPane.setContent(noteFlow);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vvalueProperty().bind(noteFlow.heightProperty());
-        chatBox.getChildren().addAll(scrollPane, chatWindow.getRoot());
+        scrollPane.getStyleClass().add("logWindow");
+        chatBox.getChildren().addAll(turnLabel, playerLabel, scrollPane, chatWindow.getRoot());
         chatWindow.getVBox().setPadding(new Insets(0, 0, 0, 0));
-        chatBox.setPadding(new Insets(20, 0, 0, 20));
-        chatBox.setSpacing(20);
+        chatWindow.getScrollPane().getStyleClass().add("chatWindow");
+        chatBox.setPadding(new Insets(100, 5, 0, 20));
+        chatBox.setSpacing(40);
 
 
 

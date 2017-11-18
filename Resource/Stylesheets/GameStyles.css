@@ -1,6 +1,5 @@
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
-
 }
 
 .scroll-pane {
@@ -8,8 +7,14 @@
     -fx-border-color: black;
     -fx-background-insets: 1px;
     -fx-pref-width: 200;
-    -fx-pref-height: 500;
+}
 
+.chatWindow{
+    -fx-pref-height: 200;
+}
+
+.logWindow{
+    -fx-pref-height: 400;
 }
 
 .chatButton {
@@ -18,7 +23,7 @@
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
     -fx-border-color: black;
-    -fx-pref-width: 50px;
+    -fx-pref-width: 70px;
 }
 
 .chatButton:hover{
@@ -28,7 +33,7 @@
 .text-field {
     -fx-font-size: 12Pt;
     -fx-border-color: black;
-    -fx-padding: 10px 20px;
+    -fx-padding: 10px 10px;
 }
 
 .buttonOnAction {
@@ -54,6 +59,16 @@
     -fx-padding: 14px 40px;
     -fx-border-color: black;
     -fx-pref-width: 150;
+    -fx-padding: 0px 0px 0px 10px
+
+}
+
+.infoLabel {
+    -fx-text-fill: black;
+    -fx-font-size: 20Pt;
+    -fx-padding: 14px 40px;
+    -fx-border-color: black;
+    -fx-pref-width: 280;
     -fx-padding: 0px 0px 0px 10px
 
 }
