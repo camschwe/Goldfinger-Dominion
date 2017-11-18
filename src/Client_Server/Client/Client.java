@@ -120,7 +120,7 @@ public class Client extends Thread {
                     }
                     break;
                 case 4:
-                    if (message.getMessage().equals("started")){
+                    if (message.getMessage().equals("start")){
                         Platform.runLater(() -> lobbyController.startGame());
                     } else if (message.getMessage().equals("running")){
                         gameStarted = true;
