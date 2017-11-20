@@ -41,10 +41,9 @@ public class Client extends Thread {
     private static boolean reset = true;
     private boolean turn = false;
     private boolean gameStarted = false;
-
-
-
     private boolean isServer = false;
+    private boolean connected = false;
+    private boolean failure = false;
 
     public Client(String serverAdresse, String clientName){
         try {
@@ -53,8 +52,10 @@ public class Client extends Thread {
             serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
             objInput = new ObjectInputStream(serverSocket.getInputStream());
+            connected = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            failure = true;
         }
 
     }
@@ -257,5 +258,13 @@ public class Client extends Thread {
 
     public static String getColor(){
         return Client.color;
+    }
+
+    public boolean isConnected(){
+        return connected;
+    }
+
+    public boolean isFailure() {
+        return failure;
     }
 }

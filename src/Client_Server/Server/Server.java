@@ -186,6 +186,8 @@ public class Server extends Thread{
         private void removeClient() throws IOException {
             players.remove(name);
             outputs.remove(objOutput);
+            objInput.close();
+            objOutput.close();
             sendPlayerList();
         }
 

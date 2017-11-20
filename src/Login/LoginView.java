@@ -3,10 +3,7 @@ package Login;
 import Localisation.Localisator;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -21,9 +18,11 @@ public class LoginView {
     protected Stage primaryStage;
     protected Button hostButton, joinButton;
     protected TextField userNameField;
-    protected Label userNameLabel;
+    protected Label userNameLabel, connectingLabel;
     protected ComboBox<String> switchBox;
     protected Localisator localisator;
+    protected TextInputDialog dialog;
+    protected Alert conError;
 
 
     public LoginView(Stage primaryStage, Localisator localisator) {
@@ -31,6 +30,8 @@ public class LoginView {
         this.localisator = localisator;
 
         userNameLabel = new Label(localisator.getResourceBundle().getString("username"));
+        connectingLabel = new Label(localisator.getResourceBundle().getString("connecting"));
+        connectingLabel.setVisible(false);
         hostButton = new Button(localisator.getResourceBundle().getString("hosting"));
         joinButton = new Button(localisator.getResourceBundle().getString("join"));
         userNameField = new TextField();
@@ -44,6 +45,17 @@ public class LoginView {
                 "Deutsch",
                 "Schwiizerdütsch"
         );
+
+        conError = new Alert(Alert.AlertType.ERROR);
+        dialog = new TextInputDialog("localhost");        // TODO (localisator.getResourceBundle().getString("address"));
+
+        dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
+        dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));
+        dialog.setContentText(localisator.getResourceBundle().getString("addressText"));
+
+        conError.setTitle(localisator.getResourceBundle().getString("conErrorTitle"));
+        conError.setHeaderText(localisator.getResourceBundle().getString("conErrorHeader"));
+        conError.setContentText(localisator.getResourceBundle().getString("conErrorText"));
 
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();

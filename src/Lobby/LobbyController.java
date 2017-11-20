@@ -10,6 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * Created by Benjamin Probst on 06.10.2017.
  */
@@ -103,6 +106,17 @@ public class LobbyController {
 
         gameView.start();
         lobbyView.stop();
+    }
+
+    public void showAddress(){
+        if (client.isServer()){
+            try {
+                //lobbyView.addressLabel.setText(InetAddress.getLocalHost());
+                System.out.println(InetAddress.getLocalHost().getHostAddress());
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
