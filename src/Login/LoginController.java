@@ -35,14 +35,15 @@ public class LoginController {
 
         loginView.joinButton.setOnAction(event -> {
 
-            Optional<String> address = loginView.dialog.showAndWait();
-            if (address.isPresent()){
-                if (address.get().equals("localhost") || loginModel.checkIP(address.get())){
-                    if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
-                        loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
-                        loginView.userNameField.getStyleClass().clear();
-                        loginView.userNameField.getStyleClass().add("userNameNeeded");
-                    } else {
+            if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
+                loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
+                loginView.userNameField.getStyleClass().clear();
+                loginView.userNameField.getStyleClass().add("userNameNeeded");
+            } else {
+                Optional<String> address = loginView.dialog.showAndWait();
+                if (address.isPresent()){
+                    if (address.get().equals("localhost") || loginModel.checkIP(address.get())){
+
                         clientName = loginView.userNameField.getText();
                         loginView.connectingLabel.setVisible(true);
                         client = new Client(address.get(), clientName);
