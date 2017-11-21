@@ -27,6 +27,7 @@ public class Server extends Thread{
     private static ArrayList<Player> endPlayers = new ArrayList<>();
     private static int actualPlayer = 0;
     private static boolean gameStarted = false;
+    private static boolean gameEnded = false;
 
     public Server() throws Exception{
         colors.add("-fx-fill: red");
@@ -90,12 +91,14 @@ public class Server extends Thread{
                                     break;
                                 case 4:
                                     if (message.getMessage().equals("start")) {
+                                        gameEnded = false;
                                         setGamePlayers();
                                         sendMessageToAll(message);
                                         Collections.shuffle(gamePlayers);
                                         nextPlayer();
                                         gameStarted = true;
-                                    } else if (message.getMessage().equals("ended")){
+                                    } else if (message.getMessage().equals("EndGame")){
+                                        gameEnded = true;
                                         sendMessageToAll(message);
                                         sendToAll(endPlayers);
                                     }
@@ -222,11 +225,13 @@ public class Server extends Thread{
 
         // Der nächste Spieler wird gesendet
         private void nextPlayer() throws IOException {
-            sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
-            if (actualPlayer < gamePlayers.size()-1) {
-                actualPlayer += 1;
-            } else {
-                actualPlayer = 0;
+            if (!gameEnded) {
+                sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
+                if (actualPlayer < gamePlayers.size() - 1) {
+                    actualPlayer += 1;
+                } else {
+                    actualPlayer = 0;
+                }
             }
         }
 
