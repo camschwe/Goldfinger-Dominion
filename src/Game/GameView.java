@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -237,6 +238,7 @@ public class GameView {
         gameStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
         gameStage.setTitle("Goldfinger Dominion");
+        gameStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
         //gameStage.setFullScreen(true);
 
     }

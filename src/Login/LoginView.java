@@ -4,6 +4,7 @@ import Localisation.Localisator;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -76,6 +77,7 @@ public class LoginView {
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/LoginStyles.css").toExternalForm());
+        primaryStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
         primaryStage.setTitle("Goldfinger Dominion");
         primaryStage.setMaxWidth(1000);
         primaryStage.setMaxHeight(800);
