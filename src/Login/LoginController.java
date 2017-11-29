@@ -3,10 +3,14 @@ package Login;
 import Client_Server.Client.Client;
 import Client_Server.Chat.Message;
 import Client_Server.Server.StartServer;
+import Dialogs.DialogController;
+import Dialogs.DialogModel;
+import Dialogs.DialogView;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
 import Localisation.Localisator;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.util.Optional;
@@ -35,17 +39,32 @@ public class LoginController {
 
         loginView.joinButton.setOnAction(event -> {
 
+
+
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
                 loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
                 loginView.userNameField.getStyleClass().clear();
                 loginView.userNameField.getStyleClass().add("userNameNeeded");
             } else {
-                Optional<String> address = loginView.dialog.showAndWait();
+                DialogView dialogView = new DialogView("Please enter IP Address", "localhost", "IP Address", localisator);
+                DialogController dialogController = new DialogController(dialogView, new DialogModel(), localisator, this);
+                dialogView.start();
+
+                /**Optional<String> address = loginView.dialog.showAndWait();
+
+                Platform.runLater(() -> loginView.connectingLabel.setVisible(true));
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 if (address.isPresent()){
                     if (address.get().equals("localhost") || loginModel.checkIP(address.get())){
 
                         clientName = loginView.userNameField.getText();
-                        loginView.connectingLabel.setVisible(true);
+
                         client = new Client(address.get(), clientName);
                         if (client.isConnected()) {
                             client.start();
@@ -74,7 +93,7 @@ public class LoginController {
                             loginView.conError.show();
                         }
                     }
-                }
+                }**/
             }
         });
 
@@ -108,41 +127,83 @@ public class LoginController {
         });
     }
 
-        public void languageChecker(String language) {
+    public void languageChecker(String language) {
 
-            switch (language) {
-                case "Schwiizerdütsch":
-                    localisator.switchCH();
-                    break;
-                case "Deutsch":
-                    localisator.switchGER();
-                    break;
-                case "English":
-                    localisator.switchENG();
-                    break;
-                default:
-                    break;
+        switch (language) {
+            case "Schwiizerdütsch":
+                localisator.switchCH();
+                break;
+            case "Deutsch":
+                localisator.switchGER();
+                break;
+            case "English":
+                localisator.switchENG();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void languageUpdate(){
+
+        loginView.userNameLabel.setText(localisator.getResourceBundle().getString("username"));
+        loginView.hostButton.setText(localisator.getResourceBundle().getString("hosting"));
+        loginView.joinButton.setText(localisator.getResourceBundle().getString("join"));
+        loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
+        loginView.userNameField.getStyleClass().clear();
+        loginView.userNameField.getStyleClass().add("text-field");
+        loginView.switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
+        loginView.connectingLabel.setText(localisator.getResourceBundle().getString("connecting"));
+        loginView.dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
+        loginView.dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));
+        loginView.dialog.setContentText(localisator.getResourceBundle().getString("addressText"));
+        loginView.conError.setTitle(localisator.getResourceBundle().getString("conErrorTitle"));
+        loginView.conError.setHeaderText(localisator.getResourceBundle().getString("conErrorHeader"));
+        loginView.conError.setContentText(localisator.getResourceBundle().getString("conErrorText"));
+    }
+
+    public String connect(String address){
+        clientName = loginView.userNameField.getText();
+
+        client = new Client(address, clientName);
+        if (client.isConnected()) {
+            client.start();
+        }
+        loginView.connectingLabel.setVisible(false);
+
+        if (!client.isFailure()) {
+            Message user = new Message(0, clientName, "login");
+            client.sendObject(user);
+            while (!client.isChecked()) {
+                //Waiting until server response for username validation
             }
+            if (client.isValid()) {
+                lobbyView = new LobbyView(primaryStage, localisator);
+                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
+                lobbyModel = new LobbyModel();
+                client.setLobbyController(lobbyController);
+                client.actualizePlayers();
+                return "successful";
+            } else {
+                loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("validUsername"));
+                loginView.userNameField.getStyleClass().clear();
+                loginView.userNameField.getStyleClass().add("text-field");
+                client.resetChecked();
+                return "username used";
+            }
+
+        } else {
+            return "Error connecting";
         }
+    }
 
-        public void languageUpdate(){
+    public LoginModel getLoginModel() {
+        return loginModel;
+    }
 
-            loginView.userNameLabel.setText(localisator.getResourceBundle().getString("username"));
-            loginView.hostButton.setText(localisator.getResourceBundle().getString("hosting"));
-            loginView.joinButton.setText(localisator.getResourceBundle().getString("join"));
-            loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
-            loginView.userNameField.getStyleClass().clear();
-            loginView.userNameField.getStyleClass().add("text-field");
-            loginView.switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
-            loginView.connectingLabel.setText(localisator.getResourceBundle().getString("connecting"));
-            loginView.dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
-            loginView.dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));
-            loginView.dialog.setContentText(localisator.getResourceBundle().getString("addressText"));
-            loginView.conError.setTitle(localisator.getResourceBundle().getString("conErrorTitle"));
-            loginView.conError.setHeaderText(localisator.getResourceBundle().getString("conErrorHeader"));
-            loginView.conError.setContentText(localisator.getResourceBundle().getString("conErrorText"));
-        }
-
+    public LoginView getLoginView() {
+        return loginView;
+    }
 }
 
 
