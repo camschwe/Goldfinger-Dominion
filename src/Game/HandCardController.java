@@ -41,8 +41,6 @@ public class HandCardController {
     //TODO: Aktualisierung am Zugende implementieren
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
-        System.out.println(gameModel.getPlayer().isYourTurn());
-        System.out.println(gameModel.getPlayer().getPlayerName());
 
 
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
@@ -88,7 +86,8 @@ public class HandCardController {
             Player player = gameModel.getPlayer();
             Card card = gameButton.getCard();
 
-            if(player.isYourTurn()){
+
+            if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
                 cardSwitch(card, player);
                 if(!card.getType().equals("point")){
                     gameController.noteFlowUpdate(card, player, 0, Client.getColor());
@@ -112,11 +111,8 @@ public class HandCardController {
 
     //Switch zur überprüfung der gedrückten Handkarte
     public void cardSwitch(Card card, Player player ){
-        String cardName = "!Valid";
+        String cardName = card.getName();
 
-        if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
-            cardName = card.getName();
-        }
 
         switch (cardName) {
             case "copper":
@@ -161,6 +157,7 @@ public class HandCardController {
         Player player = gameModel.getPlayer();
         if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
             gameButton.getStyleClass().add("buttonOnAction");
+            System.out.println("Checked");
         }
     }
 

@@ -50,10 +50,14 @@ public class GameController {
         gameView.phaseButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
-                handCardController.updateHandCardsView();
-                player1LabelUpdate();
-                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
-                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+
+                Platform.runLater(() -> {
+                    handCardController.updateHandCardsView();
+                    player1LabelUpdate();
+                    fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
+                    fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+                    });
+
             }
             if (gameModel.getPlayer().isTurnEnded()){
                 getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
@@ -79,7 +83,6 @@ public class GameController {
         });
 
         //Eventhändler für den Money Button
-        //TODO: fix HANDCARDUPDATE
         gameView.moneyButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
                 ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
