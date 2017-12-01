@@ -2,6 +2,8 @@ package Game;
 
 import java.io.Serializable;
 
+import static sun.audio.AudioPlayer.player;
+
 /**
  * Created by camillo.schweizer on 13.10.2017.
  */
@@ -38,7 +40,7 @@ public class Card implements Serializable {
     public void village(Player player){
         player.draw(1);
         player.setActions(player.getActions() + 1);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
 
     }
 
@@ -46,32 +48,91 @@ public class Card implements Serializable {
         player.setMoney(player.getMoney()+2);
         player.setBuys(player.getBuys()+1);
         player.setActions(player.getActions() + 1);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
     }
 
     public void smithy(Player player){
         player.draw(3);
         player.setActions(player.getActions()- 1);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
     }
 
     public void market(Player player){
         player.draw(1);
         player.setActions(player.getActions()+1);
         player.setMoney(player.getMoney()+1);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
     }
 
     public void laboratory(Player player){
         player.draw(2);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
     }
 
     public void lumberjack(Player player){
         player.setMoney(player.getMoney()+2);
         player.setActions(player.getActions() - 1);
         player.setBuys(player.getBuys()+1);
-        this.actionSupport(this, player);
+        actionSupport(this, player);
+    }
+
+    public void adventurer(Player player){
+        int counter = 0;
+
+
+        while(counter<2){
+            if(player.getDrawDeck().size()<1){
+                player.changeDecks(player.getPutDeck(), player.getDrawDeck());
+            }
+            if(player.getDrawDeck().get(0).getType().equals("money")){
+                player.draw(1);
+                counter++;
+            }else{
+                player.getPlayDeck().add(player.getDrawDeck().get(0));
+                player.getDrawDeck().remove(0);
+
+            }
+        }
+        player.setActions(player.getActions()- 1);
+        actionSupport(this, player);
+    }
+
+    public void moneylender(Player player){
+
+        for(int i= 0; i<player.getHandCards().size(); i++){
+            if(player.getHandCards().get(i).getType().equals("money") && player.getHandCards().get(i).getValue()==1){
+                player.getHandCards().remove(i);
+                player.setMoney(player.getMoney()+3);
+                i = player.getHandCards().size();
+            }
+        }
+        player.setActions(player.getActions()- 1);
+        actionSupport(this, player);
+    }
+
+    public void chancellor(Player player){
+        player.setMoney(player.getMoney()+2);
+        player.setActions(player.getActions()- 1);
+        for(int i = player.getDrawDeck().size()-1; i>=0 ; i--){
+            player.getPutDeck().add(player.getDrawDeck().get(i));
+            player.getDrawDeck().remove(i);
+        }
+        actionSupport(this, player);
+    }
+
+    public boolean magpie (Player player){
+        player.draw(1);
+
+        if(player.getDrawDeck().get(0).getType().equals("money")){
+            player.draw(1);
+            actionSupport(this, player);
+            return false;
+        }else{
+            player.getHandCards().add(cardCopy(this));
+            actionSupport(this, player);
+            return true;
+        }
+
     }
 
 
@@ -81,6 +142,7 @@ public class Card implements Serializable {
             player.endPhase();
         }
     }
+
 
     /**
      * Methode für das ausspielen einer Geldkarte

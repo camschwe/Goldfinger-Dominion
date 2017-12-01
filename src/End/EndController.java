@@ -44,6 +44,10 @@ public class EndController {
             endView.resultLabel.setText(localisator.getResourceBundle().getString("won"));
         }
 
+        //TODO:ADD TURNS
+
+        endView.turnLabel.setText(localisator.getResourceBundle().getString("turnsDone"));
+
         for(int i= 0; i<playerList.size(); i++) {
 
             int y= i;
@@ -57,8 +61,6 @@ public class EndController {
             if(i>3){
                 j=1;
             }
-
-
 
 
 
@@ -94,7 +96,6 @@ public class EndController {
 
         }
 
-
     }
 
 
@@ -125,8 +126,6 @@ public class EndController {
             if(i>3){
                 j=1;
             }
-
-
 
 
 

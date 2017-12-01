@@ -196,19 +196,36 @@ public class GameController {
         Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
 
-            for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
-                System.out.println(gameObject.getPlayer().getPlayDeck().size());
+                for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
+                    System.out.println(gameObject.getPlayer().getPlayDeck().size());
 
-                if(i >= gameObject.getPlayer().getPlayDeck().size()){
-                    Button button = new Button();
-                    button.getStyleClass().add("mediumButton");
-                    button.getStyleClass().add("back2");
-                    gameView.player2Box.getChildren().add(button);
-                }else {
-                    GameButton gameButton = new GameButton(gameObject.getPlayer().getPlayDeck().get(i));
-                    gameView.player2Box.getChildren().add(gameButton);
+                    if (i >= gameObject.getPlayer().getPlayDeck().size()) {
+                        Button button = new Button();
+                        button.getStyleClass().add("mediumButton");
+                        button.getStyleClass().add("back2");
+                        gameView.player2Box.getChildren().add(button);
+
+                        if (getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
+                            button.getStyleClass().add("invisible");
+                        }
+                    } else {
+                        GameButton gameButton = new GameButton(gameObject.getPlayer().getPlayDeck().get(i));
+                        gameView.player2Box.getChildren().add(gameButton);
+                        if (getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
+                            gameButton.getStyleClass().add("invisible");
+                        }
+                    }
+
+            }
+
+            if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
+                gameView.drawStapelPlayer2.getStyleClass().remove("invisible");
+                gameView.putStapelPlayer2.getStyleClass().remove("invisible");
+                if(gameObject.getPlayer().getPutDeck().size() > 0) {
+                    gameView.putStapelPlayer2.getStyleClass().add(gameObject.getPlayer().getPutDeck().get(gameObject.getPlayer().getPutDeck().size() - 1).getName());
                 }
             }
+
         });
 
 
@@ -263,9 +280,19 @@ public class GameController {
     public void player2LabelUpdate(GameObject gameObject){
 
         Platform.runLater(() -> {
+
+            if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
+                gameView.playerLabel2.getStyleClass().remove("invisible");
+                gameView.moneyLabel2.getStyleClass().remove("invisible");
+                gameView.phaseLabel2.getStyleClass().remove("invisible");
+                gameView.pointLabel2.getStyleClass().remove("invisible");
+
+            }
+
             gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
 
             gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
+            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t"+gameObject.getPlayer().getPoints());
             if(gameModel.getPlayer().isActionPhase()){
                 gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
                         ":\t" +localisator.getResourceBundle().getString( "action"));
@@ -279,9 +306,22 @@ public class GameController {
     }
 
     public void newTurn(boolean turn){
-        System.out.println("/nYour turn/n");
         gameModel.getPlayer().setYourTurn(turn);
-        Platform.runLater(() -> fieldCardController.getHandCardController().updateHandCardsView());
+        Platform.runLater(() ->{
+
+        fieldCardController.getHandCardController().updateHandCardsView();
+
+            if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
+                gameView.player2Box.getChildren().clear();
+                for(int i=0;i<5;i++){
+                    Button player2Card=new Button();
+                    player2Card.getStyleClass().add("mediumButton");
+                    player2Card.getStyleClass().add("back2");
+                    gameView.player2Box.getChildren().add(player2Card);
+            }
+
+        }
+        });
     }
 
     public GameModel getGameModel() {

@@ -38,7 +38,6 @@ public class HandCardController {
      */
 
     //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
-    //TODO: Aktualisierung am Zugende implementieren
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
 
@@ -85,7 +84,6 @@ public class HandCardController {
         gameButton.setOnAction(event -> {
             Player player = gameModel.getPlayer();
             Card card = gameButton.getCard();
-
 
             if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
                 cardSwitch(card, player);
@@ -142,6 +140,19 @@ public class HandCardController {
             case "lumberjack":
                 card.lumberjack(player);
                 break;
+            case "adventurer":
+                card.adventurer(player);
+                break;
+            case "moneylender":
+                card.moneylender(player);
+                break;
+            case "chancellor":
+                card.chancellor(player);
+                break;
+            case "magpie":
+                card.magpie(player);
+                magpieUpdate();
+                break;
             default:
                 break;
         }
@@ -173,5 +184,16 @@ public class HandCardController {
         return card.getType().equals("money") &&
                  player.isYourTurn() &&
                  player.isBuyPhase();
+    }
+
+    public void magpieUpdate(){
+        GameButton magpieButton = new GameButton();
+
+        for(GameButton gameButton:fieldCardController.getActionButtons()){
+            if(gameButton.getCard().getName().equals("magpie")){
+                magpieButton = gameButton;
+            }
+        }
+        fieldCardController.buyUpdate(magpieButton, gameModel.getPlayer(), magpieButton.getCard() );
     }
 }

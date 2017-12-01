@@ -15,6 +15,9 @@ public class GameButton extends Button implements Serializable {
      * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style ahand
      * vom Namen festgelegt
      */
+    public GameButton() {
+
+    }
 
 
     public GameButton(Card card) {

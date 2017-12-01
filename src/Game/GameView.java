@@ -26,7 +26,7 @@ public class GameView {
      */
     private Localisator localisator;
     protected ChatWindow chatWindow;
-    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, endGameButton;
+    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, putStapelPlayer2, drawStapelPlayer2, endGameButton;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2, turnLabel, playerLabel;
     public GridPane resourcePane, actionPane;
@@ -177,21 +177,21 @@ public class GameView {
          * Label und Buttons Spieler 2
          */
 
-        playerLabel2 = new Label ("Spieler 2");
-        playerLabel2.getStyleClass().add("nameLabel");
+        playerLabel2 = new Label ();
+        playerLabel2.getStyleClass().addAll("nameLabel", "invisible");
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t3");
         phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+
                 ":\t" +localisator.getResourceBundle().getString( "buy"));
-        moneyLabel2.getStyleClass().add("resourceLabel");
-        pointLabel2.getStyleClass().add("resourceLabel");
-        phaseLabel2.getStyleClass().add("resourceLabel");
-        Button putStapelPlayer2 = new Button();
-        putStapelPlayer2.getStyleClass().add("mediumButton");
-        putStapelPlayer2.getStyleClass().add("trash");
-        Button drawStapelPlayer2 = new Button();
-        drawStapelPlayer2.getStyleClass().add("mediumButton");
-        drawStapelPlayer2.getStyleClass().add("back2");
+        moneyLabel2.getStyleClass().addAll("resourceLabel", "invisible");
+        pointLabel2.getStyleClass().addAll("resourceLabel", "invisible");
+        phaseLabel2.getStyleClass().addAll("resourceLabel", "invisible");
+        putStapelPlayer2 = new Button();
+        putStapelPlayer2.getStyleClass().addAll("mediumButton", "trash", "invisible");
+
+        drawStapelPlayer2 = new Button();
+        drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2", "invisible");
+
 
         player2Pane.add(playerLabel2, 0,1);
         player2Pane.add(moneyLabel2, 0,2);
@@ -209,6 +209,8 @@ public class GameView {
             player2Card.getStyleClass().add("mediumButton");
             player2Card.getStyleClass().add("back2");
             player2Box.getChildren().add(player2Card);
+            player2Card.getStyleClass().add("invisible");
+
         }
 
         player2Box.setPadding((new Insets(20, 20, 20, 80)));
