@@ -38,7 +38,6 @@ public class HandCardController {
      */
 
     //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
-    //TODO: Aktualisierung am Zugende implementieren
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
 
