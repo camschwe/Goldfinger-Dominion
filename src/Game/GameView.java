@@ -26,7 +26,7 @@ public class GameView {
      */
     private Localisator localisator;
     protected ChatWindow chatWindow;
-    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1;
+    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, endGameButton;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2, turnLabel, playerLabel;
     public GridPane resourcePane, actionPane;
@@ -131,8 +131,10 @@ public class GameView {
         moneyButton = new Button(localisator.getResourceBundle().getString("playMoneyCards"));
         moneyButton.getStyleClass().add("klickButton");
 
+        endGameButton = new Button("Spiel beenden");
+
         VBox buttonBox = new VBox();
-        buttonBox.getChildren().addAll(phaseButton, moneyButton);
+        buttonBox.getChildren().addAll(phaseButton, moneyButton, endGameButton);
         buttonBox.setSpacing(10);
         rightMainPane.setBottom(buttonBox);
 
@@ -253,6 +255,14 @@ public class GameView {
 
     public ChatWindow getChatWindow() {
         return chatWindow;
+    }
+
+    public Stage getGameStage() {
+        return gameStage;
+    }
+
+    public void setGameStage(Stage gameStage) {
+        this.gameStage = gameStage;
     }
 }
 

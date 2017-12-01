@@ -1,0 +1,48 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 12Pt;
+    -fx-padding: 10px 0px;
+    -fx-border-color: black;
+    -fx-min-width: 200px;
+}
+
+.button:hover{
+    -fx-background-color: white;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 10Pt;
+    -fx-pref-width: 100;
+
+}
+
+.turnLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20Pt;
+    -fx-padding: 50px 0px;
+    -fx-pref-width: 150;
+}
+
+.playerLabel{
+    -fx-text-fill: white;
+    -fx-font-size: 20Pt;
+}
+
+.resultLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 80Pt;
+    -fx-padding: 14px 40px;
+    -fx-border-color: black;
+    -fx-pref-width: 800;
+    -fx-padding: 0px 0px 0px 10px;
+    -fx-alignment: center;
+
+}
+
+.root {
+    -fx-background-image: url("../Backgrounds/smoke.jpg");
+    -fx-background-size: stretch;
+
+}

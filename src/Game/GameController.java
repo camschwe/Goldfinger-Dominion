@@ -3,7 +3,10 @@ package Game;
 import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
 import Client_Server.GameObject;
+import End.EndController;
+import End.EndModel;
 import Localisation.Localisator;
+import Login.EndView;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
@@ -29,6 +32,11 @@ public class GameController {
     private HandCardController handCardController;
     private FieldCardController fieldCardController;
     private Client client;
+    private EndView endView;
+    private EndController endController;
+    private EndModel endModel;
+
+
 
     public GameController(GameView gameView, Localisator localisator, GameModel gameModel, Client client){
         this.gameView = gameView;
@@ -63,6 +71,14 @@ public class GameController {
                 getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
                 gameModel.getPlayer().setTurnEnded(false);
             }
+
+        });
+
+
+        gameView.endGameButton.setOnAction(event -> {
+            endView = new EndView(gameView.getGameStage(), localisator);
+            endModel = new EndModel();
+            endController = new EndController(endModel, endView, localisator);
 
         });
 
@@ -281,10 +297,13 @@ public class GameController {
     }
 
     public void endView(ArrayList<Player> o) {
-        /**
-         * TODO Camillo
-         * End View mit ArrayList abfüllen und starten.
-         */
+        Platform.runLater(() ->{
+            endView = new EndView(gameView.getGameStage(), localisator);
+            endModel = new EndModel();
+            endController = new EndController(endModel, endView, localisator, o, gameModel);
+        } );
+
+
     }
 
     public void endGame() {

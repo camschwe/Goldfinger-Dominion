@@ -3,6 +3,7 @@ package Login;
 import Client_Server.Client.Client;
 import Client_Server.Chat.Message;
 import Client_Server.Server.StartServer;
+import End.EndController;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
@@ -78,12 +79,14 @@ public class LoginController {
             }
         });
 
+
         loginView.hostButton.setOnAction(event -> {
 
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()) {
                 loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
                 loginView.userNameField.getStyleClass().clear();
                 loginView.userNameField.getStyleClass().add("userNameNeeded");
+
             } else {
                 clientName = loginView.userNameField.getText();
                 StartServer startServer = new StartServer();
@@ -92,8 +95,8 @@ public class LoginController {
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
-                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 lobbyModel = new LobbyModel();
+                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
                 client.setLobbyController(lobbyController);
                 client.actualizePlayers();
                 client.setServer();
