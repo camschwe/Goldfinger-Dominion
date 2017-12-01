@@ -21,7 +21,8 @@ public class DialogController {
             if (address.equals("localhost") || loginController.getLoginModel().checkIP(address)){
                 String result = loginController.connect(address);
                 switch (result){
-                    case "successfull":
+                    case "successful":
+                        System.out.println("Successfull");
                         dialogView.stop();
                         break;
                     case "username used":
@@ -36,9 +37,7 @@ public class DialogController {
             }
         });
 
-        dialogView.btnCancel.setOnAction(event ->{
-            //Do something
-        });
+        dialogView.btnCancel.setOnAction(event -> dialogView.stop());
     }
 
 }

@@ -12,11 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
 public class DialogView {
-    protected Label inputLabel, connectingLabel;
+    protected Label inputLabel, connectingLabel, infoLabel;
     private TextField inputTextField;
     protected Button btnOK, btnCancel;
     private Stage dialogStage;
@@ -35,6 +36,9 @@ public class DialogView {
         connectingLabel = new Label(localisator.getResourceBundle().getString("conErrorText"));
         connectingLabel.setVisible(false);
 
+        infoLabel = new Label(localisator.getResourceBundle().getString("infoLabel"));
+        infoLabel.setTextFill(Color.web("#34e143"));
+
         VBox allBoxes = new VBox();
         HBox upperBox = new HBox();
         HBox underBox = new HBox();
@@ -44,7 +48,7 @@ public class DialogView {
         underBox.setAlignment(Pos.BOTTOM_RIGHT);
         allBoxes.setAlignment(Pos.CENTER);
 
-        allBoxes.getChildren().addAll(upperBox, underBox, connectingLabel);
+        allBoxes.getChildren().addAll(upperBox, underBox, infoLabel, connectingLabel);
 
         Pane root = new Pane();
         root.getChildren().add(allBoxes);

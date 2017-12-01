@@ -175,6 +175,11 @@ public class LoginController {
             Message user = new Message(0, clientName, "login");
             client.sendObject(user);
             while (!client.isChecked()) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //Waiting until server response for username validation
             }
             if (client.isValid()) {
