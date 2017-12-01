@@ -66,7 +66,7 @@ public class FieldCardController {
         //TODO: ADD AMOUNT REFERRING PLAYER
         //Initialisierung Punktekarten
         for(int i = 0; i < gameModel.getPointCards().size() ; i++) {
-            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), 8);
+            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), 1);
             gameView.resourcePane.add(pointButton, 0,i);
             resourceButtons.add(pointButton);
             addMouseExited(pointButton, gameView.actionButton);

@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class LoginView {
 
     protected Stage primaryStage;
-    protected Button hostButton, joinButton;
+    protected Button hostButton, joinButton, tutorialButton;
     protected TextField userNameField;
     protected Label userNameLabel, connectingLabel;
     protected ComboBox<String> switchBox;
@@ -49,6 +49,8 @@ public class LoginView {
                 "Deutsch",
                 "Schwiizerdütsch"
         );
+
+        tutorialButton = new Button(localisator.getResourceBundle().getString("tutorial"));
 
 
         conError = new Alert(Alert.AlertType.ERROR);
@@ -83,7 +85,7 @@ public class LoginView {
         HBox hBox = new HBox();
         root.setBottom(hBox);
         hBox.setPadding(new Insets(0, 0, 40, 740));
-        hBox.getChildren().addAll(switchBox);
+        hBox.getChildren().addAll(switchBox, tutorialButton);
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);

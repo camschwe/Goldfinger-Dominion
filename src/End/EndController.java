@@ -1,5 +1,6 @@
 package End;
 
+import Game.GameController;
 import Game.GameModel;
 import Game.Player;
 import Localisation.Localisator;
@@ -17,13 +18,15 @@ public class EndController {
     private EndView endView;
     private EndModel endModel;
     private ArrayList<Player> playerList;
+    private GameController gameController;
 
 
-    public EndController(EndModel endModel, EndView endView, Localisator localisator, ArrayList<Player> playerList, GameModel gameModel) {
+    public EndController(EndModel endModel, EndView endView, Localisator localisator, ArrayList<Player> playerList, GameModel gameModel, GameController gameController) {
         this.endView = endView;
         this.endModel = endModel;
         this.localisator = localisator;
         this.playerList = playerList;
+        this.gameController = gameController;
 
         endView.lobbyButton.setOnAction(event -> {
 
@@ -42,6 +45,9 @@ public class EndController {
 
         if(playerList.get(0).getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
             endView.resultLabel.setText(localisator.getResourceBundle().getString("won"));
+            gameController.playSound("MONSTER_KILL.wav");
+        }else{
+            gameController.playSound("DENIED.wav");
         }
 
         //TODO:ADD TURNS
