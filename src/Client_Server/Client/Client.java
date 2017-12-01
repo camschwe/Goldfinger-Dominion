@@ -69,6 +69,8 @@ public class Client extends Thread {
                     o = objInput.readObject();
                 } catch (EOFException e) {
                     e.printStackTrace();
+                    objInput.close();
+                    serverSocket.close();
                 } catch (SocketException e){
 
                 } catch (Exception e) {
@@ -177,6 +179,9 @@ public class Client extends Thread {
                     lobbyController.getLobbyView().getPlayers().get(iCopy).setVisible(true);
                 });
                 i++;
+                if (i >= 4){
+                    break;
+                }
             }
         }
         reset = true;

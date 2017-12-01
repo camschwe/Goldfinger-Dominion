@@ -12,7 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import sun.applet.Main;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.util.ArrayList;
 
 /**
@@ -308,5 +312,25 @@ public class GameController {
 
     public void endGame() {
         gameModel.getPlayer().setYourTurn(false);
+    }
+
+
+    /**
+     * Methode um ein Audio File abzuspielen.
+     * Kopiert von: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+     * @param fileName
+     */
+    public static synchronized void playSound(final String fileName) {
+        new Thread(() -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Main.class.getResourceAsStream("/Sounds/" + fileName));
+                clip.open(inputStream);
+                clip.start();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }).start();
     }
 }

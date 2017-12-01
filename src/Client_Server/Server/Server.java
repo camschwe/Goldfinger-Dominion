@@ -12,6 +12,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Benjamin Probst on 01.10.2017.
@@ -144,8 +146,14 @@ public class Server extends Thread{
                 if (!players.contains(message.getClientName())) {
                     players.add(name);
                     outputs.add(objOutput);
-                    Collections.shuffle(colors);
-                    Message send = new Message(3, name, "valid", colors.get(0));
+                    Message send;
+                    if (!colors.isEmpty()) {
+                        Collections.shuffle(colors);
+                        send = new Message(3, name, "valid", colors.get(0));
+                    } else {
+                        send = new Message(3, name, "valid", getRandomColor());
+                    }
+                    System.out.println("Added Player: " + send.toString());
                     objOutput.writeObject(send);
                     sendPlayerList();
                     sendMessageToAll(new Message(3, name, "actualize"));
@@ -242,6 +250,17 @@ public class Server extends Thread{
             for (Player player : endPlayers){
                 System.out.println(player.getPlayerName() + " Punkte: " + player.getPoints());
             }
+        }
+
+        private String getRandomColor(){
+            String color = "-fx-fill: #";
+            for (int i = 1; i < 3; i++){
+                int red = ThreadLocalRandom.current().nextInt(0, 16);
+                int green = ThreadLocalRandom.current().nextInt(0, 16);
+                int blue = ThreadLocalRandom.current().nextInt(0, 16);
+                color += Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
+            }
+            return color;
         }
     }
 }

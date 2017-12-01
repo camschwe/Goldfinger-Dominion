@@ -10,9 +10,13 @@ import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
 import Localisation.Localisator;
+import javafx.concurrent.Task;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.util.Optional;
+
+import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
  * Created by Benjamin Probst on 06.10.2017.
@@ -38,8 +42,6 @@ public class LoginController {
 
         loginView.joinButton.setOnAction(event -> {
 
-
-
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
                 loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("UsernameNeeded"));
                 loginView.userNameField.getStyleClass().clear();
@@ -49,50 +51,6 @@ public class LoginController {
                 DialogController dialogController = new DialogController(dialogView, new DialogModel(), localisator, this);
                 dialogView.start();
 
-                /**Optional<String> address = loginView.dialog.showAndWait();
-
-                Platform.runLater(() -> loginView.connectingLabel.setVisible(true));
-
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (address.isPresent()){
-                    if (address.get().equals("localhost") || loginModel.checkIP(address.get())){
-
-                        clientName = loginView.userNameField.getText();
-
-                        client = new Client(address.get(), clientName);
-                        if (client.isConnected()) {
-                            client.start();
-                        }
-                        loginView.connectingLabel.setVisible(false);
-
-                        if (!client.isFailure()) {
-                            Message user = new Message(0, clientName, "login");
-                            client.sendObject(user);
-                            while (!client.isChecked()) {
-                                //Waiting until server response for username validation
-                            }
-                            if (client.isValid()) {
-                                lobbyView = new LobbyView(primaryStage, localisator);
-                                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
-                                lobbyModel = new LobbyModel();
-                                client.setLobbyController(lobbyController);
-                                client.actualizePlayers();
-                            } else {
-                                loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("validUsername"));
-                                loginView.userNameField.getStyleClass().clear();
-                                loginView.userNameField.getStyleClass().add("text-field");
-                                client.resetChecked();
-                            }
-                        } else {
-                            loginView.conError.show();
-                        }
-                    }
-                }**/
             }
         });
 
@@ -124,6 +82,21 @@ public class LoginController {
             languageChecker(language);
             languageUpdate();
         });
+
+        final Task task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                AudioClip audio = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
+                audio.setVolume(0.05);
+                audio.setCycleCount(s);
+                audio.play();
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
     public void languageChecker(String language) {
