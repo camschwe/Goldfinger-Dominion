@@ -114,12 +114,15 @@ public class HandCardController {
 
         switch (cardName) {
             case "copper":
+                gameController.playSound("coin.wav");
                 card.playMoneyCard(player);
                 break;
             case "silver":
+                gameController.playSound("coin.wav");
                 card.playMoneyCard(player);
                 break;
             case "gold":
+                gameController.playSound("coin.wav");
                 card.playMoneyCard(player);
                 break;
             case "village":
