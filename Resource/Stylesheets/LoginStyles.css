@@ -54,3 +54,11 @@
     -fx-background-size: 1000 800;
 
 }
+
+.invisible{
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+}
