@@ -65,16 +65,27 @@ public class GameModel {
 
         actionCards = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++){
-            Card village = new Card("village","action", 3, 0 );
-            actionCards.add(village);
-        }
 
-        Card fair = new Card("fair","action", 5, 0 );
-        actionCards.add(fair);
+        Card village = new Card("village","action", 3, 0 );
+        actionCards.add(village);
+
+        Card lumberjack = new Card("lumberjack","action", 3, 0);
+        actionCards.add(lumberjack);
+
+        Card chancellor = new Card("chancellor", "action", 3,0);
+        actionCards.add(chancellor);
+
+        Card magpie = new Card("magpie", "action", 3,0);
+        actionCards.add(magpie);
 
         Card smithy = new Card("smithy","action", 4, 0);
         actionCards.add(smithy);
+
+        Card moneylender = new Card("moneylender", "action", 4,0);
+        actionCards.add(moneylender);
+
+        Card fair = new Card("fair","action", 5, 0 );
+        actionCards.add(fair);
 
         Card market = new Card("market","action", 5, 0);
         actionCards.add(market);
@@ -82,9 +93,8 @@ public class GameModel {
         Card laboratory = new Card("laboratory","action", 5, 0);
         actionCards.add(laboratory);
 
-        Card lumberjack = new Card("lumberjack","action", 3, 0);
-        actionCards.add(lumberjack);
-
+        Card adventurer = new Card("adventurer", "action", 6,0);
+        actionCards.add(adventurer);
     }
 
     //TODO: IMPLEMENTIEREN

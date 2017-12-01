@@ -85,7 +85,6 @@ public class HandCardController {
             Player player = gameModel.getPlayer();
             Card card = gameButton.getCard();
 
-
             if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
                 cardSwitch(card, player);
                 if(!card.getType().equals("point")){
@@ -141,6 +140,19 @@ public class HandCardController {
             case "lumberjack":
                 card.lumberjack(player);
                 break;
+            case "adventurer":
+                card.adventurer(player);
+                break;
+            case "moneylender":
+                card.moneylender(player);
+                break;
+            case "chancellor":
+                card.chancellor(player);
+                break;
+            case "magpie":
+                card.magpie(player);
+                magpieUpdate();
+                break;
             default:
                 break;
         }
@@ -172,5 +184,16 @@ public class HandCardController {
         return card.getType().equals("money") &&
                  player.isYourTurn() &&
                  player.isBuyPhase();
+    }
+
+    public void magpieUpdate(){
+        GameButton magpieButton = new GameButton();
+
+        for(GameButton gameButton:fieldCardController.getActionButtons()){
+            if(gameButton.getCard().getName().equals("magpie")){
+                magpieButton = gameButton;
+            }
+        }
+        fieldCardController.buyUpdate(magpieButton, gameModel.getPlayer(), magpieButton.getCard() );
     }
 }

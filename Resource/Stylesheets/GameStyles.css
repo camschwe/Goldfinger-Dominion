@@ -177,6 +177,22 @@
     -fx-background-image: url('../Cards/lumberjack.JPG');
 }
 
+.adventurer{
+    -fx-background-image: url('../Cards/adventurer.JPG');
+}
+
+.moneylender{
+    -fx-background-image: url('../Cards/moneylender.JPG');
+}
+
+.chancellor{
+    -fx-background-image: url('../Cards/chancellor.JPG');
+}
+
+.magpie{
+    -fx-background-image: url('../Cards/magpie.JPG');
+}
+
 .copperSmall{
     -fx-background-image: url('../Cards/copper_small.JPG');
 }
@@ -222,8 +238,24 @@
     -fx-background-image: url('../Cards/laboratory_small.JPG');
 }
 
-.lumberjackSmall{
+.lumberjackSmall {
     -fx-background-image: url('../Cards/lumberjack_small.JPG');
+}
+
+.adventurerSmall{
+    -fx-background-image: url('../Cards/adventurer_small.JPG');
+}
+
+.moneylenderSmall{
+    -fx-background-image: url('../Cards/moneylender_small.JPG');
+}
+
+.chancellorSmall{
+    -fx-background-image: url('../Cards/chancellor_small.JPG');
+}
+
+.magpieSmall{
+    -fx-background-image: url('../Cards/magpie_small.JPG');
 }
 
 .back1{
