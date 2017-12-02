@@ -47,7 +47,17 @@ public class GameController {
         this.localisator = localisator;
         this.gameModel = gameModel;
         this.client = client;
+
         gameView.pointLabel1.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameModel.getPlayer().getPoints());
+        if(gameModel.getPlayerList().size()== 1){
+            gameView.player2Box.setVisible(false);
+            gameView.playerLabel2.getStyleClass().add("invisible");
+            gameView.putStapelPlayer2.getStyleClass().add("invisible");
+            gameView.drawStapelPlayer2.getStyleClass().add("invisible");
+            gameView.pointLabel2.getStyleClass().add("invisible");
+            gameView.phaseLabel2.getStyleClass().add("invisible");
+            gameView.moneyLabel2.getStyleClass().add("invisible");
+        }
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
@@ -105,11 +115,11 @@ public class GameController {
         //Eventhändler für den Money Button
         gameView.moneyButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
-                playSound("coin");
                 ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
 
                 for(Card card : tempList){
                     noteFlowUpdate(card, gameModel.getPlayer(), 0, Client.getColor());
+                    playSound(soundUpdate(card.getName()));
                     GameObject gObject = new GameObject(gameModel.getPlayer(), card, 0 );
                     this.client.sendObject(gObject);
 
@@ -176,6 +186,18 @@ public class GameController {
 
     }
 
+    public String soundUpdate(String cardName){
+        if(cardName.equals("copper") || cardName.equals("silver") || cardName.equals("gold")){
+            cardName = "coin";
+        }
+        if(cardName.equals("estate") || cardName.equals("duchy") || cardName.equals("province")){
+            cardName = "point";
+        }
+        System.out.println(cardName);
+        return cardName;
+    }
+
+
 
     public void otherPlayerChecker(GameObject gameObject) {
         if(!gameObject.getPlayer().getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
@@ -186,6 +208,8 @@ public class GameController {
             }
             player2LabelUpdate(gameObject);
             noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
+            playSound(soundUpdate(gameObject.getCard().getName()));
+
             if (gameObject.getCard().getType().equals("point")){
                 gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints());
             }

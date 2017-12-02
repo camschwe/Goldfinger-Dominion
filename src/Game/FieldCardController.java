@@ -129,6 +129,7 @@ public class FieldCardController {
                 fieldCardsGlowingUpdate(actionButtons);
                 buttonAmountUpdate(gameButton);
                 gameController.noteFlowUpdate( card, player, 1, Client.getColor());
+                gameController.playSound(gameController.soundUpdate(gameButton.getCard().getName()));
 
              }
 

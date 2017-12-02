@@ -6,7 +6,7 @@
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-background-insets: 1px;
-    -fx-pref-width: 500;
+    -fx-pref-width: 400;
 }
 
 .button {
@@ -39,7 +39,6 @@
 .userLabel {
     -fx-text-fill: black;
     -fx-font-size: 12Pt;
-    -fx-border-color: black;
     -fx-pref-width: 150;
     -fx-padding: 0px 0px 0px 10px
 }
@@ -58,6 +57,8 @@
     -fx-font-size: 36Pt;
     -fx-padding: 20px 36px;
     -fx-border-color: black;
+    -fx-pref-width: 830;
+    -fx-alignment: center;
 
 
 }
@@ -66,7 +67,7 @@
     -fx-font-size: 12Pt;
     -fx-border-color: white;
     -fx-padding: 10px 20px;
-    -fx-pref-width: 400;
+    -fx-pref-width: 300;
 }
 
 

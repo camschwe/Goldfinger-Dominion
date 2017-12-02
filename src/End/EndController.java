@@ -45,9 +45,9 @@ public class EndController {
 
         if(playerList.get(0).getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
             endView.resultLabel.setText(localisator.getResourceBundle().getString("won"));
-            gameController.playSound("MONSTER_KILL.wav");
+            gameController.playSound("MONSTER_KILL");
         }else{
-            gameController.playSound("DENIED.wav");
+            gameController.playSound("DENIED");
         }
 
         //TODO:ADD TURNS
@@ -60,11 +60,11 @@ public class EndController {
             int j= 0;
 
 
-            if(i>3){
-                y-=4;
+            if(i>1){
+                y-=2;
             }
 
-            if(i>3){
+            if(i>1){
                 j=1;
             }
 
@@ -119,17 +119,17 @@ public class EndController {
             System.exit(0);
         });
 
-        for(int i= 0; i<8; i++) {
+        for(int i= 0; i<4; i++) {
 
             int y= i;
             int j= 0;
 
 
-            if(i>3){
-                y-=4;
+            if(i>1){
+                y-=2;
             }
 
-            if(i>3){
+            if(i>1){
                 j=1;
             }
 

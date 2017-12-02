@@ -180,7 +180,7 @@ public class Client extends Thread {
             for (String player: players){
                 final int iCopy = i;
                 Platform.runLater(() -> {
-                    lobbyController.getLobbyView().getPlayers().get(iCopy).setText(player);
+                    lobbyController.getLobbyView().getPlayers().get(iCopy).setText("- "+player);
                     lobbyController.getLobbyView().getPlayers().get(iCopy).setVisible(true);
                 });
                 i++;
@@ -277,5 +277,13 @@ public class Client extends Thread {
 
     public boolean isFailure() {
         return failure;
+    }
+
+    public static ArrayList<String> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(ArrayList<String> players) {
+        Client.players = players;
     }
 }

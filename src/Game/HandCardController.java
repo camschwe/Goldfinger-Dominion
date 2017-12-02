@@ -1,5 +1,6 @@
 package Game;
 
+import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
 import Client_Server.GameObject;
 import Localisation.Localisator;
@@ -89,6 +90,7 @@ public class HandCardController {
                 cardSwitch(card, player);
                 if(!card.getType().equals("point")){
                     gameController.noteFlowUpdate(card, player, 0, Client.getColor());
+                    gameController.playSound(gameController.soundUpdate(gameButton.getCard().getName()));
                 }
                 gameController.player1LabelUpdate();
                 gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
@@ -114,57 +116,44 @@ public class HandCardController {
 
         switch (cardName) {
             case "copper":
-                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "silver":
-                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "gold":
-                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "village":
-                gameController.playSound("village");
                 card.village(player);
                 break;
             case "fair":
-                gameController.playSound("fair");
                 card.fair(player);
                 break;
             case "smithy":
-                gameController.playSound("smithy");
                 card.smithy(player);
                 break;
             case "market":
-                gameController.playSound("market");
                 card.market(player);
                 break;
             case "laboratory":
-                gameController.playSound("laboratory");
                 card.laboratory(player);
                 break;
             case "lumberjack":
-                gameController.playSound("lumberjack");
                 card.lumberjack(player);
                 break;
             case "adventurer":
-                gameController.playSound("adventurer");
                 card.adventurer(player);
                 break;
             case "moneylender":
-                gameController.playSound("moneylender");
                 card.moneylender(player);
                 break;
             case "chancellor":
-                gameController.playSound("chancellor");
                 card.chancellor(player);
                 break;
             case "magpie":
-                gameController.playSound("magpie");
                 if(card.magpie(player)) {
-                    magpieUpdate();
+                    magpieUpdate(player);
                 }
                 break;
             default:
@@ -200,7 +189,7 @@ public class HandCardController {
                  player.isBuyPhase();
     }
 
-    public void magpieUpdate(){
+    public void magpieUpdate(Player player){
         GameButton magpieButton = new GameButton();
 
         for(GameButton gameButton:fieldCardController.getActionButtons()){
@@ -208,6 +197,14 @@ public class HandCardController {
                 magpieButton = gameButton;
             }
         }
-        fieldCardController.buyUpdate(magpieButton, gameModel.getPlayer(), magpieButton.getCard() );
+        magpieButton.setAmount(magpieButton.getAmount() - 1);
+        Card cardCopy = Card.cardCopy(magpieButton.getCard());
+        player.getHandCards().add(cardCopy);
+        updateHandCardsView();
+        gameController.getClient().sendObject(new GameObject(player, cardCopy, 1 ));
+        fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+
     }
+
+
 }
