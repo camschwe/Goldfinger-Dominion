@@ -128,7 +128,6 @@ public class Card implements Serializable {
             actionSupport(this, player);
             return false;
         }else{
-            player.getHandCards().add(cardCopy(this));
             actionSupport(this, player);
             return true;
         }

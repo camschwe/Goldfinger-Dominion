@@ -74,7 +74,7 @@ public class FieldCardController {
             addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
 
-        
+
         //Initialisierung Aktionskarten
         int column = 0;
         int row = 0;
