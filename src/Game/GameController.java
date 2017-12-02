@@ -105,7 +105,7 @@ public class GameController {
         //Eventhändler für den Money Button
         gameView.moneyButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
-                playSound("coin.wav");
+                playSound("coin");
                 ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
 
                 for(Card card : tempList){
@@ -366,7 +366,7 @@ public class GameController {
             try {
                 Clip clip = AudioSystem.getClip();
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                        Main.class.getResourceAsStream("/Sounds/" + fileName));
+                        Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
                 clip.open(inputStream);
                 clip.start();
             } catch (Exception e) {

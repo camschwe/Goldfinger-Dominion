@@ -31,6 +31,8 @@ public class Server extends Thread{
     private static boolean gameStarted = false;
     private static boolean gameEnded = false;
     private static int round = 1;
+    private static int maxRounds;
+    private static int provinces = 8;
 
     public Server() throws Exception{
         colors.add("-fx-fill: red");
@@ -113,6 +115,9 @@ public class Server extends Thread{
                             }
                         }else if (o instanceof GameObject){
                             GameObject gameObject = (GameObject) o;
+                            if (gameObject.getCard().getName().equals("province")){
+                                provinces--;
+                            }
                             actualizeEndPlayers(gameObject.getPlayer());
                             sendToAll(gameObject);
                         } else if (o instanceof Player){
@@ -238,6 +243,11 @@ public class Server extends Thread{
                     sendMessageToAll(new Message(4, "Round limit reached", "EndGame"));
                 } else {
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
+                    for (Player player : endPlayers){
+                        if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
+                            sendToAll(player);
+                        }
+                    }
                     if (actualPlayer < gamePlayers.size() - 1) {
                         actualPlayer += 1;
                     } else {

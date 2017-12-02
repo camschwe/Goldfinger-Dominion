@@ -114,55 +114,55 @@ public class HandCardController {
 
         switch (cardName) {
             case "copper":
-                gameController.playSound("coin.wav");
+                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "silver":
-                gameController.playSound("coin.wav");
+                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "gold":
-                gameController.playSound("coin.wav");
+                gameController.playSound("coin");
                 card.playMoneyCard(player);
                 break;
             case "village":
-                gameController.playSound("village.wav");
+                gameController.playSound("village");
                 card.village(player);
                 break;
             case "fair":
-                gameController.playSound("fair.wav");
+                gameController.playSound("fair");
                 card.fair(player);
                 break;
             case "smithy":
-                gameController.playSound("smithy.wav");
+                gameController.playSound("smithy");
                 card.smithy(player);
                 break;
             case "market":
-                gameController.playSound("market.wav");
+                gameController.playSound("market");
                 card.market(player);
                 break;
             case "laboratory":
-                gameController.playSound("laboratory.wav");
+                gameController.playSound("laboratory");
                 card.laboratory(player);
                 break;
             case "lumberjack":
-                gameController.playSound("lumberjack.wav");
+                gameController.playSound("lumberjack");
                 card.lumberjack(player);
                 break;
             case "adventurer":
-                gameController.playSound("adventurer.wav");
+                gameController.playSound("adventurer");
                 card.adventurer(player);
                 break;
             case "moneylender":
-                gameController.playSound("moneylender.wav");
+                gameController.playSound("moneylender");
                 card.moneylender(player);
                 break;
             case "chancellor":
-                gameController.playSound("chancellor.wav");
+                gameController.playSound("chancellor");
                 card.chancellor(player);
                 break;
             case "magpie":
-                gameController.playSound("magpie.wav");
+                gameController.playSound("magpie");
                 if(card.magpie(player)) {
                     magpieUpdate();
                 }

@@ -156,6 +156,9 @@ public class Client extends Thread {
         if (o instanceof ArrayList){
             gameController.endView((ArrayList<Player>) o);
         }
+        if (o instanceof Player){
+
+        }
     }
 
     // die Clientseitige Spielerliste wird erstellt und aktualisiert
