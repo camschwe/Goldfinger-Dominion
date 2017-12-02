@@ -22,10 +22,13 @@ public class GameModel {
     private ArrayList<Card> pointCards;
     private ArrayList<Card> moneyCards;
     private ArrayList<Card> actionCards;
+    private ArrayList<String> playerList;
 
     public GameModel(Client client) {
 
         //TODO: Correct with hash set
+        this.playerList = (client.getPlayers());
+
         this.player = new Player(client.getClientName());
         this.turn = 1;
 
@@ -65,42 +68,28 @@ public class GameModel {
 
         actionCards = new ArrayList<>();
 
-
-        Card village = new Card("village","action", 3, 0 );
-        actionCards.add(village);
-
-        Card lumberjack = new Card("lumberjack","action", 3, 0);
-        actionCards.add(lumberjack);
-
-        Card chancellor = new Card("chancellor", "action", 3,0);
-        actionCards.add(chancellor);
-
-        Card magpie = new Card("magpie", "action", 3,0);
-        actionCards.add(magpie);
-
-        Card smithy = new Card("smithy","action", 4, 0);
-        actionCards.add(smithy);
-
         Card moneylender = new Card("moneylender", "action", 4,0);
         actionCards.add(moneylender);
-
         Card fair = new Card("fair","action", 5, 0 );
         actionCards.add(fair);
-
         Card market = new Card("market","action", 5, 0);
         actionCards.add(market);
-
         Card laboratory = new Card("laboratory","action", 5, 0);
         actionCards.add(laboratory);
-
         Card adventurer = new Card("adventurer", "action", 6,0);
         actionCards.add(adventurer);
+        Card village = new Card("village","action", 3, 0 );
+        actionCards.add(village);
+        Card lumberjack = new Card("lumberjack","action", 3, 0);
+        actionCards.add(lumberjack);
+        Card chancellor = new Card("chancellor", "action", 3,0);
+        actionCards.add(chancellor);
+        Card magpie = new Card("magpie", "action", 4,0);
+        actionCards.add(magpie);
+        Card smithy = new Card("smithy","action", 4, 0);
+        actionCards.add(smithy);
     }
 
-    //TODO: IMPLEMENTIEREN
-    public void updateChecker(){
-
-    }
 
     public int  getPlayerCount(){
         return this.playerCount;
@@ -149,5 +138,13 @@ public class GameModel {
 
     public void setTurn(int turn) {
         this.turn = turn;
+    }
+
+    public ArrayList<String> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(ArrayList<String> playerList) {
+        this.playerList = playerList;
     }
 }

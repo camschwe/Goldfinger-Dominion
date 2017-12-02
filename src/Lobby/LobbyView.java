@@ -32,7 +32,7 @@ public class LobbyView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
         chatWindow = new ChatWindow(localisator);
-        chatWindow.getVBox().setPadding(new Insets(80, 50, 80, 0));
+        chatWindow.getVBox().setPadding(new Insets(70, 90, 80, 0));
 
         participateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
@@ -59,7 +59,7 @@ public class LobbyView {
         topBox.getChildren().addAll(gameLabel);
         HBox botBox = new HBox();
         botBox.setPadding(new Insets(0, 0, 120, 80));
-        botBox.setSpacing(20);
+        botBox.setSpacing(430);
         botBox.getChildren().addAll(startButton, spectatorButton);
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();

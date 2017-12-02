@@ -178,19 +178,19 @@ public class GameView {
          */
 
         playerLabel2 = new Label ();
-        playerLabel2.getStyleClass().addAll("nameLabel", "invisible");
+        playerLabel2.getStyleClass().addAll("nameLabel");
         moneyLabel2 = new Label(localisator.getResourceBundle().getString("money")+ ":\t0");
         pointLabel2 = new Label(localisator.getResourceBundle().getString("point")+ ":\t3");
         phaseLabel2 = new Label(localisator.getResourceBundle().getString("phase")+
                 ":\t" +localisator.getResourceBundle().getString( "buy"));
-        moneyLabel2.getStyleClass().addAll("resourceLabel", "invisible");
-        pointLabel2.getStyleClass().addAll("resourceLabel", "invisible");
-        phaseLabel2.getStyleClass().addAll("resourceLabel", "invisible");
+        moneyLabel2.getStyleClass().add("resourceLabel");
+        pointLabel2.getStyleClass().add("resourceLabel");
+        phaseLabel2.getStyleClass().add("resourceLabel");
         putStapelPlayer2 = new Button();
-        putStapelPlayer2.getStyleClass().addAll("mediumButton", "trash", "invisible");
+        putStapelPlayer2.getStyleClass().addAll("mediumButton", "trash");
 
         drawStapelPlayer2 = new Button();
-        drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2", "invisible");
+        drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
 
 
         player2Pane.add(playerLabel2, 0,1);
@@ -209,7 +209,7 @@ public class GameView {
             player2Card.getStyleClass().add("mediumButton");
             player2Card.getStyleClass().add("back2");
             player2Box.getChildren().add(player2Card);
-            player2Card.getStyleClass().add("invisible");
+
 
         }
 
