@@ -398,4 +398,8 @@ public class GameController {
             }
         }).start();
     }
+
+    public Localisator getLocalisator() {
+        return localisator;
+    }
 }

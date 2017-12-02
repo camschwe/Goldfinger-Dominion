@@ -245,6 +245,7 @@ public class Server extends Thread{
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
                     for (Player player : endPlayers){
                         if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
+                            System.out.println("\nSending Player\n");
                             sendToAll(player);
                         }
                     }

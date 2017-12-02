@@ -157,7 +157,12 @@ public class Client extends Thread {
             gameController.endView((ArrayList<Player>) o);
         }
         if (o instanceof Player){
-
+            if (actualController == 2){
+                Platform.runLater(() -> {
+                    gameController.getGameView().playerLabel2.setText(((Player) o).getPlayerName());
+                    gameController.getGameView().pointLabel2.setText(gameController.getLocalisator().getResourceBundle().getString("point") + ":\t" + ((Player) o).getPoints());
+                });
+            }
         }
     }
 
