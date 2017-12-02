@@ -160,11 +160,13 @@ public class Client extends Thread {
 
     // die Clientseitige Spielerliste wird erstellt und aktualisiert
     private void addPlayers(Message message){
-        if (reset) {
-            players.clear();
-            reset = false;
+        if (players.size() <= 4) {
+            if (reset) {
+                players.clear();
+                reset = false;
+            }
+            players.add(message.getClientName());
         }
-        players.add(message.getClientName());
     }
 
     // Aktualisierung der Spielerliste in der LobbyView
@@ -255,6 +257,7 @@ public class Client extends Thread {
         try {
             objOutput.close();
             objInput.close();
+            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

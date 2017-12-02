@@ -2,6 +2,12 @@ package Dialogs;
 
 import Localisation.Localisator;
 import Login.LoginController;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+/**
+ * Created by Benjamin Probst on 27.11.17.
+ **/
 
 public class DialogController {
     private DialogView dialogView;
@@ -34,6 +40,12 @@ public class DialogController {
                 }
             } else {
                 dialogView.connectingLabel.setVisible(true);
+            }
+        });
+
+        dialogView.inputTextField.setOnKeyPressed((KeyEvent event) -> {
+            if (event.getCode().equals(KeyCode.ENTER)){
+                dialogView.btnOK.fire();
             }
         });
 

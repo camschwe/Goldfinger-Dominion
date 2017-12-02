@@ -30,6 +30,7 @@ public class Server extends Thread{
     private static int actualPlayer = 0;
     private static boolean gameStarted = false;
     private static boolean gameEnded = false;
+    private static int round = 1;
 
     public Server() throws Exception{
         colors.add("-fx-fill: red");
@@ -221,7 +222,6 @@ public class Server extends Thread{
                     output.writeObject(message);
                     output.reset();
                 }
-
             }
         }
 
@@ -234,11 +234,16 @@ public class Server extends Thread{
         // Der nächste Spieler wird gesendet
         private void nextPlayer() throws IOException {
             if (!gameEnded) {
-                sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
-                if (actualPlayer < gamePlayers.size() - 1) {
-                    actualPlayer += 1;
+                if (round == 19 && actualPlayer == gamePlayers.size()){
+                    sendMessageToAll(new Message(4, "Round limit reached", "EndGame"));
                 } else {
-                    actualPlayer = 0;
+                    sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
+                    if (actualPlayer < gamePlayers.size() - 1) {
+                        actualPlayer += 1;
+                    } else {
+                        actualPlayer = 0;
+                        round++;
+                    }
                 }
             }
         }

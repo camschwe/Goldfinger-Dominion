@@ -4,7 +4,6 @@ package Dialogs;
 import Localisation.Localisator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,10 +14,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Created by Benjamin Probst on 27.11.17.
+ **/
 
 public class DialogView {
     protected Label inputLabel, connectingLabel, infoLabel;
-    private TextField inputTextField;
+    protected TextField inputTextField;
     protected Button btnOK, btnCancel;
     private Stage dialogStage;
     private Localisator localisator;

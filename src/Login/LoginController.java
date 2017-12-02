@@ -21,6 +21,7 @@ import static javafx.scene.media.AudioClip.INDEFINITE;
 /**
  * Created by Benjamin Probst on 06.10.2017.
  */
+
 public class LoginController {
 
     private LoginModel loginModel;
@@ -83,13 +84,14 @@ public class LoginController {
             languageUpdate();
         });
 
+
         final Task task = new Task() {
 
             @Override
             protected Object call() throws Exception {
                 int s = INDEFINITE;
                 AudioClip audio = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
-                audio.setVolume(0.05);
+                audio.setVolume(0.07);
                 audio.setCycleCount(s);
                 audio.play();
                 return null;
