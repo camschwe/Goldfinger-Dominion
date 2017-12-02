@@ -105,6 +105,7 @@ public class GameController {
         //Eventhändler für den Money Button
         gameView.moneyButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
+                playSound("coin.wav");
                 ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
 
                 for(Card card : tempList){
@@ -344,7 +345,7 @@ public class GameController {
         Platform.runLater(() ->{
             endView = new EndView(gameView.getGameStage(), localisator);
             endModel = new EndModel();
-            endController = new EndController(endModel, endView, localisator, o, gameModel);
+            endController = new EndController(endModel, endView, localisator, o, gameModel, this);
         } );
 
 

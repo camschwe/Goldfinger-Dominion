@@ -126,35 +126,46 @@ public class HandCardController {
                 card.playMoneyCard(player);
                 break;
             case "village":
+                gameController.playSound("village.wav");
                 card.village(player);
                 break;
             case "fair":
+                gameController.playSound("fair.wav");
                 card.fair(player);
                 break;
             case "smithy":
+                gameController.playSound("smithy.wav");
                 card.smithy(player);
                 break;
             case "market":
+                gameController.playSound("market.wav");
                 card.market(player);
                 break;
             case "laboratory":
+                gameController.playSound("laboratory.wav");
                 card.laboratory(player);
                 break;
             case "lumberjack":
+                gameController.playSound("lumberjack.wav");
                 card.lumberjack(player);
                 break;
             case "adventurer":
+                gameController.playSound("adventurer.wav");
                 card.adventurer(player);
                 break;
             case "moneylender":
+                gameController.playSound("moneylender.wav");
                 card.moneylender(player);
                 break;
             case "chancellor":
+                gameController.playSound("chancellor.wav");
                 card.chancellor(player);
                 break;
             case "magpie":
-                card.magpie(player);
-                magpieUpdate();
+                gameController.playSound("magpie.wav");
+                if(card.magpie(player)) {
+                    magpieUpdate();
+                }
                 break;
             default:
                 break;
