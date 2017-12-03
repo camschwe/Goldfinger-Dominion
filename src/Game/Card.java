@@ -59,7 +59,6 @@ public class Card implements Serializable {
 
     public void market(Player player){
         player.draw(1);
-        player.setActions(player.getActions()+1);
         player.setMoney(player.getMoney()+1);
         actionSupport(this, player);
     }
