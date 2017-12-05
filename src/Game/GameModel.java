@@ -90,6 +90,29 @@ public class GameModel {
         actionCards.add(smithy);
     }
 
+    public int moneyButtonAmount(int index){
+
+        switch (index) {
+            case 0:
+                return 60-(7*playerList.size());
+            case 1:
+                return 40;
+            case 2:
+                return 30;
+            default:
+                return 10;
+        }
+    }
+
+    public int pointButtonAmount(){
+        if(playerList.size()<3){
+            return 8;
+        }else{
+            return 12;
+        }
+    }
+
+
 
     public int  getPlayerCount(){
         return this.playerCount;

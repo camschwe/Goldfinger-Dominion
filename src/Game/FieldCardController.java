@@ -51,10 +51,10 @@ public class FieldCardController {
          * dem Array aus dem GameModel.Zudem Eventhändler für die Feldkarten sowie Methode für den Glow Effekt.
          * */
 
-        //TODO: ADD AMOUNT REFERRING PLAYER
+
         //Initialisierung der Geldkarten
         for(int i = 0; i < gameModel.getMoneyCards().size() ; i++) {
-            GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), 30);
+            GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), gameModel.moneyButtonAmount(i));
             gameView.resourcePane.add(moneyButton, 1,i);
             resourceButtons.add(moneyButton);
             addMouseExited(moneyButton, gameView.actionButton);
@@ -63,10 +63,10 @@ public class FieldCardController {
 
         }
 
-        //TODO: ADD AMOUNT REFERRING PLAYER
+
         //Initialisierung Punktekarten
         for(int i = 0; i < gameModel.getPointCards().size() ; i++) {
-            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), 1);
+            GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), gameModel.pointButtonAmount());
             gameView.resourcePane.add(pointButton, 0,i);
             resourceButtons.add(pointButton);
             addMouseExited(pointButton, gameView.actionButton);
@@ -74,7 +74,7 @@ public class FieldCardController {
             addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
 
-        //TODO: ADD AMOUNT REFERRING PLAYER
+
         //Initialisierung Aktionskarten
         int column = 0;
         int row = 0;
@@ -196,8 +196,8 @@ public class FieldCardController {
             }
         }
 
-
     }
+
 
     public void buttonAmountUpdate(GameButton gameButton){
         gameButton.setText(""+gameButton.getAmount());

@@ -197,12 +197,16 @@ public class HandCardController {
                 magpieButton = gameButton;
             }
         }
-        magpieButton.setAmount(magpieButton.getAmount() - 1);
-        Card cardCopy = Card.cardCopy(magpieButton.getCard());
-        player.getHandCards().add(cardCopy);
-        updateHandCardsView();
-        gameController.getClient().sendObject(new GameObject(player, cardCopy, 1 ));
-        fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+
+        if(magpieButton.getAmount()> 0) {
+            magpieButton.setAmount(magpieButton.getAmount() - 1);
+            Card cardCopy = Card.cardCopy(magpieButton.getCard());
+            player.getPlayDeck().add(cardCopy);
+            updateHandCardsView();
+            fieldCardController.buttonAmountUpdate(magpieButton);
+            gameController.getClient().sendObject(new GameObject(player, cardCopy, 1));
+            fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+        }
 
     }
 

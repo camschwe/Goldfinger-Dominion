@@ -59,7 +59,7 @@ public class Card implements Serializable {
 
     public void market(Player player){
         player.draw(1);
-        player.setActions(player.getActions()+1);
+        player.setBuys(player.getBuys()+1);
         player.setMoney(player.getMoney()+1);
         actionSupport(this, player);
     }
@@ -128,7 +128,6 @@ public class Card implements Serializable {
             actionSupport(this, player);
             return false;
         }else{
-            player.getHandCards().add(cardCopy(this));
             actionSupport(this, player);
             return true;
         }
