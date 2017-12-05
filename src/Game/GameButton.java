@@ -12,7 +12,7 @@ public class GameButton extends Button implements Serializable {
     int amount;
 
     /**
-     * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style ahand
+     * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style anhand
      * vom Namen festgelegt
      */
     public GameButton() {

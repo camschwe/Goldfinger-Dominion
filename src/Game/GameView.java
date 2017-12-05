@@ -33,6 +33,7 @@ public class GameView {
     protected TextFlow noteFlow;
     public String newLine;
     protected ScrollPane scrollPane;
+    protected Scene scene;
 
 
 
@@ -238,7 +239,7 @@ public class GameView {
          */
 
         //Scene Initialisieren
-        Scene scene = new Scene(root, 1920, 1080);
+        scene = new Scene(root, 1920, 1080);
         gameStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
         gameStage.setTitle("Goldfinger Dominion");
@@ -266,5 +267,11 @@ public class GameView {
     public void setGameStage(Stage gameStage) {
         this.gameStage = gameStage;
     }
+
+    public Scene getScene(){
+        return scene;
+    }
+
+
 }
 

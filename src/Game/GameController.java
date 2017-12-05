@@ -49,6 +49,7 @@ public class GameController {
         this.client = client;
 
         gameView.pointLabel1.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameModel.getPlayer().getPoints());
+
         if(gameModel.getPlayerList().size()== 1){
             gameView.player2Box.setVisible(false);
             gameView.playerLabel2.getStyleClass().add("invisible");
@@ -57,6 +58,11 @@ public class GameController {
             gameView.pointLabel2.getStyleClass().add("invisible");
             gameView.phaseLabel2.getStyleClass().add("invisible");
             gameView.moneyLabel2.getStyleClass().add("invisible");
+        }
+
+        if(localisator.getLanguage().equals("eng")){
+            gameView.getScene().getStylesheets().clear();
+            gameView.getScene().getStylesheets().add(getClass().getResource("../Stylesheets/GameStylesEng.css").toExternalForm());
         }
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);

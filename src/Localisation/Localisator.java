@@ -40,5 +40,13 @@ public class Localisator {
     public ResourceBundle getResourceBundle(){
         return this.resourceBundle;
     }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }
 
