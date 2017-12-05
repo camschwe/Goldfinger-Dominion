@@ -243,6 +243,7 @@ public class Server extends Thread{
                     sendMessageToAll(new Message(4, "Round limit reached", "EndGame"));
                 } else {
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
+                    sendMessageToAll(new Message(7, gamePlayers.get(actualPlayer), Integer.toString(round)));
                     for (Player player : endPlayers){
                         if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
                             System.out.println("\nSending Player\n");

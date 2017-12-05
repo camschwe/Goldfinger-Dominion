@@ -276,30 +276,21 @@ public class GameController {
     }
 
     public void actionFieldCardUpdate(String cardName){
-
-        Platform.runLater(() -> {
-            for(int i = 0; i< fieldCardController.getActionButtons().size();i++){
-                if(fieldCardController.getActionButtons().get(i).getCard().getName().equals(cardName)){
-                    fieldCardController.getActionButtons().get(i).setAmount( fieldCardController.getActionButtons().get(i).getAmount()-1);
+            for (GameButton card : fieldCardController.getActionButtons()){
+                if (card.getCard().getName().equals(cardName)){
+                    card.setAmount(card.getAmount()-1);
+                    Platform.runLater(() -> card.setText("" + card.getAmount()));
                 }
             }
-
-        });
-
     }
 
     public void resourceFieldUpdate(String cardName){
-
-        Platform.runLater(() -> {
-            for(int i = 0; i< fieldCardController.getResourceButtons().size();i++){
-                if(fieldCardController.getResourceButtons().get(i).getCard().getName().equals(cardName)){
-                    fieldCardController.getResourceButtons().get(i).setAmount( fieldCardController.getResourceButtons().get(i).getAmount()-1);
-                }
+        for (GameButton card : fieldCardController.getResourceButtons()){
+            if (card.getCard().getName().equals(cardName)){
+                card.setAmount(card.getAmount() - 1);
+                Platform.runLater(() -> card.setText("" + card.getAmount()));
             }
-
-        });
-
-
+        }
     }
 
     public void player2LabelUpdate(GameObject gameObject){
@@ -371,8 +362,13 @@ public class GameController {
             endModel = new EndModel();
             endController = new EndController(endModel, endView, localisator, o, gameModel, this);
         } );
+    }
 
-
+    public void changeTurnLabels(String name, int i){
+        Platform.runLater(() -> {
+            gameView.playerLabel.setText(localisator.getResourceBundle().getString("player")+ ":\t" + name);
+            gameView.turnLabel.setText(localisator.getResourceBundle().getString("round")+ ":\t" + i);
+        });
     }
 
     public void endGame() {

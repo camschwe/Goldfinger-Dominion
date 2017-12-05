@@ -84,7 +84,11 @@ public class LoginController {
             languageUpdate();
         });
 
-
+        /**
+         * Methode um ein Audio File abzuspielen.
+         * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+         * @param fileName
+         */
         final Task task = new Task() {
 
             @Override
