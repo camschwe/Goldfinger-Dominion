@@ -14,8 +14,6 @@ import javafx.concurrent.Task;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
-import java.util.Optional;
-
 import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
@@ -33,6 +31,7 @@ public class LoginController {
     protected Localisator localisator;
     private String clientName;
     private Client client;
+    private String resolution = "1080p";
 
 
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
@@ -65,7 +64,7 @@ public class LoginController {
                 clientName = loginView.userNameField.getText();
                 StartServer startServer = new StartServer();
                 startServer.start();
-                client = new Client("localhost", clientName);
+                client = new Client("localhost", clientName, resolution);
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
@@ -78,10 +77,14 @@ public class LoginController {
             }
         });
 
-        loginView.switchBox.setOnAction(event -> {
-            String language = loginView.switchBox.getValue();
+        loginView.languageBox.setOnAction(event -> {
+            String language = loginView.languageBox.getValue();
             languageChecker(language);
             languageUpdate();
+        });
+
+        loginView.sizeBox.setOnAction(event -> {
+            this.resolution = loginView.sizeBox.getValue();
         });
 
         /**
@@ -130,7 +133,8 @@ public class LoginController {
         loginView.userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
         loginView.userNameField.getStyleClass().clear();
         loginView.userNameField.getStyleClass().add("text-field");
-        loginView.switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
+        loginView.languageBox.setPromptText(localisator.getResourceBundle().getString("language"));
+        loginView.sizeBox.setPromptText(localisator.getResourceBundle().getString("size"));
         loginView.connectingLabel.setText(localisator.getResourceBundle().getString("connecting"));
         loginView.dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
         loginView.dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));
@@ -143,7 +147,7 @@ public class LoginController {
     public String connect(String address){
         clientName = loginView.userNameField.getText();
 
-        client = new Client(address, clientName);
+        client = new Client(address, clientName, resolution);
         if (client.isConnected()) {
             client.start();
         }

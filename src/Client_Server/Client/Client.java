@@ -44,11 +44,13 @@ public class Client extends Thread {
     private boolean isServer = false;
     private boolean connected = false;
     private boolean failure = false;
+    private String resolution;
 
-    public Client(String serverAdresse, String clientName){
+    public Client(String serverAdresse, String clientName, String resolution){
         try {
             Client.serverAdresse = serverAdresse;
             this.clientName = clientName;
+            this.resolution = resolution;
             serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
             objInput = new ObjectInputStream(serverSocket.getInputStream());

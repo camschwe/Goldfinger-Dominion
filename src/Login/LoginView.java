@@ -22,7 +22,7 @@ public class LoginView {
     protected Button hostButton, joinButton, tutorialButton;
     protected TextField userNameField;
     protected Label userNameLabel, connectingLabel;
-    protected ComboBox<String> switchBox;
+    protected ComboBox<String> languageBox, sizeBox;
     protected Localisator localisator;
     protected TextInputDialog dialog;
     protected Alert conError;
@@ -42,15 +42,21 @@ public class LoginView {
         VBox centerBox = new VBox();
 
 
-        switchBox = new ComboBox<>();
-        switchBox.setPromptText(localisator.getResourceBundle().getString("language"));
-        switchBox.getItems().addAll(
+        languageBox = new ComboBox<>();
+        languageBox.setPromptText(localisator.getResourceBundle().getString("language"));
+        languageBox.getItems().addAll(
                 "English",
                 "Deutsch",
                 "Schwiizerdütsch"
         );
 
-        tutorialButton = new Button(localisator.getResourceBundle().getString("tutorial"));
+        sizeBox = new ComboBox<>();
+        sizeBox.setPromptText(localisator.getResourceBundle().getString("size"));
+        sizeBox.getItems().addAll(
+                "1080p",
+                "720p"
+        );
+
 
 
         conError = new Alert(Alert.AlertType.ERROR);
@@ -82,10 +88,10 @@ public class LoginView {
         gridPane.setPadding(new Insets(10, 0, 20, 290));
         gridPane.setHgap(20);
         gridPane.setVgap(20);
-        HBox hBox = new HBox();
-        root.setBottom(hBox);
-        hBox.setPadding(new Insets(0, 0, 40, 740));
-        hBox.getChildren().addAll(switchBox, tutorialButton);
+        VBox vBox = new VBox();
+        root.setBottom(vBox);
+        vBox.setPadding(new Insets(0, 0, 40, 740));
+        vBox.getChildren().addAll(languageBox, sizeBox);
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);
