@@ -147,11 +147,13 @@ public class Client extends Thread {
                     }
                     Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
                     break;
+                case 7:
+                    gameController.changeTurnLabels(message.getClientName(), Integer.parseInt(message.getMessage()));
             }
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
-            Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
+            gameController.otherPlayerChecker(gameObject);
         }
         if (o instanceof ArrayList){
             gameController.endView((ArrayList<Player>) o);

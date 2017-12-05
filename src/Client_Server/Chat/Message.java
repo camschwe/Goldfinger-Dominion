@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Message implements Serializable {
     /**
      * die Variable type speichert die möglichen Arten von Nachrichten:
-     * 0 = neuer Spieler, 1 = eine Nachricht, 2 = Spieler meldet sich ab, 3 = Spielername validation, 4 = Game started, 5 = aktueller Spieler, 6 = Turn ended
+     * 0 = neuer Spieler, 1 = eine Nachricht, 2 = Spieler meldet sich ab, 3 = Spielername validation, 4 = Game started, 5 = aktueller Spieler, 6 = Turn ended, 7 Round Information
      *
      * Die Variable color speichert als String die zu verwendende Farbe als css Ausdruck
      *
