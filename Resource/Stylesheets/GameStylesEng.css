@@ -108,9 +108,6 @@
 
 
 
-
-
-
 .buttonOpacity{
     -fx-opacity: 0.5;
 }
@@ -139,67 +136,67 @@
 }
 
 .copper{
-    -fx-background-image: url('../Cards/copper.JPG');
+    -fx-background-image: url('../Cards/copper_eng.JPG');
 }
 
 .silver {
-    -fx-background-image: url('../Cards/silver.JPG');
+    -fx-background-image: url('../Cards/silver_eng.JPG');
 }
 
 .gold {
-     -fx-background-image: url('../Cards/gold.JPG');
- }
+    -fx-background-image: url('../Cards/gold_eng.JPG');
+}
 
 .province {
-    -fx-background-image: url('../Cards/province.JPG');
-   }
+    -fx-background-image: url('../Cards/province_eng.JPG');
+}
 
 .duchy {
-    -fx-background-image: url('../Cards/duchy.JPG');
-    }
+    -fx-background-image: url('../Cards/duchy_eng.JPG');
+}
 
 .estate {
-    -fx-background-image: url('../Cards/estate.JPG');
+    -fx-background-image: url('../Cards/estate_eng.JPG');
 }
 
 .village {
-    -fx-background-image: url('../Cards/village.JPG');
+    -fx-background-image: url('../Cards/village_eng.JPG');
 }
 
 .fair{
-    -fx-background-image: url('../Cards/fair.JPG');
+    -fx-background-image: url('../Cards/fair_eng.JPG');
 }
 
 .smithy{
-    -fx-background-image: url('../Cards/smithy.JPG');
+    -fx-background-image: url('../Cards/smithy_eng.JPG');
 }
 
 .market{
-    -fx-background-image: url('../Cards/market.JPG');
+    -fx-background-image: url('../Cards/market_eng.JPG');
 }
 
 .laboratory{
-    -fx-background-image: url('../Cards/laboratory.JPG');
+    -fx-background-image: url('../Cards/laboratory_eng.JPG');
 }
 
 .lumberjack{
-    -fx-background-image: url('../Cards/lumberjack.JPG');
+    -fx-background-image: url('../Cards/lumberjack_eng.JPG');
 }
 
 .adventurer{
-    -fx-background-image: url('../Cards/adventurer.JPG');
+    -fx-background-image: url('../Cards/adventurer_eng.JPG');
 }
 
 .moneylender{
-    -fx-background-image: url('../Cards/moneylender.JPG');
+    -fx-background-image: url('../Cards/moneylender_eng.JPG');
 }
 
 .chancellor{
-    -fx-background-image: url('../Cards/chancellor.JPG');
+    -fx-background-image: url('../Cards/chancellor_eng.JPG');
 }
 
 .magpie{
-    -fx-background-image: url('../Cards/magpie.JPG');
+    -fx-background-image: url('../Cards/magpie_eng.JPG');
 }
 
 .copperSmall{
@@ -228,43 +225,43 @@
 }
 
 .villageSmall {
-    -fx-background-image: url('../Cards/village_small.JPG');
+    -fx-background-image: url('../Cards/village_small_eng.JPG');
 }
 
 .fairSmall{
-    -fx-background-image: url('../Cards/fair_small.JPG');
+    -fx-background-image: url('../Cards/fair_small_eng.JPG');
 }
 
 .smithySmall{
-    -fx-background-image: url('../Cards/smithy_small.JPG');
+    -fx-background-image: url('../Cards/smithy_small_eng.JPG');
 }
 
 .marketSmall{
-    -fx-background-image: url('../Cards/market_small.JPG');
+    -fx-background-image: url('../Cards/market_small_eng.JPG');
 }
 
 .laboratorySmall{
-    -fx-background-image: url('../Cards/laboratory_small.JPG');
+    -fx-background-image: url('../Cards/laboratory_small_eng.JPG');
 }
 
 .lumberjackSmall {
-    -fx-background-image: url('../Cards/lumberjack_small.JPG');
+    -fx-background-image: url('../Cards/lumberjack_small_eng.JPG');
 }
 
 .adventurerSmall{
-    -fx-background-image: url('../Cards/adventurer_small.JPG');
+    -fx-background-image: url('../Cards/adventurer_small_eng.JPG');
 }
 
 .moneylenderSmall{
-    -fx-background-image: url('../Cards/moneylender_small.JPG');
+    -fx-background-image: url('../Cards/moneylender_small_eng.JPG');
 }
 
 .chancellorSmall{
-    -fx-background-image: url('../Cards/chancellor_small.JPG');
+    -fx-background-image: url('../Cards/chancellor_small_eng.JPG');
 }
 
 .magpieSmall{
-    -fx-background-image: url('../Cards/magpie_small.JPG');
+    -fx-background-image: url('../Cards/magpie_small_eng.JPG');
 }
 
 .back1{

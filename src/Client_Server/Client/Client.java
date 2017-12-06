@@ -44,11 +44,13 @@ public class Client extends Thread {
     private boolean isServer = false;
     private boolean connected = false;
     private boolean failure = false;
+    private String resolution;
 
-    public Client(String serverAdresse, String clientName){
+    public Client(String serverAdresse, String clientName, String resolution){
         try {
             Client.serverAdresse = serverAdresse;
             this.clientName = clientName;
+            this.resolution = resolution;
             serverSocket = new Socket(Client.serverAdresse, PORT);
             objOutput = new ObjectOutputStream(serverSocket.getOutputStream());
             objInput = new ObjectInputStream(serverSocket.getInputStream());
@@ -146,11 +148,13 @@ public class Client extends Thread {
                     }
                     Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
                     break;
+                case 7:
+                    gameController.changeTurnLabels(message.getClientName(), Integer.parseInt(message.getMessage()));
             }
         }
         if(o instanceof GameObject){
             GameObject gameObject = (GameObject) o;
-            Platform.runLater(() -> gameController.otherPlayerChecker(gameObject));
+            gameController.otherPlayerChecker(gameObject);
         }
         if (o instanceof ArrayList){
             gameController.endView((ArrayList<Player>) o);

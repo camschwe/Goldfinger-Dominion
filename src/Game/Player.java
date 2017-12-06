@@ -42,6 +42,7 @@ public class Player implements Serializable, Comparable{
      * von Spielkarten und wechselt den Ablagestapel mit dem Ziehstapel, wenn keine Karten mehr vorhanden sind
      */
 
+    //TODO: überprüfen ob beim Ablagestapel noch weitere Karten verfügbar sind
     //Zieht Anzahl angegebener Karten vom Nachziehstapel
     public void draw(int cards){
         if(this.drawDeck.size() == 0){
@@ -137,7 +138,6 @@ public class Player implements Serializable, Comparable{
             }
     }
 
-    //TODO: Change TO OTHER PLAYER
     //Schliesst den aktuellen Zug Ab und zieht 5 neue Karten
     public void endTurn(){
         this.money = 0;
