@@ -110,7 +110,7 @@ public class Server extends Thread{
                                     break;
                                 case 6:
                                     nextPlayer();
-                                    sortEndPlayers();
+                                    Collections.sort(endPlayers);
                                     break;
                             }
                         }else if (o instanceof GameObject){
@@ -126,7 +126,6 @@ public class Server extends Thread{
                             }
                         }
                     } catch (Exception e) {
-                        System.out.println("ERROR");
                         removeClient();
                         break;
                     }
@@ -159,7 +158,6 @@ public class Server extends Thread{
                     } else {
                         send = new Message(3, name, "valid", getRandomColor());
                     }
-                    System.out.println("Added Player: " + send.toString());
                     objOutput.writeObject(send);
                     sendPlayerList();
                     sendMessageToAll(new Message(3, name, "actualize"));
@@ -210,7 +208,6 @@ public class Server extends Thread{
 
         // Übermitteln eines Objekts an alle Spieler
         private void sendToAll(Object o) throws IOException {
-            System.out.println("Server sending Object: " + o);
             for (ObjectOutputStream output : outputs){
                 if (output != null){
                     output.writeObject(o);
@@ -245,7 +242,6 @@ public class Server extends Thread{
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
                     for (Player player : endPlayers){
                         if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
-                            System.out.println("\nSending Player\n");
                             sendToAll(player);
                         }
                     }
@@ -260,13 +256,9 @@ public class Server extends Thread{
         }
 
         // EndPlayers List sortieren
-        private void sortEndPlayers(){
+        /**private void sortEndPlayers(){
             Collections.sort(endPlayers);
-            System.out.println("Liste sortiert");
-            for (Player player : endPlayers){
-                System.out.println(player.getPlayerName() + " Punkte: " + player.getPoints());
-            }
-        }
+        }**/
 
         private String getRandomColor(){
             String color = "-fx-fill: #";

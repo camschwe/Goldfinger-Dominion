@@ -76,7 +76,6 @@ public class Client extends Thread {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println("Objekt empfangen: " + o);
                 handleObject(o);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -157,11 +156,14 @@ public class Client extends Thread {
             gameController.endView((ArrayList<Player>) o);
         }
         if (o instanceof Player){
-            if (actualController == 2){
+            if (actualController == 2 && !((Player) o).getPlayerName().equals(this.clientName)){
+                System.out.println("*********************" + "\n" + this.clientName + "\n" + ((Player) o).getPlayerName() + "\n" + "*********************");
                 Platform.runLater(() -> {
                     gameController.getGameView().playerLabel2.setText(((Player) o).getPlayerName());
                     gameController.getGameView().pointLabel2.setText(gameController.getLocalisator().getResourceBundle().getString("point") + ":\t" + ((Player) o).getPoints());
                 });
+            } else {
+                System.out.println("*********************\nDoing nothing\n*********************");
             }
         }
     }
@@ -185,7 +187,7 @@ public class Client extends Thread {
             for (String player: players){
                 final int iCopy = i;
                 Platform.runLater(() -> {
-                    lobbyController.getLobbyView().getPlayers().get(iCopy).setText("- "+player);
+                    lobbyController.getLobbyView().getPlayers().get(iCopy).setText("- " + player);
                     lobbyController.getLobbyView().getPlayers().get(iCopy).setVisible(true);
                 });
                 i++;
