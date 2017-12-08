@@ -7,12 +7,14 @@ import End.EndController;
 import End.EndModel;
 import Localisation.Localisator;
 import Login.EndView;
+import Login.LoginController;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import sun.applet.Main;
+import sun.rmi.runtime.Log;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -140,6 +142,20 @@ public class GameController {
 
 
         });
+
+        gameView.musicButton.setOnAction(event -> {
+            if (client.getMusicActivated()){
+                client.stopMusic();
+                client.setMusicActivated(true);
+                Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOff"));
+            } else {
+                client.startBackground();
+                client.setMusicActivated(false);
+                Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOff"));
+            }
+        });
     }
 
 
@@ -217,7 +233,7 @@ public class GameController {
             playSound(soundUpdate(gameObject.getCard().getName()));
 
             if (gameObject.getCard().getType().equals("point")){
-                gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints());
+                Platform.runLater(() -> gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints()));
             }
     }
     }

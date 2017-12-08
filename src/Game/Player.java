@@ -323,7 +323,7 @@ public class Player implements Serializable, Comparable{
     @Override
     public int compareTo(Object o) {
         Player p = (Player) o;
-        return this.points - p.getPoints();
+        return p.getPoints() - this.points;
     }
 
 }

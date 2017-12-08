@@ -70,6 +70,19 @@
     -fx-pref-width: 300;
 }
 
+.musicButtonOn{
+    -fx-background-image: url(../musicButton/sound.png);
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-background-repeat: stretch;
+}
+
+.musicButtonOff{
+    -fx-background-image: url(../musicButton/nosound.png);
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-background-repeat: stretch;
+}
 
 .root {
     -fx-background-image: url("../Backgrounds/scroll.jpg");

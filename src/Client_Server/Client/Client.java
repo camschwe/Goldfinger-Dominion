@@ -8,6 +8,8 @@ import Game.HandCardController;
 import Game.Player;
 import Lobby.LobbyController;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.scene.media.AudioClip;
 
 import java.awt.*;
 import java.io.EOFException;
@@ -17,6 +19,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+
+import static javafx.scene.media.AudioClip.INDEFINITE;
 
 /**
  * Created by Benjamin Probst on 01.10.2017.
@@ -45,9 +49,12 @@ public class Client extends Thread {
     private boolean connected = false;
     private boolean failure = false;
     private String resolution;
+    private boolean musicActivated = true;
+    private static AudioClip audioClip;
 
-    public Client(String serverAdresse, String clientName, String resolution){
+    public Client(String serverAdresse, String clientName, String resolution, AudioClip audioClip){
         try {
+            this.audioClip = audioClip;
             Client.serverAdresse = serverAdresse;
             this.clientName = clientName;
             this.resolution = resolution;
@@ -146,7 +153,7 @@ public class Client extends Thread {
                     if (gameStarted){
                         gameController.getFieldCardController().getSpectatorController().changePlayerCards();
                     }
-                    Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
+                    //Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
                     break;
                 case 7:
                     gameController.changeTurnLabels(message.getClientName(), Integer.parseInt(message.getMessage()));
@@ -278,6 +285,40 @@ public class Client extends Thread {
         running = false;
     }
 
+    public static void startBackground(){
+        /**
+         * Methode um ein Audio File abzuspielen.
+         * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+         * @param fileName
+         */
+        final Task task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                audioClip = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
+                audioClip.setVolume(0.07);
+                audioClip.setCycleCount(s);
+                audioClip.play();
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+
+    public void stopMusic(){
+        this.musicActivated = false;
+        audioClip.stop();
+    }
+
+    public boolean getMusicActivated(){
+        return musicActivated;
+    }
+
+    public void setMusicActivated(boolean music){
+        this.musicActivated = music;
+    }
     public static String getColor(){
         return Client.color;
     }

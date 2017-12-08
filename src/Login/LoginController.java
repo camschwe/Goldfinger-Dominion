@@ -10,6 +10,7 @@ import Lobby.LobbyController;
 import Lobby.LobbyModel;
 import Lobby.LobbyView;
 import Localisation.Localisator;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
@@ -32,6 +33,8 @@ public class LoginController {
     private String clientName;
     private Client client;
     private String resolution = "1080p";
+    private boolean musicActivated = true;
+    private static AudioClip audioClip;
 
 
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
@@ -64,7 +67,7 @@ public class LoginController {
                 clientName = loginView.userNameField.getText();
                 StartServer startServer = new StartServer();
                 startServer.start();
-                client = new Client("localhost", clientName, resolution);
+                client = new Client("localhost", clientName, resolution, audioClip);
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
@@ -87,25 +90,22 @@ public class LoginController {
             this.resolution = loginView.sizeBox.getValue();
         });
 
-        /**
-         * Methode um ein Audio File abzuspielen.
-         * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
-         * @param fileName
-         */
-        final Task task = new Task() {
-
-            @Override
-            protected Object call() throws Exception {
-                int s = INDEFINITE;
-                AudioClip audio = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
-                audio.setVolume(0.07);
-                audio.setCycleCount(s);
-                audio.play();
-                return null;
+        loginView.musicButton.setOnAction(event -> {
+            if (musicActivated){
+                stopMusic();
+                musicActivated = false;
+                Platform.runLater(() -> loginView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> loginView.musicButton.getStyleClass().add("musicButtonOff"));
+            } else {
+                startBackground();
+                musicActivated = true;
+                Platform.runLater(() -> loginView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> loginView.musicButton.getStyleClass().add("musicButtonOff"));
             }
-        };
-        Thread thread = new Thread(task);
-        thread.start();
+        });
+
+        startBackground();
+
     }
 
     public void languageChecker(String language) {
@@ -147,7 +147,7 @@ public class LoginController {
     public String connect(String address){
         clientName = loginView.userNameField.getText();
 
-        client = new Client(address, clientName, resolution);
+        client = new Client(address, clientName, resolution, audioClip);
         if (client.isConnected()) {
             client.start();
         }
@@ -182,6 +182,41 @@ public class LoginController {
         } else {
             return "Error connecting";
         }
+    }
+
+    public static void startBackground(){
+        /**
+         * Methode um ein Audio File abzuspielen.
+         * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+         * @param fileName
+         */
+        final Task task = new Task() {
+
+            @Override
+            protected Object call() throws Exception {
+                int s = INDEFINITE;
+                audioClip = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
+                audioClip.setVolume(0.07);
+                audioClip.setCycleCount(s);
+                audioClip.play();
+                return null;
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+
+    public void stopMusic(){
+        this.musicActivated = false;
+        audioClip.stop();
+    }
+
+    public boolean getMusicActivated(){
+        return musicActivated;
+    }
+
+    public void setMusicActivated(boolean music){
+        this.musicActivated = music;
     }
 
     public LoginModel getLoginModel() {

@@ -21,8 +21,7 @@ import java.util.ArrayList;
 public class LobbyView {
 
     public Stage primaryStage;
-    public Button startButton;
-    protected Button spectatorButton;
+    protected Button startButton, spectatorButton, musicButton;
     public Label participateLabel, gameLabel, userLabel1, userLabel2, userLabel3, userLabel4;
     protected Localisator localisator;
     protected ChatWindow chatWindow;
@@ -42,6 +41,8 @@ public class LobbyView {
         userLabel4 = new Label("unknown");
         startButton = new Button(localisator.getResourceBundle().getString("start"));
         spectatorButton = new Button(localisator.getResourceBundle().getString("spectator"));
+        musicButton = new Button();
+        musicButton.setStyle("-fx-background-image: url(musicButton/sound.png); -fx-background-repeat: no-repeat;");
         players.add(userLabel1);
         players.add(userLabel2);
         players.add(userLabel3);
