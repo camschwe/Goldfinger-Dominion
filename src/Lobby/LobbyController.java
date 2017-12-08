@@ -97,7 +97,7 @@ public class LobbyController {
                 client.startBackground();
                 client.setMusicActivated(false);
                 Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
-                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
+                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOn"));
             }
         });
 
