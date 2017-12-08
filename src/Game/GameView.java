@@ -176,7 +176,7 @@ public class GameView {
         phaseLabel1.getStyleClass().add("resourceLabel");
         putStapelPlayer1 = new Button();
         putStapelPlayer1.getStyleClass().add("mediumButton");
-        putStapelPlayer1.getStyleClass().add("back1");
+        putStapelPlayer1.getStyleClass().add("invisible");
         Button drawStapelPlayer1 = new Button();
         drawStapelPlayer1.getStyleClass().add("mediumButton");
         drawStapelPlayer1.getStyleClass().add("back1");
@@ -224,7 +224,7 @@ public class GameView {
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");
         putStapelPlayer2 = new Button();
-        putStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
+        putStapelPlayer2.getStyleClass().addAll("mediumButton", "invisible");
 
         drawStapelPlayer2 = new Button();
         drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
@@ -236,7 +236,7 @@ public class GameView {
         player2Pane.add(phaseLabel2, 0,4);
         player2Pane.setPadding(new Insets(200,0,0,0));
         player2Pane.setVgap(5);
-        player2CardBox.getChildren().addAll(putStapelPlayer2, drawStapelPlayer2);
+        player2CardBox.getChildren().addAll(drawStapelPlayer2, putStapelPlayer2);
 
 
 

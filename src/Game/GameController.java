@@ -232,7 +232,6 @@ public class GameController {
             if(gameObject.getAction() == 0){
                 Platform.runLater(() -> {
                     player2HandCardsUpdate(gameObject);
-                    putStapelUpdate(gameObject.getPlayer(), gameView.putStapelPlayer2);
                 });
 
             }else{
@@ -246,6 +245,7 @@ public class GameController {
                 player2LabelUpdate(gameObject);
                 noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
                 playSound(soundUpdate(gameObject.getCard().getName()));
+                putStapelUpdate(gameObject.getPlayer(), gameView.putStapelPlayer2);
             });
 
 
@@ -400,8 +400,9 @@ public class GameController {
 
     public void player2PointUpdate(Player o){
         Platform.runLater(() -> {
-            gameView.playerLabel2.setText((o).getPlayerName());
-            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point") + ":\t" + (o).getPoints());
+            gameView.playerLabel2.setText(o.getPlayerName());
+            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point") + ":\t" + o.getPoints());
+            putStapelUpdate(o, gameView.putStapelPlayer2);
         });
     }
 

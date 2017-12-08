@@ -162,19 +162,19 @@ public class FieldCardController {
         gameController.putStapelUpdate(player, gameView.putStapelPlayer1);
         gameController.player1LabelUpdate();
         handCardController.updateHandCardsView();
+        fieldCardsGlowingUpdate(resourceButtons);
+        fieldCardsGlowingUpdate(actionButtons);
+        handCardController.updateHandCardsView();
         gameController.getClient().sendObject(new GameObject(player, card, 1 ));
         if(card.getName().equals("province") && gameButton.getAmount() < 1) {
             gameController.getClient().sendObject(new Message(4, player.getPlayerName(), "EndGame"));
-            //gameView.stop();
         }
         if (player.isTurnEnded()){
             gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
             player.setTurnEnded(false);
         }
 
-        fieldCardsGlowingUpdate(resourceButtons);
-        fieldCardsGlowingUpdate(actionButtons);
-        handCardController.updateHandCardsView();
+
 
     }
 
