@@ -150,7 +150,7 @@ public class GameController {
                 client.startBackground();
                 client.setMusicActivated(false);
                 Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
-                Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOff"));
+                Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOn"));
             }
         });
     }

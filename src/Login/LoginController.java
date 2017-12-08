@@ -100,7 +100,7 @@ public class LoginController {
                 startBackground();
                 musicActivated = true;
                 Platform.runLater(() -> loginView.musicButton.getStyleClass().clear());
-                Platform.runLater(() -> loginView.musicButton.getStyleClass().add("musicButtonOff"));
+                Platform.runLater(() -> loginView.musicButton.getStyleClass().add("musicButtonOn"));
             }
         });
 
