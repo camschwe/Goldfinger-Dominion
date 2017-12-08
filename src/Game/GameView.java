@@ -132,8 +132,8 @@ public class GameView {
         chatBox.getChildren().addAll(musicBox, turnLabel, playerLabel, scrollPane, chatWindow.getRoot());
         chatWindow.getVBox().setPadding(new Insets(0, 0, 0, 0));
         chatWindow.getScrollPane().getStyleClass().add("chatWindow");
-        chatBox.setPadding(new Insets(100, 5, 0, 20));
-        chatBox.setSpacing(40);
+        chatBox.setPadding(new Insets(0, 5, 0, 20));
+        chatBox.setSpacing(20);
 
 
 
