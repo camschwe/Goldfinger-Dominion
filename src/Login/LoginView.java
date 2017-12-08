@@ -40,6 +40,7 @@ public class LoginView {
 
 
         languageBox = new ComboBox<>();
+        //languageBox.getStyleClass().add("box");
         languageBox.setPromptText("Schwiizerdütsch");
         languageBox.getItems().addAll(
                 "English",
@@ -48,6 +49,7 @@ public class LoginView {
         );
 
         sizeBox = new ComboBox<>();
+        //sizeBox.getStyleClass().add("box");
         sizeBox.setPromptText("720p");
         sizeBox.getItems().addAll(
                 "1080p",
@@ -97,6 +99,7 @@ public class LoginView {
         root.setTop(musicBox);
         root.setBottom(bottom);
         bottom.setPadding(new Insets(0, 0, 40, 740));
+        bottom.setSpacing(20);
         bottom.getChildren().addAll(languageBox, sizeBox);
 
         //Scene Initialisieren

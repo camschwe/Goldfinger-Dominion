@@ -11,6 +11,20 @@
     -fx-background-color: black;
 }
 
+.combo-box-base {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+
+
+}
+
+.combo-box .cell:selected {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+
+}
+
 .label {
     -fx-background-color: transparent;
     -fx-text-fill: white;

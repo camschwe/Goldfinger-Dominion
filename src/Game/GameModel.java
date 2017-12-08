@@ -104,9 +104,10 @@ public class GameModel {
         }
     }
 
+    //TODO: CHANGE TO 8
     public int pointButtonAmount(){
         if(playerList.size()<3){
-            return 8;
+            return 1;
         }else{
             return 12;
         }

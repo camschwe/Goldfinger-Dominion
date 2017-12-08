@@ -17,14 +17,14 @@ import javafx.stage.Stage;
 public class EndView {
 
     protected Stage gameStage;
-    public Button lobbyButton, leaveButton;
+    public Button leaveButton;
     public Label resultLabel, turnLabel;
     protected Localisator localisator;
     public GridPane gridPane;
     public Scene scene;
 
 
-    public EndView(Stage gameStage, Localisator localisator, String turns) {
+    public EndView(Stage gameStage, Localisator localisator, String turns, String resolution) {
         this.gameStage = gameStage;
         this.localisator = localisator;
 
@@ -39,10 +39,10 @@ public class EndView {
         root.setBottom(hBox);
 
         leaveButton = new Button(localisator.getResourceBundle().getString("leave"));
-        lobbyButton = new Button(localisator.getResourceBundle().getString("lobby"));
+
 
         hBox.setPadding(new Insets(0, 0, 40, 740));
-        hBox.getChildren().addAll(lobbyButton, leaveButton);
+        hBox.getChildren().add(leaveButton);
 
         resultLabel = new Label(localisator.getResourceBundle().getString("lost"));
         turnLabel = new Label(turns);
@@ -53,15 +53,19 @@ public class EndView {
 
 
         //Scene Initialisieren
-        scene = new Scene(root, 1920, 1080);
+
+        if(resolution.equals("720p")){
+            scene = new Scene(root, 1280, 720);
+            scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesSmall.css").toExternalForm());
+        }else{
+            scene = new Scene(root, 1920, 1080);
+            scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesBig.css").toExternalForm());
+        }
         gameStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesBig.css").toExternalForm());
+
         gameStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
         gameStage.setTitle("Goldfinger Dominion");
-        gameStage.setMaxWidth(1920);
-        gameStage.setMaxHeight(1080);
-        gameStage.setMinWidth(1920);
-        gameStage.setMinHeight(1080);
+
     }
 
     public void start() {

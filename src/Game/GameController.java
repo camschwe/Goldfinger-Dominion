@@ -385,7 +385,7 @@ public class GameController {
 
     public void endView(ArrayList<Player> o) {
         Platform.runLater(() ->{
-            endView = new EndView(gameView.getGameStage(), localisator, gameView.turnLabel.getText());
+            endView = new EndView(gameView.getGameStage(), localisator, gameView.turnLabel.getText(), client.getResolution());
             endModel = new EndModel();
             endController = new EndController(endModel, endView, localisator, o, gameModel, this);
         } );
