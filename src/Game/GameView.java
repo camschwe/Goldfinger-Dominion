@@ -95,14 +95,16 @@ public class GameView {
 
 
 
-        resourcePane.setHgap(20);
-        resourcePane.setVgap(20);
-        resourcePane.setPadding(new Insets(20, 20, 0, 20));
+
 
         if(resolution.equals("720p")){
             resourcePane.setHgap(10);
             resourcePane.setVgap(10);
-            resourcePane.setPadding(new Insets(0, 20, 0, 20));
+            resourcePane.setPadding(new Insets(5, 20, 0, 20));
+        }else{
+            resourcePane.setHgap(20);
+            resourcePane.setVgap(20);
+            resourcePane.setPadding(new Insets(20, 20, 0, 20));
         }
 
 
@@ -183,8 +185,10 @@ public class GameView {
 
         if(resolution.equals("720p")){
             player1CardBox.setSpacing(5);
+            player1CardBox.setPadding((new Insets(0, 0, 5, 20)));
         }else{
             player1CardBox.setSpacing(10);
+            player1CardBox.setPadding((new Insets(0, 0, 10, 0)));
         }
 
 
@@ -192,7 +196,7 @@ public class GameView {
         player1Box.setAlignment(Pos.BOTTOM_CENTER);
 
         if(resolution.equals("720p")){
-            player1Box.setPadding((new Insets(20, 20, 20, 20)));
+            player1Box.setPadding((new Insets(0, 0, 10, 0)));
             player1Box.setSpacing(5);
         }else{
             player1Box.setPadding((new Insets(20, 20, 20, 20)));
@@ -213,7 +217,7 @@ public class GameView {
         pointLabel2.getStyleClass().add("resourceLabel");
         phaseLabel2.getStyleClass().add("resourceLabel");
         putStapelPlayer2 = new Button();
-        putStapelPlayer2.getStyleClass().addAll("mediumButton", "trash");
+        putStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
 
         drawStapelPlayer2 = new Button();
         drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
@@ -232,10 +236,10 @@ public class GameView {
 
         if(resolution.equals("720p")){
             player2CardBox.setSpacing(5);
-            player2Box.setPadding((new Insets(10, 0, 100, 0)));
+            player2CardBox.setPadding((new Insets(5, 0, 0, 0)));
         }else{
             player2CardBox.setSpacing(10);
-            player2Box.setPadding((new Insets(20, 20, 20, 80)));
+            player2CardBox.setPadding((new Insets(10, 0, 0, 0)));
         }
 
 
@@ -245,8 +249,14 @@ public class GameView {
             player2Card.getStyleClass().add("mediumButton");
             player2Card.getStyleClass().add("back2");
             player2Box.getChildren().add(player2Card);
+        }
 
-
+        if(resolution.equals("720p")){
+            player2Box.setSpacing(5);
+            player2Box.setPadding((new Insets(10, 0, 100, 0)));
+        }else{
+            player2Box.setSpacing(10);
+            player2Box.setPadding((new Insets(20, 20, 20, 80)));
         }
 
 
