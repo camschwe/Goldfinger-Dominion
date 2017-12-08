@@ -34,6 +34,13 @@ public class LobbyController {
         this.lobbyView = lobbyView;
         this.localisator = localisator;
         this.client = client;
+        if (client.getMusicActivated()) {
+            Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
+            Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOn"));
+        } else {
+            Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
+            Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
+        }
 
         lobbyView.startButton.setOnAction(event -> {
 
@@ -90,12 +97,12 @@ public class LobbyController {
         lobbyView.musicButton.setOnAction(event -> {
             if (client.getMusicActivated()){
                 client.stopMusic();
-                client.setMusicActivated(true);
+                client.setMusicActivated(false);
                 Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
                 Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
             } else {
                 client.startBackground();
-                client.setMusicActivated(false);
+                client.setMusicActivated(true);
                 Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
                 Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOn"));
             }

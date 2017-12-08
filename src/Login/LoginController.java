@@ -67,7 +67,7 @@ public class LoginController {
                 clientName = loginView.userNameField.getText();
                 StartServer startServer = new StartServer();
                 startServer.start();
-                client = new Client("localhost", clientName, resolution, audioClip);
+                client = new Client("localhost", clientName, resolution, audioClip, musicActivated);
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
@@ -146,7 +146,7 @@ public class LoginController {
     public String connect(String address){
         clientName = loginView.userNameField.getText();
 
-        client = new Client(address, clientName, resolution, audioClip);
+        client = new Client(address, clientName, resolution, audioClip, musicActivated);
         if (client.isConnected()) {
             client.start();
         }

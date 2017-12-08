@@ -89,10 +89,15 @@ public class LoginView {
         gridPane.setPadding(new Insets(10, 0, 20, 290));
         gridPane.setHgap(20);
         gridPane.setVgap(20);
-        VBox vBox = new VBox();
-        root.setBottom(vBox);
-        vBox.setPadding(new Insets(0, 0, 40, 740));
-        vBox.getChildren().addAll(musicButton, languageBox, sizeBox);
+        VBox bottom = new VBox();
+        VBox musicBox = new VBox();
+        musicBox.getChildren().add(musicButton);
+        musicBox.setPadding(new Insets(10));
+        musicBox.setAlignment(Pos.TOP_RIGHT);
+        root.setTop(musicBox);
+        root.setBottom(bottom);
+        bottom.setPadding(new Insets(0, 0, 40, 740));
+        bottom.getChildren().addAll(languageBox, sizeBox);
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);

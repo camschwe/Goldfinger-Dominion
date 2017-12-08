@@ -52,9 +52,10 @@ public class Client extends Thread {
     private boolean musicActivated = true;
     private static AudioClip audioClip;
 
-    public Client(String serverAdresse, String clientName, String resolution, AudioClip audioClip){
+    public Client(String serverAdresse, String clientName, String resolution, AudioClip audioClip, boolean musicActivated){
         try {
             this.audioClip = audioClip;
+            this.musicActivated = musicActivated;
             Client.serverAdresse = serverAdresse;
             this.clientName = clientName;
             this.resolution = resolution;
