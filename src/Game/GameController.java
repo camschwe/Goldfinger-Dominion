@@ -62,14 +62,6 @@ public class GameController {
             gameView.moneyLabel2.getStyleClass().add("invisible");
         }
 
-        if(localisator.getLanguage().equals("eng")){
-            gameView.getScene().getStylesheets().clear();
-            gameView.getScene().getStylesheets().add(getClass().getResource("../Stylesheets/GameStylesEng.css").toExternalForm());
-        }
-
-        if(client.getResolution().equals("720p")){
-            smallScreenUpdate();
-        }
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());

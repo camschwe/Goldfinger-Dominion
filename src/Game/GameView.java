@@ -37,7 +37,7 @@ public class GameView {
 
 
 
-    public GameView(Stage gameStage, Localisator localisator, ChatWindow chatWindow, String resolution) {
+    public GameView(Stage gameStage, Localisator localisator, ChatWindow chatWindow, String resolution, String language) {
         this.gameStage = gameStage;
         this.localisator = localisator;
         this.chatWindow = chatWindow;
@@ -289,6 +289,12 @@ public class GameView {
             scene = new Scene(root, 1920, 1080);
             scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
 
+        }
+
+        if(language.equals("eng")){
+            scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStylesEng.css").toExternalForm());
+        }else{
+            scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStylesDe.css").toExternalForm());
         }
         gameStage.setScene(scene);
 

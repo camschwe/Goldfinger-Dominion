@@ -32,7 +32,7 @@ public class LoginController {
     protected Localisator localisator;
     private String clientName;
     private Client client;
-    private String resolution = "1080p";
+    private String resolution = "720p";
     private boolean musicActivated = true;
     private static AudioClip audioClip;
 
@@ -134,7 +134,6 @@ public class LoginController {
         loginView.userNameField.getStyleClass().clear();
         loginView.userNameField.getStyleClass().add("text-field");
         loginView.languageBox.setPromptText(localisator.getResourceBundle().getString("language"));
-        loginView.sizeBox.setPromptText(localisator.getResourceBundle().getString("size"));
         loginView.connectingLabel.setText(localisator.getResourceBundle().getString("connecting"));
         loginView.dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
         loginView.dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));

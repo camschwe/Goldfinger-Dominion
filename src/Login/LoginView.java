@@ -40,7 +40,7 @@ public class LoginView {
 
 
         languageBox = new ComboBox<>();
-        languageBox.setPromptText(localisator.getResourceBundle().getString("language"));
+        languageBox.setPromptText("Schwiizerdütsch");
         languageBox.getItems().addAll(
                 "English",
                 "Deutsch",
@@ -48,7 +48,7 @@ public class LoginView {
         );
 
         sizeBox = new ComboBox<>();
-        sizeBox.setPromptText(localisator.getResourceBundle().getString("size"));
+        sizeBox.setPromptText("720p");
         sizeBox.getItems().addAll(
                 "1080p",
                 "720p"
