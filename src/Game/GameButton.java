@@ -16,9 +16,7 @@ public class GameButton extends Button implements Serializable {
      * vom Namen festgelegt
      */
     public GameButton() {
-
     }
-
 
     public GameButton(Card card) {
         this.card = card;

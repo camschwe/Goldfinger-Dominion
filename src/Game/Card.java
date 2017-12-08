@@ -41,7 +41,6 @@ public class Card implements Serializable {
         player.draw(1);
         player.setActions(player.getActions() + 1);
         actionSupport(this, player);
-
     }
 
     public void fair(Player player){
@@ -131,7 +130,6 @@ public class Card implements Serializable {
             actionSupport(this, player);
             return true;
         }
-
     }
 
 

@@ -62,7 +62,6 @@ public class GameController {
             gameView.moneyLabel2.getStyleClass().add("invisible");
         }
 
-
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
 
@@ -91,7 +90,6 @@ public class GameController {
                     fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                     fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
                     });
-
             }
             if (gameModel.getPlayer().isTurnEnded()){
                 getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
@@ -127,17 +125,14 @@ public class GameController {
                     playSound(soundUpdate(card.getName()));
                     GameObject gObject = new GameObject(gameModel.getPlayer(), card, 0 );
                     this.client.sendObject(gObject);
-
                 }
+
                 player1LabelUpdate();
                 this.handCardController = fieldCardController.getHandCardController();
                 handCardController.updateHandCardsView();
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
-
             }
-
-
         });
 
         gameView.musicButton.setOnAction(event -> {
@@ -176,9 +171,6 @@ public class GameController {
                 putStapelButton.getStyleClass().add("invisible");
             }
         }
-
-
-
     }
 
     public void player1LabelUpdate(){
@@ -212,7 +204,6 @@ public class GameController {
         Platform.runLater(() -> {
             gameView.noteFlow.getChildren().addAll(action, cardName, actions, buys);
         });
-
     }
 
     public String soundUpdate(String cardName){
@@ -255,7 +246,6 @@ public class GameController {
     }
     }
 
-
     public void player2HandCardsUpdate(GameObject gameObject) {
             gameView.player2Box.getChildren().clear();
 
@@ -277,10 +267,7 @@ public class GameController {
                             gameButton.getStyleClass().add("invisible");
                         }
                     }
-
-            }
-
-
+                }
     }
 
     public void fieldCardUpdate(GameObject gameObject){
@@ -299,7 +286,6 @@ public class GameController {
             default:
                 break;
         }
-
     }
 
     public void actionFieldCardUpdate(String cardName){
@@ -329,7 +315,6 @@ public class GameController {
                 gameView.moneyLabel2.getStyleClass().remove("invisible");
                 gameView.phaseLabel2.getStyleClass().remove("invisible");
                 gameView.pointLabel2.getStyleClass().remove("invisible");
-
             }
 
             gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
@@ -342,10 +327,7 @@ public class GameController {
             }else{gameView.phaseLabel2.setText(localisator.getResourceBundle().getString("phase")+
                     ":\t" +localisator.getResourceBundle().getString( "buy"));
             }
-
         });
-
-
     }
 
     public void newTurn(boolean turn){
@@ -361,9 +343,8 @@ public class GameController {
                     player2Card.getStyleClass().add("mediumButton");
                     player2Card.getStyleClass().add("back2");
                     gameView.player2Box.getChildren().add(player2Card);
+                }
             }
-
-        }
         });
     }
 
@@ -427,10 +408,6 @@ public class GameController {
             } catch (Exception e) {
             }
         }).start();
-    }
-
-    public void smallScreenUpdate(){
-
     }
 
     public Localisator getLocalisator() {

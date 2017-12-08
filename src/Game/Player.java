@@ -62,20 +62,20 @@ public class Player implements Serializable, Comparable{
 
 
         }
-        for(int i = cards-1; i>= 0;i--){
-            this.handCards.add(this.drawDeck.get(i));
-            this.drawDeck.remove(i);
-
-
+        if(this.drawDeck.size() + this.putDeck.size() != 0){
+            for(int i = cards-1; i>= 0;i--) {
+                this.handCards.add(this.drawDeck.get(i));
+                this.drawDeck.remove(i);
+            }
         }
 
     }
 
     //Karten werden von einem Deck in ein anderes übernommen
     public void changeDecks (ArrayList<Card> removeArray,ArrayList<Card> addArray){
-        for(int i = removeArray.size()-1; i>=0 ; i--){
-            addArray.add(removeArray.get(i));
-            removeArray.remove(i);
+            for(int i = removeArray.size()-1; i>=0 ; i--){
+                addArray.add(removeArray.get(i));
+                removeArray.remove(i);
         }
     }
 

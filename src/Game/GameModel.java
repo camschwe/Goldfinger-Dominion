@@ -32,7 +32,6 @@ public class GameModel {
         this.player = new Player(client.getClientName());
         this.turn = 1;
 
-
         /**
          * Initialisierung der Kartenobjekte für das Spielerdeck
          */
@@ -112,8 +111,6 @@ public class GameModel {
             return 12;
         }
     }
-
-
 
     public int  getPlayerCount(){
         return this.playerCount;

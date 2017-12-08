@@ -31,7 +31,6 @@ public class HandCardController {
         this.fieldCardController = fieldCardController;
 
         updateHandCardsView();
-
     }
 
     /**
@@ -42,7 +41,6 @@ public class HandCardController {
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
 
-
         for (int i = 0; i < gameModel.getPlayer().getHandCards().size(); i++) {
             GameButton gameButton = new GameButton(gameModel.getPlayer().getHandCards().get(i));
             gameView.player1Box.getChildren().add(gameButton);
@@ -51,7 +49,6 @@ public class HandCardController {
             addMouseKlicked(gameButton);
             glowingUpdateHandCards(gameButton);
         }
-
     }
 
     /**
@@ -113,7 +110,6 @@ public class HandCardController {
     public void cardSwitch(Card card, Player player ){
         String cardName = card.getName();
 
-
         switch (cardName) {
             case "copper":
                 card.playMoneyCard(player);
@@ -161,7 +157,6 @@ public class HandCardController {
         }
     }
 
-
     /**
      * Glow Effekt hinzuzufügen und wieder zu entfernen
      */
@@ -179,7 +174,6 @@ public class HandCardController {
                 player.isYourTurn() &&
                 player.isActionPhase() &&
                 player.getActions() > 0;
-
     }
 
     public boolean moneyChecker(Card card, Player player){
@@ -206,8 +200,5 @@ public class HandCardController {
             gameController.getClient().sendObject(new GameObject(player, cardCopy, 1));
             fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
         }
-
     }
-
-
 }

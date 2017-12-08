@@ -34,7 +34,12 @@ public class EndController {
         });
 
 
-        if(playerList.size()>3){
+        if(playerList.size()>3 && endView.getResolution().equals("720p")){
+            endView.scene.getStylesheets().clear();
+            endView.scene.getStylesheets().add("../Stylesheets/EndStylesMini.css");
+        }
+
+        if(playerList.size()>3 && endView.getResolution().equals("1080p")){
             endView.scene.getStylesheets().clear();
             endView.scene.getStylesheets().add("../Stylesheets/EndStylesSmall.css");
         }

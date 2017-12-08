@@ -52,7 +52,6 @@ public class FieldCardController {
          * dem Array aus dem GameModel.Zudem Eventhändler für die Feldkarten sowie Methode für den Glow Effekt.
          * */
 
-
         //Initialisierung der Geldkarten
         for(int i = 0; i < gameModel.getMoneyCards().size() ; i++) {
             GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), gameModel.moneyButtonAmount(i));
@@ -64,7 +63,6 @@ public class FieldCardController {
 
         }
 
-
         //Initialisierung Punktekarten
         for(int i = 0; i < gameModel.getPointCards().size() ; i++) {
             GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), gameModel.pointButtonAmount());
@@ -74,7 +72,6 @@ public class FieldCardController {
             addMouseEntered(pointButton, gameView.actionButton);
             addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
-
 
         //Initialisierung Aktionskarten
         int column = 0;
@@ -131,12 +128,9 @@ public class FieldCardController {
                 buttonAmountUpdate(gameButton);
                 gameController.noteFlowUpdate( card, player, 1, Client.getColor());
                 gameController.playSound(gameController.soundUpdate(gameButton.getCard().getName()));
-
-             }
-
+            }
         });
     }
-
 
     /**
      * Methoden für den Klickevent beziehungsweise Kauf einer Karte
@@ -173,9 +167,6 @@ public class FieldCardController {
             gameController.getClient().sendObject(new Message(6, player.getPlayerName(), "Turn ended"));
             player.setTurnEnded(false);
         }
-
-
-
     }
 
     /**
@@ -196,7 +187,6 @@ public class FieldCardController {
                 gameButtons.get(i).getStyleClass().add("buttonOpacity");
             }
         }
-
     }
 
 

@@ -35,13 +35,10 @@ public class GameView {
     protected ScrollPane scrollPane;
     protected Scene scene;
 
-
-
     public GameView(Stage gameStage, Localisator localisator, ChatWindow chatWindow, String resolution, String language) {
         this.gameStage = gameStage;
         this.localisator = localisator;
         this.chatWindow = chatWindow;
-
 
         /**
          * Initialisierung der Container
@@ -65,11 +62,9 @@ public class GameView {
         VBox chatBox = new VBox();
         VBox musicBox = new VBox();
 
-
         /**
          * Verteilung der Container
          */
-
 
         root.setCenter(midPane);
         root.setLeft(leftPane);
@@ -87,16 +82,9 @@ public class GameView {
         resourceBorder.setCenter(resourcePane);
         actionBorder.setCenter(actionPane);
 
-
-
-
         /**
          * Pane mit Ressourcenkarten
          */
-
-
-
-
 
         if(resolution.equals("720p")){
             resourcePane.setHgap(10);
@@ -107,7 +95,6 @@ public class GameView {
             resourcePane.setVgap(20);
             resourcePane.setPadding(new Insets(20, 20, 0, 20));
         }
-
 
         musicButton = new Button();
         musicBox.getChildren().add(musicButton);
@@ -137,19 +124,14 @@ public class GameView {
         chatBox.setPadding(new Insets(0, 5, 0, 20));
         chatBox.setSpacing(20);
 
-
-
         phaseButton = new Button(localisator.getResourceBundle().getString("endPhase"));
         phaseButton.getStyleClass().add("klickButton");
-
 
         moneyButton = new Button(localisator.getResourceBundle().getString("playMoneyCards"));
         moneyButton.getStyleClass().add("klickButton");
 
-
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(phaseButton, moneyButton);
-
 
         if(resolution.equals("720p")){
             buttonBox.setSpacing(10);
@@ -198,8 +180,6 @@ public class GameView {
             player1CardBox.setPadding((new Insets(0, 0, 10, 0)));
         }
 
-
-
         player1Box.setAlignment(Pos.BOTTOM_CENTER);
 
         if(resolution.equals("720p")){
@@ -229,7 +209,6 @@ public class GameView {
         drawStapelPlayer2 = new Button();
         drawStapelPlayer2.getStyleClass().addAll("mediumButton", "back2");
 
-
         player2Pane.add(playerLabel2, 0,1);
         player2Pane.add(moneyLabel2, 0,2);
         player2Pane.add(pointLabel2, 0,3);
@@ -238,9 +217,6 @@ public class GameView {
         player2Pane.setVgap(5);
         player2CardBox.getChildren().addAll(drawStapelPlayer2, putStapelPlayer2);
 
-
-
-
         if(resolution.equals("720p")){
             player2CardBox.setSpacing(5);
             player2CardBox.setPadding((new Insets(5, 0, 0, 0)));
@@ -248,7 +224,6 @@ public class GameView {
             player2CardBox.setSpacing(10);
             player2CardBox.setPadding((new Insets(10, 0, 0, 0)));
         }
-
 
         //TODO: mit Array schöner gestalten
         for(int i = 0; i<5; i++){
@@ -265,8 +240,6 @@ public class GameView {
             player2Box.setSpacing(10);
             player2Box.setPadding((new Insets(20, 20, 20, 80)));
         }
-
-
 
         /**
          * Pane mit Aktionskarten
@@ -302,7 +275,6 @@ public class GameView {
         }else{
             scene = new Scene(root, 1920, 1080);
             scene.getStylesheets().add(getClass().getResource("../Stylesheets/GameStyles.css").toExternalForm());
-
         }
 
         if(language.equals("eng")){
@@ -315,7 +287,6 @@ public class GameView {
         gameStage.setTitle("Goldfinger Dominion");
         gameStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
         //gameStage.setFullScreen(true);
-
     }
 
     public void start() {

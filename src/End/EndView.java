@@ -22,11 +22,13 @@ public class EndView {
     protected Localisator localisator;
     public GridPane gridPane;
     public Scene scene;
+    String resolution;
 
 
     public EndView(Stage gameStage, Localisator localisator, String turns, String resolution) {
         this.gameStage = gameStage;
         this.localisator = localisator;
+        this.resolution = resolution;
 
         BorderPane root = new BorderPane();
         gridPane = new GridPane();
@@ -74,8 +76,14 @@ public class EndView {
 
     public void stop() {
         gameStage.hide();
-
     }
 
+    public String getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
 }
 
