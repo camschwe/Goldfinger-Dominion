@@ -171,7 +171,6 @@ public class HandCardController {
         Player player = gameModel.getPlayer();
         if(this.actionChecker(card, player) || this.moneyChecker(card, player)){
             gameButton.getStyleClass().add("buttonOnAction");
-            System.out.println("Checked");
         }
     }
 

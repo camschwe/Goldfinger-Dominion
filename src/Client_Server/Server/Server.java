@@ -73,7 +73,6 @@ public class Server extends Thread{
                         try {
                             o = objInput.readObject();
                         } catch (Exception e){
-                            System.out.println("Error reading Object");
                         }
                         if (o == null) {
                             return;

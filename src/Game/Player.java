@@ -48,6 +48,8 @@ public class Player implements Serializable, Comparable{
         if(this.drawDeck.size() == 0){
             this.changeDecks(this.putDeck, this.drawDeck);
             Collections.shuffle(this.drawDeck);
+
+
         }
         if(this.drawDeck.size() < cards){
             for(int i = this.drawDeck.size()-1 ; i>=0 ;i--){
@@ -57,11 +59,16 @@ public class Player implements Serializable, Comparable{
             }
             this.changeDecks(this.putDeck, this.drawDeck);
             Collections.shuffle(this.drawDeck);
+
+
         }
         for(int i = cards-1; i>= 0;i--){
             this.handCards.add(this.drawDeck.get(i));
             this.drawDeck.remove(i);
+
+
         }
+
     }
 
     //Karten werden von einem Deck in ein anderes übernommen
@@ -93,7 +100,7 @@ public class Player implements Serializable, Comparable{
         }
     }
 
-    //Spielerlarten auf dem Feld sowie aus der Hand werden auf den Ablagestapel gelegt
+    //Spielerkarten auf dem Feld sowie aus der Hand werden auf den Ablagestapel gelegt
     public void dropCards(){
         for(int i = this.handCards.size()-1; i >= 0;i--){
             this.playDeck.add(this.handCards.get(i));

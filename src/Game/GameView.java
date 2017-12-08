@@ -149,10 +149,14 @@ public class GameView {
 
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(phaseButton, moneyButton);
-        buttonBox.setSpacing(10);
+
 
         if(resolution.equals("720p")){
-            buttonBox.setSpacing(5);
+            buttonBox.setSpacing(10);
+            buttonBox.setPadding((new Insets(0, 0, 5, 0)));
+        }else{
+            buttonBox.setSpacing(20);
+            buttonBox.setPadding((new Insets(0, 0, 10, 0)));
         }
 
         rightMainPane.setBottom(buttonBox);
@@ -172,7 +176,7 @@ public class GameView {
         phaseLabel1.getStyleClass().add("resourceLabel");
         putStapelPlayer1 = new Button();
         putStapelPlayer1.getStyleClass().add("mediumButton");
-        putStapelPlayer1.getStyleClass().add("trash");
+        putStapelPlayer1.getStyleClass().add("back1");
         Button drawStapelPlayer1 = new Button();
         drawStapelPlayer1.getStyleClass().add("mediumButton");
         drawStapelPlayer1.getStyleClass().add("back1");

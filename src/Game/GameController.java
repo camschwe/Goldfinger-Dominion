@@ -164,9 +164,19 @@ public class GameController {
         if(player.getPutDeck().size() > 0) {
             putStapelButton.getStyleClass().clear();
             putStapelButton.getStyleClass().add("mediumButton");
-            putStapelButton.getStyleClass().add(player.getPutDeck().get(player.getPutDeck().size()-1).getName());
-        }else{putStapelButton.getStyleClass().add("trash");
+            putStapelButton.getStyleClass().add(player.getPutDeck().get(player.getPutDeck().size() - 1).getName());
+        }else{
+            if(player.getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
+                putStapelButton.getStyleClass().clear();
+                putStapelButton.getStyleClass().add("mediumButton");
+                putStapelButton.getStyleClass().add("invisible");
+            }else{
+                putStapelButton.getStyleClass().clear();
+                putStapelButton.getStyleClass().add("mediumButton");
+                putStapelButton.getStyleClass().add("invisible");
+            }
         }
+
 
 
     }
@@ -220,13 +230,24 @@ public class GameController {
     public void otherPlayerChecker(GameObject gameObject) {
         if(!gameObject.getPlayer().getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
             if(gameObject.getAction() == 0){
-                player2HandCardsUpdate(gameObject);
+                Platform.runLater(() -> {
+                    player2HandCardsUpdate(gameObject);
+                    putStapelUpdate(gameObject.getPlayer(), gameView.putStapelPlayer2);
+                });
+
             }else{
-                fieldCardUpdate(gameObject);
+                Platform.runLater(() -> {
+                    fieldCardUpdate(gameObject);
+                });
+
             }
-            player2LabelUpdate(gameObject);
-            noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
-            playSound(soundUpdate(gameObject.getCard().getName()));
+
+            Platform.runLater(() -> {
+                player2LabelUpdate(gameObject);
+                noteFlowUpdate(gameObject.getCard(), gameObject.getPlayer(), gameObject.getAction(), gameObject.getColor());
+                playSound(soundUpdate(gameObject.getCard().getName()));
+            });
+
 
             if (gameObject.getCard().getType().equals("point")){
                 Platform.runLater(() -> gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints()));
@@ -236,11 +257,9 @@ public class GameController {
 
 
     public void player2HandCardsUpdate(GameObject gameObject) {
-        Platform.runLater(() -> {
             gameView.player2Box.getChildren().clear();
 
                 for (int i = 0; i < gameObject.getPlayer().getHandCards().size() + gameObject.getPlayer().getPlayDeck().size(); i++) {
-                    System.out.println(gameObject.getPlayer().getPlayDeck().size());
 
                     if (i >= gameObject.getPlayer().getPlayDeck().size()) {
                         Button button = new Button();
@@ -260,16 +279,6 @@ public class GameController {
                     }
 
             }
-
-            if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
-                gameView.drawStapelPlayer2.getStyleClass().remove("invisible");
-                gameView.putStapelPlayer2.getStyleClass().remove("invisible");
-                if(gameObject.getPlayer().getPutDeck().size() > 0) {
-                    gameView.putStapelPlayer2.getStyleClass().add(gameObject.getPlayer().getPutDeck().get(gameObject.getPlayer().getPutDeck().size() - 1).getName());
-                }
-            }
-
-        });
 
 
     }
@@ -389,6 +398,13 @@ public class GameController {
         });
     }
 
+    public void player2PointUpdate(Player o){
+        Platform.runLater(() -> {
+            gameView.playerLabel2.setText((o).getPlayerName());
+            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point") + ":\t" + (o).getPoints());
+        });
+    }
+
     public void endGame() {
         gameModel.getPlayer().setYourTurn(false);
     }
@@ -408,7 +424,6 @@ public class GameController {
                 clip.open(inputStream);
                 clip.start();
             } catch (Exception e) {
-                System.err.println(e.getMessage());
             }
         }).start();
     }

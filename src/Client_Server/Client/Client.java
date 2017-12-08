@@ -169,13 +169,7 @@ public class Client extends Thread {
         }
         if (o instanceof Player){
             if (actualController == 2 && !((Player) o).getPlayerName().equals(this.clientName)){
-                System.out.println("*********************" + "\n" + this.clientName + "\n" + ((Player) o).getPlayerName() + "\n" + "*********************");
-                Platform.runLater(() -> {
-                    gameController.getGameView().playerLabel2.setText(((Player) o).getPlayerName());
-                    gameController.getGameView().pointLabel2.setText(gameController.getLocalisator().getResourceBundle().getString("point") + ":\t" + ((Player) o).getPoints());
-                });
-            } else {
-                System.out.println("*********************\nDoing nothing\n*********************");
+                gameController.player2PointUpdate((Player)o);
             }
         }
     }
