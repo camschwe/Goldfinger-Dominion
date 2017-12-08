@@ -63,6 +63,7 @@ public class GameView {
         HBox player2CardBox = new HBox();
         HBox player1CardBox = new HBox();
         VBox chatBox = new VBox();
+        VBox musicBox = new VBox();
 
 
         /**
@@ -107,7 +108,9 @@ public class GameView {
 
 
         musicButton = new Button();
-        musicButton.setStyle("-fx-background-image: url(musicButton/sound.png); -fx-background-repeat: no-repeat;");
+        musicBox.getChildren().add(musicButton);
+        musicBox.setPadding(new Insets(10));
+        musicBox.setAlignment(Pos.TOP_RIGHT);
 
         /**
          * Chat, TextArea und PhaseButton sowie MoneyButton
@@ -126,7 +129,7 @@ public class GameView {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vvalueProperty().bind(noteFlow.heightProperty());
         scrollPane.getStyleClass().add("logWindow");
-        chatBox.getChildren().addAll(turnLabel, playerLabel, scrollPane, chatWindow.getRoot());
+        chatBox.getChildren().addAll(musicBox, turnLabel, playerLabel, scrollPane, chatWindow.getRoot());
         chatWindow.getVBox().setPadding(new Insets(0, 0, 0, 0));
         chatWindow.getScrollPane().getStyleClass().add("chatWindow");
         chatBox.setPadding(new Insets(100, 5, 0, 20));

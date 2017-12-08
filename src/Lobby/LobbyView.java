@@ -42,7 +42,11 @@ public class LobbyView {
         startButton = new Button(localisator.getResourceBundle().getString("start"));
         spectatorButton = new Button(localisator.getResourceBundle().getString("spectator"));
         musicButton = new Button();
-        musicButton.setStyle("-fx-background-image: url(musicButton/sound.png); -fx-background-repeat: no-repeat;");
+        VBox musicBox = new VBox();
+        musicBox.getChildren().add(musicButton);
+        musicBox.setPadding(new Insets(10));
+        musicBox.setAlignment(Pos.TOP_RIGHT);
+
         players.add(userLabel1);
         players.add(userLabel2);
         players.add(userLabel3);
@@ -57,7 +61,7 @@ public class LobbyView {
 
         HBox topBox = new HBox();
         topBox.setPadding(new Insets(50, 0, 0, 80));
-        topBox.getChildren().addAll(gameLabel);
+        topBox.getChildren().addAll(gameLabel, musicBox);
         HBox botBox = new HBox();
         botBox.setPadding(new Insets(0, 0, 120, 80));
         botBox.setSpacing(430);

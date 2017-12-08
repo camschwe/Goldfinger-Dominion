@@ -74,6 +74,14 @@ public class GameController {
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
 
+        if (client.getMusicActivated()) {
+            Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
+            Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOn"));
+        } else {
+            Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
+            Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOff"));
+        }
+
         gameView.gameStage.setOnCloseRequest(event -> {
             client.stopClient();
             Platform.exit();
@@ -143,12 +151,12 @@ public class GameController {
         gameView.musicButton.setOnAction(event -> {
             if (client.getMusicActivated()){
                 client.stopMusic();
-                client.setMusicActivated(true);
+                client.setMusicActivated(false);
                 Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
                 Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOff"));
             } else {
                 client.startBackground();
-                client.setMusicActivated(false);
+                client.setMusicActivated(true);
                 Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
                 Platform.runLater(() -> gameView.musicButton.getStyleClass().add("musicButtonOn"));
             }
