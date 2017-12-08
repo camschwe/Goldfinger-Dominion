@@ -26,7 +26,7 @@ public class GameView {
      */
     private Localisator localisator;
     protected ChatWindow chatWindow;
-    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, putStapelPlayer2, drawStapelPlayer2;
+    public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, putStapelPlayer2, drawStapelPlayer2, endGameButton, musicButton;
     public HBox player1Box, player2Box;
     public Label moneyLabel1, moneyLabel2, phaseLabel1, phaseLabel2, pointLabel1, pointLabel2, playerLabel1, playerLabel2, turnLabel, playerLabel;
     public GridPane resourcePane, actionPane;
@@ -44,7 +44,7 @@ public class GameView {
 
 
         /**
-         * Initialisierung der Con Tainer
+         * Initialisierung der Container
          */
 
         BorderPane root = new BorderPane();
@@ -65,9 +65,8 @@ public class GameView {
         VBox chatBox = new VBox();
 
 
-
         /**
-         * Verteilung der ConTainer
+         * Verteilung der Container
          */
 
 
@@ -98,13 +97,17 @@ public class GameView {
 
         resourcePane.setHgap(20);
         resourcePane.setVgap(20);
-        resourcePane.setPadding(new Insets(0, 20, 0, 20));
+        resourcePane.setPadding(new Insets(20, 20, 0, 20));
 
         if(resolution.equals("720p")){
             resourcePane.setHgap(10);
             resourcePane.setVgap(10);
             resourcePane.setPadding(new Insets(0, 20, 0, 20));
         }
+
+
+        musicButton = new Button();
+        musicButton.setStyle("-fx-background-image: url(musicButton/sound.png); -fx-background-repeat: no-repeat;");
 
         /**
          * Chat, TextArea und PhaseButton sowie MoneyButton

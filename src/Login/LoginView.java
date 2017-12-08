@@ -6,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
@@ -19,7 +16,7 @@ import javafx.stage.Stage;
 public class LoginView {
 
     protected Stage primaryStage;
-    protected Button hostButton, joinButton, tutorialButton;
+    protected Button hostButton, joinButton, tutorialButton, musicButton;
     protected TextField userNameField;
     protected Label userNameLabel, connectingLabel;
     protected ComboBox<String> languageBox, sizeBox;
@@ -57,6 +54,10 @@ public class LoginView {
                 "720p"
         );
 
+        musicButton = new Button();
+        musicButton.getStyleClass().clear();
+        musicButton.getStyleClass().add("musicButtonOn");
+        /** Music Button soll 40x40 sein **/
 
 
         conError = new Alert(Alert.AlertType.ERROR);
@@ -91,7 +92,7 @@ public class LoginView {
         VBox vBox = new VBox();
         root.setBottom(vBox);
         vBox.setPadding(new Insets(0, 0, 40, 740));
-        vBox.getChildren().addAll(languageBox, sizeBox);
+        vBox.getChildren().addAll(musicButton, languageBox, sizeBox);
 
         //Scene Initialisieren
         Scene scene = new Scene(root, 1000, 800);

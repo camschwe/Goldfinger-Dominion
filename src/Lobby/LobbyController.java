@@ -4,6 +4,7 @@ import Client_Server.Chat.Message;
 import Client_Server.Client.Client;
 import Game.*;
 import Localisation.Localisator;
+import Login.LoginController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
@@ -84,6 +85,20 @@ public class LobbyController {
             client.stopClient();
             Platform.exit();
             System.exit(0);
+        });
+
+        lobbyView.musicButton.setOnAction(event -> {
+            if (client.getMusicActivated()){
+                client.stopMusic();
+                client.setMusicActivated(true);
+                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
+            } else {
+                client.startBackground();
+                client.setMusicActivated(false);
+                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().clear());
+                Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
+            }
         });
 
 
