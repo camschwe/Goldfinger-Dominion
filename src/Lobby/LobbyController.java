@@ -99,7 +99,7 @@ public class LobbyController {
 
     public void startGame(){
         Stage gameStage = new Stage();
-        gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow());
+        gameView = new GameView(gameStage, localisator, lobbyView.getChatWindow(), client.getResolution());
         gameModel = new GameModel(client);
         gameController = new GameController(gameView, localisator, gameModel, client);
         client.setGameController(gameController);

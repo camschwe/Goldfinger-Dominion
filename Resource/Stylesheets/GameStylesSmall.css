@@ -1,0 +1,279 @@
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-background-insets: 1px;
+    -fx-pref-width: 140;
+}
+
+.chatWindow{
+    -fx-pref-height: 140;
+}
+
+.logWindow{
+    -fx-pref-height: 270;
+}
+
+.chatButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 7Pt;
+    -fx-padding: 0px 0px;
+    -fx-border-color: black;
+    -fx-pref-width: 50px;
+}
+
+.chatButton:hover{
+    -fx-background-color: black;
+}
+
+.text-field {
+    -fx-font-size: 10Pt;
+    -fx-border-color: black;
+}
+
+.buttonOnAction {
+    -fx-effect: dropshadow(three-pass-box, #FFFF00, 30, 0, 0, 0);
+}
+
+.klickButton {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 10Pt;
+    -fx-padding: 7px 0px 0px 0px;
+    -fx-border-color: black;
+    -fx-min-width: 140px;
+}
+
+.klickButton:hover{
+    -fx-background-color: white;
+}
+
+.nameLabel {
+    -fx-text-fill: black;
+    -fx-font-size: 18Pt;
+    -fx-padding: 14px 40px;
+    -fx-border-color: black;
+    -fx-pref-width: 130;
+    -fx-padding: 0px 0px 0px 7px
+
+}
+
+.infoLabel {
+    -fx-text-fill: black;
+    -fx-font-size: 14Pt;
+    -fx-padding: 10px 30px;
+    -fx-border-color: black;
+    -fx-pref-width: 160;
+    -fx-padding: 0px 0px 0px 7px
+
+}
+
+.resourceLabel {
+    -fx-text-fill: black;
+    -fx-font-size: 10Pt;
+    -fx-border-color: black;
+    -fx-pref-width: 130;
+    -fx-padding: 0px 0px 0px 7px
+
+}
+
+.noteText {
+    -fx-max-width: 170px;
+    -fx-max-height: 400px;
+    -fx-border-color: black;
+    -fx-text-fill: black;
+    -fx-font-size: 10Pt;
+    -fx-border-width: 2px;
+
+}
+
+.smallButton {
+    -fx-min-width: 80;
+    -fx-min-height: 80;
+    -fx-border-width: 2px;
+    -fx-background-size: stretch;
+    -fx-background-color: black;
+    -fx-padding: 0px 0px 62px 58px;
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-font-size: 7Pt;
+    -fx-font-weight: 900;
+
+}
+
+.buttonOpacity{
+    -fx-opacity: 0.5;
+}
+
+.bigButton{
+    -fx-min-width: 140;
+    -fx-min-height: 200;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-color: black;
+}
+
+.mediumButton{
+    -fx-pref-width: 100;
+    -fx-pref-height: 160;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-color: black;
+}
+
+
+.trash{
+    -fx-background-image: url('../Cards/trash.JPG');
+}
+
+.copper{
+    -fx-background-image: url('../Cards/copper.JPG');
+}
+
+.silver {
+    -fx-background-image: url('../Cards/silver.JPG');
+}
+
+.gold {
+    -fx-background-image: url('../Cards/gold.JPG');
+}
+
+.province {
+    -fx-background-image: url('../Cards/province.JPG');
+}
+
+.duchy {
+    -fx-background-image: url('../Cards/duchy.JPG');
+}
+
+.estate {
+    -fx-background-image: url('../Cards/estate.JPG');
+}
+
+.village {
+    -fx-background-image: url('../Cards/village.JPG');
+}
+
+.fair{
+    -fx-background-image: url('../Cards/fair.JPG');
+}
+
+.smithy{
+    -fx-background-image: url('../Cards/smithy.JPG');
+}
+
+.market{
+    -fx-background-image: url('../Cards/market.JPG');
+}
+
+.laboratory{
+    -fx-background-image: url('../Cards/laboratory.JPG');
+}
+
+.lumberjack{
+    -fx-background-image: url('../Cards/lumberjack.JPG');
+}
+
+.adventurer{
+    -fx-background-image: url('../Cards/adventurer.JPG');
+}
+
+.moneylender{
+    -fx-background-image: url('../Cards/moneylender.JPG');
+}
+
+.chancellor{
+    -fx-background-image: url('../Cards/chancellor.JPG');
+}
+
+.magpie{
+    -fx-background-image: url('../Cards/magpie.JPG');
+}
+
+.copperSmall{
+    -fx-background-image: url('../Cards/copper_small.JPG');
+}
+
+.silverSmall {
+    -fx-background-image: url('../Cards/silver_small.JPG');
+}
+
+.goldSmall {
+    -fx-background-image: url('../Cards/gold_small.JPG');
+}
+
+
+.provinceSmall {
+    -fx-background-image: url('../Cards/province_small.JPG');
+}
+
+.duchySmall {
+    -fx-background-image: url('../Cards/duchy_small.JPG');
+}
+
+.estateSmall {
+    -fx-background-image: url('../Cards/estate_small.JPG');
+}
+
+.villageSmall {
+    -fx-background-image: url('../Cards/village_small.JPG');
+}
+
+.fairSmall{
+    -fx-background-image: url('../Cards/fair_small.JPG');
+}
+
+.smithySmall{
+    -fx-background-image: url('../Cards/smithy_small.JPG');
+}
+
+.marketSmall{
+    -fx-background-image: url('../Cards/market_small.JPG');
+}
+
+.laboratorySmall{
+    -fx-background-image: url('../Cards/laboratory_small.JPG');
+}
+
+.lumberjackSmall {
+    -fx-background-image: url('../Cards/lumberjack_small.JPG');
+}
+
+.adventurerSmall{
+    -fx-background-image: url('../Cards/adventurer_small.JPG');
+}
+
+.moneylenderSmall{
+    -fx-background-image: url('../Cards/moneylender_small.JPG');
+}
+
+.chancellorSmall{
+    -fx-background-image: url('../Cards/chancellor_small.JPG');
+}
+
+.magpieSmall{
+    -fx-background-image: url('../Cards/magpie_small.JPG');
+}
+
+.back1{
+    -fx-background-image: url('../Cards/back1.JPG');
+}
+.back2{
+    -fx-background-image: url('../Cards/back2.JPG');
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.root {
+    -fx-background-image: url("../Backgrounds/marmor_texture.jpg");
+    -fx-background-size: stretch;
+
+}

@@ -65,6 +65,10 @@ public class GameController {
             gameView.getScene().getStylesheets().add(getClass().getResource("../Stylesheets/GameStylesEng.css").toExternalForm());
         }
 
+        if(client.getResolution().equals("720p")){
+            smallScreenUpdate();
+        }
+
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
         gameView.playerLabel1.setText(client.getClientName());
 
@@ -94,13 +98,6 @@ public class GameController {
 
         });
 
-
-        gameView.endGameButton.setOnAction(event -> {
-            endView = new EndView(gameView.getGameStage(), localisator);
-            endModel = new EndModel();
-            endController = new EndController(endModel, endView, localisator);
-
-        });
 
         gameView.chatWindow.getSendButton().setOnAction(event -> {
             if (gameView.chatWindow.getTxtMessage().getText() == null || gameView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
@@ -199,7 +196,6 @@ public class GameController {
         if(cardName.equals("estate") || cardName.equals("duchy") || cardName.equals("province")){
             cardName = "point";
         }
-        System.out.println(cardName);
         return cardName;
     }
 
@@ -364,7 +360,7 @@ public class GameController {
 
     public void endView(ArrayList<Player> o) {
         Platform.runLater(() ->{
-            endView = new EndView(gameView.getGameStage(), localisator);
+            endView = new EndView(gameView.getGameStage(), localisator, gameView.turnLabel.getText());
             endModel = new EndModel();
             endController = new EndController(endModel, endView, localisator, o, gameModel, this);
         } );
@@ -399,6 +395,10 @@ public class GameController {
                 System.err.println(e.getMessage());
             }
         }).start();
+    }
+
+    public void smallScreenUpdate(){
+
     }
 
     public Localisator getLocalisator() {

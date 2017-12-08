@@ -295,4 +295,12 @@ public class Client extends Thread {
     public static void setPlayers(ArrayList<String> players) {
         Client.players = players;
     }
+
+    public String getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
 }

@@ -24,7 +24,7 @@ public class EndView {
     public Scene scene;
 
 
-    public EndView(Stage gameStage, Localisator localisator) {
+    public EndView(Stage gameStage, Localisator localisator, String turns) {
         this.gameStage = gameStage;
         this.localisator = localisator;
 
@@ -45,7 +45,7 @@ public class EndView {
         hBox.getChildren().addAll(lobbyButton, leaveButton);
 
         resultLabel = new Label(localisator.getResourceBundle().getString("lost"));
-        turnLabel = new Label(localisator.getResourceBundle().getString("turnsDone"));
+        turnLabel = new Label(turns);
         turnLabel.getStyleClass().add("turnLabel");
         resultLabel.getStyleClass().add("resultLabel");
         gridPane.add(turnLabel, 0,0);

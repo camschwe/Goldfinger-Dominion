@@ -93,11 +93,11 @@ public class GameModel {
     public int moneyButtonAmount(int index){
 
         switch (index) {
-            case 0:
+            case 2:
                 return 60-(7*playerList.size());
             case 1:
                 return 40;
-            case 2:
+            case 0:
                 return 30;
             default:
                 return 10;
