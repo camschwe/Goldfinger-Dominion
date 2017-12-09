@@ -50,10 +50,10 @@ public class LobbyController {
                     client.sendObject(new Message(4, client.getClientName(), "start"));
                 } else {
                     if (lobbyView.startButton.getText().equals(localisator.getResourceBundle().getString("start"))) {
-                        client.sendObject(new Message(1, client.getClientName(), "ready", Client.getColor()));
+                        client.sendObject(new Message(1, client.getClientName(), localisator.getResourceBundle().getString("ready"), Client.getColor()));
                         lobbyView.startButton.setText(localisator.getResourceBundle().getString("ready"));
                     } else {
-                        client.sendObject(new Message(1, client.getClientName(), "unready", Client.getColor()));
+                        client.sendObject(new Message(1, client.getClientName(), localisator.getResourceBundle().getString("unready"), Client.getColor()));
                         lobbyView.startButton.setText(localisator.getResourceBundle().getString("start"));
                     }
                 }
