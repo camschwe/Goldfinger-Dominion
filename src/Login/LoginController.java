@@ -80,11 +80,24 @@ public class LoginController {
             }
         });
 
+        /**
+         * Created by camillo.schweizer
+         *
+         * Eventhändler für die languageBox - startet die Updatemethde nach auswahl einer Sprache. Zudem wird languageUpdate
+         * aufgerufen, um die View zu aktualisieren
+         */
+
         loginView.languageBox.setOnAction(event -> {
             String language = loginView.languageBox.getValue();
             languageChecker(language);
             languageUpdate();
         });
+
+        /**
+         * Created by camillo.schweizer
+         *
+         * Eventhändler für die sizeBox - startet die Updatemethde
+         */
 
         loginView.sizeBox.setOnAction(event -> {
             this.resolution = loginView.sizeBox.getValue();
@@ -105,8 +118,13 @@ public class LoginController {
         });
 
         startBackground();
-
     }
+
+    /**
+     * Created by camillo.schweizer
+     *
+     * Wird vom Eventhändler der languageBox aufgerufen um die Sprache beim Localisator zu ändern
+     */
 
     public void languageChecker(String language) {
 
@@ -124,6 +142,12 @@ public class LoginController {
                 break;
         }
     }
+
+    /**
+     * Created by camillo.schweizer
+     *
+     * Wird vom Eventhändler der languageBox aufgerufen, um die View zu aktualisieren
+     */
 
     public void languageUpdate(){
 
@@ -183,12 +207,14 @@ public class LoginController {
         }
     }
 
+    /**
+     * Methode um ein Audio File abzuspielen.
+     * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
+     * @param fileName
+     */
+
     public static void startBackground(){
-        /**
-         * Methode um ein Audio File abzuspielen.
-         * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
-         * @param fileName
-         */
+
         final Task task = new Task() {
 
             @Override

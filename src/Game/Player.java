@@ -10,13 +10,13 @@ import java.util.Collections;
 public class Player implements Serializable, Comparable{
 
     /**
-     * Spielerklassen mit Arrays für das GUI sowie Methoden für den Kauf und das ausspielen von Karten
+     * Spielerklassen mit Arrays für alle Kartendecks sowie Methoden für den Kauf und das ausspielen von Karten
      */
     private ArrayList<Card> handCards;
     private ArrayList<Card> putDeck;
     private ArrayList<Card> drawDeck;
     private ArrayList<Card> playDeck;
-    private boolean yourTurn, actionPhase, buyPhase, turnEnded, actionDouble;
+    private boolean yourTurn, actionPhase, buyPhase, turnEnded;
     private int actions, buys, money, points;
     private String playerName;
 
@@ -34,23 +34,19 @@ public class Player implements Serializable, Comparable{
         this.points = 3;
         this.yourTurn = false;
         this.turnEnded = false;
-
     }
 
     /**
-     * Methoden um die verschiedenen Arrays des Spielers zu managen. Beispielsweise für den Zug von einer beliebigen Anzahl
-     * von Spielkarten und wechselt den Ablagestapel mit dem Ziehstapel, wenn keine Karten mehr vorhanden sind
+     * Zieht die Anzahl von angegebener Karten vom Nachziehstapel. Insofern auf diesem nicht ausreichend Karten zur
+     * Verfügung stehen, wird eine supportmethode aufgerufen, um die Decks auszutauschen und die Karten zu mischeln.
      */
 
-    //TODO: überprüfen ob beim Ablagestapel noch weitere Karten verfügbar sind
-    //Zieht Anzahl angegebener Karten vom Nachziehstapel
     public void draw(int cards){
-        if(this.drawDeck.size() == 0){
+        if(this.drawDeck.size() == 0 && this.putDeck.size() > 0){
             this.changeDecks(this.putDeck, this.drawDeck);
             Collections.shuffle(this.drawDeck);
-
-
         }
+
         if(this.drawDeck.size() < cards){
             for(int i = this.drawDeck.size()-1 ; i>=0 ;i--){
                 this.handCards.add(this.drawDeck.get(i));
@@ -59,19 +55,21 @@ public class Player implements Serializable, Comparable{
             }
             this.changeDecks(this.putDeck, this.drawDeck);
             Collections.shuffle(this.drawDeck);
-
-
         }
+
         if(this.drawDeck.size() + this.putDeck.size() != 0){
             for(int i = cards-1; i>= 0;i--) {
                 this.handCards.add(this.drawDeck.get(i));
                 this.drawDeck.remove(i);
             }
         }
-
     }
 
-    //Karten werden von einem Deck in ein anderes übernommen
+    /**
+     * Supportmethode um die Karten von einem Deck in das andere zu kopieren. Es wird die Karte auf der letzten Position
+     * genommen und bei dem anderen Deck bei der letzten Position wieder eingefügt.
+     */
+
     public void changeDecks (ArrayList<Card> removeArray,ArrayList<Card> addArray){
             for(int i = removeArray.size()-1; i>=0 ; i--){
                 addArray.add(removeArray.get(i));
@@ -79,17 +77,18 @@ public class Player implements Serializable, Comparable{
         }
     }
 
-    //Legt eine Handkarte auf den Ablagestapel
-    public void dropCard(Card card) {
-        this.changeCardPlace(card, this.handCards, this.putDeck);
-    }
+    /**
+     * Karte wird von der Hand auf dem Spielstapel gelegt und dort bei der letzten Position eingefügt
+     */
 
-    //Legt eine Handkarte auf den Spielstapel
     public void addPlayCard(Card card){
         this.changeCardPlace(card, this.handCards, this.playDeck);
     }
 
-    //Wechselt die Karten von einem Deck in ein anderes
+    /**
+     * Karte wird von einem Array in einn anderen Array verschoben und dort bei der letzten Position eingefügt
+     */
+
     public void changeCardPlace(Card card, ArrayList<Card> removeArray,ArrayList<Card> addArray ){
 
         for(int i =0; i< removeArray.size();i++){
@@ -100,7 +99,11 @@ public class Player implements Serializable, Comparable{
         }
     }
 
-    //Spielerkarten auf dem Feld sowie aus der Hand werden auf den Ablagestapel gelegt
+    /**
+     * Suppportmethode für den Abschluss eines Spielzugs - Alle Handkarten sowie die Ausgespielten Karten werden
+     * auf den Ablagestapel gelegt.
+     */
+
     public void dropCards(){
         for(int i = this.handCards.size()-1; i >= 0;i--){
             this.playDeck.add(this.handCards.get(i));
@@ -112,13 +115,11 @@ public class Player implements Serializable, Comparable{
         }
     }
 
-
-
     /**
-     * Methode für das kaufen einer Karte
+     * Karte wird gekauft und auf den Spielstapel gelegt. Zudem wird der Geldbetrag vom Spieler abgebucht. Wenn der
+     * Spieler keine Käufe mehr übrig hat, wird Methode zum beenden des Spielzugs aufgerufen.
      */
 
-    //karte wird gekauft und auf den Spielstapel gelegt. Zudem wird der Geldbetrag vom Spieler abgebucht
     public void buyCard(Card card){
         this.putDeck.add(card);
         this.money -= card.getCost();
@@ -132,10 +133,10 @@ public class Player implements Serializable, Comparable{
     }
 
     /**
-     * Methoden für das Zug- bzw Phasenmanagement
+     * Schliesst die aktuelle Phase ab und insofern es sich um die Kaufphase handelt, wird Methode zum beenden des
+     * Spielzugs aufgerufen
      */
 
-    //Schliesst die aktuelle Phase ab
     public void endPhase(){
         if(this.actionPhase) {
             this.buyPhase = true;
@@ -145,7 +146,11 @@ public class Player implements Serializable, Comparable{
             }
     }
 
-    //Schliesst den aktuellen Zug Ab und zieht 5 neue Karten
+    /**
+     * Schliesst den aktuellen Spielzug ab und ruft die Methoden auf, um die Karten auf den Ablagestapel zu legen
+     * sowie 5 Handkarten für den neuen Zug zu ziehen
+     */
+
     public void endTurn(){
         this.money = 0;
         this.buys = 1;
@@ -155,10 +160,12 @@ public class Player implements Serializable, Comparable{
         phaseChanger();
         this.turnEnded = true;
         this.yourTurn = false;
-        this.actionDouble = false;
     }
 
-    //überspringt die Aktionsphase, insofern keine Aktionskarte in der Hand
+    /**
+     * Supportmethode um die Aktionsphase zu überspringen, insofern sich keine entsprechende Karte in der Hand befindet
+     */
+
     public void phaseChanger(){
         if(this.handCardActionChecker()) {
             this.buyPhase = false;
@@ -170,10 +177,9 @@ public class Player implements Serializable, Comparable{
     }
 
     /**
-     * Supportmethode um die Handkarten zu überprüfen
+     * Supportmethode um zu überprüfen, ob sich eine Aktionskarte in der Hand befindet und gibt einen Boolean zurück
      */
 
-    //überprüft ob sich eine Aktionskarte in der Hand befindet
     public boolean handCardActionChecker(){
         for (Card card : handCards) {
             if (card.getType().equals("action")) {
@@ -182,6 +188,11 @@ public class Player implements Serializable, Comparable{
         }
         return false;
     }
+
+    /**
+     * Supportmethode um alle Geldkarten in der Hnad auszuspielen und fügt dem Spieler den entsprechenden Geldbetrag
+     * hinzu. Retourniert wird eine temporäre Arrayliste für die weitere Bearbeitung
+     */
 
     public ArrayList<Card> playAllMoneyCards(){
         for (Card card : this.handCards){

@@ -5,6 +5,9 @@ import java.util.ResourceBundle;
 
 /**
  * Created by camillo.schweizer on 07.10.2017.
+ *
+ * Klasse um die Sprache in den Views anzupassen. Standardmässig ist Schweizerdeutsch hinterlegt. Der String gibt die
+ * aktuelle Sprache wieder. Bei jeder Anpassung der Sprache wird der String neu gesetzt und ein neues Sprachobjekt generiert
  */
 public class Localisator {
 

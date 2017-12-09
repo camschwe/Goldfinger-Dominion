@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by camillo.schweizer on 06.10.2017.
+ * Created by Benjamin Probst on 06.10.2017.
  */
 public class LoginModel {
 

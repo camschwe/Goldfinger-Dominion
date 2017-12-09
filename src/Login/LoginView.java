@@ -12,7 +12,11 @@ import javafx.stage.Stage;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * View für den Login mit Eingabe des Benutzernamens, Buttons für das hosten sowie beitreten eines Servers
+ * sowie den Spracheinstellungen und der Auflösung und der Musik
  */
+
 public class LoginView {
 
     protected Stage primaryStage;
@@ -29,6 +33,10 @@ public class LoginView {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
 
+        /**
+         * Label und Buttons
+         */
+
         userNameLabel = new Label(localisator.getResourceBundle().getString("username"));
         connectingLabel = new Label(localisator.getResourceBundle().getString("connecting"));
         connectingLabel.setVisible(false);
@@ -38,6 +46,9 @@ public class LoginView {
         userNameField.setPromptText(localisator.getResourceBundle().getString("username"));
         VBox centerBox = new VBox();
 
+        /**
+         * Box zur Auswahl der Sprache - Englisch, Deutsch und Schweizerdeutsch
+         */
 
         languageBox = new ComboBox<>();
         //languageBox.getStyleClass().add("box");
@@ -48,6 +59,10 @@ public class LoginView {
                 "Schwiizerdütsch"
         );
 
+        /**
+         * Box zur Auswahl der Auflösung - 720p sowie 1080p
+         */
+
         sizeBox = new ComboBox<>();
         //sizeBox.getStyleClass().add("box");
         sizeBox.setPromptText("720p");
@@ -55,6 +70,10 @@ public class LoginView {
                 "1080p",
                 "720p"
         );
+
+        /**
+         * @Benjamin: TODO: Comment
+         */
 
         musicButton = new Button();
         musicButton.getStyleClass().clear();
@@ -75,6 +94,9 @@ public class LoginView {
         Stage conStage = (Stage) conError.getDialogPane().getScene().getWindow();
         conStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
 
+        /**
+         * Container
+         */
 
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -102,7 +124,11 @@ public class LoginView {
         bottom.setSpacing(20);
         bottom.getChildren().addAll(languageBox, sizeBox);
 
-        //Scene Initialisieren
+        /**
+         * Initialisierung der Scene mit einer vorgegebenen Grösse von 1000x800px sowie dem Hintergrund, dem Stylesheet
+         * und dem Icon
+         */
+
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/LoginStyles.css").toExternalForm());
@@ -120,7 +146,6 @@ public class LoginView {
 
     public void stop() {
         primaryStage.hide();
-
     }
 
     public Label getConnectingLabel() {

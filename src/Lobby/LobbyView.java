@@ -17,6 +17,10 @@ import java.util.ArrayList;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * View für die Lobby - Mit label für die maximale Anzahl von Spielern, welche nach dem Beitritt sichtbar werden und
+ * mit dem entsprechenden Namen ergänzt sind. Zudem ist die ChatView implementiert. Es hat einen Button für den Host
+ * zum Spielstart und zudem noch ein Button um einem Spiel zuzuschauen.
  */
 public class LobbyView {
 
@@ -30,8 +34,17 @@ public class LobbyView {
     public LobbyView(Stage primaryStage, Localisator localisator) {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
+
+        /**
+         * ChatWindow
+         */
+
         chatWindow = new ChatWindow(localisator);
         chatWindow.getVBox().setPadding(new Insets(70, 90, 80, 0));
+
+        /**
+         * Label und Buttons
+         */
 
         participateLabel = new Label(localisator.getResourceBundle().getString("participate"));
         gameLabel = new Label(localisator.getResourceBundle().getString("game"));
@@ -46,6 +59,8 @@ public class LobbyView {
         musicBox.getChildren().add(musicButton);
         musicBox.setPadding(new Insets(10));
         musicBox.setAlignment(Pos.TOP_RIGHT);
+        gameLabel.getStyleClass().add("ipLabel");
+        participateLabel.getStyleClass().add("participateLabel");
 
         players.add(userLabel1);
         players.add(userLabel2);
@@ -56,8 +71,9 @@ public class LobbyView {
             label.setVisible(false);
         }
 
-        gameLabel.getStyleClass().add("ipLabel");
-        participateLabel.getStyleClass().add("participateLabel");
+        /**
+         * Container
+         */
 
         HBox topBox = new HBox();
         topBox.setPadding(new Insets(50, 0, 0, 80));
@@ -82,7 +98,10 @@ public class LobbyView {
         gridPane.setHgap(40);
         gridPane.setVgap(40);
 
-        //Scene Initialisieren
+        /**
+         * Initialisierung der Scene mit der breits definierten Stage aus der LoginView
+         */
+
         Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("../Stylesheets/LobbyStyles.css").toExternalForm());

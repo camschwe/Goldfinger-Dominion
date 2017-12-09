@@ -10,12 +10,10 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * Controller für die Eigenen Handkarten mit Eventhändlern sowie Supportmethoden
  */
 public class HandCardController {
-
-    /**
-     * Controller für die Handkarten mit Initalisierung und Eventhändlern
-     */
 
     private GameView gameView;
     private Localisator localisator;
@@ -34,10 +32,10 @@ public class HandCardController {
     }
 
     /**
-     * Initialisierung der Handkarten sowie hinzufügen der Eventhändler
+     *  Generiert GameButtons für die Handkarten und fügt diese der View hinzu sowie die Eventhandler
      */
 
-    //Generiert Buttons für die Handkarten und fügt diese dem GU Hinzu sowie die Eventhandler
+
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
 
@@ -52,10 +50,9 @@ public class HandCardController {
     }
 
     /**
-     * Eventhändler für Entered, Exited und Klicked
+     * Eventhändler für Entered - Die karte wird über CSS grösser dargestellt
      */
 
-    //Action Event Handcards Mouse Entered
     public void addMouseEntered(GameButton gameButton){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -66,7 +63,10 @@ public class HandCardController {
         });
     }
 
-    // Action Event Handcards Mouse Left
+    /**
+     * Eventhändler für Exited - Kartengrösse wird über CSS wieder resetted.
+     */
+
     public void addMouseExited(GameButton gameButton){
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
@@ -77,7 +77,11 @@ public class HandCardController {
         });
     }
 
-    //Eventhändler für Klick auf Handkarte
+    /**
+     * Eventhändler für Klicked - überpüft ob die Handkarte ausgespielt werden darf und ruft danach über die Supportmethode
+     * die entsprechende Kartenlogik ab. Danach wird die View aktualisiert und der Kartensound abgespielt.
+     */
+
     public void addMouseKlicked(GameButton gameButton){
         gameButton.setOnAction(event -> {
             Player player = gameModel.getPlayer();
@@ -103,10 +107,10 @@ public class HandCardController {
     }
 
     /**
-     * Klickevent für Geld- und Aktionskarten
+     * Supportmethode für den Klick Eventhändler - überprüft, um was für eine Karte es sich handelt und ruft die
+     * dazugehörige Methode auf.
      */
 
-    //Switch zur überprüfung der gedrückten Handkarte
     public void cardSwitch(Card card, Player player ){
         String cardName = card.getName();
 
@@ -158,7 +162,8 @@ public class HandCardController {
     }
 
     /**
-     * Glow Effekt hinzuzufügen und wieder zu entfernen
+     * Ruft eine Methode auf um zu überprüfen, ob eine Karte ausgespielt werden kann und fügt dieser danach einen Leucht-
+     * effekt hinzu.
      */
 
     public void glowingUpdateHandCards(GameButton gameButton){
@@ -169,6 +174,10 @@ public class HandCardController {
         }
     }
 
+    /**
+     * Supportmethode um zu überprüfen ob eine Aktionskarte ausgespielt werden kann - gibt einen Boolean zurück
+     */
+
     public boolean actionChecker(Card card, Player player){
         return card.getType().equals("action") &&
                 player.isYourTurn() &&
@@ -176,11 +185,20 @@ public class HandCardController {
                 player.getActions() > 0;
     }
 
+    /**
+     * Supportmethode um zu überprüfen ob eine Geldkarte ausgespielt werden kann - gibt einen Boolean zurück
+     */
+
     public boolean moneyChecker(Card card, Player player){
         return card.getType().equals("money") &&
                  player.isYourTurn() &&
                  player.isBuyPhase();
     }
+
+    /**
+     * Supportmethode für die MagpieKarte - Wird ausgelöst, wenn keine Geldkarte gezogen wird. Fügt dem Ablagestapel des
+     * Spielers eine Magpiekarte hinzu (insofern ausreichend vorhanden) und führt ruft die Methoden zur Viewaktualisierung auf
+     */
 
     public void magpieUpdate(Player player){
         GameButton magpieButton = new GameButton();
