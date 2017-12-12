@@ -38,7 +38,7 @@ public class Server extends Thread{
         colors.add("-fx-fill: red");
         colors.add("-fx-fill: green");
         colors.add("-fx-fill: blue");
-        colors.add("-fx-fill: yellow");
+        colors.add("-fx-fill: mediumvioletred");
         serverSocket = new ServerSocket(PORT);
         try {
             while (true){
@@ -198,6 +198,7 @@ public class Server extends Thread{
 
         // Wenn ein Client die Verbindung trennt, soll er auch aus der Liste entfernt werden
         private void removeClient() throws IOException {
+            sendMessageToAll(new Message(1, "Server", "Client " + name + " has left the Server. Please restart the game.", "-fx-fill: black"));
             players.remove(name);
             outputs.remove(objOutput);
             objInput.close();
@@ -220,8 +221,12 @@ public class Server extends Thread{
         private void sendMessageToAll(Message message) throws IOException {
             for (ObjectOutputStream output : outputs){
                 if (output != null){
-                    output.writeObject(message);
-                    output.reset();
+                    try {
+                        output.writeObject(message);
+                        output.reset();
+                    } catch (Exception e){
+                        
+                    }
                 }
             }
         }

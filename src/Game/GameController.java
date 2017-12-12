@@ -397,17 +397,19 @@ public class GameController {
      * Kopiert von: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
      * @param fileName
      */
-    public static synchronized void playSound(final String fileName) {
-        new Thread(() -> {
-            try {
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                        Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
-                clip.open(inputStream);
-                clip.start();
-            } catch (Exception e) {
-            }
-        }).start();
+    public synchronized void playSound(final String fileName) {
+        if (client.getMusicActivated()) {
+            new Thread(() -> {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                            Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                }
+            }).start();
+        }
     }
 
     public Localisator getLocalisator() {
