@@ -242,10 +242,10 @@ public class GameView {
 
         if(resolution.equals("720p")){
             player2Box.setSpacing(5);
-            player2Box.setPadding((new Insets(10, 0, 100, 10)));
+            player2Box.setPadding((new Insets(10, 5, 100, 10)));
         }else{
             player2Box.setSpacing(10);
-            player2Box.setPadding((new Insets(20, 0, 0, 80)));
+            player2Box.setPadding((new Insets(20, 10, 0, 80)));
         }
 
         /**
