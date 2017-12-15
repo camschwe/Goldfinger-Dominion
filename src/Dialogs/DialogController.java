@@ -49,6 +49,9 @@ public class DialogController {
             }
         });
 
+        /**
+         * Eventhandler für drücken der OK Taste
+         */
         dialogView.inputTextField.setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER)){
                 dialogView.btnOK.fire();

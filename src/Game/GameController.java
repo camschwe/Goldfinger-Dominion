@@ -81,7 +81,9 @@ public class GameController {
 
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
 
-        //TODO: BENI COMMENT
+        /**
+         * Musik Button Design bei Start des Controllers festlegen
+         */
 
         if (client.getMusicActivated()) {
             Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
@@ -165,8 +167,9 @@ public class GameController {
             }
         });
 
-        //TODO: BENI COMMENT
-
+        /**
+         * Eventhanlder für das drücken des Musik Buttons
+         */
         gameView.musicButton.setOnAction(event -> {
             if (client.getMusicActivated()){
                 client.stopMusic();

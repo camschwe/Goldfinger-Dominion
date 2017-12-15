@@ -295,15 +295,19 @@ public class Client extends Thread {
      * Methode für das beenden des Clients
      */
     public void stopClient(){
-        sendObject(new Message(2, this.clientName, "left", color));
-        try {
-            objOutput.close();
-            objInput.close();
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!isServer()) {
+            sendObject(new Message(2, this.clientName, "left", color));
+            try {
+                objOutput.close();
+                objInput.close();
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            running = false;
+        } else {
+            sendObject(new Message(1, this.clientName, "Host left game. Please restart the game.", color));
         }
-        running = false;
     }
 
     public static void startBackground(){

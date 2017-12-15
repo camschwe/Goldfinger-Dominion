@@ -42,6 +42,9 @@ public class LobbyController {
             Platform.runLater(() -> lobbyView.musicButton.getStyleClass().add("musicButtonOff"));
         }
 
+        /**
+         * Eventhandler für das Drücken des Startbuttons
+         */
         lobbyView.startButton.setOnAction(event -> {
 
             //TODO: Add player count

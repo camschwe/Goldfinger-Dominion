@@ -42,6 +42,9 @@ public class LoginController {
         this.primaryStage = primaryStage;
         this.localisator = localisator;
 
+        /**
+         * Eventhandler für den Join Button
+         */
         loginView.joinButton.setOnAction(event -> {
 
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()){
@@ -55,6 +58,9 @@ public class LoginController {
             }
         });
 
+        /**
+         * Eventhandler für den Host Button
+         */
         loginView.hostButton.setOnAction(event -> {
 
             if (loginView.userNameField.getText() == null || loginView.userNameField.getText().trim().isEmpty()) {
@@ -84,7 +90,6 @@ public class LoginController {
          * Eventhändler für die languageBox - startet die Updatemethde nach auswahl einer Sprache. Zudem wird languageUpdate
          * aufgerufen, um die View zu aktualisieren
          */
-
         loginView.languageBox.setOnAction(event -> {
             String language = loginView.languageBox.getValue();
             languageChecker(language);
@@ -96,11 +101,13 @@ public class LoginController {
          *
          * Eventhändler für die sizeBox - startet die Updatemethde
          */
-
         loginView.sizeBox.setOnAction(event -> {
             this.resolution = loginView.sizeBox.getValue();
         });
 
+        /**
+         * Eventhandler für den Musik Button
+         */
         loginView.musicButton.setOnAction(event -> {
             if (musicActivated){
                 stopMusic();
@@ -151,7 +158,6 @@ public class LoginController {
      *
      * Wird vom Eventhändler der languageBox aufgerufen, um die View zu aktualisieren
      */
-
     public void languageUpdate(){
 
         loginView.userNameLabel.setText(localisator.getResourceBundle().getString("username"));
@@ -170,6 +176,11 @@ public class LoginController {
         loginView.conError.setContentText(localisator.getResourceBundle().getString("conErrorText"));
     }
 
+    /**
+     * Methode um eine Verbindung mit dem Server herzustellen
+     * @param address benötigt eine IP Adresse als String
+     * @return Status des Verbindungsaufbaus
+     */
     public String connect(String address){
         clientName = loginView.userNameField.getText();
 
@@ -235,6 +246,9 @@ public class LoginController {
         thread.start();
     }
 
+    /**
+     * Methode um die Musik zu stoppen
+     */
     public void stopMusic(){
         this.musicActivated = false;
         audioClip.stop();

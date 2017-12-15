@@ -26,7 +26,10 @@ public class SpectatorController {
         fillPlayer(1);
     }
 
-    // Methode zum hinzufügen der Spielerkarten, Aktiver Spieler und Letzter Spieler
+    /**
+     * Methode zum hinzufügen der Spielerkarten, Aktiver Spieler und Letzter Spieler
+     * @param i
+     */
     private void fillPlayer(int i) {
         for (int amount = 0; amount < initial; amount++) {
             Button button = new Button();
@@ -40,7 +43,9 @@ public class SpectatorController {
         }
     }
 
-    // Methode welche beim Abschluss des Zuges die Karten von oben nach unten verschiebt
+    /**
+     * Methode welche beim Abschluss des Zuges die Karten von oben nach unten verschiebt
+     */
     public void changePlayerCards(){
         ArrayList<Button> buttons = new ArrayList<>();
         for (Node child : gameView.player2Box.getChildren()) {
@@ -71,7 +76,11 @@ public class SpectatorController {
         });
     }
 
-    // Action Event Handcards Mouse Left
+    /**
+     *
+     * Action Event Handcards Mouse Left
+     * @param gameButton
+     */
     public void addMouseExited(Button gameButton){
         gameButton.setOnMouseExited(mouseEvent -> {
             gameButton.getStyleClass().remove("bigButton");
