@@ -19,7 +19,6 @@ import java.net.UnknownHostException;
  */
 public class LobbyController {
 
-    private LobbyModel lobbyModel;
     private LobbyView lobbyView;
     private HandCardController handCardController;
     private GameView gameView;
@@ -29,8 +28,7 @@ public class LobbyController {
     private Client client;
     private GameController gameController;
 
-    public LobbyController(LobbyModel lobbyModel, LobbyView lobbyView, Localisator localisator, Client client) {
-        this.lobbyModel = lobbyModel;
+    public LobbyController(LobbyView lobbyView, Localisator localisator, Client client) {
         this.lobbyView = lobbyView;
         this.localisator = localisator;
         this.client = client;
@@ -126,10 +124,6 @@ public class LobbyController {
 
     public LobbyView getLobbyView() {
         return lobbyView;
-    }
-
-    public LobbyModel getLobbyModel() {
-        return lobbyModel;
     }
 
     public void startGame(){

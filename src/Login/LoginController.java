@@ -6,7 +6,6 @@ import Client_Server.Server.StartServer;
 import Dialogs.DialogController;
 import Dialogs.DialogView;
 import Lobby.LobbyController;
-import Lobby.LobbyModel;
 import Lobby.LobbyView;
 import Localisation.Localisator;
 import javafx.application.Platform;
@@ -27,7 +26,6 @@ public class LoginController {
     private LobbyView lobbyView;
     private Stage primaryStage;
     private LobbyController lobbyController;
-    private LobbyModel lobbyModel;
     protected Localisator localisator;
     private String clientName;
     private Client client;
@@ -75,8 +73,7 @@ public class LoginController {
                 client.start();
                 client.sendObject(new Message(0, clientName, "login"));
                 lobbyView = new LobbyView(primaryStage, localisator);
-                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
-                lobbyModel = new LobbyModel();
+                lobbyController = new LobbyController(lobbyView, localisator, client);
                 client.setLobbyController(lobbyController);
                 client.actualizePlayers();
                 client.setServer();
@@ -205,8 +202,7 @@ public class LoginController {
             }
             if (client.isValid()) {
                 lobbyView = new LobbyView(primaryStage, localisator);
-                lobbyController = new LobbyController(lobbyModel, lobbyView, localisator, client);
-                lobbyModel = new LobbyModel();
+                lobbyController = new LobbyController(lobbyView, localisator, client);
                 client.setLobbyController(lobbyController);
                 client.actualizePlayers();
                 return "successful";

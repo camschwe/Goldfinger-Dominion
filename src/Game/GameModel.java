@@ -8,13 +8,11 @@ import java.util.Collections;
 
 /**
  * Created by camillo.schweizer on 07.10.2017.
+ *
+ * Klasse zum Spiel mit allen globalen Parametern sowie Initialisierung der Kartenobjekte und der Arrays für
+ * die Feldkarten
  */
 public class GameModel {
-
-    /**
-     * Klasse zum Spiel mit allen globalen Parametern sowie Initialisierung der Kartenobjekte und der Arrays für
-     * die Feldkarten
-     */
 
     int playerCount;
     private Player player;
@@ -112,12 +110,11 @@ public class GameModel {
      * Methode um die Anzahl der Punktekarten auf diem Spielfeld anhand der Spieler festzulegen.
      */
 
-    //TODO: CHANGE TO 8
     public int pointButtonAmount(){
         if(playerList.size()<3){
-            return 1;
+            return 8;
         }else{
-            return 1;
+            return 12;
         }
     }
 
