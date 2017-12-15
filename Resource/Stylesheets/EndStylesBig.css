@@ -28,6 +28,7 @@
 .playerLabel{
     -fx-text-fill: white;
     -fx-font-size: 40Pt;
+    -fx-min-width: 300;
 }
 
 .resultLabel {

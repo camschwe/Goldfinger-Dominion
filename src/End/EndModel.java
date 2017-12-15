@@ -5,6 +5,8 @@ import Game.Player;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * Berechnet für die jeweilige Punktekarte, wie viele, dass der Spieler in all seinen Decks besitzt.
  */
 public class EndModel {
 

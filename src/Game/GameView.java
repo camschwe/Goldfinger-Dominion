@@ -16,14 +16,15 @@ import javafx.stage.Stage;
 
 /**
  * Created by camillo.schweizer on 07.10.2017.
+ *
+ * View für das Game mit der GameStage in 1080p oder 720p. Abhängig von der ausgewählten Grösse werden andere Stylesheets
+ * und andere Paddings festgelegt. Mit Labels für die wichtigen Informationen der Spieler. Die
+ * Feld sowie die Handkarten werden über die jeweiligen Controller generiert.
  */
 public class GameView {
 
     protected Stage gameStage;
 
-    /**
-     * View für das Game mit der GameStage in 1080p - skalierbarkeit geplant auf andere Seitenverhältnisse
-     */
     private Localisator localisator;
     protected ChatWindow chatWindow;
     public Button actionButton, phaseButton, moneyButton, putStapelPlayer1, putStapelPlayer2, drawStapelPlayer2, endGameButton, musicButton;
@@ -231,7 +232,7 @@ public class GameView {
             player2CardBox.setPadding((new Insets(10, 0, 0, 0)));
         }
 
-        //TODO: mit Array schöner gestalten
+
         for(int i = 0; i<5; i++){
             Button player2Card = new Button();
             player2Card.getStyleClass().add("mediumButton");
@@ -270,10 +271,8 @@ public class GameView {
         }
 
         /**
-         * Scene
+         * Initialisierung der Scene ja nach grösse und Sprache werden ander Stylesheets geladen
          */
-
-        //Scene Initialisieren
 
         if(resolution.equals("720p")){
             scene = new Scene(root, 1280, 720);
@@ -292,7 +291,7 @@ public class GameView {
 
         gameStage.setTitle("Goldfinger Dominion");
         gameStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
-        //gameStage.setFullScreen(true);
+
     }
 
     public void start() {

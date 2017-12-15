@@ -12,7 +12,7 @@ import java.util.Collections;
 public class GameModel {
 
     /**
-     * Klasse zum Spiel mit allen globalen Parametern sowie Initialisierung der Kartenobjekte sowie der Arrays für
+     * Klasse zum Spiel mit allen globalen Parametern sowie Initialisierung der Kartenobjekte und der Arrays für
      * die Feldkarten
      */
 
@@ -26,14 +26,15 @@ public class GameModel {
 
     public GameModel(Client client) {
 
-        //TODO: Correct with hash set
+
         this.playerList = (client.getPlayers());
 
         this.player = new Player(client.getClientName());
         this.turn = 1;
 
         /**
-         * Initialisierung der Kartenobjekte für das Spielerdeck
+         * Initialisierung der Kartenobjekte für das Spielerdeck und Verteilung auf das Array. Es wird jeweils eine Karte
+         * generiert und die dem Button hinterlegt.
          */
 
         for(int i = 0; i < 3 ; i++) {
@@ -50,7 +51,8 @@ public class GameModel {
         player.draw(5);
 
         /**
-         * Initialisierung der Kartenobjekte für das Spielfeld
+         * Initialisierung der Kartenobjekte für das Spielfeld und Verteilung auf das Array. Es wird jeweils eine Karte
+         * generiert und die dem Button hinterlegt.
          */
 
         Card copper = new Card("copper","money", 0, 1);
@@ -58,7 +60,7 @@ public class GameModel {
         Card gold = new Card("gold","money", 6, 3);
         Card estate = new Card("estate","point", 2, 1 );
         Card duchy = new Card("duchy","point", 5, 3);
-        Card province = new Card("province","point", 8, 6);
+        Card province = new Card("province","point", 1, 6);
 
         pointCards = new ArrayList<>();
         Collections.addAll(pointCards, province, duchy, estate);
@@ -89,8 +91,11 @@ public class GameModel {
         actionCards.add(smithy);
     }
 
-    public int moneyButtonAmount(int index){
+    /**
+     * Methode um die Anzahl der Geldkarten auf diem Spielfeld anhand der Spieler festzulegen.
+     */
 
+    public int moneyButtonAmount(int index){
         switch (index) {
             case 2:
                 return 60-(7*playerList.size());
@@ -103,12 +108,16 @@ public class GameModel {
         }
     }
 
+    /**
+     * Methode um die Anzahl der Punktekarten auf diem Spielfeld anhand der Spieler festzulegen.
+     */
+
     //TODO: CHANGE TO 8
     public int pointButtonAmount(){
         if(playerList.size()<3){
             return 1;
         }else{
-            return 12;
+            return 1;
         }
     }
 

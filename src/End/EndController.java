@@ -13,6 +13,8 @@ import java.util.Collections;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * Controller für die Endview - Labels werden anhand der vom Server übermittelten Spielerinformationen festgelegt.
  */
 public class EndController {
     private Localisator localisator;
@@ -36,15 +38,18 @@ public class EndController {
             System.exit(0);
         });
 
+        /**
+         * Festlegung des Stylesheets anhand der Spielerzahl
+         */
 
         if(this.playerList.size()>3 && endView.getResolution().equals("720p")){
             endView.scene.getStylesheets().clear();
-            endView.scene.getStylesheets().add("../Stylesheets/EndStylesMini.css");
+            endView.scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesMini.css").toExternalForm());
         }
 
         if(this.playerList.size()>3 && endView.getResolution().equals("1080p")){
             endView.scene.getStylesheets().clear();
-            endView.scene.getStylesheets().add("../Stylesheets/EndStylesSmall.css");
+            endView.scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesSmall.css").toExternalForm());
         }
 
         if(this.playerList.get(0).getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
@@ -53,6 +58,11 @@ public class EndController {
         }else{
             gameController.playSound("DENIED");
         }
+
+
+        /**
+         * Befüllung der Gridpane mit den Labels für jeden Spieler
+         */
 
         for(int i= 0; i<playerList.size(); i++) {
 
@@ -67,8 +77,6 @@ public class EndController {
             if(i>1){
                 j=1;
             }
-
-
 
             Label playerLabel = new Label(playerList.get(i).getPlayerName());
             playerLabel.getStyleClass().add("playerLabel");

@@ -58,7 +58,7 @@
     -fx-font-size: 24Pt;
     -fx-padding: 14px 40px;
     -fx-border-color: black;
-    -fx-pref-width: 150;
+    -fx-pref-width: 200;
     -fx-padding: 0px 0px 0px 10px
 
 }
@@ -77,7 +77,7 @@
     -fx-text-fill: black;
     -fx-font-size: 12Pt;
     -fx-border-color: black;
-    -fx-pref-width: 150;
+    -fx-pref-width: 200;
     -fx-padding: 0px 0px 0px 10px
 
 }
