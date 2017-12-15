@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
@@ -29,22 +30,24 @@ public class EndController {
         this.gameController = gameController;
 
 
+        Collections.sort(this.playerList);
+
         endView.leaveButton.setOnAction(event -> {
             System.exit(0);
         });
 
 
-        if(playerList.size()>3 && endView.getResolution().equals("720p")){
+        if(this.playerList.size()>3 && endView.getResolution().equals("720p")){
             endView.scene.getStylesheets().clear();
             endView.scene.getStylesheets().add("../Stylesheets/EndStylesMini.css");
         }
 
-        if(playerList.size()>3 && endView.getResolution().equals("1080p")){
+        if(this.playerList.size()>3 && endView.getResolution().equals("1080p")){
             endView.scene.getStylesheets().clear();
             endView.scene.getStylesheets().add("../Stylesheets/EndStylesSmall.css");
         }
 
-        if(playerList.get(0).getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
+        if(this.playerList.get(0).getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
             endView.resultLabel.setText(localisator.getResourceBundle().getString("won"));
             gameController.playSound("MONSTER_KILL");
         }else{
