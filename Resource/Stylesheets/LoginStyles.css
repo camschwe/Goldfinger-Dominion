@@ -1,14 +1,14 @@
 .button {
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: white;
+    -fx-border-color: black;
     -fx-min-width: 200px;
 }
 
 .button:hover{
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
 
 .combo-box-base {
@@ -19,24 +19,24 @@
 }
 
 .combo-box .cell:selected {
-    -fx-text-fill: white;
     -fx-background-color: transparent;
     -fx-border-color: white;
+    -fx-text-fill: white;
 
 }
 
 .label {
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
-    -fx-border-color: white;
+    -fx-border-color: black;
     -fx-min-width: 200px;
     -fx-alignment: center;
 }
 
 .text-field {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-font-size: 12Pt;
     -fx-padding: 10px 0px;
     -fx-border-color: black;
