@@ -31,6 +31,9 @@ import java.util.ArrayList;
 
 public class GameController {
 
+    /**
+     * Hauptkontroller zur Steuerung der GameView mit Methoden zum GUI Update
+     */
 
     private GameView gameView;
     private Localisator localisator;
