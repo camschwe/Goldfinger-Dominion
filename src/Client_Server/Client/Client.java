@@ -292,7 +292,7 @@ public class Client extends Thread {
             protected Object call() throws Exception {
                 int s = INDEFINITE;
                 audioClip = new AudioClip(getClass().getResource("/Sounds/background.wav").toExternalForm());
-                audioClip.setVolume(0.07);
+                audioClip.setVolume(0.09);
                 audioClip.setCycleCount(s);
                 audioClip.play();
                 return null;

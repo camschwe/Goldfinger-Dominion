@@ -125,7 +125,7 @@ public class Server extends Thread{
                             }
                         }
                     } catch (Exception e) {
-                        removeClient();
+                        //removeClient();
                         break;
                     }
                 }
@@ -198,7 +198,36 @@ public class Server extends Thread{
 
         // Wenn ein Client die Verbindung trennt, soll er auch aus der Liste entfernt werden
         private void removeClient() throws IOException {
-            sendMessageToAll(new Message(1, "Server", "Client " + name + " has left the Server. Please restart the game.", "-fx-fill: black"));
+            sendMessageToAll(new Message(1, "Server", "Client " + name + " has left the Server.", "-fx-fill: black"));
+            int rem = 10;
+            for (int i = 0; i < gamePlayers.size(); i++){
+                if (gamePlayers.get(i).equals(name)){
+                    rem = i;
+                }
+            }
+            if (rem != 10){
+                gamePlayers.remove(rem);
+                if (actualPlayer == gamePlayers.size()){
+                    actualPlayer = 0;
+                }
+            }
+
+            if (actualPlayer == 0) {
+                if (rem == gamePlayers.size()){
+                    nextPlayer();
+                }
+            } else {
+                if (rem == actualPlayer-1){
+                    actualPlayer = actualPlayer -1;
+                    nextPlayer();
+                    if (actualPlayer < gamePlayers.size() - 1) {
+                        actualPlayer += 1;
+                    } else {
+                        actualPlayer = 0;
+                        round++;
+                    }
+                }
+            }
             players.remove(name);
             outputs.remove(objOutput);
             objInput.close();
@@ -231,6 +260,7 @@ public class Server extends Thread{
             }
         }
 
+        // Festlegung der Spieler im Spiel
         private void setGamePlayers(){
             for (String player : players) {
                 gamePlayers.add(player);
@@ -240,31 +270,32 @@ public class Server extends Thread{
         // Der nächste Spieler wird gesendet
         private void nextPlayer() throws IOException {
             if (!gameEnded) {
-                if (round == 19 && actualPlayer == gamePlayers.size()){
+                /**if (round == 19 && actualPlayer == gamePlayers.size()){
                     sendMessageToAll(new Message(4, "Round limit reached", "EndGame"));
-                } else {
+                } else {**/
+
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
                     sendMessageToAll(new Message(7, gamePlayers.get(actualPlayer), Integer.toString(round)));
+                if (actualPlayer < gamePlayers.size() - 1) {
+                    actualPlayer += 1;
+                } else {
+                    actualPlayer = 0;
+                    round++;
+                }
                     for (Player player : endPlayers){
                         if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
                             sendToAll(player);
                         }
                     }
-                    if (actualPlayer < gamePlayers.size() - 1) {
-                        actualPlayer += 1;
-                    } else {
-                        actualPlayer = 0;
-                        round++;
-                    }
-                }
+
+                //}
             }
         }
 
-        // EndPlayers List sortieren
-        /**private void sortEndPlayers(){
-            Collections.sort(endPlayers);
-        }**/
-
+        /**
+         * Generator für zufällige Farbe für Spieler
+         * Format: -fx-fill: #XXXXXX
+         */
         private String getRandomColor(){
             String color = "-fx-fill: #";
             for (int i = 1; i < 3; i++){

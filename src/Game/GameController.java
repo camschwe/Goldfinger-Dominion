@@ -40,7 +40,7 @@ public class GameController {
     private GameModel gameModel;
     private HandCardController handCardController;
     private FieldCardController fieldCardController;
-    private Client client;
+    private static Client client;
     private EndView endView;
     private EndController endController;
     private EndModel endModel;
@@ -467,16 +467,18 @@ public class GameController {
      */
 
     public static synchronized void playSound(final String fileName) {
-        new Thread(() -> {
-            try {
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                        Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
-                clip.open(inputStream);
-                clip.start();
-            } catch (Exception e) {
-            }
-        }).start();
+        if (client.getMusicActivated()) {
+            new Thread(() -> {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                            Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                }
+            }).start();
+        }
     }
 
     public GameModel getGameModel() {
