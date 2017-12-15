@@ -48,11 +48,10 @@ public class FieldCardController {
         }
 
         /**
-         * Jeweils eine Methode zur Initialisierung der Geld, Punkte und Aktionskarten auf dem Spielfeld anhand
-         * dem Array aus dem GameModel.Zudem Eventhändler für die Feldkarten sowie Methode für den Glow Effekt.
+         * Initialisierung der Geldkarten auf dem Spielfeld anhand dem Array aus dem GameModel und hinzufügen der Eventhandler
+         * für Klick, Mouseover and Mouseexited
          * */
 
-        //Initialisierung der Geldkarten
         for(int i = 0; i < gameModel.getMoneyCards().size() ; i++) {
             GameButton moneyButton = new GameButton(gameModel.getMoneyCards().get(i), gameModel.moneyButtonAmount(i));
             gameView.resourcePane.add(moneyButton, 1,i);
@@ -63,7 +62,11 @@ public class FieldCardController {
 
         }
 
-        //Initialisierung Punktekarten
+        /**
+         * Initialisierung der Punktekarten auf dem Spielfeld anhand dem Array aus dem GameModel und hinzufügen der Eventhandler
+         * für Klick, Mouseover and Mouseexited
+         * */
+
         for(int i = 0; i < gameModel.getPointCards().size() ; i++) {
             GameButton pointButton = new GameButton(gameModel.getPointCards().get(i), gameModel.pointButtonAmount());
             gameView.resourcePane.add(pointButton, 0,i);
@@ -73,7 +76,11 @@ public class FieldCardController {
             addMouseKlicked(pointButton, gameModel.getPlayer(), pointButton.getCard());
         }
 
-        //Initialisierung Aktionskarten
+        /**
+         * Methode für die Initialisierung der Aktionskarten auf dem Spielfeld anhand dem Array aus dem GameModel und hinzufügen der Eventhandler
+         * für Klick, Mouseover and Mouseexited
+         * */
+
         int column = 0;
         int row = 0;
         for(int i = 0; i < gameModel.getActionCards().size(); i++){
@@ -92,11 +99,9 @@ public class FieldCardController {
     }
 
     /**
-     * Eventhändler für das GUI und Klick
+     * Eventhändler für den Mousentered - Zeigt die jeweilige Karte vergrössert an
      */
 
-    //fügt Effekt für Mouseover hizu
-    //TODO: MIT TOOLTIP LöSEN
     public void addMouseEntered(GameButton gameButton, Button showButton){
         gameButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -107,7 +112,11 @@ public class FieldCardController {
             }
         });
     }
-    //Fügt Effekt für Mouse Exited hinzu
+
+    /**
+     * Eventhändler für den Mouseexited - Vergrösserte Karte wird wieder unsichtbar
+     */
+
     public void addMouseExited(GameButton gameButton, Button showButton){
         gameButton.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
@@ -117,8 +126,11 @@ public class FieldCardController {
         });
     }
 
-    //TODO: ALLE 3 EVENTHÄNDLER ZUSAMMENLEGEN?
-    //Eventhändler für Klick auf einen Aktionskarte auf dem Spielfeld
+    /**
+     * Eventhändler für Klick - Methoden zur Aktualisierung des Spiels sowie des GUI werden aufgerufen, insofern mit der
+     * Karte interagiert werden kann.
+     */
+
     public void addMouseKlicked(GameButton gameButton, Player player, Card card){
         gameButton.setOnAction(event -> {
             if(buyChecker(gameButton, player, card)){
@@ -133,10 +145,9 @@ public class FieldCardController {
     }
 
     /**
-     * Methoden für den Klickevent beziehungsweise Kauf einer Karte
+     * Supportmethode zur überprüfung ob eine Karten gekauft werden kann
      */
 
-    //überprüft ob eine Karte gekauft werden kann
     public boolean buyChecker(GameButton gameButton, Player player, Card card) {
         return player.isYourTurn() &&
                 player.isBuyPhase() &&
@@ -145,7 +156,10 @@ public class FieldCardController {
                 gameButton.getAmount() > 0;
     }
 
-    //Führt die Kaufaktion Durch und aktualisiert das GU
+    /**
+     * Methode um den Kauf durchzuführen und das GUI danach zu aktualisieren
+     */
+
     public void buyUpdate(GameButton gameButton, Player player, Card card){
         gameButton.setAmount(gameButton.getAmount() - 1);
         Card cardCopy = Card.cardCopy(card);
@@ -170,10 +184,9 @@ public class FieldCardController {
     }
 
     /**
-     * Methode um den Glow Effekt hinzuzufügen und zu entfernen
+     * Methode um den Glow Effekt hinzuzufügen und zu entfernen - Der Glow effekt zeigt, ob mit einer Karte interagiert werden kann
      */
 
-    //Aktualisiert den Glow Effekt
     public void fieldCardsGlowingUpdate(ArrayList<GameButton> gameButtons){
 
         for(int i = 0; i<gameButtons.size(); i++) {

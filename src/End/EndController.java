@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * Controller für die Endview - Labels werden anhand der vom Server übermittelten Spielerinformationen festgelegt.
  */
 public class EndController {
     private Localisator localisator;
@@ -33,6 +35,9 @@ public class EndController {
             System.exit(0);
         });
 
+        /**
+         * Festlegung des Stylesheets anhand der Spielerzahl
+         */
 
         if(playerList.size()>3 && endView.getResolution().equals("720p")){
             endView.scene.getStylesheets().clear();
@@ -51,6 +56,11 @@ public class EndController {
             gameController.playSound("DENIED");
         }
 
+
+        /**
+         * Befüllung der Gridpane mit den Labels für jeden Spieler
+         */
+
         for(int i= 0; i<playerList.size(); i++) {
 
             int y= i;
@@ -64,8 +74,6 @@ public class EndController {
             if(i>1){
                 j=1;
             }
-
-
 
             Label playerLabel = new Label(playerList.get(i).getPlayerName());
             playerLabel.getStyleClass().add("playerLabel");

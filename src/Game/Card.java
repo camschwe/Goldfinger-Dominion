@@ -6,12 +6,10 @@ import static sun.audio.AudioPlayer.player;
 
 /**
  * Created by camillo.schweizer on 13.10.2017.
+ * Generiert einfache Kartenobjekte mit einem String für den Namen sowie dem Typen. Zudem sind Methoden vorhanden,
+ * um die Aktion der jeweiligen Karte auszuführen.
  */
 public class Card implements Serializable {
-
-    /**
-     * Generiert einfache Kartenobjekte mit einem String für den Namen sowie dem Typen
-     */
 
     String cardName, type;
     int cost, value;
@@ -32,11 +30,12 @@ public class Card implements Serializable {
     public String getName() {
         return cardName;
     }
+
     /**
      * Methoden für das ausspielen von Aktionskarten
      */
 
-    //Führt Aktionskarte Village aus
+
     public void village(Player player){
         player.draw(1);
         player.setActions(player.getActions() + 1);
@@ -132,6 +131,10 @@ public class Card implements Serializable {
         }
     }
 
+    /**
+     * Supportmethode um die Phase abzuschliessen, wenn der Spieler keine Aktionen mehr überig hat.
+     */
+
 
     public void actionSupport(Card card, Player player) {
         player.addPlayCard(card);
@@ -140,12 +143,11 @@ public class Card implements Serializable {
         }
     }
 
-
     /**
-     * Methode für das ausspielen einer Geldkarte
+     * Methode für das ausspielen einer Geldkarte - Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die
+     * Karte aus der Hand
      */
 
-    //Fügt den Wert der Geldkarte dem Spieler hinzu und entfernt die Karte aus der Hand
     public void playMoneyCard(Player player){
         player.setMoney(player.getMoney()+ this.getValue());
         player.addPlayCard(this);

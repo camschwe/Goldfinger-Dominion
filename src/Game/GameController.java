@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 /**
  * Created by camillo.schweizer on 21.10.2017.
+ *
+ * Hauptkontroller zur Steuerung der GameView mit Methoden zum GUI Update. Zudem handelt der Controller die Spielzüge
+ * des Gegners.
  */
 
 
 public class GameController {
 
-    /**
-     * Hauptkontroller zur Steuerung der GameView mit Methoden zum GUI Update
-     */
 
     private GameView gameView;
     private Localisator localisator;
@@ -50,7 +50,17 @@ public class GameController {
         this.gameModel = gameModel;
         this.client = client;
 
+        /**
+         * Aktualisierung der Label nach dem Spielstart
+         */
+
         gameView.pointLabel1.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameModel.getPlayer().getPoints());
+        gameView.playerLabel1.setText(client.getClientName());
+
+
+        /**
+         * Gegnerische Labels sowie Karten werden ausgeblendet, wenn nur 1 Spieler vorhanden ist.
+         */
 
         if(gameModel.getPlayerList().size()== 1){
             gameView.player2Box.setVisible(false);
@@ -62,8 +72,13 @@ public class GameController {
             gameView.moneyLabel2.getStyleClass().add("invisible");
         }
 
+        /**
+         * Initialisierung des Controllers für die Feldkarten
+         */
+
         fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
-        gameView.playerLabel1.setText(client.getClientName());
+
+        //TODO: BENI COMMENT
 
         if (client.getMusicActivated()) {
             Platform.runLater(() -> gameView.musicButton.getStyleClass().clear());
@@ -79,7 +94,11 @@ public class GameController {
             System.exit(0);
         });
 
-        //Eventhändler für den Phase Button
+        /**
+         * Eventhändler für den Button um eine Phase zu überspringen. Führ die Notwendigen Updates beim Spiel sowie auch
+         * dem GUI durch.
+         */
+
         gameView.phaseButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
@@ -98,6 +117,10 @@ public class GameController {
 
         });
 
+        /**
+         * Eventhändler für den Chattbutton. Mit dem im Textfeld vorhandenen String wird eine Message generiert und
+         * an alle Clients geschickt
+         */
 
         gameView.chatWindow.getSendButton().setOnAction(event -> {
             if (gameView.chatWindow.getTxtMessage().getText() == null || gameView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
@@ -115,7 +138,11 @@ public class GameController {
             }
         });
 
-        //Eventhändler für den Money Button
+        /**
+         * Eventhändler für den Moneybutton. Es werden alle Geldkarten ausgespielt und die dafür notwendigen Updates
+         * beim Spieler sowie auch beim GUI vorgenommen
+         */
+
         gameView.moneyButton.setOnAction(event -> {
             if(gameModel.getPlayer().isYourTurn() && gameModel.getPlayer().isBuyPhase()){
                 ArrayList<Card> tempList = gameModel.getPlayer().playAllMoneyCards();
@@ -135,6 +162,8 @@ public class GameController {
             }
         });
 
+        //TODO: BENI COMMENT
+
         gameView.musicButton.setOnAction(event -> {
             if (client.getMusicActivated()){
                 client.stopMusic();
@@ -152,7 +181,8 @@ public class GameController {
 
 
     /**
-     * Methoden zum GUI Update
+     * Methode um den PutStapel zu aktualisieren. Anhand des mitgegebenen Spielers sowie des Buttons wird die Karte
+     * neu gesetzt oder unsichtbar gemacht.
      */
 
     public void putStapelUpdate(Player player, Button putStapelButton){
@@ -173,6 +203,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Methode um das Spielerlabel zu aktualisieren. Spielername, Geld, Punkte und Phase wird neu gesetzt.
+     */
+
     public void player1LabelUpdate(){
         Player player = gameModel.getPlayer();
         gameView.moneyLabel1.setText(localisator.getResourceBundle().getString("money")+ ":\t"+player.getMoney());
@@ -184,6 +218,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Methode um das NoteFlow zu aktualisieren. Anhand des Spielers wird die Farbe festgelegt und im Text danach die Aktion
+     * beschrieben sowie die aktuell verfügbaren Käufe sowie Aktionen ausgegeben.
+     */
 
     public void noteFlowUpdate(Card card, Player player, int type, String color) {
         Text action;
@@ -206,6 +244,11 @@ public class GameController {
         });
     }
 
+    /**
+     * Supportmethode damit das korrekte Soundfile abgespielt werden kan. Bei Geldkarten wird "coin" zurückgegeben, bei Punktekarten
+     * "point" und bei den Aktionskarten der jeweilige Name
+     */
+
     public String soundUpdate(String cardName){
         if(cardName.equals("copper") || cardName.equals("silver") || cardName.equals("gold")){
             cardName = "coin";
@@ -217,6 +260,10 @@ public class GameController {
     }
 
 
+    /**
+     * Methode um den gegnerischen Spielzug zu verarbeiten. Anhand des übermittelten GameObjects und der darin enthaltenen
+     * Aktion werden die entsprechenden Aktualisierungsmethoden für das Spiel sowie das GUI aufgerufen.
+     */
 
     public void otherPlayerChecker(GameObject gameObject) {
         if(!gameObject.getPlayer().getPlayerName().equals(gameModel.getPlayer().getPlayerName())){
@@ -246,6 +293,11 @@ public class GameController {
     }
     }
 
+    /**
+     * Methode um den gegnerischen Handkarten zu aktualisieren. Ausgespielte Karten werden angezeigt wohingegen man bei
+     * den noch verbleibenden Handkarten lediglich die Rückseite sieht.
+     */
+
     public void player2HandCardsUpdate(GameObject gameObject) {
             gameView.player2Box.getChildren().clear();
 
@@ -270,6 +322,11 @@ public class GameController {
                 }
     }
 
+    /**
+     * Supportmethoe um anhand dem GameObject bzw der vom Gegenspieler gekaufte Karte das korrekte Update ausführen
+     * zu können.
+     */
+
     public void fieldCardUpdate(GameObject gameObject){
         String type = gameObject.getCard().getType();
 
@@ -288,6 +345,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Aktualisiert die Aktionskarten auf dem Spielfeld nach dem gegnerischen Kauf.
+     */
+
     public void actionFieldCardUpdate(String cardName){
             for (GameButton card : fieldCardController.getActionButtons()){
                 if (card.getCard().getName().equals(cardName)){
@@ -297,6 +358,10 @@ public class GameController {
             }
     }
 
+    /**
+     * Aktualisiert die Geld oder Punktekarten auf dem Spielfeld nach dem gegnerischen Kauf.
+     */
+
     public void resourceFieldUpdate(String cardName){
         for (GameButton card : fieldCardController.getResourceButtons()){
             if (card.getCard().getName().equals(cardName)){
@@ -305,6 +370,10 @@ public class GameController {
             }
         }
     }
+
+    /**
+     * Aktualisiert die Label des gegnerischen Spielers
+     */
 
     public void player2LabelUpdate(GameObject gameObject){
 
@@ -330,6 +399,11 @@ public class GameController {
         });
     }
 
+    /**
+     * Methode wird nach abschluss des gegnerischen Spielzugs aufgerufen und startet den neuen Zug. Zudem werden die
+     * Handkarten des gegnerischen Spielers aktualisiert.
+     */
+
     public void newTurn(boolean turn){
         gameModel.getPlayer().setYourTurn(turn);
         Platform.runLater(() ->{
@@ -348,6 +422,60 @@ public class GameController {
         });
     }
 
+    /**
+     * Methode um nach abschluss des Spiels die EndView aufzurufen
+     */
+
+    public void endView(ArrayList<Player> o) {
+        Platform.runLater(() ->{
+            endView = new EndView(gameView.getGameStage(), localisator, gameView.turnLabel.getText(), client.getResolution());
+            endModel = new EndModel();
+            endController = new EndController(endModel, endView, localisator, o, gameModel, this);
+        } );
+    }
+
+    /**
+     * Methode um die Labels mit dem aktuellen Spieler und der Anzahl Züge zu aktualisieren
+     */
+
+    public void changeTurnLabels(String name, int i){
+        Platform.runLater(() -> {
+            gameView.playerLabel.setText(localisator.getResourceBundle().getString("player")+ ":\t" + name);
+            gameView.turnLabel.setText(localisator.getResourceBundle().getString("round")+ ":\t" + i);
+        });
+    }
+
+    /**
+     * Methode um di Labels des Gegenspielers zu aktualisieren
+     */
+
+    public void player2PointUpdate(Player o){
+        Platform.runLater(() -> {
+            gameView.playerLabel2.setText(o.getPlayerName());
+            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point") + ":\t" + o.getPoints());
+            putStapelUpdate(o, gameView.putStapelPlayer2);
+        });
+    }
+
+    /**
+     * Methode um ein Audio File abzuspielen.
+     * Kopiert von: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+     * @param fileName
+     */
+
+    public static synchronized void playSound(final String fileName) {
+        new Thread(() -> {
+            try {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
+                clip.open(inputStream);
+                clip.start();
+            } catch (Exception e) {
+            }
+        }).start();
+    }
+
     public GameModel getGameModel() {
         return gameModel;
     }
@@ -364,50 +492,8 @@ public class GameController {
         return fieldCardController;
     }
 
-    public void endView(ArrayList<Player> o) {
-        Platform.runLater(() ->{
-            endView = new EndView(gameView.getGameStage(), localisator, gameView.turnLabel.getText(), client.getResolution());
-            endModel = new EndModel();
-            endController = new EndController(endModel, endView, localisator, o, gameModel, this);
-        } );
-    }
-
-    public void changeTurnLabels(String name, int i){
-        Platform.runLater(() -> {
-            gameView.playerLabel.setText(localisator.getResourceBundle().getString("player")+ ":\t" + name);
-            gameView.turnLabel.setText(localisator.getResourceBundle().getString("round")+ ":\t" + i);
-        });
-    }
-
-    public void player2PointUpdate(Player o){
-        Platform.runLater(() -> {
-            gameView.playerLabel2.setText(o.getPlayerName());
-            gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point") + ":\t" + o.getPoints());
-            putStapelUpdate(o, gameView.putStapelPlayer2);
-        });
-    }
-
     public void endGame() {
         gameModel.getPlayer().setYourTurn(false);
-    }
-
-
-    /**
-     * Methode um ein Audio File abzuspielen.
-     * Kopiert von: https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
-     * @param fileName
-     */
-    public static synchronized void playSound(final String fileName) {
-        new Thread(() -> {
-            try {
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                        Main.class.getResourceAsStream("/Sounds/" + fileName + ".wav"));
-                clip.open(inputStream);
-                clip.start();
-            } catch (Exception e) {
-            }
-        }).start();
     }
 
     public Localisator getLocalisator() {

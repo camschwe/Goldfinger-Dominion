@@ -6,15 +6,14 @@ import java.io.Serializable;
 
 /**
  * Created by camillo.schweizer on 13.10.2017.
+ *
+ * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style anhand
+ * vom Namen festgelegt
  */
 public class GameButton extends Button implements Serializable {
     Card card;
     int amount;
 
-    /**
-     * Jeweils ein  Konstruktor für Handkarten und Feldkarten. Es wird ein Kartenobjekt mitgegeben und der Style anhand
-     * vom Namen festgelegt
-     */
     public GameButton() {
     }
 

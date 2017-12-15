@@ -35,7 +35,6 @@ public class HandCardController {
      *  Generiert GameButtons für die Handkarten und fügt diese der View hinzu sowie die Eventhandler
      */
 
-
     public void updateHandCardsView() {
         gameView.player1Box.getChildren().clear();
 
@@ -102,7 +101,6 @@ public class HandCardController {
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
             }
-
         });
     }
 

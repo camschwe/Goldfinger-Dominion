@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 /**
  * Created by camillo.schweizer on 06.10.2017.
+ *
+ * EndView mit Label Gewonnen/Verlooren sowie allen Spielern und ihren erreichten Punkten. Je nach Auflösung wird ein
+ * anderes Stylesheet geladen.
  */
 public class EndView {
 
@@ -54,7 +57,9 @@ public class EndView {
         root.setTop(resultLabel);
 
 
-        //Scene Initialisieren
+        /**
+         * Initialisierung der Scene mit dem dafür notwendige Stylesheet - Auflösung
+         */
 
         if(resolution.equals("720p")){
             scene = new Scene(root, 1280, 720);
