@@ -20,7 +20,7 @@ public class Message implements Serializable {
     private String clientName;
     private String color;
 
-    // Konstruktor
+    // Standard Konstruktor
     public Message (int type,String clientName, String message){
         this.type = type;
         this.clientName = clientName;

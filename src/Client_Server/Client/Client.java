@@ -52,6 +52,14 @@ public class Client extends Thread {
     private boolean musicActivated = true;
     private static AudioClip audioClip;
 
+    /**
+     * Konstruktor
+     * @param serverAdresse Adresse des Servers
+     * @param clientName Name des Clients
+     * @param resolution Auflösung
+     * @param audioClip für Hintergrundmusik
+     * @param musicActivated für allgemein Musik
+     */
     public Client(String serverAdresse, String clientName, String resolution, AudioClip audioClip, boolean musicActivated){
         try {
             this.audioClip = audioClip;
@@ -70,7 +78,9 @@ public class Client extends Thread {
 
     }
 
-    //Der Client hört auf Objekte vom Server
+    /**
+     * Der Client hört auf Objekte vom Server und ruft eine Handler Methode auf
+     */
     public void run(){
         while (running) {
             Object o = null;
@@ -104,7 +114,10 @@ public class Client extends Thread {
         return this.clientName;
     }
 
-    // Methode um das erhaltene Objekt zu verarbeiten
+    /**
+     * Handler Methode um das Objekt vom Server zu verarbeiten
+     * @param o Objekt
+     */
     public void handleObject(Object o){
         if (o instanceof Message){
             Message message = (Message) o;
@@ -154,7 +167,6 @@ public class Client extends Thread {
                     if (gameStarted){
                         gameController.getFieldCardController().getSpectatorController().changePlayerCards();
                     }
-                    //Platform.runLater(() -> gameController.getGameView().playerLabel2.setText(message.getClientName()));
                     break;
                 case 7:
                     gameController.changeTurnLabels(message.getClientName(), Integer.parseInt(message.getMessage()));
@@ -174,7 +186,10 @@ public class Client extends Thread {
         }
     }
 
-    // die Clientseitige Spielerliste wird erstellt und aktualisiert
+    /**
+     * die Clientseitige Spielerliste wird erstellt und aktualisiert
+     * @param message Nachricht mit Spielern vom Server
+     */
     private void addPlayers(Message message){
         if (players.size() <= 4) {
             if (reset) {
@@ -185,7 +200,9 @@ public class Client extends Thread {
         }
     }
 
-    // Aktualisierung der Spielerliste in der LobbyView
+    /**
+     * Aktualisierung der Spielerliste in der LobbyView
+     */
     public void actualizePlayers() {
         int i = 0;
 
@@ -205,7 +222,10 @@ public class Client extends Thread {
         reset = true;
     }
 
-    // Aktualisieren der Chat Nachrichten
+    /**
+     * Aktualisieren der Chat Nachrichten
+     * @param message Nachricht
+     */
     public void actualizeChat(Message message) {
         if (actualController == 1){
             lobbyController.getLobbyView().getChatWindow().actualizeChatFlow(message);
@@ -226,7 +246,10 @@ public class Client extends Thread {
         checked = false;
     }
 
-    // Sendet ein Objekt an den Server
+    /**
+     * Sendet ein Objekt an den Server
+     * @param o Objekt an den Server
+     */
     public void sendObject(Object o){
         try {
             if(o instanceof GameObject) {
@@ -268,6 +291,9 @@ public class Client extends Thread {
         return gameStarted;
     }
 
+    /**
+     * Methode für das beenden des Clients
+     */
     public void stopClient(){
         sendObject(new Message(2, this.clientName, "left", color));
         try {
@@ -314,6 +340,7 @@ public class Client extends Thread {
     public void setMusicActivated(boolean music){
         this.musicActivated = music;
     }
+
     public static String getColor(){
         return Client.color;
     }

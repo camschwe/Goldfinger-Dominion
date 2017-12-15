@@ -21,7 +21,7 @@ public class LoginView {
 
     protected Stage primaryStage;
     protected Button hostButton, joinButton, tutorialButton, musicButton;
-    protected TextField userNameField;
+    public TextField userNameField;
     protected Label userNameLabel, connectingLabel;
     protected ComboBox<String> languageBox, sizeBox;
     protected Localisator localisator;
@@ -72,17 +72,16 @@ public class LoginView {
         );
 
         /**
-         * @Benjamin: TODO: Comment
+         * Button für Musik ein/ausschalten
          */
 
         musicButton = new Button();
         musicButton.getStyleClass().clear();
         musicButton.getStyleClass().add("musicButtonOn");
-        /** Music Button soll 40x40 sein **/
 
 
         conError = new Alert(Alert.AlertType.ERROR);
-        dialog = new TextInputDialog("localhost");        // TODO (localisator.getResourceBundle().getString("address"));
+        dialog = new TextInputDialog("localhost");
 
         dialog.setTitle(localisator.getResourceBundle().getString("addressTitle"));
         dialog.setHeaderText(localisator.getResourceBundle().getString("addressHeader"));

@@ -102,7 +102,9 @@ public class ChatWindow {
 
     public TextFlow getTxtChatFlow() { return this.txtChatFlow;}
 
-    // Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
+    /**
+     * Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
+      */
     public void actualizeChatFlow(Message message){
         System.out.println(message);
         Text user = new Text(message.getClientName() + ": ");

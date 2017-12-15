@@ -4,7 +4,6 @@ import Client_Server.Client.Client;
 import Client_Server.Chat.Message;
 import Client_Server.Server.StartServer;
 import Dialogs.DialogController;
-import Dialogs.DialogModel;
 import Dialogs.DialogView;
 import Lobby.LobbyController;
 import Lobby.LobbyModel;
@@ -51,9 +50,8 @@ public class LoginController {
                 loginView.userNameField.getStyleClass().add("userNameNeeded");
             } else {
                 DialogView dialogView = new DialogView("Please enter IP Address", "localhost", "IP Address", localisator);
-                DialogController dialogController = new DialogController(dialogView, new DialogModel(), localisator, this);
+                DialogController dialogController = new DialogController(dialogView, localisator, this);
                 dialogView.start();
-
             }
         });
 
@@ -118,6 +116,11 @@ public class LoginController {
         });
 
         startBackground();
+
+        loginView.primaryStage.setOnCloseRequest(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     /**
@@ -170,11 +173,13 @@ public class LoginController {
     public String connect(String address){
         clientName = loginView.userNameField.getText();
 
-        client = new Client(address, clientName, resolution, audioClip, musicActivated);
-        if (client.isConnected()) {
-            client.start();
+        if (client == null) {
+            client = new Client(address, clientName, resolution, audioClip, musicActivated);
+            if (client.isConnected()) {
+                client.start();
+            }
         }
-        loginView.connectingLabel.setVisible(false);
+            loginView.connectingLabel.setVisible(false);
 
         if (!client.isFailure()) {
             Message user = new Message(0, clientName, "login");
@@ -210,7 +215,6 @@ public class LoginController {
     /**
      * Methode um ein Audio File abzuspielen.
      * Kopiert von: https://stackoverflow.com/questions/31784698/javafx-background-thread-task-should-play-music-in-a-loop-as-background-thread
-     * @param fileName
      */
 
     public static void startBackground(){
@@ -250,6 +254,10 @@ public class LoginController {
 
     public LoginView getLoginView() {
         return loginView;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }
 

@@ -60,6 +60,9 @@ public class LobbyController {
             }
         });
 
+        /**
+         * Eventhandler für den Zuschauer Modus. Startet ein Spielfeld um zuzuschauen
+         */
         lobbyView.spectatorButton.setOnAction(event -> {
             if (client.isGameStarted()){
                 startGame();
@@ -72,6 +75,9 @@ public class LobbyController {
             }
         });
 
+        /**
+         * Eventhandler für den Chat Senden Button
+         */
         lobbyView.chatWindow.getSendButton().setOnAction(event -> {
             if (lobbyView.chatWindow.getTxtMessage().getText() == null || lobbyView.chatWindow.getTxtMessage().getText().trim().isEmpty()) {
             }else {
@@ -82,11 +88,15 @@ public class LobbyController {
             }
         });
 
+        /**
+         * Eventhandler für das betätigen der Enter Taste
+         */
         lobbyView.chatWindow.getTxtMessage().setOnKeyPressed((KeyEvent event) -> {
             if (event.getCode().equals(KeyCode.ENTER)){
                 lobbyView.chatWindow.getSendButton().fire();
             }
         });
+
 
         lobbyView.primaryStage.setOnCloseRequest(event -> {
             client.stopClient();

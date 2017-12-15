@@ -11,16 +11,17 @@ import javafx.scene.input.KeyEvent;
 
 public class DialogController {
     private DialogView dialogView;
-    private DialogModel dialogModel;
     private Localisator localisator;
     private LoginController loginController;
 
-    public DialogController(DialogView dialogView, DialogModel dialogModel, Localisator localisator, LoginController loginController){
+    public DialogController(DialogView dialogView,  Localisator localisator, LoginController loginController){
         this.dialogView = dialogView;
-        this.dialogModel = dialogModel;
         this.localisator = localisator;
         this.loginController = loginController;
 
+        /**
+         * Eventhandler für das drücken des OK Buttons
+         */
         dialogView.btnOK.setOnAction(event -> {
             dialogView.connectingLabel.setVisible(false);
             String address = dialogView.getAddress();
@@ -33,6 +34,11 @@ public class DialogController {
                         break;
                     case "username used":
                         dialogView.stop();
+                        loginController.getLoginView().userNameField.setText("");
+                        loginController.getLoginView().userNameField.setPromptText(localisator.getResourceBundle().getString("usernameUsed"));
+                        loginController.getLoginView().userNameField.getStyleClass().clear();
+                        loginController.getLoginView().userNameField.getStyleClass().add("userNameNeeded");
+                        loginController.getClient().resetChecked();
                         break;
                     case "Error connecting":
                         dialogView.connectingLabel.setVisible(true);
