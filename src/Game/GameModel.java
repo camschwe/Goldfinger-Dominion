@@ -60,7 +60,7 @@ public class GameModel {
         Card gold = new Card("gold","money", 6, 3);
         Card estate = new Card("estate","point", 2, 1 );
         Card duchy = new Card("duchy","point", 5, 3);
-        Card province = new Card("province","point", 8, 6);
+        Card province = new Card("province","point", 1, 6);
 
         pointCards = new ArrayList<>();
         Collections.addAll(pointCards, province, duchy, estate);
@@ -117,7 +117,7 @@ public class GameModel {
         if(playerList.size()<3){
             return 1;
         }else{
-            return 12;
+            return 1;
         }
     }
 
