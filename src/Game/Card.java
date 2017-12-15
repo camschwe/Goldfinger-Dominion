@@ -121,6 +121,10 @@ public class Card implements Serializable {
     public boolean magpie (Player player){
         player.draw(1);
 
+        if(player.getDrawDeck().size() == 0){
+            player.changeDecks(player.getPutDeck(), player.getDrawDeck());
+        }
+
         if(player.getDrawDeck().get(0).getType().equals("money")){
             player.draw(1);
             actionSupport(this, player);
