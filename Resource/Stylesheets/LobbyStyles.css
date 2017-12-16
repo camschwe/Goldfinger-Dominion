@@ -59,8 +59,17 @@
     -fx-border-color: black;
     -fx-pref-width: 830;
     -fx-alignment: center;
+}
 
+.addressLabel{
+    -fx-text-fill: black;
+    -fx-font-size: 14Pt;
+    -fx-padding: 0px 0px 0px 0px
+}
 
+.roundLimit{
+    -fx-text-fill: black;
+    -fx-font-size: 12Pt;
 }
 
 .text-field {

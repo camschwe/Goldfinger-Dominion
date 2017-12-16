@@ -119,6 +119,13 @@ public class LobbyController {
             }
         });
 
+        lobbyView.roundLimit.setOnAction(event -> {
+            if (lobbyView.roundLimit.isSelected()){
+                lobbyView.round.setVisible(true);
+            } else {
+                lobbyView.round.setVisible(false);
+            }
+        });
 
     }
 
@@ -140,8 +147,10 @@ public class LobbyController {
     public void showAddress(){
         if (client.isServer()){
             try {
-                //lobbyView.addressLabel.setText(InetAddress.getLocalHost());
-                System.out.println(InetAddress.getLocalHost().getHostAddress());
+                lobbyView.addressLabel.setText(localisator.getResourceBundle().getString("ip") + " " + InetAddress.getLocalHost().getHostAddress());
+                lobbyView.addressLabel.setVisible(true);
+                lobbyView.roundLimit.setVisible(true);
+                //System.out.println(InetAddress.getLocalHost().getHostAddress());
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }
