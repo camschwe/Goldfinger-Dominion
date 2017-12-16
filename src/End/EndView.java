@@ -93,8 +93,5 @@ public class EndView {
         return resolution;
     }
 
-    public void setResolution(String resolution) {
-        this.resolution = resolution;
-    }
 }
 

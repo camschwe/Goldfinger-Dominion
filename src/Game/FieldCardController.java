@@ -207,22 +207,6 @@ public class FieldCardController {
         gameButton.setText(""+gameButton.getAmount());
     }
 
-    public GameView getGameView() {
-        return gameView;
-    }
-
-    public void setGameView(GameView gameView) {
-        this.gameView = gameView;
-    }
-
-    public GameModel getGameModel() {
-        return gameModel;
-    }
-
-    public void setGameModel(GameModel gameModel) {
-        this.gameModel = gameModel;
-    }
-
     public Localisator getLocalisator() {
         return localisator;
     }
@@ -235,32 +219,12 @@ public class FieldCardController {
         return handCardController;
     }
 
-    public void setHandCardController(HandCardController handCardController) {
-        this.handCardController = handCardController;
-    }
-
-    public GameController getGameController() {
-        return gameController;
-    }
-
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
-
     public ArrayList<GameButton> getActionButtons() {
         return actionButtons;
     }
 
-    public void setActionButtons(ArrayList<GameButton> actionButtons) {
-        this.actionButtons = actionButtons;
-    }
-
     public ArrayList<GameButton> getResourceButtons() {
         return resourceButtons;
-    }
-
-    public void setResourceButtons(ArrayList<GameButton> resourceButtons) {
-        this.resourceButtons = resourceButtons;
     }
 
     public SpectatorController getSpectatorController() {

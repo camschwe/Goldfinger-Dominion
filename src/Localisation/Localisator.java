@@ -48,8 +48,5 @@ public class Localisator {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 }
 

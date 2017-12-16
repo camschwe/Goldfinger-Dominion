@@ -219,10 +219,6 @@ public class Player implements Serializable, Comparable{
         return playDeck;
     }
 
-    public void setPlayDeck(ArrayList<Card> playDeck) {
-        this.playDeck = playDeck;
-    }
-
     public ArrayList<Card> getHandCards() {
         return handCards;
     }
@@ -231,20 +227,8 @@ public class Player implements Serializable, Comparable{
         return putDeck;
     }
 
-    public void setPutDeck(ArrayList<Card> putDeck) {
-        this.putDeck = putDeck;
-    }
-
     public ArrayList<Card> getDrawDeck() {
         return drawDeck;
-    }
-
-    public void setDrawDeck(ArrayList<Card> drawDeck) {
-        this.drawDeck = drawDeck;
-    }
-
-    public void setHandCards(ArrayList<Card> handCards) {
-        this.handCards = handCards;
     }
 
     public boolean isYourTurn() {
@@ -259,16 +243,8 @@ public class Player implements Serializable, Comparable{
         return actionPhase;
     }
 
-    public void setActionPhase(boolean actionPhase) {
-        this.actionPhase = actionPhase;
-    }
-
     public boolean isBuyPhase() {
         return buyPhase;
-    }
-
-    public void setBuyPhase(boolean buyPhase) {
-        this.buyPhase = buyPhase;
     }
 
     public int getActions() {
@@ -299,16 +275,8 @@ public class Player implements Serializable, Comparable{
         return points;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public String getPlayerName() {
         return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
     }
 
     public boolean isTurnEnded() {
@@ -335,7 +303,6 @@ public class Player implements Serializable, Comparable{
         }
 
         return("\n\n\n");
-
     }
 
     @Override
@@ -343,5 +310,4 @@ public class Player implements Serializable, Comparable{
         Player p = (Player) o;
         return p.getPoints() - this.points;
     }
-
 }

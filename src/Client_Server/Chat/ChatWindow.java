@@ -100,8 +100,6 @@ public class ChatWindow {
         return this.scrollPane;
     }
 
-    public TextFlow getTxtChatFlow() { return this.txtChatFlow;}
-
     /**
      * Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
       */

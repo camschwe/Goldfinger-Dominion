@@ -43,11 +43,6 @@ public class Message implements Serializable {
         return message;
     }
 
-    public String getFullMessage(){
-        String fullMessage = (this.clientName + ": " + toString());
-        return fullMessage;
-    }
-
     public String getColor() {
         return color;
     }
