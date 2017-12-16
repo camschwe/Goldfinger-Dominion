@@ -250,14 +250,6 @@ public class LoginController {
         audioClip.stop();
     }
 
-    public boolean getMusicActivated(){
-        return musicActivated;
-    }
-
-    public void setMusicActivated(boolean music){
-        this.musicActivated = music;
-    }
-
     public LoginModel getLoginModel() {
         return loginModel;
     }

@@ -118,15 +118,6 @@ public class GameModel {
         }
     }
 
-    public int  getPlayerCount(){
-        return this.playerCount;
-    }
-
-
-    public void setPlayerCount(int playerCount) {
-        this.playerCount = playerCount;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -135,16 +126,8 @@ public class GameModel {
         return pointCards;
     }
 
-    public void setPointCards(ArrayList<Card> pointCards) {
-        this.pointCards = pointCards;
-    }
-
     public ArrayList<Card> getMoneyCards() {
         return moneyCards;
-    }
-
-    public void setMoneyCards(ArrayList<Card> moneyCards) {
-        this.moneyCards = moneyCards;
     }
 
     public Player getPlayer(){
@@ -155,23 +138,8 @@ public class GameModel {
         return actionCards;
     }
 
-    public void setActionCards(ArrayList<Card> actionCards) {
-        this.actionCards = actionCards;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
     public ArrayList<String> getPlayerList() {
         return playerList;
     }
 
-    public void setPlayerList(ArrayList<String> playerList) {
-        this.playerList = playerList;
-    }
 }

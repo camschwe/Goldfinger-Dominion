@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 /**
  * Created by camillo.schweizer on 23.10.2017.
+ *
+ * Container für die Übermittlung von Spielzügen. Es werden die Karte, der entsprechende Spieler sowie auch die Aktion
+ * (0 = gespielt, Action 1 = gekauft) übermittelt
  */
 public class GameObject implements Serializable {
     private Player player;
@@ -14,24 +17,15 @@ public class GameObject implements Serializable {
     private int action;
     private String color;
 
-
-    //Action 0 = gespielt, Action 1 = gekauft
     public GameObject(Player player, Card card, int action){
         this.player = player;
         this.card = card;
         this.action = action;
         this.color = "!valid";
-
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public GameObject gameObjectCopy(){
-        GameObject copy = new GameObject(this.getPlayer(), this.getCard(), this.getAction());
-        return copy;
-
     }
 
     public void setPlayer(Player player) {
@@ -42,16 +36,8 @@ public class GameObject implements Serializable {
         return card;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
     public int getAction() {
         return action;
-    }
-
-    public void setAction(int action) {
-        this.action = action;
     }
 
     public String getColor() {

@@ -310,10 +310,6 @@ public class GameView {
         return gameStage;
     }
 
-    public void setGameStage(Stage gameStage) {
-        this.gameStage = gameStage;
-    }
-
     public Scene getScene(){
         return scene;
     }

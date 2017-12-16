@@ -36,10 +36,6 @@ public class GameButton extends Button implements Serializable {
         return card;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
     public int getAmount() {
         return amount;
     }
