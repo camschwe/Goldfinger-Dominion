@@ -303,7 +303,6 @@ public class Player implements Serializable, Comparable{
         }
 
         return("\n\n\n");
-
     }
 
     @Override
@@ -311,5 +310,4 @@ public class Player implements Serializable, Comparable{
         Player p = (Player) o;
         return p.getPoints() - this.points;
     }
-
 }

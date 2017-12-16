@@ -54,6 +54,13 @@ public class GameController {
         this.client = client;
 
         /**
+         * Initialisierung der SupportController für Hand- sowie Feldkarten
+         */
+
+        fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
+        this.handCardController = fieldCardController.getHandCardController();
+
+        /**
          * Aktualisierung der Label nach dem Spielstart
          */
 
@@ -74,12 +81,6 @@ public class GameController {
             gameView.phaseLabel2.getStyleClass().add("invisible");
             gameView.moneyLabel2.getStyleClass().add("invisible");
         }
-
-        /**
-         * Initialisierung des Controllers für die Feldkarten
-         */
-
-        fieldCardController = new FieldCardController(gameView, localisator, gameModel, this);
 
         /**
          * Musik Button Design bei Start des Controllers festlegen
@@ -108,17 +109,20 @@ public class GameController {
             if(gameModel.getPlayer().isYourTurn()) {
                 gameModel.getPlayer().endPhase();
 
-                Platform.runLater(() -> {
-                    handCardController.updateHandCardsView();
-                    player1LabelUpdate();
-                    fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
-                    fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
-                    });
             }
             if (gameModel.getPlayer().isTurnEnded()){
                 getClient().sendObject(new Message(6, gameModel.getPlayer().getPlayerName(), "Turn ended"));
                 gameModel.getPlayer().setTurnEnded(false);
             }
+
+            Platform.runLater(() -> {
+                handCardController.updateHandCardsView();
+                putStapelUpdate(gameModel.getPlayer(), gameView.putStapelPlayer1);
+                player1LabelUpdate();
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
+                fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
+
+            });
 
         });
 
@@ -160,7 +164,6 @@ public class GameController {
                 }
 
                 player1LabelUpdate();
-                this.handCardController = fieldCardController.getHandCardController();
                 handCardController.updateHandCardsView();
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
