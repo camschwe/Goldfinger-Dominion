@@ -35,7 +35,6 @@ public class Card implements Serializable {
      * Methoden für das ausspielen von Aktionskarten
      */
 
-
     public void village(Player player){
         player.draw(1);
         player.setActions(player.getActions() + 1);
@@ -138,7 +137,6 @@ public class Card implements Serializable {
     /**
      * Supportmethode um die Phase abzuschliessen, wenn der Spieler keine Aktionen mehr überig hat.
      */
-
 
     public void actionSupport(Card card, Player player) {
         player.addPlayCard(card);

@@ -28,7 +28,6 @@ import java.util.ArrayList;
  * des Gegners.
  */
 
-
 public class GameController {
 
     /**
@@ -44,8 +43,6 @@ public class GameController {
     private EndView endView;
     private EndController endController;
     private EndModel endModel;
-
-
 
     public GameController(GameView gameView, Localisator localisator, GameModel gameModel, Client client){
         this.gameView = gameView;
@@ -186,7 +183,6 @@ public class GameController {
         });
     }
 
-
     /**
      * Methode um den PutStapel zu aktualisieren. Anhand des mitgegebenen Spielers sowie des Buttons wird die Karte
      * neu gesetzt oder unsichtbar gemacht.
@@ -235,9 +231,9 @@ public class GameController {
 
         if (type == 0) {
             action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
-        } else {action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
+        } else {
+            action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
         }
-
         Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
         Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
         Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
@@ -265,7 +261,6 @@ public class GameController {
         }
         return cardName;
     }
-
 
     /**
      * Methode um den gegnerischen Spielzug zu verarbeiten. Anhand des übermittelten GameObjects und der darin enthaltenen
@@ -295,7 +290,7 @@ public class GameController {
             if (gameObject.getCard().getType().equals("point")){
                 Platform.runLater(() -> gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints()));
             }
-    }
+        }
     }
 
     /**
@@ -381,18 +376,14 @@ public class GameController {
      */
 
     public void player2LabelUpdate(GameObject gameObject){
-
         Platform.runLater(() -> {
-
             if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
                 gameView.playerLabel2.getStyleClass().remove("invisible");
                 gameView.moneyLabel2.getStyleClass().remove("invisible");
                 gameView.phaseLabel2.getStyleClass().remove("invisible");
                 gameView.pointLabel2.getStyleClass().remove("invisible");
             }
-
             gameView.playerLabel2.setText(gameObject.getPlayer().getPlayerName());
-
             gameView.moneyLabel2.setText(localisator.getResourceBundle().getString("money")+ ":\t"+gameObject.getPlayer().getMoney());
             gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t"+gameObject.getPlayer().getPoints());
             if(gameModel.getPlayer().isActionPhase()){
@@ -413,7 +404,7 @@ public class GameController {
         gameModel.getPlayer().setYourTurn(turn);
         Platform.runLater(() ->{
 
-        fieldCardController.getHandCardController().updateHandCardsView();
+            fieldCardController.getHandCardController().updateHandCardsView();
 
             if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
                 gameView.player2Box.getChildren().clear();

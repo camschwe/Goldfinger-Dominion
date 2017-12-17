@@ -153,7 +153,6 @@ public class LobbyController {
                 lobbyView.addressLabel.setText(localisator.getResourceBundle().getString("ip") + " " + InetAddress.getLocalHost().getHostAddress());
                 lobbyView.addressLabel.setVisible(true);
                 lobbyView.roundLimit.setVisible(true);
-                //System.out.println(InetAddress.getLocalHost().getHostAddress());
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             }

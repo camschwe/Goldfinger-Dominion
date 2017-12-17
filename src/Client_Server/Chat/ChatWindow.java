@@ -27,7 +27,6 @@ public class ChatWindow {
     protected VBox vBox;
     protected ScrollPane scrollPane;
 
-
     public ChatWindow(Localisator localisator) {
         this.stage = new Stage();
         this.localisator = localisator;
@@ -35,7 +34,6 @@ public class ChatWindow {
         sendButton = new Button(localisator.getResourceBundle().getString("sendButton"));
         sendButton.getStyleClass().add("chatButton");
         txtChatFlow = new TextFlow();
-
 
         newLine = System.getProperty("line.separator");
         scrollPane = new ScrollPane();
@@ -48,7 +46,6 @@ public class ChatWindow {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
-
         HBox hBox = new HBox();
         vBox = new VBox();
         txtMessage.setPromptText(localisator.getResourceBundle().getString("message"));
@@ -60,8 +57,6 @@ public class ChatWindow {
         hBox.setSpacing(5);
 
         root.getChildren().add(vBox);
-
-
     }
 
     public void start(){
@@ -104,13 +99,10 @@ public class ChatWindow {
      * Aktualisiert das Nachrichtenfenster mit der neusten Nachricht
       */
     public void actualizeChatFlow(Message message){
-        System.out.println(message);
         Text user = new Text(message.getClientName() + ": ");
         user.setStyle(message.getColor());
         Text content = new Text(message.getMessage() + newLine);
         Platform.runLater(() -> txtChatFlow.getChildren().addAll(user, content));
 
     }
-
-
 }

@@ -55,12 +55,10 @@ public class DialogView {
         Pane root = new Pane();
         root.getChildren().add(allBoxes);
 
-
         Scene scene = new Scene(root, 310, 150);
 
         dialogStage.setScene(scene);
         dialogStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
-
     }
 
     public void start(){

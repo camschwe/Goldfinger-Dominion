@@ -59,7 +59,6 @@ public class FieldCardController {
             addMouseExited(moneyButton, gameView.actionButton);
             addMouseEntered(moneyButton, gameView.actionButton);
             addMouseKlicked(moneyButton, gameModel.getPlayer(), moneyButton.getCard());
-
         }
 
         /**
@@ -188,7 +187,6 @@ public class FieldCardController {
      */
 
     public void fieldCardsGlowingUpdate(ArrayList<GameButton> gameButtons){
-
         for(int i = 0; i<gameButtons.size(); i++) {
             gameButtons.get(i).getStyleClass().remove("buttonOnAction");
             if (gameModel.getPlayer().isYourTurn() &&

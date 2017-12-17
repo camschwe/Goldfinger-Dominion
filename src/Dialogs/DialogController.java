@@ -29,7 +29,6 @@ public class DialogController {
                 String result = loginController.connect(address);
                 switch (result){
                     case "successful":
-                        System.out.println("Successfull");
                         dialogView.stop();
                         break;
                     case "username used":

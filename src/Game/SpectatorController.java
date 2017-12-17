@@ -77,7 +77,6 @@ public class SpectatorController {
     }
 
     /**
-     *
      * Action Event Handcards Mouse Left
      * @param gameButton
      */
