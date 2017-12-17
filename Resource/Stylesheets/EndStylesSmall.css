@@ -14,8 +14,6 @@
 .label {
     -fx-text-fill: white;
     -fx-font-size: 10Pt;
-    -fx-pref-width: 100;
-
 }
 
 .turnLabel{
@@ -28,6 +26,7 @@
 .playerLabel{
     -fx-text-fill: white;
     -fx-font-size: 20Pt;
+    -fx-pref-width: 150px;
 }
 
 .resultLabel {

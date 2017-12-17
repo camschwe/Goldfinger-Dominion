@@ -42,12 +42,12 @@ public class EndController {
          * Festlegung des Stylesheets anhand der Spielerzahl
          */
 
-        if(this.playerList.size()>3 && endView.getResolution().equals("720p")){
+        if(this.playerList.size()<3 && endView.getResolution().equals("720p")){
             endView.scene.getStylesheets().clear();
             endView.scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesMini.css").toExternalForm());
         }
 
-        if(this.playerList.size()>3 && endView.getResolution().equals("1080p")){
+        if(this.playerList.size()<3 && endView.getResolution().equals("1080p")){
             endView.scene.getStylesheets().clear();
             endView.scene.getStylesheets().add(getClass().getResource("../Stylesheets/EndStylesSmall.css").toExternalForm());
         }

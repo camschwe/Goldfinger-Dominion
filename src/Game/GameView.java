@@ -261,7 +261,7 @@ public class GameView {
 
         actionPane.setHgap(20);
         actionPane.setVgap(20);
-        actionPane.setPadding(new Insets(25, 0, 0, 0));
+        actionPane.setPadding(new Insets(150, 0, 0, 0));
         actionPane.setAlignment(Pos.TOP_CENTER);
 
         if(resolution.equals("720p")){
