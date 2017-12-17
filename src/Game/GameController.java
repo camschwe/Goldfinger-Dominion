@@ -121,9 +121,7 @@ public class GameController {
                 player1LabelUpdate();
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getResourceButtons());
                 fieldCardController.fieldCardsGlowingUpdate(fieldCardController.getActionButtons());
-
             });
-
         });
 
         /**
@@ -285,7 +283,6 @@ public class GameController {
                 Platform.runLater(() -> {
                     fieldCardUpdate(gameObject);
                 });
-
             }
 
             Platform.runLater(() -> {
@@ -294,7 +291,6 @@ public class GameController {
                 playSound(soundUpdate(gameObject.getCard().getName()));
                 putStapelUpdate(gameObject.getPlayer(), gameView.putStapelPlayer2);
             });
-
 
             if (gameObject.getCard().getType().equals("point")){
                 Platform.runLater(() -> gameView.pointLabel2.setText(localisator.getResourceBundle().getString("point")+ ":\t" + gameObject.getPlayer().getPoints()));
