@@ -1,4 +1,4 @@
-package Login;
+package End;
 
 import Game.Player;
 import Localisation.Localisator;

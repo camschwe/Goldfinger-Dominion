@@ -6,7 +6,7 @@ import Client_Server.GameObject;
 import End.EndController;
 import End.EndModel;
 import Localisation.Localisator;
-import Login.EndView;
+import End.EndView;
 import Login.LoginController;
 import javafx.application.Platform;
 import javafx.scene.control.Button;

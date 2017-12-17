@@ -4,7 +4,7 @@ import Game.GameController;
 import Game.GameModel;
 import Game.Player;
 import Localisation.Localisator;
-import Login.EndView;
+import End.EndView;
 import javafx.scene.control.Label;
 
 
