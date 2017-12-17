@@ -20,13 +20,13 @@
     -fx-text-fill: white;
     -fx-font-size: 20Pt;
     -fx-padding: 50px 0px;
-    -fx-pref-width: 150;
+    -fx-pref-width: 200;
 }
 
 .playerLabel{
     -fx-text-fill: white;
     -fx-font-size: 20Pt;
-    -fx-pref-width: 150px;
+    -fx-pref-width: 200px;
 }
 
 .resultLabel {
