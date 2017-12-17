@@ -413,7 +413,7 @@ public class GameController {
         gameModel.getPlayer().setYourTurn(turn);
         Platform.runLater(() ->{
 
-        fieldCardController.getHandCardController().updateHandCardsView();
+            fieldCardController.getHandCardController().updateHandCardsView();
 
             if(!getGameView().playerLabel1.getText().equals(gameView.playerLabel2.getText())) {
                 gameView.player2Box.getChildren().clear();

@@ -100,8 +100,6 @@ public class Client extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
@@ -163,9 +161,11 @@ public class Client extends Thread {
                             e.printStackTrace();
                         }
                     }
-                    gameController.newTurn(turn);
+
                     if (gameStarted){
                         gameController.getFieldCardController().getSpectatorController().changePlayerCards();
+                    } else {
+                        gameController.newTurn(turn);
                     }
                     break;
                 case 7:
@@ -264,7 +264,7 @@ public class Client extends Thread {
             objOutput.reset();
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -302,7 +302,7 @@ public class Client extends Thread {
                 objInput.close();
                 serverSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
             running = false;
         } else {

@@ -58,11 +58,11 @@ public class LobbyView {
         roundLimit.setVisible(false);
         roundLimit.getStyleClass().add("roundLimit");
         round = new ComboBox<>();
-        round.getItems().add("2");
         for (int i = 0; i <= 20; i++){
             int j = i + 15;
             round.getItems().add("" + j);
         }
+        round.getSelectionModel().selectLast();
         round.setVisible(false);
         userLabel1 = new Label("unknown");
         userLabel2 = new Label("unknown");
