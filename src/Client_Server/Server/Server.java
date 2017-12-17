@@ -158,13 +158,13 @@ public class Server extends Thread{
                     if (!colors.isEmpty()) {
                         Collections.shuffle(colors);
                         send = new Message(3, name, "valid", colors.get(0));
+                        colors.remove(0);
                     } else {
                         send = new Message(3, name, "valid", getRandomColor());
                     }
                     objOutput.writeObject(send);
                     sendPlayerList();
                     sendMessageToAll(new Message(3, name, "actualize"));
-                    colors.remove(0);
                     if (gameStarted){
                         objOutput.writeObject(new Message(4, name, "running"));
                     }

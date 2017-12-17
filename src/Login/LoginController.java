@@ -186,7 +186,7 @@ public class LoginController {
                 client.start();
             }
         }
-            loginView.connectingLabel.setVisible(false);
+        loginView.connectingLabel.setVisible(false);
 
         if (!client.isFailure()) {
             Message user = new Message(0, clientName, "login");
