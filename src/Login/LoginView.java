@@ -64,7 +64,6 @@ public class LoginView {
          */
 
         sizeBox = new ComboBox<>();
-        //sizeBox.getStyleClass().add("box");
         sizeBox.setPromptText("720p");
         sizeBox.getItems().addAll(
                 "1080p",

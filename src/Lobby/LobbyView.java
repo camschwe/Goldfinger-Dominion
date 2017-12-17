@@ -44,7 +44,7 @@ public class LobbyView {
          */
 
         chatWindow = new ChatWindow(localisator);
-        chatWindow.getVBox().setPadding(new Insets(70, 90, 80, 0));
+        chatWindow.getVBox().setPadding(new Insets(70, 90, 50, 0));
 
         /**
          * Label und Buttons

@@ -49,7 +49,7 @@ public class LoginController {
                 loginView.userNameField.getStyleClass().clear();
                 loginView.userNameField.getStyleClass().add("userNameNeeded");
             } else {
-                DialogView dialogView = new DialogView("Please enter IP Address", "localhost", "IP Address", localisator);
+                DialogView dialogView = new DialogView(localisator.getResourceBundle().getString("addressText"), "localhost", "IP Address", localisator);
                 DialogController dialogController = new DialogController(dialogView, localisator, this);
                 dialogView.start();
             }
