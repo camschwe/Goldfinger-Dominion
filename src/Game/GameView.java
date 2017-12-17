@@ -96,7 +96,6 @@ public class GameView {
             resourcePane.setVgap(20);
             resourcePane.setPadding(new Insets(20, 20, 0, 20));
         }
-
         musicButton = new Button();
         musicBox.getChildren().add(musicButton);
         musicBox.setPadding(new Insets(10));
@@ -172,7 +171,6 @@ public class GameView {
         player1Pane.setVgap(5);
         player1CardBox.getChildren().addAll(putStapelPlayer1, drawStapelPlayer1);
 
-
         if(resolution.equals("720p")){
             player1CardBox.setSpacing(5);
             player1CardBox.setPadding((new Insets(0, 0, 5, 20)));
@@ -223,7 +221,6 @@ public class GameView {
             player2Pane.setPadding(new Insets(200,0,0,0));
         }
 
-
         if(resolution.equals("720p")){
             player2CardBox.setSpacing(5);
             player2CardBox.setPadding((new Insets(5, 0, 0, 0)));
@@ -231,7 +228,6 @@ public class GameView {
             player2CardBox.setSpacing(10);
             player2CardBox.setPadding((new Insets(10, 0, 0, 0)));
         }
-
 
         for(int i = 0; i<5; i++){
             Button player2Card = new Button();

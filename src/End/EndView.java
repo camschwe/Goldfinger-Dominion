@@ -61,7 +61,6 @@ public class EndView {
         gridPane.add(turnLabel, 0,0);
         root.setTop(resultLabel);
 
-
         /**
          * Initialisierung der Scene mit dem dafür notwendige Stylesheet - Auflösung
          */
@@ -78,7 +77,6 @@ public class EndView {
 
         gameStage.getIcons().add(new Image("Backgrounds/DominionSchildTransparent.png"));
         gameStage.setTitle("Goldfinger Dominion");
-
     }
 
     public void start() {

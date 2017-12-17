@@ -24,7 +24,6 @@ public class GameModel {
 
     public GameModel(Client client) {
 
-
         this.playerList = (client.getPlayers());
 
         this.player = new Player(client.getClientName());

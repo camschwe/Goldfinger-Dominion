@@ -33,7 +33,6 @@ public class LoginController {
     private boolean musicActivated = true;
     private static AudioClip audioClip;
 
-
     public LoginController(LoginModel loginModel, LoginView loginView, Stage primaryStage, Localisator localisator) {
         this.loginModel = loginModel;
         this.loginView = loginView;
