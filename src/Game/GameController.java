@@ -230,13 +230,23 @@ public class GameController {
         Text action;
 
         if (type == 0) {
-            action = new Text(localisator.getResourceBundle().getString("played") + " :\t");
+            action = new Text(localisator.getResourceBundle().getString("played") + " :\t\t");
         } else {
-            action = new Text(localisator.getResourceBundle().getString("bought") + " :\t");
+            action = new Text(localisator.getResourceBundle().getString("bought") + " :\t\t");
         }
         Text cardName = new Text(localisator.getResourceBundle().getString(card.getName())+ gameView.newLine);
-        Text actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
-        Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t"+player.getBuys() + gameView.newLine + gameView.newLine);
+
+        Text actions;
+
+        if(localisator.getLanguage().equals("ger")){
+            actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t"+player.getActions() + gameView.newLine);
+        }else{
+            actions = new Text(localisator.getResourceBundle().getString("actions") + " :\t\t"+player.getActions() + gameView.newLine);
+        }
+
+
+
+        Text buys = new Text(localisator.getResourceBundle().getString("buys") + " :\t\t"+player.getBuys() + gameView.newLine + gameView.newLine);
 
         action.setStyle(color);
         cardName.setStyle(color);
