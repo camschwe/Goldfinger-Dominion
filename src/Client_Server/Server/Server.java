@@ -31,7 +31,8 @@ public class Server extends Thread{
     private static boolean gameStarted = false;
     private static boolean gameEnded = false;
     private static int round = 1;
-    private static int maxRounds;
+    private static int maxRounds = Integer.MAX_VALUE;
+    private static boolean roundLimit = false;
     private static int provinces = 8;
 
     public Server() throws Exception{
@@ -110,6 +111,9 @@ public class Server extends Thread{
                                 case 6:
                                     nextPlayer();
                                     Collections.sort(endPlayers);
+                                    break;
+                                case 7:
+                                    setRoundLimit(message);
                                     break;
                             }
                         }else if (o instanceof GameObject){
@@ -270,25 +274,26 @@ public class Server extends Thread{
         // Der nächste Spieler wird gesendet
         private void nextPlayer() throws IOException {
             if (!gameEnded) {
-                /**if (round == 19 && actualPlayer == gamePlayers.size()){
+                if (roundLimit && round == maxRounds + 1){
+                    gameEnded = true;
                     sendMessageToAll(new Message(4, "Round limit reached", "EndGame"));
-                } else {**/
+                    sendToAll(endPlayers);
+                } else {
 
                     sendMessageToAll(new Message(5, gamePlayers.get(actualPlayer), "turn"));
                     sendMessageToAll(new Message(7, gamePlayers.get(actualPlayer), Integer.toString(round)));
-                if (actualPlayer < gamePlayers.size() - 1) {
-                    actualPlayer += 1;
-                } else {
-                    actualPlayer = 0;
-                    round++;
-                }
-                    for (Player player : endPlayers){
-                        if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))){
+                    if (actualPlayer < gamePlayers.size() - 1) {
+                        actualPlayer += 1;
+                    } else {
+                        actualPlayer = 0;
+                        round++;
+                    }
+                    for (Player player : endPlayers) {
+                        if (player.getPlayerName().equals(gamePlayers.get(actualPlayer))) {
                             sendToAll(player);
                         }
                     }
-
-                //}
+                }
             }
         }
 
@@ -305,6 +310,11 @@ public class Server extends Thread{
                 color += Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
             }
             return color;
+        }
+
+        public void setRoundLimit(Message message) {
+            maxRounds = Integer.parseInt(message.getMessage());
+            roundLimit = true;
         }
     }
 }
